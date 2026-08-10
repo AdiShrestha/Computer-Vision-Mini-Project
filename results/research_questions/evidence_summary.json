@@ -1,0 +1,37 @@
+{
+  "rq1": {
+    "verdict": "positive",
+    "lead_time_days": {
+      "score_a": 180,
+      "score_b": 180,
+      "score_c": 180,
+      "baseline": 0
+    },
+    "south_lhonak_detected": {
+      "score_a": true,
+      "score_b": true,
+      "score_c": true
+    },
+    "fp_rate": {
+      "score_a": 0.15,
+      "score_b": 0.15,
+      "score_c": 0.15
+    },
+    "auc_roc": {
+      "score_a": 0.8646,
+      "score_b": 0.8646,
+      "score_c": 0.8646
+    },
+    "confidence": "strong"
+  },
+  "rq3": {
+    "verdict": "positive",
+    "learned_outperforms_baseline": true,
+    "dimensions_of_improvement": [
+      "lead_time",
+      "synthetic_detection_rate",
+      "auc_roc"
+    ],
+    "confidence": "strong"
+  }
+}
