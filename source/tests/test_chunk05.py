@@ -51,3 +51,39 @@ def test_active_channels_correct():
     assert 'CH-06' not in meta['active_channels'], "CH-06 (InSAR) should be excluded"
     assert 'CH-01' in meta['active_channels'], "CH-01 should be active"
     assert len(meta['active_channels']) == 7, f"Expected 7 active channels, got {len(meta['active_channels'])}"
+
+
+# ============================================================
+# C05-03: Threshold refinement (INV-007 compliance)
+# ============================================================
+
+def test_threshold_analysis_exists():
+    path = os.path.join(ABLATION_DIR, 'threshold_analysis.json')
+    assert os.path.isfile(path), "threshold_analysis.json not found"
+
+
+def test_threshold_fp_rate_is_computed():
+    """ADVERSARIAL: refined_fp_rate must be a real computed value."""
+    with open(os.path.join(ABLATION_DIR, 'threshold_analysis.json')) as f:
+        ta = json.load(f)
+    rfp = ta.get('refined_fp_rate')
+    assert rfp is not None, "refined_fp_rate not computed"
+    assert isinstance(rfp, float)
+    assert 0.0 <= rfp <= 1.0
+
+
+def test_refined_fp_below_original():
+    """Refined FP rate must be lower than original 15.05%."""
+    with open(os.path.join(ABLATION_DIR, 'threshold_analysis.json')) as f:
+        ta = json.load(f)
+    assert ta['refined_fp_rate'] < ta['original_fp_rate'], (
+        f"refined_fp_rate ({ta['refined_fp_rate']}) not below original ({ta['original_fp_rate']})"
+    )
+
+
+def test_threshold_sweep_has_multiple_entries():
+    """Sweep table must have multiple entries (not a single hardcoded result)."""
+    with open(os.path.join(ABLATION_DIR, 'threshold_analysis.json')) as f:
+        ta = json.load(f)
+    assert len(ta.get('threshold_sweep_table', [])) >= 10, "Sweep must cover at least 10 percentiles"
+
