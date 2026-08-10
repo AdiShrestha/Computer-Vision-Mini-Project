@@ -1,5 +1,5 @@
 # Core dependencies for sentinel-gl (Self-Supervised GLOF Precursor Detection)
-# Pinned versions generated via pip freeze per C01-01 / C01-04
+# Pinned versions generated via pip freeze per C01-01 / C01-04 / C01-06
 
 torch==2.12.1
 numpy==2.5.0
@@ -16,3 +16,5 @@ PyYAML==6.0.3
 shapely==2.1.2
 pyproj==3.7.2
 jsonschema==4.26.0
+cdsapi==0.7.7
+asf-search==12.3.0

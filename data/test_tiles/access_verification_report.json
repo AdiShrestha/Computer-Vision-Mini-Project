@@ -1,0 +1,41 @@
+[
+  {
+    "source": "GEE (Sentinel-1 GRD)",
+    "status": "BLOCKED",
+    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
+    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+  },
+  {
+    "source": "GEE (Sentinel-2 L2A)",
+    "status": "BLOCKED",
+    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
+    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+  },
+  {
+    "source": "GEE (Landsat 8)",
+    "status": "BLOCKED",
+    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
+    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+  },
+  {
+    "source": "GEE (MODIS LST)",
+    "status": "BLOCKED",
+    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
+    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+  },
+  {
+    "source": "Copernicus CDS (ERA5)",
+    "status": "BLOCKED",
+    "reason": "HUMAN ACTION REQUIRED: Register at https://cds.climate.copernicus.eu/ and create ~/.cdsapirc file with API key."
+  },
+  {
+    "source": "ASF DAAC (Sentinel-1 SLC)",
+    "status": "FAIL",
+    "error": "HTTPSConnectionPool(host='cmr.earthdata.nasa.gov', port=443): Max retries exceeded with url: /search/granules.umm_json (Caused by NameResolutionError(\"HTTPSConnection(host='cmr.earthdata.nasa.gov', port=443): Failed to resolve 'cmr.earthdata.nasa.gov' ([Errno 8] nodename nor servname provided, or not known)\"))"
+  },
+  {
+    "source": "ITS_LIVE (Glacier Velocity)",
+    "status": "FAIL",
+    "error": "HTTPSConnectionPool(host='nsidc.org', port=443): Max retries exceeded with url: /apps/itslive-search/api/v1/search?bbox=88.104%2C27.814999999999998%2C88.30399999999999%2C28.015&start=2023-01-01&end=2023-01-31 (Caused by NameResolutionError(\"HTTPSConnection(host='nsidc.org', port=443): Failed to resolve 'nsidc.org' ([Errno 8] nodename nor servname provided, or not known)\"))"
+  }
+]
