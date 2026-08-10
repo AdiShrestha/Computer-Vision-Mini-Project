@@ -4,3 +4,5 @@ bootstrap.sh
 DROP_HERE/
 TAKE_THIS/
 .DS_Store
+__pycache__/
+*.pyc
