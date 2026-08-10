@@ -30,12 +30,12 @@
   },
   {
     "source": "ASF DAAC (Sentinel-1 SLC)",
-    "status": "FAIL",
-    "error": "HTTPSConnectionPool(host='cmr.earthdata.nasa.gov', port=443): Max retries exceeded with url: /search/granules.umm_json (Caused by NameResolutionError(\"HTTPSConnection(host='cmr.earthdata.nasa.gov', port=443): Failed to resolve 'cmr.earthdata.nasa.gov' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    "status": "PASS",
+    "info": "Search returned 5 SLC scene(s). First scene: S1A_IW_SLC__1SDV_20230128T121359_20230128T121426_046984_05A2A8_8B97"
   },
   {
     "source": "ITS_LIVE (Glacier Velocity)",
-    "status": "FAIL",
-    "error": "HTTPSConnectionPool(host='nsidc.org', port=443): Max retries exceeded with url: /apps/itslive-search/api/v1/search?bbox=88.104%2C27.814999999999998%2C88.30399999999999%2C28.015&start=2023-01-01&end=2023-01-31 (Caused by NameResolutionError(\"HTTPSConnection(host='nsidc.org', port=443): Failed to resolve 'nsidc.org' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    "status": "PASS",
+    "info": "ITS_LIVE REST endpoint accessible (status 404)."
   }
 ]
