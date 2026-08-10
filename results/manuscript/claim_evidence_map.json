@@ -1,0 +1,182 @@
+{
+  "map_version": "C06-01",
+  "n_claims": 25,
+  "self_verification": {
+    "passes": 25,
+    "failures": [],
+    "all_pass": true
+  },
+  "claims": {
+    "CL-01": {
+      "claim_text": "Score-C achieves AUC-ROC of 0.9521 on synthetic anomaly detection",
+      "value": 0.9521053093284387,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_c.auc_roc",
+      "rework_version": "C04-R1"
+    },
+    "CL-02": {
+      "claim_text": "Score-C achieves AUC-PR of 0.7130 on synthetic anomaly detection",
+      "value": 0.7129523479845108,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_c.auc_pr",
+      "rework_version": "C04-R1"
+    },
+    "CL-03": {
+      "claim_text": "Score-A (reconstruction MSE) AUC-ROC is 0.4552 \u2014 null result (anti-correlated with labels)",
+      "value": 0.45518658227164754,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_a.auc_roc",
+      "rework_version": "C04-R1"
+    },
+    "CL-04": {
+      "claim_text": "Score-B (embedding distance) achieves AUC-ROC of 0.8973",
+      "value": 0.897305252645217,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_b.auc_roc",
+      "rework_version": "C04-R1"
+    },
+    "CL-05": {
+      "claim_text": "Static extent baseline achieves AUC-ROC of 0.6140",
+      "value": 0.613965531202764,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.baseline.auc_roc",
+      "rework_version": "C04-R1"
+    },
+    "CL-06": {
+      "claim_text": "Score-C outperforms baseline by +0.3381 AUC-ROC",
+      "value": 0.3381397781,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "computed:scorer_comparison.score_c.auc_roc - scorer_comparison.baseline.auc_roc",
+      "rework_version": "C04-R1"
+    },
+    "CL-07": {
+      "claim_text": "Score-C outperforms baseline by +0.6212 AUC-PR",
+      "value": 0.6211587897,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "computed:scorer_comparison.score_c.auc_pr - scorer_comparison.baseline.auc_pr",
+      "rework_version": "C04-R1"
+    },
+    "CL-08": {
+      "claim_text": "Score-C false positive rate at 85th percentile threshold is 15.05%",
+      "value": 0.15046296296296297,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_c.false_positive_rate",
+      "rework_version": "C04-R1"
+    },
+    "CL-09": {
+      "claim_text": "Score-C false positive rate at refined (88th percentile) threshold is 9.03%",
+      "value": 0.09027777777777778,
+      "source_file": "results/ablation/threshold_analysis.json",
+      "json_path": "refined_fp_rate"
+    },
+    "CL-10": {
+      "claim_text": "INV-007 (FP \u2264 10%) compliance status at refined threshold",
+      "value": true,
+      "source_file": "results/ablation/threshold_analysis.json",
+      "json_path": "inv007_compliant"
+    },
+    "CL-11": {
+      "claim_text": "CH-05 (SAR backscatter) contributes +0.1573 AUC-ROC to Score-C performance",
+      "value": 0.1573273186136902,
+      "source_file": "results/ablation/ablation_summary.json",
+      "json_path": "channel_contributions.CH-05",
+      "ablation_version": "C05-02"
+    },
+    "CL-12": {
+      "claim_text": "Removing CH-05 drops Score-C AUC-ROC from 0.9521 to 0.7948",
+      "value": {
+        "full_15ch": 0.9521053093284387,
+        "no_ch05": 0.7947779907147485
+      },
+      "source_file": "results/ablation/ablation_summary.json",
+      "json_path": "configs.FULL_15CH.auc_roc AND configs.NO_CH05.auc_roc",
+      "ablation_version": "C05-02"
+    },
+    "CL-13": {
+      "claim_text": "Mean InSAR coherence over South Lhonak (SGL-001) moraine is 0.24",
+      "value": 0.24,
+      "source_file": "results/rq2/insar_metadata.json",
+      "json_path": "mean_coherence_sgl001"
+    },
+    "CL-14": {
+      "claim_text": "InSAR feasibility requires minimum coherence of 0.30",
+      "value": 0.3,
+      "source_file": "results/rq2/insar_metadata.json",
+      "json_path": "coherence_threshold_for_feasibility"
+    },
+    "CL-15": {
+      "claim_text": "South Lhonak GLOF event date: October 4, 2023 (INV-009)",
+      "value": "2023-10-04",
+      "source_file": "project/invariants.md",
+      "json_path": "INV-009"
+    },
+    "CL-16": {
+      "claim_text": "Number of training-role lakes in study: 15",
+      "value": 15,
+      "source_file": "source/data/registry/lake_registry.json",
+      "json_path": "computed:len([l for l in lakes if l.role==training])"
+    },
+    "CL-17": {
+      "claim_text": "Number of evaluation lakes in study (event + control): 5",
+      "value": 5,
+      "source_file": "source/data/registry/lake_registry.json",
+      "json_path": "computed:len([l for l in lakes if l.role in (evaluation_event,evaluation_control)])"
+    },
+    "CL-18": {
+      "claim_text": "Score-C synthetic anomaly detection rate is 100%",
+      "value": 1.0,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_c.synthetic_detection_rate",
+      "rework_version": "C04-R1"
+    },
+    "CL-19": {
+      "claim_text": "Static extent baseline synthetic detection rate is 50%",
+      "value": 0.5,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.baseline.synthetic_detection_rate",
+      "rework_version": "C04-R1"
+    },
+    "CL-20": {
+      "claim_text": "Score-B lead time: 2730 days (entire time series flagged \u2014 threshold too coarse)",
+      "value": 2730,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_b.lead_time_days",
+      "rework_version": "C04-R1"
+    },
+    "CL-21": {
+      "claim_text": "Score-A AUC-PR is 0.2065",
+      "value": 0.20650602639820625,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_a.auc_pr",
+      "rework_version": "C04-R1"
+    },
+    "CL-22": {
+      "claim_text": "Score-B AUC-PR is 0.5761",
+      "value": 0.5760672020574208,
+      "source_file": "results/evaluation/evaluation_summary.json",
+      "json_path": "scorer_comparison.score_b.auc_pr",
+      "rework_version": "C04-R1"
+    },
+    "CL-23": {
+      "claim_text": "Optical-only AUC-ROC is 0.7355",
+      "value": 0.7354666918592097,
+      "source_file": "results/ablation/ablation_summary.json",
+      "json_path": "configs.OPTICAL_ONLY.auc_roc",
+      "ablation_version": "C05-02"
+    },
+    "CL-24": {
+      "claim_text": "SAR-only AUC-ROC is 0.7563",
+      "value": 0.7563174125458865,
+      "source_file": "results/ablation/ablation_summary.json",
+      "json_path": "configs.SAR_ONLY.auc_roc",
+      "ablation_version": "C05-02"
+    },
+    "CL-25": {
+      "claim_text": "Dynamic-only (velocity+meteo) AUC-ROC is 0.5125",
+      "value": 0.5124838047937811,
+      "source_file": "results/ablation/ablation_summary.json",
+      "json_path": "configs.DYNAMIC_ONLY.auc_roc",
+      "ablation_version": "C05-02"
+    }
+  }
+}
