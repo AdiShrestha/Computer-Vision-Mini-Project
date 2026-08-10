@@ -6,3 +6,5 @@ TAKE_THIS/
 .DS_Store
 __pycache__/
 *.pyc
+data/raw/
+data/test_tiles/
