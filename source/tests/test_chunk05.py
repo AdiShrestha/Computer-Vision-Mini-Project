@@ -108,3 +108,51 @@ def test_ablation_table_exists():
     assert os.path.isfile(os.path.join(repo_root, 'results', 'figures', 'ablation_comparison_table.png'))
 
 
+# ============================================================
+# C05-05: RQ2 answer and evidence traceability
+# ============================================================
+
+def test_rq2_answer_exists():
+    assert os.path.isfile(os.path.join(RQ2_DIR, 'rq2_answer.md'))
+
+
+def test_rq2_evidence_summary_exists():
+    assert os.path.isfile(os.path.join(RQ2_DIR, 'evidence_summary.json'))
+
+
+def test_rq2_has_verdict():
+    with open(os.path.join(RQ2_DIR, 'rq2_answer.md')) as f:
+        content = f.read()
+    assert 'Verdict' in content and len(content) > 500
+
+
+def test_rq2_evidence_matches_ablation():
+    """ADVERSARIAL: Numbers in evidence_summary must match ablation_summary."""
+    with open(os.path.join(RQ2_DIR, 'evidence_summary.json')) as f:
+        ev = json.load(f)
+    with open(os.path.join(ABLATION_DIR, 'ablation_summary.json')) as f:
+        abl = json.load(f)
+
+    # CH-05 contribution must match
+    ev_ch05 = ev['rq2']['ch05_contribution_auc_roc']
+    abl_ch05 = abl['channel_contributions']['CH-05']
+    assert abs(ev_ch05 - abl_ch05) < 0.001, (
+        f"FABRICATION: evidence says CH-05 contribution={ev_ch05}, ablation says {abl_ch05}"
+    )
+
+    # Full 15CH AUC-ROC must match
+    ev_full = ev['rq2']['full_15ch_auc_roc']
+    abl_full = abl['configs']['FULL_15CH']['auc_roc']
+    assert abs(ev_full - abl_full) < 0.001, (
+        f"FABRICATION: evidence says FULL_15CH={ev_full}, ablation says {abl_full}"
+    )
+
+
+def test_rq2_has_source_file_traceability():
+    with open(os.path.join(RQ2_DIR, 'evidence_summary.json')) as f:
+        ev = json.load(f)
+    assert 'source_files' in ev['rq2'], "Missing source_file traceability"
+    assert len(ev['rq2']['source_files']) >= 2
+
+
+

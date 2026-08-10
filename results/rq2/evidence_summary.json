@@ -1,0 +1,19 @@
+{
+  "rq2": {
+    "verdict": "mixed",
+    "source_files": {
+      "insar": "results/rq2/insar_metadata.json",
+      "ablation": "results/ablation/ablation_summary.json",
+      "threshold": "results/ablation/threshold_analysis.json"
+    },
+    "insar_mean_coherence_sgl001": 0.24,
+    "insar_feasibility": "infeasible",
+    "most_important_channel": "CH-05",
+    "ch05_contribution_auc_roc": 0.1573273186136902,
+    "full_15ch_auc_roc": 0.9521053093284387,
+    "no_ch05_auc_roc": 0.7947779907147485,
+    "inv007_compliant": true,
+    "refined_fp_rate": 0.09027777777777778,
+    "confidence": "moderate"
+  }
+}
