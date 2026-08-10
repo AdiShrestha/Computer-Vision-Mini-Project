@@ -1,0 +1,18 @@
+{
+  "insar_feasibility": "infeasible",
+  "band": "C-band",
+  "wavelength_cm": 5.6,
+  "method": "SBAS-InSAR",
+  "mean_coherence_sgl001": 0.24,
+  "coherence_threshold_for_feasibility": 0.30,
+  "decorrelation_causes": [
+    "winter snow cover",
+    "monsoon layover/shadow geometry",
+    "surface movement of loose moraine till"
+  ],
+  "decision_ref": "Decision 001 in project/evolution/decision_log.md",
+  "ch06_status": "excluded",
+  "active_channels": ["CH-01", "CH-02", "CH-03", "CH-04", "CH-05", "CH-07", "CH-08"],
+  "ablation_approach": "channel_dropout_on_active_channels",
+  "rq2_insar_verdict": "infeasible_negative_result"
+}
