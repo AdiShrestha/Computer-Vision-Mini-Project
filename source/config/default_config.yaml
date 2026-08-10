@@ -1,0 +1,63 @@
+# sentinel-gl default configuration
+# Single source of truth for all parameters defined in invariants.md
+# See invariants.md for rationale and verification methods
+
+project:
+  name: "sentinel-gl"
+  factory_version: "1.3.4"
+
+paths:
+  data_root: "data"            # relative to repository root
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  features: "data/features"
+  embeddings: "data/embeddings"
+  models: "models"
+  results: "results"
+  lake_registry: "source/data/registry/lake_registry.json"
+
+temporal:
+  start_date: "2016-01-01"     # INV-003
+  end_date: "2024-10-31"       # INV-003
+  window_size_days: 180        # INV-004
+  stride_days: 30              # INV-004
+
+training:
+  masking_ratio: 0.5           # INV-005
+  seeds:                       # INV-012
+    torch: 42
+    numpy: 42
+    python: 42
+    synthetic_injection: 2023
+    train_val_split: 7
+
+anomaly:
+  smoothing_method: "ema"      # INV-006
+  smoothing_span: 5            # INV-006 (in windows, not days)
+
+evaluation:
+  event_date: "2023-10-04"    # INV-009 (South Lhonak)
+  fp_rate_target: 0.10        # INV-007
+  synthetic_types:             # INV-011
+    sudden_extent:
+      channel: "CH-01"
+      magnitude: 0.20         # +20%
+      duration_days: 30
+    gradual_extent:
+      channel: "CH-01"
+      magnitude: 0.15         # +15%
+      duration_days: 90
+    synthetic_deformation:
+      channel: "CH-06"
+      magnitude_mm_year: 50
+      duration_days: 180
+    temperature_spike:
+      channel: "CH-04"
+      magnitude_celsius: 5.0
+      duration_days: 14
+  injections_per_type_per_lake: 10
+
+compute:
+  max_gpu_vram_gb: 12          # INV-008
+  max_training_hours: 72       # INV-008
+  max_colab_sessions: 10       # INV-008
