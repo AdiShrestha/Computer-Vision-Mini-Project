@@ -1,0 +1,500 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "created": "2026-08-10",
+    "factory_version": "1.3.4",
+    "source_inventories": [
+      "ICIMOD (2018) Status of Glacial Lakes in the Hindu Kush Himalaya",
+      "ICIMOD & UNDP (2020) Inventory of Glacial Lakes in Koshi, Gandaki, Karnali Basins",
+      "ICIMOD (2021) Standardization of GLOF Risk Assessment for Eastern Himalaya"
+    ]
+  },
+  "lakes": [
+    {
+      "id": "SGL-001",
+      "name": "South Lhonak Lake",
+      "alternative_names": ["Lhonak Cho"],
+      "coordinates": {
+        "latitude": 27.915,
+        "longitude": 88.204,
+        "elevation_m": 5200
+      },
+      "bounding_box": {
+        "north": 27.935,
+        "south": 27.895,
+        "east": 88.225,
+        "west": 88.185
+      },
+      "role": "evaluation_event",
+      "dam_type": "moraine",
+      "basin": "Teesta",
+      "country": "India",
+      "susceptibility_class": "very_high",
+      "icimod_reference": "ICIMOD (2021) Eastern Himalaya Assessment",
+      "documented_events": [
+        {
+          "date": "2023-10-04",
+          "description": "Catastrophic GLOF caused by lateral moraine landslide into lake, releasing ~50 million m3 water",
+          "references": ["Sattar et al. (2026)", "Science (2025)"]
+        }
+      ],
+      "notes": "Primary evaluation event anchor lake (INV-009)"
+    },
+    {
+      "id": "SGL-002",
+      "name": "Imja Tsho",
+      "alternative_names": ["Imja Lake"],
+      "coordinates": {
+        "latitude": 27.901,
+        "longitude": 86.924,
+        "elevation_m": 5010
+      },
+      "bounding_box": {
+        "north": 27.920,
+        "south": 27.880,
+        "east": 86.945,
+        "west": 86.905
+      },
+      "role": "evaluation_control",
+      "dam_type": "moraine",
+      "basin": "Dudh Koshi",
+      "country": "Nepal",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Extensively studied control lake; water level artificially lowered by 3.4m in 2016"
+    },
+    {
+      "id": "SGL-003",
+      "name": "Tsho Rolpa",
+      "alternative_names": ["Cho Rolpa"],
+      "coordinates": {
+        "latitude": 27.854,
+        "longitude": 86.471,
+        "elevation_m": 4580
+      },
+      "bounding_box": {
+        "north": 27.875,
+        "south": 27.835,
+        "east": 86.495,
+        "west": 86.450
+      },
+      "role": "evaluation_control",
+      "dam_type": "moraine",
+      "basin": "Tamakoshi",
+      "country": "Nepal",
+      "susceptibility_class": "very_high",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Very high susceptibility control lake; siphoning channel constructed in 2000"
+    },
+    {
+      "id": "SGL-004",
+      "name": "Thulagi Lake",
+      "alternative_names": ["Thulagi Tsho"],
+      "coordinates": {
+        "latitude": 28.491,
+        "longitude": 84.484,
+        "elevation_m": 4050
+      },
+      "bounding_box": {
+        "north": 28.510,
+        "south": 28.470,
+        "east": 84.505,
+        "west": 84.465
+      },
+      "role": "evaluation_control",
+      "dam_type": "moraine",
+      "basin": "Marsyangdi",
+      "country": "Nepal",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "High susceptibility moraine-dammed control lake in Marsyangdi basin"
+    },
+    {
+      "id": "SGL-005",
+      "name": "Lower Barun Lake",
+      "alternative_names": ["Lower Barun Tsho"],
+      "coordinates": {
+        "latitude": 27.795,
+        "longitude": 87.162,
+        "elevation_m": 4550
+      },
+      "bounding_box": {
+        "north": 27.815,
+        "south": 27.775,
+        "east": 87.185,
+        "west": 87.140
+      },
+      "role": "evaluation_control",
+      "dam_type": "moraine",
+      "basin": "Arun",
+      "country": "Nepal",
+      "susceptibility_class": "very_high",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Rapidly expanding moraine-dammed control lake in Arun basin"
+    },
+    {
+      "id": "SGL-006",
+      "name": "Dig Tsho",
+      "alternative_names": ["Dig Cho"],
+      "coordinates": {
+        "latitude": 27.872,
+        "longitude": 86.586,
+        "elevation_m": 4365
+      },
+      "bounding_box": {
+        "north": 27.890,
+        "south": 27.855,
+        "east": 86.605,
+        "west": 86.565
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Bhote Koshi",
+      "country": "Nepal",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Historical 1985 GLOF site (outside 2016-2024 study window); used in training set"
+    },
+    {
+      "id": "SGL-007",
+      "name": "Lumding Tsho",
+      "alternative_names": ["Lumding Lake"],
+      "coordinates": {
+        "latitude": 27.785,
+        "longitude": 86.621,
+        "elevation_m": 4860
+      },
+      "bounding_box": {
+        "north": 27.805,
+        "south": 27.765,
+        "east": 86.640,
+        "west": 86.600
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Dudh Koshi",
+      "country": "Nepal",
+      "susceptibility_class": "medium",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Training lake in Dudh Koshi upper reaches"
+    },
+    {
+      "id": "SGL-008",
+      "name": "Chamlang South",
+      "alternative_names": ["Chamlang Tsho"],
+      "coordinates": {
+        "latitude": 27.742,
+        "longitude": 86.973,
+        "elevation_m": 4920
+      },
+      "bounding_box": {
+        "north": 27.760,
+        "south": 27.725,
+        "east": 86.995,
+        "west": 86.950
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Arun",
+      "country": "Nepal",
+      "susceptibility_class": "medium",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Training lake in Arun basin"
+    },
+    {
+      "id": "SGL-009",
+      "name": "Hongu Lake",
+      "alternative_names": ["Hongu Tsho"],
+      "coordinates": {
+        "latitude": 27.781,
+        "longitude": 86.932,
+        "elevation_m": 5320
+      },
+      "bounding_box": {
+        "north": 27.800,
+        "south": 27.760,
+        "east": 86.950,
+        "west": 86.910
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Hongu",
+      "country": "Nepal",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "High elevation training lake"
+    },
+    {
+      "id": "SGL-010",
+      "name": "Galong Co",
+      "alternative_names": ["Galong Tsho"],
+      "coordinates": {
+        "latitude": 29.821,
+        "longitude": 93.912,
+        "elevation_m": 4150
+      },
+      "bounding_box": {
+        "north": 29.840,
+        "south": 29.800,
+        "east": 93.935,
+        "west": 93.890
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Yarlung Tsangpo",
+      "country": "China",
+      "susceptibility_class": "medium",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Eastern Tibet training lake"
+    },
+    {
+      "id": "SGL-011",
+      "name": "Cirenmaco",
+      "alternative_names": ["Zhangmu Lake"],
+      "coordinates": {
+        "latitude": 28.125,
+        "longitude": 86.068,
+        "elevation_m": 4650
+      },
+      "bounding_box": {
+        "north": 28.145,
+        "south": 28.105,
+        "east": 86.090,
+        "west": 86.045
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Sun Koshi",
+      "country": "China",
+      "susceptibility_class": "very_high",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Historical 1981 GLOF lake in Tibet (outside 2016-2024 study window); training corpus"
+    },
+    {
+      "id": "SGL-012",
+      "name": "Jiacuo Lake",
+      "alternative_names": ["Jiacuo Co"],
+      "coordinates": {
+        "latitude": 29.145,
+        "longitude": 88.752,
+        "elevation_m": 4820
+      },
+      "bounding_box": {
+        "north": 29.165,
+        "south": 29.125,
+        "east": 88.775,
+        "west": 88.730
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Yarlung Tsangpo",
+      "country": "China",
+      "susceptibility_class": "medium",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Southern Tibet training lake"
+    },
+    {
+      "id": "SGL-013",
+      "name": "Shisper Glacial Lake",
+      "alternative_names": ["Shisper Dammed Lake"],
+      "coordinates": {
+        "latitude": 36.425,
+        "longitude": 74.721,
+        "elevation_m": 3200
+      },
+      "bounding_box": {
+        "north": 36.445,
+        "south": 36.405,
+        "east": 74.745,
+        "west": 74.700
+      },
+      "role": "training",
+      "dam_type": "ice",
+      "basin": "Hunza",
+      "country": "Pakistan",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD (2018), GLOFNet (2025)",
+      "documented_events": [],
+      "notes": "Karakoram ice-dammed surging glacier lake"
+    },
+    {
+      "id": "SGL-014",
+      "name": "Khyagar Lake",
+      "alternative_names": ["Khyagar Glacier Lake"],
+      "coordinates": {
+        "latitude": 35.682,
+        "longitude": 76.124,
+        "elevation_m": 4800
+      },
+      "bounding_box": {
+        "north": 35.700,
+        "south": 35.660,
+        "east": 76.145,
+        "west": 76.100
+      },
+      "role": "training",
+      "dam_type": "ice",
+      "basin": "Shaksgam",
+      "country": "Pakistan",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Karakoram ice-dammed lake with cyclic drainage"
+    },
+    {
+      "id": "SGL-015",
+      "name": "Lake Merzbacher",
+      "alternative_names": ["Merzbacher Lake"],
+      "coordinates": {
+        "latitude": 39.852,
+        "longitude": 79.865,
+        "elevation_m": 3300
+      },
+      "bounding_box": {
+        "north": 39.870,
+        "south": 39.835,
+        "east": 79.890,
+        "west": 79.840
+      },
+      "role": "training",
+      "dam_type": "ice",
+      "basin": "Inylchek",
+      "country": "China",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Tien Shan / HKH boundary ice-dammed outburst lake"
+    },
+    {
+      "id": "SGL-016",
+      "name": "Gangabal Lake",
+      "alternative_names": ["Harmukut Lake"],
+      "coordinates": {
+        "latitude": 34.432,
+        "longitude": 74.921,
+        "elevation_m": 3570
+      },
+      "bounding_box": {
+        "north": 34.450,
+        "south": 34.415,
+        "east": 74.940,
+        "west": 74.900
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Jhelum",
+      "country": "India",
+      "susceptibility_class": "medium",
+      "icimod_reference": "ICIMOD (2018)",
+      "documented_events": [],
+      "notes": "Western Himalaya / Kashmir training lake"
+    },
+    {
+      "id": "SGL-017",
+      "name": "Tar Tsho",
+      "alternative_names": ["Tar Lake"],
+      "coordinates": {
+        "latitude": 28.721,
+        "longitude": 83.912,
+        "elevation_m": 4750
+      },
+      "bounding_box": {
+        "north": 28.740,
+        "south": 28.700,
+        "east": 83.935,
+        "west": 83.890
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Gandaki",
+      "country": "Nepal",
+      "susceptibility_class": "medium",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Central Nepal training lake"
+    },
+    {
+      "id": "SGL-018",
+      "name": "Tilicho Lake",
+      "alternative_names": ["Tilicho Tsho"],
+      "coordinates": {
+        "latitude": 28.692,
+        "longitude": 83.845,
+        "elevation_m": 4920
+      },
+      "bounding_box": {
+        "north": 28.710,
+        "south": 28.675,
+        "east": 83.870,
+        "west": 83.820
+      },
+      "role": "training",
+      "dam_type": "mixed",
+      "basin": "Gandaki",
+      "country": "Nepal",
+      "susceptibility_class": "low",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Large high-altitude mixed-dam training lake"
+    },
+    {
+      "id": "SGL-019",
+      "name": "Panch Pokhari",
+      "alternative_names": ["Panch Pokhari Lake"],
+      "coordinates": {
+        "latitude": 27.962,
+        "longitude": 85.712,
+        "elevation_m": 4100
+      },
+      "bounding_box": {
+        "north": 27.980,
+        "south": 27.945,
+        "east": 85.730,
+        "west": 85.690
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Indrawati",
+      "country": "Nepal",
+      "susceptibility_class": "low",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Central Nepal high elevation cluster lake"
+    },
+    {
+      "id": "SGL-020",
+      "name": "Gosaikunda Lake",
+      "alternative_names": ["Gosaikunda"],
+      "coordinates": {
+        "latitude": 28.083,
+        "longitude": 85.416,
+        "elevation_m": 4380
+      },
+      "bounding_box": {
+        "north": 28.100,
+        "south": 28.065,
+        "east": 85.435,
+        "west": 85.395
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Trishuli",
+      "country": "Nepal",
+      "susceptibility_class": "low",
+      "icimod_reference": "ICIMOD & UNDP (2020)",
+      "documented_events": [],
+      "notes": "Langtang region moraine-dammed training lake"
+    }
+  ]
+}
