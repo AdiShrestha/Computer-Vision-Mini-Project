@@ -9,3 +9,4 @@ __pycache__/
 data/raw/
 data/test_tiles/
 data/processed/
+data/features/
