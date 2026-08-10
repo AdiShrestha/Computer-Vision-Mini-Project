@@ -1,0 +1,17 @@
+# Core dependencies for sentinel-gl (Self-Supervised GLOF Precursor Detection)
+# Pinned versions generated via pip freeze per C01-01
+
+torch==2.12.1
+numpy==2.5.0
+pandas==3.0.3
+xarray==2026.7.0
+zarr==3.3.0
+rasterio==1.5.1
+earthengine-api==1.7.38
+scikit-learn==1.9.0
+matplotlib==3.11.0
+Cartopy==0.25.0
+pytest==9.1.1
+PyYAML==6.0.3
+shapely==2.1.2
+pyproj==3.7.2
