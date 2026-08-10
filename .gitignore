@@ -10,3 +10,6 @@ data/raw/
 data/test_tiles/
 data/processed/
 data/features/
+data/embeddings/
+models/checkpoints/
+results/
