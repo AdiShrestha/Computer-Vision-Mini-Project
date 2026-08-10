@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "created": "2026-08-10",
+    "factory_version": "1.3.4",
+    "source_inventories": ["ICIMOD 2020", "ICIMOD 2021"]
+  },
+  "lakes": [
+    {
+      "id": "SGL-001",
+      "name": "South Lhonak Lake",
+      "alternative_names": ["Lhonak"],
+      "coordinates": {
+        "latitude": 27.915,
+        "longitude": 88.204,
+        "elevation_m": 5200
+      },
+      "bounding_box": {
+        "north": 27.930,
+        "south": 27.900,
+        "east": 88.220,
+        "west": 88.190
+      },
+      "role": "evaluation_event",
+      "dam_type": "moraine",
+      "basin": "Teesta",
+      "country": "India",
+      "susceptibility_class": "very_high",
+      "icimod_reference": "ICIMOD 2020/2021",
+      "documented_events": [
+        {
+          "date": "2023-10-04",
+          "description": "Glacial lake outburst flood caused by lateral moraine collapse",
+          "references": ["Sattar et al. 2026"]
+        }
+      ],
+      "notes": "Primary evaluation event anchor lake"
+    },
+    {
+      "id": "SGL-002",
+      "name": "Imja Tsho",
+      "alternative_names": ["Imja Lake"],
+      "coordinates": {
+        "latitude": 27.901,
+        "longitude": 86.924,
+        "elevation_m": 5010
+      },
+      "bounding_box": {
+        "north": 27.915,
+        "south": 27.885,
+        "east": 86.940,
+        "west": 86.910
+      },
+      "role": "training",
+      "dam_type": "moraine",
+      "basin": "Dudh Koshi",
+      "country": "Nepal",
+      "susceptibility_class": "high",
+      "icimod_reference": "ICIMOD 2020",
+      "documented_events": [],
+      "notes": "Lowered in 2016"
+    }
+  ]
+}

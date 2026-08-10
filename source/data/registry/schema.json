@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "sentinel-gl Lake Registry",
+  "description": "Canonical list of study lakes with geospatial boundaries, metadata, and role assignments. Frozen after Chunk 01 finalization (INV-001).",
+  "type": "object",
+  "required": ["version", "metadata", "lakes"],
+  "properties": {
+    "version": {"type": "string"},
+    "metadata": {
+      "type": "object",
+      "required": ["created", "factory_version", "source_inventories"],
+      "properties": {
+        "created": {"type": "string", "format": "date"},
+        "factory_version": {"type": "string"},
+        "source_inventories": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "lakes": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "coordinates", "bounding_box", "role", "dam_type", "basin"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^SGL-[0-9]{3}$",
+            "description": "Unique lake identifier: SGL-001 through SGL-999"
+          },
+          "name": {"type": "string"},
+          "alternative_names": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "coordinates": {
+            "type": "object",
+            "required": ["latitude", "longitude"],
+            "properties": {
+              "latitude": {"type": "number", "minimum": 25, "maximum": 40},
+              "longitude": {"type": "number", "minimum": 70, "maximum": 100},
+              "elevation_m": {"type": "number", "minimum": 3000, "maximum": 7000}
+            }
+          },
+          "bounding_box": {
+            "type": "object",
+            "required": ["north", "south", "east", "west"],
+            "properties": {
+              "north": {"type": "number"},
+              "south": {"type": "number"},
+              "east": {"type": "number"},
+              "west": {"type": "number"}
+            },
+            "description": "Geographic bounding box in decimal degrees (WGS84)"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["training", "evaluation_event", "evaluation_control"]
+          },
+          "dam_type": {
+            "type": "string",
+            "enum": ["moraine", "ice", "mixed", "unknown"]
+          },
+          "basin": {"type": "string"},
+          "country": {"type": "string"},
+          "susceptibility_class": {
+            "type": "string",
+            "enum": ["very_high", "high", "medium", "low", "unassessed"],
+            "description": "Per ICIMOD multi-criteria assessment where available"
+          },
+          "icimod_reference": {
+            "type": "string",
+            "description": "Which ICIMOD inventory/assessment this lake appears in"
+          },
+          "documented_events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["date", "description"],
+              "properties": {
+                "date": {"type": "string"},
+                "description": {"type": "string"},
+                "references": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            },
+            "description": "Known GLOF events at this lake, if any"
+          },
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}
