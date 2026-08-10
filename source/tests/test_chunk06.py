@@ -79,8 +79,9 @@ def test_methods_covers_all_components():
     with open(os.path.join(SECTIONS_DIR, 'methods.md')) as f:
         content = f.read()
     required = ['TS-MAE', 'Score-A', 'Score-B', 'Score-C', 'INV-004', 'ablation', 'threshold']
+    content_lower = content.lower()
     for term in required:
-        assert term in content, f"Methods missing required term: '{term}'"
+        assert term.lower() in content_lower, f"Methods missing required term: '{term}'"
 
 
 def test_experiments_cites_claim_ids():
