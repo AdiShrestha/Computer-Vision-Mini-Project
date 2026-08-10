@@ -87,3 +87,24 @@ def test_threshold_sweep_has_multiple_entries():
         ta = json.load(f)
     assert len(ta.get('threshold_sweep_table', [])) >= 10, "Sweep must cover at least 10 percentiles"
 
+
+# ============================================================
+# C05-04: Ablation figures
+# ============================================================
+
+def test_ablation_bar_chart_exists():
+    assert os.path.isfile(os.path.join(repo_root, 'results', 'figures', 'ablation_bar_chart.png'))
+
+
+def test_contribution_figure_exists():
+    assert os.path.isfile(os.path.join(repo_root, 'results', 'figures', 'channel_contribution.png'))
+
+
+def test_roc_curve_exists():
+    assert os.path.isfile(os.path.join(repo_root, 'results', 'figures', 'threshold_roc_curve.png'))
+
+
+def test_ablation_table_exists():
+    assert os.path.isfile(os.path.join(repo_root, 'results', 'figures', 'ablation_comparison_table.png'))
+
+
