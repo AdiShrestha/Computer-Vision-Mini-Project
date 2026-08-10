@@ -15,6 +15,11 @@ import json
 import traceback
 from typing import Dict, Any
 
+# Ensure source root is in sys.path
+source_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if source_root not in sys.path:
+    sys.path.insert(0, source_root)
+
 # Test location: South Lhonak Lake (27.915°N, 88.204°E)
 TEST_LAT = 27.915
 TEST_LON = 88.204
@@ -32,16 +37,21 @@ def test_gee_source(collection_name: str, display_name: str) -> Dict[str, Any]:
     """Test access to a specific Google Earth Engine collection."""
     try:
         import ee
+        project_id = "gen-lang-client-0285668543"
         try:
-            ee.Initialize()
-        except Exception:
-            # Attempt default project initialization
-            ee.Initialize(project='ee-sentinel-gl')
+            ee.Initialize(project=project_id)
+        except Exception as init_err:
+            return {
+                "source": display_name,
+                "status": "BLOCKED",
+                "reason": f"GEE initialization failed: {init_err}",
+                "error": str(init_err)
+            }
     except Exception as e:
         return {
             "source": display_name,
             "status": "BLOCKED",
-            "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
+            "reason": "HUMAN ACTION REQUIRED: GEE package error.",
             "error": str(e)
         }
 

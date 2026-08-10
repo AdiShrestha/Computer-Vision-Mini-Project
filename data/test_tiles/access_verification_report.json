@@ -1,32 +1,28 @@
 [
   {
     "source": "GEE (Sentinel-1 GRD)",
-    "status": "BLOCKED",
-    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
-    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+    "status": "PASS",
+    "info": "Found 5 scene(s). First scene ID: S1A_IW_GRDH_1SDV_20230104T121401_20230104T121426_046634_0596DF_C871"
   },
   {
     "source": "GEE (Sentinel-2 L2A)",
-    "status": "BLOCKED",
-    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
-    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+    "status": "PASS",
+    "info": "Found 12 scene(s). First scene ID: 20230102T045209_20230102T045209_T45RXL"
   },
   {
     "source": "GEE (Landsat 8)",
-    "status": "BLOCKED",
-    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
-    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+    "status": "PASS",
+    "info": "Found 1 scene(s). First scene ID: LC08_139041_20230116"
   },
   {
     "source": "GEE (MODIS LST)",
-    "status": "BLOCKED",
-    "reason": "HUMAN ACTION REQUIRED: Run `earthengine authenticate` in terminal or set up GEE project credentials.",
-    "error": "Please authorize access to your Earth Engine account by running\n\nearthengine authenticate\n\nin your command line, or ee.Authenticate() in Python, and then retry."
+    "status": "PASS",
+    "info": "Found 30 scene(s). First scene ID: 2023_01_01"
   },
   {
     "source": "Copernicus CDS (ERA5)",
-    "status": "BLOCKED",
-    "reason": "HUMAN ACTION REQUIRED: Register at https://cds.climate.copernicus.eu/ and create ~/.cdsapirc file with API key."
+    "status": "PASS",
+    "info": "Downloaded test tile (25615 bytes) to /Users/adi/Desktop/Computer Vision/data/test_tiles/era5/test.nc"
   },
   {
     "source": "ASF DAAC (Sentinel-1 SLC)",
