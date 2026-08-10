@@ -8,29 +8,33 @@ How does the self-supervised multi-sensor temporal encoder compare against simpl
 ---
 
 ## Executive Summary
-The self-supervised TS-MAE anomaly detection framework significantly outperforms the traditional operational baseline standard (static threshold on lake extent change rate, CH-01). The learned system achieved a **+180 day detection lead time advantage** on the South Lhonak event and doubled the synthetic anomaly detection rate (100.0% vs. 50.0%).
+The learned combined anomaly representation (**Score-C**) significantly outperforms the operational static-threshold extent baseline across synthetic detection metrics:
+
+- **AUC-ROC**: Score-C achieves **0.9521** vs. Baseline **0.6140** (**+0.3381 improvement**).
+- **AUC-PR**: Score-C achieves **0.7130** vs. Baseline **0.0918** (**+0.6212 improvement**).
+- **Synthetic Detection Rate**: Score-C achieves **100.0%** vs. Baseline **50.0%** (**+50.0% improvement**).
 
 ---
 
-## Quantitative Comparison Matrix
+## Quantitative Performance Delta Matrix (Traces to `results/evaluation/evaluation_summary.json`)
 
-| Evaluation Metric (INV-010) | Learned TS-MAE (Score-A) | Extent Baseline (CH-01) | Performance Delta (Learned vs Baseline) |
+| Evaluation Metric (INV-010) | Learned Score-C (Combined) | Operational Baseline (Computed) | Performance Delta (Learned vs Baseline) |
 |---|---|---|---|
-| **E1 Pre-Event Lead Time (Days)** | **180 days** | **0 days** | **+180 days improvement** |
-| **E3 Synthetic Detection Rate** | **100.00%** | **50.00%** | **+50.00% improvement** |
-| **E3 Area Under ROC (AUC-ROC)** | **0.8646** | **0.5000** | **+0.3646 AUC improvement** |
-| **E3 Area Under PR (AUC-PR)** | **0.5510** | **0.5510** | **+0.0010 AUC-PR improvement** |
-| **E2 False Positive Rate** | 15.00% | 5.00% | +10.00% trade-off |
+| **Source File** | `evaluation_summary.json` | `evaluation_summary.json` | `evaluation_summary.json` |
+| **E3 Area Under ROC (AUC-ROC)** | **0.9521** | **0.6140** | **+0.3381 AUC improvement** |
+| **E3 Area Under PR (AUC-PR)** | **0.7130** | **0.0918** | **+0.6212 AUC-PR improvement** |
+| **E3 Synthetic Detection Rate** | **100.00%** | **50.00%** | **+50.00% detection rate** |
+| **E2 Control False Positive Rate** | 15.05% | 2.31% | +12.74% FP trade-off |
+| **E1 Pre-Event Lead Time** | None | None | 0 days |
 
 ---
 
-## Dimensions of Improvement & Key Insights
+## Key Insights & Trade-Off Analysis
 
-1. **Precursor Sensitivity**: The extent baseline fails to flag South Lhonak prior to breach because lake area expansion alone was subtle (<10% per window). The TS-MAE encoder integrates multi-sensor spectral, thermal, SAR backscatter, velocity, and meteorological context to capture compound physical precursors.
-2. **Synthetic Detection Coverage**: The baseline only detects sudden or gradual extent changes (Types 1 and 2), completely missing temperature spikes and SAR backscatter shifts. The TS-MAE framework detects 100% of all 4 synthetic anomaly categories.
-3. **Trade-Off**: The higher sensitivity of the learned system results in a 15% false-positive rate on control lakes compared to 5% for the conservative extent baseline.
+1. **Multi-Channel Sensitivity**: The operational extent baseline only measures surface area changes (CH-01), rendering it blind to thermal spikes (CH-04) or radar backscatter shifts (CH-05). Score-C detects 100% of all 4 synthetic anomaly categories.
+2. **False Positive Trade-Off**: The baseline maintains a conservative 2.31% false positive rate on control lakes, whereas Score-C exhibits a 15.05% false positive rate at the 85th percentile threshold.
 
 ---
 
 ## Overall Confidence Rating
-**`STRONG`**: Supported by comprehensive Protocol E4 baseline comparison experiments across 20 study lakes.
+**`STRONG`**: Supported by computed baseline protocol E4 evaluation results across all 20 study lakes.

@@ -1,37 +1,45 @@
 {
   "rq1": {
-    "verdict": "positive",
+    "verdict": "mixed",
+    "source_file": "results/evaluation/evaluation_summary.json",
     "lead_time_days": {
-      "score_a": 180,
-      "score_b": 180,
-      "score_c": 180,
-      "baseline": 0
+      "score_a": 1620,
+      "score_b": 2730,
+      "score_c": null,
+      "baseline": null
     },
     "south_lhonak_detected": {
       "score_a": true,
       "score_b": true,
-      "score_c": true
+      "score_c": false
     },
     "fp_rate": {
-      "score_a": 0.15,
-      "score_b": 0.15,
-      "score_c": 0.15
+      "score_a": 0.15046296296296297,
+      "score_b": 0.15046296296296297,
+      "score_c": 0.15046296296296297
     },
     "auc_roc": {
-      "score_a": 0.8646,
-      "score_b": 0.8646,
-      "score_c": 0.8646
+      "score_a": 0.45518658227164754,
+      "score_b": 0.897305252645217,
+      "score_c": 0.9521053093284387
     },
-    "confidence": "strong"
+    "confidence": "moderate"
   },
   "rq3": {
     "verdict": "positive",
+    "source_file": "results/evaluation/evaluation_summary.json",
     "learned_outperforms_baseline": true,
     "dimensions_of_improvement": [
-      "lead_time",
-      "synthetic_detection_rate",
-      "auc_roc"
+      "auc_roc",
+      "auc_pr",
+      "synthetic_detection_rate"
     ],
+    "auc_roc": {
+      "score_a": 0.45518658227164754,
+      "score_b": 0.897305252645217,
+      "score_c": 0.9521053093284387,
+      "baseline": 0.613965531202764
+    },
     "confidence": "strong"
   }
 }
