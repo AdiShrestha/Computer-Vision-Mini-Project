@@ -1,0 +1,10 @@
+[
+  {
+    "lake_id": "SGL-004",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/era5/SGL-004/era5_2016-01-01_2024-10-31.nc",
+    "sha256_hash": "1d04e36483780d0a8b1bdb66d876db4c5acaaea893b525fe414b1a96e8aa4163",
+    "size_bytes": 51730,
+    "source_api": "era5"
+  }
+]

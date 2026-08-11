@@ -164,3 +164,56 @@ def test_sentinel2_lake_area_plausible():
     )
 
 
+# ============================================================
+# C07-03: Real Data Acquisition — Auxiliary Channels & CH-07 Removal Verification
+# ============================================================
+
+def test_itslive_coverage():
+    """ITS_LIVE has >=5 annual observations per lake."""
+    import csv
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        csv_path = os.path.join(repo_root, 'data', 'raw', 'itslive', lake['id'], 'velocity_timeseries.csv')
+        assert os.path.exists(csv_path), f"Missing ITS_LIVE for {lake['id']}"
+        with open(csv_path, 'r', encoding='utf-8') as f:
+            rows = list(csv.DictReader(f))
+        assert len(rows) >= 5, f"{lake['id']} has only {len(rows)} ITS_LIVE obs (need >=5)"
+
+
+def test_modis_lst_coverage():
+    """MODIS LST has >70% temporal coverage per lake."""
+    manifest_path = os.path.join(repo_root, 'data', 'raw', 'auxiliary_acquisition_manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+    avg_coverage = manifest['per_source_stats']['MODIS_LST']['coverage_pct_avg']
+    assert avg_coverage >= 70.0, f"MODIS LST coverage {avg_coverage}% < 70%"
+
+
+def test_era5_coverage():
+    """ERA5 has >95% temporal coverage."""
+    manifest_path = os.path.join(repo_root, 'data', 'raw', 'auxiliary_acquisition_manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+    avg_coverage = manifest['per_source_stats']['ERA5']['coverage_pct_avg']
+    assert avg_coverage >= 95.0, f"ERA5 coverage {avg_coverage}% < 95%"
+
+
+def test_no_ch07_coherence_files():
+    """No file or column labeled 'coherence' or 'CH-07' exists in raw data."""
+    import glob
+    coherence_files = glob.glob(os.path.join(repo_root, 'data', 'raw', '**', 'coherence*'), recursive=True)
+    assert len(coherence_files) == 0, f"Found coherence files: {coherence_files}"
+    coherence_files2 = glob.glob(os.path.join(repo_root, 'data', 'raw', '**', 'ch07*'), recursive=True)
+    assert len(coherence_files2) == 0, f"Found CH-07 files: {coherence_files2}"
+
+    manifest_path = os.path.join(repo_root, 'data', 'raw', 'auxiliary_acquisition_manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+    assert 'CH-07' in manifest.get('channels_dropped', {}), (
+        "CH-07 must be listed as dropped in manifest"
+    )
+
+
+

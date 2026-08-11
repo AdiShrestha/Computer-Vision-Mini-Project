@@ -1,0 +1,181 @@
+[
+  {
+    "source": "itslive",
+    "lake_id": "SGL-001",
+    "files": [],
+    "errors": [
+      {
+        "date": "2023-01-01",
+        "error": "HTTPSConnectionPool(host='nsidc.org', port=443): Max retries exceeded with url: /apps/itslive-search/api/v1/search?bbox=88.185%2C27.895%2C88.225%2C27.935&start=2023-01-01&end=2023-01-31 (Caused by NameResolutionError(\"HTTPSConnection(host='nsidc.org', port=443): Failed to resolve 'nsidc.org' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      }
+    ],
+    "metadata": {
+      "start_date": "2023-01-01",
+      "end_date": "2023-01-31",
+      "total_scenes": 0,
+      "successful": 0,
+      "failed": 1
+    },
+    "timestamp": "2026-08-10T01:01:08Z"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-001/query_metadata.json",
+    "sha256_hash": "2daa657644d30b0bfdf714fd7d471a9013c95eba69e7b39c792b8095ff93f2ed",
+    "size_bytes": 54,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-002/query_metadata.json",
+    "sha256_hash": "6cccf0cc735a57c4126811c51c018343b8fd9a01e51aad5a0b408804db029c68",
+    "size_bytes": 52,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-003/query_metadata.json",
+    "sha256_hash": "e8037655d92f33ac9ad85b7858f4f3b4ac0ff91f27cd8138510fa88b79e44414",
+    "size_bytes": 53,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-004/query_metadata.json",
+    "sha256_hash": "fef730c0378f61c961a42a200586f2e621fcf9beebe3caf19ca759d2dd627dc8",
+    "size_bytes": 52,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-005/query_metadata.json",
+    "sha256_hash": "58c4d1962d0c94c09812efdbfc537bee1ad59f2b6b5d734f42aaa9841769ff0f",
+    "size_bytes": 53,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-006/query_metadata.json",
+    "sha256_hash": "e67c1a1396bdc1196a25905fcf295d6a48243318b4eda63ec2557c388e2aec81",
+    "size_bytes": 53,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-007/query_metadata.json",
+    "sha256_hash": "e507bb0e55a613a0072137f11aeb408be562630f78f3b442c7bfb91ddf43cfb3",
+    "size_bytes": 51,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-008/query_metadata.json",
+    "sha256_hash": "1709cab4143aa9e1acfb32673d38d94cb473bd7b888edf57194a314cc0ff4c88",
+    "size_bytes": 52,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-009/query_metadata.json",
+    "sha256_hash": "d37f9b974dd46ae1107e76e9e283d040f9b0bd410aa88e4df0073f53d2583187",
+    "size_bytes": 49,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-010/query_metadata.json",
+    "sha256_hash": "a32d0cbc9623dbf95c77a9020ca6ad892d549790c36a163afa948a67e685b5c2",
+    "size_bytes": 50,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-011/query_metadata.json",
+    "sha256_hash": "ecf5f37e2b8d6d636e0938ad138201f63db8a47cc183381a98da364c2457d621",
+    "size_bytes": 53,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-012/query_metadata.json",
+    "sha256_hash": "ca747d7e72d78bc8bde133d78047a8309c15d2b148d7f88e2a0d914ed2f4a6c2",
+    "size_bytes": 53,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-013/query_metadata.json",
+    "sha256_hash": "f21dce0f0274f6fa2b5c163cdb545984d4e4e5f13803d2d641dab6fc5fcac919",
+    "size_bytes": 52,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-014/query_metadata.json",
+    "sha256_hash": "ddaf338536e8701fd3aaff15c0cfb14ef0f0cc543c53da45901eb753293a9940",
+    "size_bytes": 49,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-015/query_metadata.json",
+    "sha256_hash": "cefdbfbf023ea2073aebcf2fed79cad451822850c9d620f0bf8446d2c4bb0eae",
+    "size_bytes": 51,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-016/query_metadata.json",
+    "sha256_hash": "91204f77bcf04601274fd376fe1053bf1b0023e1ca3da62a86f94a6b3ece2a2a",
+    "size_bytes": 50,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-017/query_metadata.json",
+    "sha256_hash": "362434b414239da1aa86c4ddeaa205999ff42614412f22deac01b903d477d1fd",
+    "size_bytes": 50,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-018/query_metadata.json",
+    "sha256_hash": "d84fa3d1ce9e8fea2b1f1e27b1ab0683b6edefe0c62024ea341f036c4399a16b",
+    "size_bytes": 51,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-019/query_metadata.json",
+    "sha256_hash": "b6f3b80e7e4fe0cb07e02fef1ff4abe7c34ffe3328c1c60250d13930e4ae09e9",
+    "size_bytes": 51,
+    "source_api": "itslive"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": "2016-01-01",
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/itslive/SGL-020/query_metadata.json",
+    "sha256_hash": "dd25c9c195e29c93d05b110c00f807411f68c13d5625627f5b31544fbc3b9d39",
+    "size_bytes": 52,
+    "source_api": "itslive"
+  }
+]
