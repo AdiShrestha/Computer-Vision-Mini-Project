@@ -31,6 +31,7 @@ def generate_modis_lst_series(
 
     seed = sum(ord(c) for c in lake_id) + 404
     rng = np.random.RandomState(seed)
+    lst_noise_std = 1.2 + (seed % 6) * 0.6
 
     records = []
     curr_date = dt_start
@@ -43,7 +44,7 @@ def generate_modis_lst_series(
             doy = curr_date.timetuple().tm_yday
             base_temp = climatology_map.get(doy, 268.15)
             # Add stochastic variation
-            obs_temp = round(float(base_temp + rng.normal(0.0, 2.5)), 2)
+            obs_temp = round(float(base_temp + rng.normal(0.0, lst_noise_std)), 2)
             anomaly = round(obs_temp - base_temp, 2)
 
             records.append({

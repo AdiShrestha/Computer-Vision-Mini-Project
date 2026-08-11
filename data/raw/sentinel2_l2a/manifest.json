@@ -1,0 +1,842 @@
+[
+  {
+    "lake_id": "SGL-001",
+    "date": 1451623861349,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160101T044212_20160101T044851_T45RXL.json",
+    "sha256_hash": "80d6119212b8ed5075815e3b045145c6f2e3bb0980145c1cc5724053b7c5913d",
+    "size_bytes": 10071,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451623846904,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160101T044212_20160101T044851_T45RXM.json",
+    "sha256_hash": "c4b5b24a6b1d8822cd8ac612c743059121f3ca8c81b7b8f2a3b921938cc69737",
+    "size_bytes": 10104,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1452747640208,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160114T045142_20160114T045802_T45RXM.json",
+    "sha256_hash": "da4a076c53467234e59ae71b3a0abe270924d3c3a02ac4b5e937408fe8f119ef",
+    "size_bytes": 9966,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454215843565,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160131T044022_20160131T044324_T45RXM.json",
+    "sha256_hash": "bc3bfe05f24fa81e18c4102532e6a10bb46338767a82275dafa31df7330a0c15",
+    "size_bytes": 9985,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1455339639086,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RXM.json",
+    "sha256_hash": "1f48cfd387e075a19098c28d8c8a6900ab4f7986eae9f6a6975a167eb713720a",
+    "size_bytes": 10090,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451623861349,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160101T044212_20160101T044851_T45RXL.json",
+    "sha256_hash": "80d6119212b8ed5075815e3b045145c6f2e3bb0980145c1cc5724053b7c5913d",
+    "size_bytes": 10071,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451623846904,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160101T044212_20160101T044851_T45RXM.json",
+    "sha256_hash": "c4b5b24a6b1d8822cd8ac612c743059121f3ca8c81b7b8f2a3b921938cc69737",
+    "size_bytes": 10104,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1452747640208,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160114T045142_20160114T045802_T45RXM.json",
+    "sha256_hash": "da4a076c53467234e59ae71b3a0abe270924d3c3a02ac4b5e937408fe8f119ef",
+    "size_bytes": 9966,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454215843565,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160131T044022_20160131T044324_T45RXM.json",
+    "sha256_hash": "bc3bfe05f24fa81e18c4102532e6a10bb46338767a82275dafa31df7330a0c15",
+    "size_bytes": 9985,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1455339639086,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-001/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RXM.json",
+    "sha256_hash": "1f48cfd387e075a19098c28d8c8a6900ab4f7986eae9f6a6975a167eb713720a",
+    "size_bytes": 10090,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1455339660550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-002/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVL.json",
+    "sha256_hash": "b8dfe5ab81e407a9af29f25e0e5b4f9b68b20e75764861085527dd179a07c57c",
+    "size_bytes": 10027,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1460523663915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-002/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVL.json",
+    "sha256_hash": "501f4ef7ba6b8d731c034b135a7ab7caf74ef29a5119d04282f5a7ccc716a2ac",
+    "size_bytes": 10025,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1479531662931,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-002/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RVL.json",
+    "sha256_hash": "18e6bfbddb462c4440c32e9c2fb2c514aab1ff3c2ba3a414233fd5bafcbe8f36",
+    "size_bytes": 10035,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1481259660748,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-002/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RVL.json",
+    "sha256_hash": "da4a341312fa7d139206877cce7b11bc766d0e5a2ef28ec3062aca98d189708c",
+    "size_bytes": 10019,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1482987658582,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-002/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RVL.json",
+    "sha256_hash": "a1c41892e509c87977ad8931b1ab33db71eb3907c991a280b88df9e78371adbd",
+    "size_bytes": 10034,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1455339660550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-003/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVL.json",
+    "sha256_hash": "b8dfe5ab81e407a9af29f25e0e5b4f9b68b20e75764861085527dd179a07c57c",
+    "size_bytes": 10027,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1460523663915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-003/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVL.json",
+    "sha256_hash": "501f4ef7ba6b8d731c034b135a7ab7caf74ef29a5119d04282f5a7ccc716a2ac",
+    "size_bytes": 10025,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1479531662931,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-003/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RVL.json",
+    "sha256_hash": "18e6bfbddb462c4440c32e9c2fb2c514aab1ff3c2ba3a414233fd5bafcbe8f36",
+    "size_bytes": 10035,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1481259660748,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-003/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RVL.json",
+    "sha256_hash": "da4a341312fa7d139206877cce7b11bc766d0e5a2ef28ec3062aca98d189708c",
+    "size_bytes": 10019,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1482987658582,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-003/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RVL.json",
+    "sha256_hash": "a1c41892e509c87977ad8931b1ab33db71eb3907c991a280b88df9e78371adbd",
+    "size_bytes": 10034,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1477199444795,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-004/COPERNICUS_S2_SR_HARMONIZED_20161023T045842_20161023T045905_T45RTM.json",
+    "sha256_hash": "51bc58ceda8a4f869e6828606ee4be1d5dc3ef10a7613a382987b4d306202f14",
+    "size_bytes": 10081,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1478063450667,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-004/COPERNICUS_S2_SR_HARMONIZED_20161102T050822_20161102T050821_T45RTM.json",
+    "sha256_hash": "4439f1b17de3c5da3ff66b009f6447ec1293116392d1732801d5b9f0d27870bd",
+    "size_bytes": 10125,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1481519448737,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-004/COPERNICUS_S2_SR_HARMONIZED_20161212T050212_20161212T050557_T45RTM.json",
+    "sha256_hash": "b2a7fd543bfb64d211a16f3e4e3b8f96d0e5f6f74c761524a8f503065ad6931a",
+    "size_bytes": 10102,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1486703447042,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-004/COPERNICUS_S2_SR_HARMONIZED_20170210T045931_20170210T050445_T45RTM.json",
+    "sha256_hash": "b77241d2badc6189f7bdd80e3093612a842f84a706724ee3762db3d0635f469f",
+    "size_bytes": 10118,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1491887451716,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-004/COPERNICUS_S2_SR_HARMONIZED_20170411T045701_20170411T051023_T45RTM.json",
+    "sha256_hash": "e5201bfefc859c7a1e7a40a5f7ec8a0cb23ce00a9ab80ee5c80cdbc8b6fdbb6e",
+    "size_bytes": 10114,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1455339656985,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-005/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RWL.json",
+    "sha256_hash": "1f5ff862ef000e9003f95a171f2cf728667995231c5e385e184a421c200fd37f",
+    "size_bytes": 10030,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1479531659362,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-005/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RWL.json",
+    "sha256_hash": "7315ed4532fb7b28700724cd79516b3d36d90718c6ee3503a52eac89fda831ce",
+    "size_bytes": 10028,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1481259657177,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-005/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RWL.json",
+    "sha256_hash": "86a7b481ae5e2a4947861197664bfa418da2c846c530ae05bdddba6515eb6b03",
+    "size_bytes": 10020,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1482987655014,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-005/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RWL.json",
+    "sha256_hash": "6b02bef9d88339a3edfdfc649e85ee9aad3ae64c1321a1ae97bd0362d4c8f213",
+    "size_bytes": 10036,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1484715652677,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-005/COPERNICUS_S2_SR_HARMONIZED_20170118T045121_20170118T045425_T45RWL.json",
+    "sha256_hash": "70744c9c1aa900c7b416e83d607ad0ebeedc3e694256ac9b36e57dc3320dbfe5",
+    "size_bytes": 10015,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1455339660550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-006/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVL.json",
+    "sha256_hash": "b8dfe5ab81e407a9af29f25e0e5b4f9b68b20e75764861085527dd179a07c57c",
+    "size_bytes": 10027,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1460523663915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-006/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVL.json",
+    "sha256_hash": "501f4ef7ba6b8d731c034b135a7ab7caf74ef29a5119d04282f5a7ccc716a2ac",
+    "size_bytes": 10025,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1479531662931,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-006/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RVL.json",
+    "sha256_hash": "18e6bfbddb462c4440c32e9c2fb2c514aab1ff3c2ba3a414233fd5bafcbe8f36",
+    "size_bytes": 10035,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1481259660748,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-006/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RVL.json",
+    "sha256_hash": "da4a341312fa7d139206877cce7b11bc766d0e5a2ef28ec3062aca98d189708c",
+    "size_bytes": 10019,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1482987658582,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-006/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RVL.json",
+    "sha256_hash": "a1c41892e509c87977ad8931b1ab33db71eb3907c991a280b88df9e78371adbd",
+    "size_bytes": 10034,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1455339660550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-007/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVL.json",
+    "sha256_hash": "b8dfe5ab81e407a9af29f25e0e5b4f9b68b20e75764861085527dd179a07c57c",
+    "size_bytes": 10027,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1460523663915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-007/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVL.json",
+    "sha256_hash": "501f4ef7ba6b8d731c034b135a7ab7caf74ef29a5119d04282f5a7ccc716a2ac",
+    "size_bytes": 10025,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1479531662931,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-007/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RVL.json",
+    "sha256_hash": "18e6bfbddb462c4440c32e9c2fb2c514aab1ff3c2ba3a414233fd5bafcbe8f36",
+    "size_bytes": 10035,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1481259660748,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-007/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RVL.json",
+    "sha256_hash": "da4a341312fa7d139206877cce7b11bc766d0e5a2ef28ec3062aca98d189708c",
+    "size_bytes": 10019,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1482987658582,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-007/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RVL.json",
+    "sha256_hash": "a1c41892e509c87977ad8931b1ab33db71eb3907c991a280b88df9e78371adbd",
+    "size_bytes": 10034,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1455339660550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-008/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVL.json",
+    "sha256_hash": "b8dfe5ab81e407a9af29f25e0e5b4f9b68b20e75764861085527dd179a07c57c",
+    "size_bytes": 10027,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1460523663915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-008/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVL.json",
+    "sha256_hash": "501f4ef7ba6b8d731c034b135a7ab7caf74ef29a5119d04282f5a7ccc716a2ac",
+    "size_bytes": 10025,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1479531662931,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-008/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RVL.json",
+    "sha256_hash": "18e6bfbddb462c4440c32e9c2fb2c514aab1ff3c2ba3a414233fd5bafcbe8f36",
+    "size_bytes": 10035,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1481259660748,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-008/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RVL.json",
+    "sha256_hash": "da4a341312fa7d139206877cce7b11bc766d0e5a2ef28ec3062aca98d189708c",
+    "size_bytes": 10019,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1482987658582,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-008/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RVL.json",
+    "sha256_hash": "a1c41892e509c87977ad8931b1ab33db71eb3907c991a280b88df9e78371adbd",
+    "size_bytes": 10034,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1455339660550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-009/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVL.json",
+    "sha256_hash": "b8dfe5ab81e407a9af29f25e0e5b4f9b68b20e75764861085527dd179a07c57c",
+    "size_bytes": 10027,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1460523663915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-009/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVL.json",
+    "sha256_hash": "501f4ef7ba6b8d731c034b135a7ab7caf74ef29a5119d04282f5a7ccc716a2ac",
+    "size_bytes": 10025,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1479531662931,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-009/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RVL.json",
+    "sha256_hash": "18e6bfbddb462c4440c32e9c2fb2c514aab1ff3c2ba3a414233fd5bafcbe8f36",
+    "size_bytes": 10035,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1481259660748,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-009/COPERNICUS_S2_SR_HARMONIZED_20161209T045202_20161209T045602_T45RVL.json",
+    "sha256_hash": "da4a341312fa7d139206877cce7b11bc766d0e5a2ef28ec3062aca98d189708c",
+    "size_bytes": 10019,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1482987658582,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-009/COPERNICUS_S2_SR_HARMONIZED_20161229T045212_20161229T045631_T45RVL.json",
+    "sha256_hash": "a1c41892e509c87977ad8931b1ab33db71eb3907c991a280b88df9e78371adbd",
+    "size_bytes": 10034,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451968223477,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-010/COPERNICUS_S2_SR_HARMONIZED_20160105T042142_20160105T042453_T46RET.json",
+    "sha256_hash": "d50a9d93059b8132c832d6ff2742cdf1dc481ba13caa60a59edfd06e8433d289",
+    "size_bytes": 10085,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451968208731,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-010/COPERNICUS_S2_SR_HARMONIZED_20160105T042142_20160105T042453_T46REU.json",
+    "sha256_hash": "fc660ec6afd0b8d21ee3e83a18eb5bef051ddd9029ef17d18cd2a218f0b90185",
+    "size_bytes": 10033,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1453092016134,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-010/COPERNICUS_S2_SR_HARMONIZED_20160118T043122_20160118T043403_T46RET.json",
+    "sha256_hash": "72ba7eeb9043bd7972078cca1656c9ffb205d8ac647d203a3d17f7a6e0725b35",
+    "size_bytes": 10154,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1453092001618,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-010/COPERNICUS_S2_SR_HARMONIZED_20160118T043122_20160118T043403_T46REU.json",
+    "sha256_hash": "0d831c1f112e161391a38c16161a0c072157d6fcd0020d2e47177c085c83812c",
+    "size_bytes": 10103,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1454560220850,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-010/COPERNICUS_S2_SR_HARMONIZED_20160204T041952_20160204T042450_T46RET.json",
+    "sha256_hash": "be065e59ca9f6ba86354dd786f5cae211ddbb218647599d06b1aad5d3b518254",
+    "size_bytes": 10002,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1452747650277,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-011/COPERNICUS_S2_SR_HARMONIZED_20160114T045142_20160114T045802_T45RUM.json",
+    "sha256_hash": "9192356f1d49a5cb4b5968eed0fb23de3e1e758c6e35fa39d53d2297c4112784",
+    "size_bytes": 10066,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1452747647244,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-011/COPERNICUS_S2_SR_HARMONIZED_20160114T045142_20160114T045802_T45RVM.json",
+    "sha256_hash": "af7835302b53d66ddf82eea8aa240c3d3cd6bf4ea23d55927e78b7f56d5d065b",
+    "size_bytes": 10000,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1455339649138,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-011/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RUM.json",
+    "sha256_hash": "a02dbcddd02364524d2bbea76d76a2f89bdad40b03fe09e9d16ab6b0cd47c21a",
+    "size_bytes": 10104,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1455339646110,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-011/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RVM.json",
+    "sha256_hash": "53f65032cb2494c9d5e398f5ca72c672d4eeac4c6f1af49eb2002a6d869a025b",
+    "size_bytes": 10022,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1460523649464,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-011/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RVM.json",
+    "sha256_hash": "8c340e3d1bdc75f9bb6962e67dd3d1dc08d5d45442e0caade978a6c0fef73de5",
+    "size_bytes": 10017,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1451623832348,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-012/COPERNICUS_S2_SR_HARMONIZED_20160101T044212_20160101T044851_T45RXN.json",
+    "sha256_hash": "193eb629fe3276d00ac6d8e058fb68084d72eb224727726e07926cb242ff8dc9",
+    "size_bytes": 9961,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1454215829001,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-012/COPERNICUS_S2_SR_HARMONIZED_20160131T044022_20160131T044324_T45RXN.json",
+    "sha256_hash": "f876674eba4a049e0359854babc39ca7d416aaf901a88b1996eafe08a0e57947",
+    "size_bytes": 10014,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1476679827917,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-012/COPERNICUS_S2_SR_HARMONIZED_20161017T043752_20161017T044357_T45RXN.json",
+    "sha256_hash": "1e994acc45286333ddd4088a4c39fb4e12eeb9caad6b56ca1942a73011dcccd6",
+    "size_bytes": 10024,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1477543829555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-012/COPERNICUS_S2_SR_HARMONIZED_20161027T044812_20161027T044811_T45RXN.json",
+    "sha256_hash": "10d23327cc1310f7b702a1ac6c66325fc9d67bc3fbe18275cd82a7d45b84cc00",
+    "size_bytes": 9965,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1478407830915,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-012/COPERNICUS_S2_SR_HARMONIZED_20161106T043952_20161106T044509_T45RXN.json",
+    "sha256_hash": "51695d34a1760ca5d88957cbb993c4c5dcf7c6db26b201e8089ebee7f5aca4c2",
+    "size_bytes": 9975,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1462082338980,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-013/COPERNICUS_S2_SR_HARMONIZED_20160501T054622_20160501T054854_T43SDA.json",
+    "sha256_hash": "2d41cb8de996327e9ca860b7b2d57bd08bed7e7bbb5142c2b24dcf42a3a35f3d",
+    "size_bytes": 10009,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1463810340518,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-013/COPERNICUS_S2_SR_HARMONIZED_20160521T054642_20160521T055208_T43SDA.json",
+    "sha256_hash": "01e07f6b34453a7fba0cbbb2ac0e5172f832e71dfc72e3a88ac808054c684c54",
+    "size_bytes": 10010,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1474178329983,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-013/COPERNICUS_S2_SR_HARMONIZED_20160918T054632_20160918T055158_T43SDA.json",
+    "sha256_hash": "06dc0ad15dd1ae6478ba928d9b4c88b78f82a4f1940e5c427baee8a954d24de8",
+    "size_bytes": 10007,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1477634331719,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-013/COPERNICUS_S2_SR_HARMONIZED_20161028T054932_20161028T055734_T43SDA.json",
+    "sha256_hash": "096a3d4c4b884bd849da491a62f7afe4f884e3462fd1ad4fe168a6f625819923",
+    "size_bytes": 10008,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1480226332856,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-013/COPERNICUS_S2_SR_HARMONIZED_20161127T055202_20161127T055158_T43SDA.json",
+    "sha256_hash": "e6059f2ccd13edcc4a5b9f6e7cbd34ed4eb781b3aeb015515fcf9569c59d64dc",
+    "size_bytes": 10028,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1479102547995,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-014/COPERNICUS_S2_SR_HARMONIZED_20161114T054102_20161114T054748_T43SEV.json",
+    "sha256_hash": "dd13498033729706455288f97bff1d1ecd215696303ab5751e2552eb94b85ac8",
+    "size_bytes": 10037,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1481694544739,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-014/COPERNICUS_S2_SR_HARMONIZED_20161214T054232_20161214T054410_T43SEV.json",
+    "sha256_hash": "2376009db929e61b75279239d817043c248866badf6b98021408012ed47bbda7",
+    "size_bytes": 10022,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1481694541507,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-014/COPERNICUS_S2_SR_HARMONIZED_20161214T054232_20161214T054410_T43SFV.json",
+    "sha256_hash": "fb1267bb7e0bdc26995955ca938a8c6e4d82ab6c35d47435fb5f5880b4dd2bac",
+    "size_bytes": 10039,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1495518552236,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-014/COPERNICUS_S2_SR_HARMONIZED_20170523T053641_20170523T053857_T43SEV.json",
+    "sha256_hash": "80db74fcbc6f693f73b62687ba1110f484342d816198344fd00a29b3a05337d4",
+    "size_bytes": 10015,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1501134549224,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-014/COPERNICUS_S2_SR_HARMONIZED_20170727T053639_20170727T053854_T43SEV.json",
+    "sha256_hash": "75c17b0c0445806b3cec53d8ee0c5bf325f2f2a652e5742080a20ac6bd4e2fc5",
+    "size_bytes": 9999,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1466746670110,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-015/COPERNICUS_S2_SR_HARMONIZED_20160624T052652_20160624T052823_T44TLK.json",
+    "sha256_hash": "0334fe11a8f5fd71625ee5eba6160b01a0420e1acce733d88e99a94f47b15d8d",
+    "size_bytes": 10139,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1475386665009,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-015/COPERNICUS_S2_SR_HARMONIZED_20161002T052642_20161002T052829_T44TLK.json",
+    "sha256_hash": "e4fb46e6e3e90f91c14df224450ba4cc2ee272e04747b145bac53a10d3c7f9bd",
+    "size_bytes": 10009,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1475386661380,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-015/COPERNICUS_S2_SR_HARMONIZED_20161002T052642_20161002T052829_T44TMK.json",
+    "sha256_hash": "34d36f88bc68c9375a65f6f082a1b63d06311f3926a13ac6aede2ca38129914e",
+    "size_bytes": 10013,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1478842664178,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-015/COPERNICUS_S2_SR_HARMONIZED_20161111T053042_20161111T053350_T44TMK.json",
+    "sha256_hash": "92da60eced7143ed4ad1bfc2aa18f58941d5952071cf76c2faf2c1b9c6f76cb3",
+    "size_bytes": 10004,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1482298659693,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-015/COPERNICUS_S2_SR_HARMONIZED_20161221T053232_20161221T053228_T44TMK.json",
+    "sha256_hash": "4b0bebc2a745d76e8f0fcb3be9e2d8cc0bc7440adbe2a150e32c56cf9faffb0e",
+    "size_bytes": 10001,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1454306359765,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-016/COPERNICUS_S2_SR_HARMONIZED_20160201T055052_20160201T055848_T43SDU.json",
+    "sha256_hash": "a144757b15b071e923c4d5d39573b4ffb4a3351393aac0fdc7bea2807b0d195a",
+    "size_bytes": 10010,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1459230564214,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-016/COPERNICUS_S2_SR_HARMONIZED_20160329T053622_20160329T054442_T43SDU.json",
+    "sha256_hash": "adb648e611e161dac8a38e7f385dd23d6437a257b2a0826e89e01a99eb6e90cd",
+    "size_bytes": 10115,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1462082367702,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-016/COPERNICUS_S2_SR_HARMONIZED_20160501T054622_20160501T054854_T43SDU.json",
+    "sha256_hash": "f7a24b7aa53568a02c29e046783fde120cbeb4de7a0d32444c2f7a51fef3ce0e",
+    "size_bytes": 9996,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1463550572793,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-016/COPERNICUS_S2_SR_HARMONIZED_20160518T053652_20160518T054016_T43SDU.json",
+    "sha256_hash": "d04eccb84ce35dc28ff4b0e88a0ba31950dc6a88992de31cf0922e910ffdad72",
+    "size_bytes": 10003,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1477374563383,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-016/COPERNICUS_S2_SR_HARMONIZED_20161025T053912_20161025T054823_T43SDU.json",
+    "sha256_hash": "061c8df33384a544af186735ffae08fc768487f9d8a00b9d13b1a5a77112ece9",
+    "size_bytes": 9967,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1477199446278,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-017/COPERNICUS_S2_SR_HARMONIZED_20161023T045842_20161023T045905_T44RQS.json",
+    "sha256_hash": "ad2759245ba61a2a1aec545b0972ee025df8a48ad1ae48cb897587adde710648",
+    "size_bytes": 10113,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1477199444795,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-017/COPERNICUS_S2_SR_HARMONIZED_20161023T045842_20161023T045905_T45RTM.json",
+    "sha256_hash": "51bc58ceda8a4f869e6828606ee4be1d5dc3ef10a7613a382987b4d306202f14",
+    "size_bytes": 10081,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1478063453540,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-017/COPERNICUS_S2_SR_HARMONIZED_20161102T050822_20161102T050821_T44RQS.json",
+    "sha256_hash": "6d24ee04189b8bbed435c07f023cb3089959dbc5bf0ede11a0c2a1edd9e3fc77",
+    "size_bytes": 10107,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1478063450667,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-017/COPERNICUS_S2_SR_HARMONIZED_20161102T050822_20161102T050821_T45RTM.json",
+    "sha256_hash": "4439f1b17de3c5da3ff66b009f6447ec1293116392d1732801d5b9f0d27870bd",
+    "size_bytes": 10125,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1478927454342,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-017/COPERNICUS_S2_SR_HARMONIZED_20161112T050032_20161112T050828_T44RQS.json",
+    "sha256_hash": "264ceb693c5c06760476a74a10092dac6310b8bf2bf6a41cd64b670de5b2e60e",
+    "size_bytes": 10114,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1477199446278,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-018/COPERNICUS_S2_SR_HARMONIZED_20161023T045842_20161023T045905_T44RQS.json",
+    "sha256_hash": "ad2759245ba61a2a1aec545b0972ee025df8a48ad1ae48cb897587adde710648",
+    "size_bytes": 10113,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1478063453540,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-018/COPERNICUS_S2_SR_HARMONIZED_20161102T050822_20161102T050821_T44RQS.json",
+    "sha256_hash": "6d24ee04189b8bbed435c07f023cb3089959dbc5bf0ede11a0c2a1edd9e3fc77",
+    "size_bytes": 10107,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1478927454342,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-018/COPERNICUS_S2_SR_HARMONIZED_20161112T050032_20161112T050828_T44RQS.json",
+    "sha256_hash": "264ceb693c5c06760476a74a10092dac6310b8bf2bf6a41cd64b670de5b2e60e",
+    "size_bytes": 10114,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1481519451604,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-018/COPERNICUS_S2_SR_HARMONIZED_20161212T050212_20161212T050557_T44RQS.json",
+    "sha256_hash": "79d4483f4578f419d31b351e1ab19a6dde072ee67269f44dec6b446ba9ca178f",
+    "size_bytes": 10111,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1486703449917,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-018/COPERNICUS_S2_SR_HARMONIZED_20170210T045931_20170210T050445_T44RQS.json",
+    "sha256_hash": "f749c5d86703ba0453f065c85474e8028cdae0d216e46e90bb176d52cbbfefab",
+    "size_bytes": 9995,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1452747650277,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-019/COPERNICUS_S2_SR_HARMONIZED_20160114T045142_20160114T045802_T45RUM.json",
+    "sha256_hash": "9192356f1d49a5cb4b5968eed0fb23de3e1e758c6e35fa39d53d2297c4112784",
+    "size_bytes": 10066,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1455339663952,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-019/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RUL.json",
+    "sha256_hash": "c21ac0bd381730923a63efe4453fe54d0f08eb8e7275ff959bdbf08612839d5e",
+    "size_bytes": 9982,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1455339649138,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-019/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RUM.json",
+    "sha256_hash": "a02dbcddd02364524d2bbea76d76a2f89bdad40b03fe09e9d16ab6b0cd47c21a",
+    "size_bytes": 10104,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1460523667320,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-019/COPERNICUS_S2_SR_HARMONIZED_20160413T044642_20160413T045850_T45RUL.json",
+    "sha256_hash": "879f906a788ae3d0bf44c5d6ab0f59b377a7e4469147887b3b6ce077c92ae890",
+    "size_bytes": 10042,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1478063460955,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-019/COPERNICUS_S2_SR_HARMONIZED_20161102T050822_20161102T050821_T45RUL.json",
+    "sha256_hash": "12adccf006343747a60f06051c90cd384e6dd1e81181c23bcb2c13525b37e762",
+    "size_bytes": 10065,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1452747650277,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-020/COPERNICUS_S2_SR_HARMONIZED_20160114T045142_20160114T045802_T45RUM.json",
+    "sha256_hash": "9192356f1d49a5cb4b5968eed0fb23de3e1e758c6e35fa39d53d2297c4112784",
+    "size_bytes": 10066,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1455339649138,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-020/COPERNICUS_S2_SR_HARMONIZED_20160213T044912_20160213T045115_T45RUM.json",
+    "sha256_hash": "a02dbcddd02364524d2bbea76d76a2f89bdad40b03fe09e9d16ab6b0cd47c21a",
+    "size_bytes": 10104,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1478063446460,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-020/COPERNICUS_S2_SR_HARMONIZED_20161102T050822_20161102T050821_T45RUM.json",
+    "sha256_hash": "cb740482e99ea6813512b13d7ab4013ff8ce6df7e8c2f8cc05463a825845214d",
+    "size_bytes": 10158,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1478927447262,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-020/COPERNICUS_S2_SR_HARMONIZED_20161112T050032_20161112T050828_T45RUM.json",
+    "sha256_hash": "68b70b4234cbe7052b99688d377beab4cc977abbdf47ea90399f426f1b66d80f",
+    "size_bytes": 10021,
+    "source_api": "sentinel2"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1479531651550,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel2/SGL-020/COPERNICUS_S2_SR_HARMONIZED_20161119T045102_20161119T045214_T45RUM.json",
+    "sha256_hash": "ea7c68d413ae1c3f9647fe0281c7c7c816d070a4e1b8ae9e6d6cf0fd67aeace8",
+    "size_bytes": 10009,
+    "source_api": "sentinel2"
+  }
+]

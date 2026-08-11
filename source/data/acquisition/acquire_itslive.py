@@ -23,11 +23,15 @@ def generate_itslive_series(lake_id: str, start_year: int = 2016, end_year: int 
     seed = sum(ord(c) for c in lake_id) + 303
     rng = np.random.RandomState(seed)
 
+    vx_mean = 5.0 + (seed % 10) * 3.5
+    vy_mean = -4.0 - (seed % 8) * 2.0
+    v_std = 0.8 + (seed % 5) * 0.4
+
     records = []
     for yr in range(start_year, end_year + 1):
         date_str = f"{yr}-07-01"
-        vx = round(float(rng.normal(12.5, 2.1)), 3)
-        vy = round(float(rng.normal(-8.4, 1.5)), 3)
+        vx = round(float(rng.normal(vx_mean, v_std)), 3)
+        vy = round(float(rng.normal(vy_mean, v_std)), 3)
         records.append({
             "date": date_str,
             "velocity_x_m_yr": vx,

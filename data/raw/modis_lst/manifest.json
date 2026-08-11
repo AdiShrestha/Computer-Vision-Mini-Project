@@ -1,0 +1,842 @@
+[
+  {
+    "lake_id": "SGL-001",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-001/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-002/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-002/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-002/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-002/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-002/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-003/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-003/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-003/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-003/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-003/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-004/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-004/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-004/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-004/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-004/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-005/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-005/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-005/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-005/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-005/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-006/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-006/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-006/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-006/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-006/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-007/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-007/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-007/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-007/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-007/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-008/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-008/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-008/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-008/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-008/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-009/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-009/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-009/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-009/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-009/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-010/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-010/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-010/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-010/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-010/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-011/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-011/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-011/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-011/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-011/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-012/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-012/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-012/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-012/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-012/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-013/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-013/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-013/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-013/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-013/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-014/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-014/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-014/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-014/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-014/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-015/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-015/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-015/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-015/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-015/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-016/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-016/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-016/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-016/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-016/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-017/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-017/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-017/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-017/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-017/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-018/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-018/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-018/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-018/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-018/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-019/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-019/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-019/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-019/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-019/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1451606400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-020/MODIS_061_MOD11A1_2016_01_01.json",
+    "sha256_hash": "b597341e0c6f000cc2a237b63d6a81954be82c746592437662d3f8b6dbd26573",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1451692800000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-020/MODIS_061_MOD11A1_2016_01_02.json",
+    "sha256_hash": "81ed822af4cdbb7818eb162ebd0b17d7da4608340e631bc1d6960ae2abc5a10d",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1451779200000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-020/MODIS_061_MOD11A1_2016_01_03.json",
+    "sha256_hash": "d96e0119305507c18d69a1efebb0b36f983d8d649b4a24ba9265f4c2d2dd1b64",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1451865600000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-020/MODIS_061_MOD11A1_2016_01_04.json",
+    "sha256_hash": "e8caba538eaa053439c2cbf4a5392684645bce033fea8963868b1d4e9e79e326",
+    "size_bytes": 3474,
+    "source_api": "modis"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1451952000000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/modis/SGL-020/MODIS_061_MOD11A1_2016_01_05.json",
+    "sha256_hash": "f54e918c8b429994ca59fef984d93c6773ba3f998fa799e12edfbf57b1b7bfe4",
+    "size_bytes": 3472,
+    "source_api": "modis"
+  }
+]

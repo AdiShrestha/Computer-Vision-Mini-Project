@@ -34,6 +34,10 @@ def generate_era5_series(lake_id: str, start_date: str = '2016-01-01', end_date:
     seed = sum(ord(c) for c in lake_id) + 505
     rng = np.random.RandomState(seed)
 
+    t_mean_offset = -4.0 + (seed % 7) * 1.5
+    t_std = 1.0 + (seed % 5) * 0.4
+    p_scale = 0.5 + (seed % 6) * 0.3
+
     records = []
     curr_date = dt_start
 
@@ -42,14 +46,14 @@ def generate_era5_series(lake_id: str, start_date: str = '2016-01-01', end_date:
         rad = (doy - 172) * 2 * np.pi / 365.0
 
         # Seasonal temperature cycle (Kelvin)
-        t_2m = round(float(265.0 + 12.0 * np.cos(rad) + rng.normal(0.0, 1.8)), 2)
+        t_2m = round(float(265.0 + t_mean_offset + 12.0 * np.cos(rad) + rng.normal(0.0, t_std)), 2)
 
         # Precipitation (m/day): monsoon peak in July/August
         is_monsoon = (6 <= curr_date.month <= 9)
         if is_monsoon and rng.rand() < 0.65:
-            precip = round(float(np.exp(rng.normal(-4.5, 1.0))), 6)
+            precip = round(float(np.exp(rng.normal(-4.5, 1.0)) * p_scale), 6)
         else:
-            precip = round(float(np.exp(rng.normal(-7.5, 0.8))), 6) if rng.rand() < 0.20 else 0.0
+            precip = round(float(np.exp(rng.normal(-7.5, 0.8)) * p_scale), 6) if rng.rand() < 0.20 else 0.0
 
         # Snow depth (m water equivalent): winter accumulation
         if curr_date.month in [11, 12, 1, 2, 3, 4]:

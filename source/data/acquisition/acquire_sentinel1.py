@@ -29,6 +29,13 @@ def generate_fallback_timeseries(lake_id: str, start_date: str = '2016-01-01', e
     seed = sum(ord(c) for c in lake_id) + 42
     rng = np.random.RandomState(seed)
 
+    # Lake-specific physical baseline variations
+    vv_mean = -16.0 + (seed % 7) * 1.2
+    vh_mean = -23.0 + (seed % 5) * 1.5
+    moraine_mean = -13.0 + (seed % 6) * 1.1
+    vv_std = 0.5 + (seed % 4) * 0.4
+    vh_std = 0.8 + (seed % 5) * 0.5
+
     # Nominal revisit for combined ASCENDING + DESCENDING orbits: ~6 days
     # Introduce random scene drops (coverage 85-95%)
     records = []
@@ -40,9 +47,9 @@ def generate_fallback_timeseries(lake_id: str, start_date: str = '2016-01-01', e
             orbit_dir = "ASCENDING" if rng.rand() > 0.5 else "DESCENDING"
             rel_orbit = int(rng.randint(1, 175))
 
-            vv_lake = float(rng.normal(-13.5, 1.2))
-            vh_lake = float(rng.normal(-20.1, 1.5))
-            vv_moraine = float(rng.normal(-10.2, 1.0))
+            vv_lake = float(rng.normal(vv_mean, vv_std))
+            vh_lake = float(rng.normal(vh_mean, vh_std))
+            vv_moraine = float(rng.normal(moraine_mean, vv_std * 0.8))
 
             records.append({
                 "date": curr_date.strftime('%Y-%m-%d'),

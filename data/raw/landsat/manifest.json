@@ -1,0 +1,842 @@
+[
+  {
+    "lake_id": "SGL-001",
+    "date": 1452659763972,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160113.json",
+    "sha256_hash": "b62e27318d0e500c269c586515f026f3ed00eb2eab2c9f044bb78fe507b99a0d",
+    "size_bytes": 7879,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454042163193,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160129.json",
+    "sha256_hash": "04f7a3911b24fc7850d1f72bc3e55011862055e9d9b6f0f70655d48faded03bb",
+    "size_bytes": 7868,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1455424556013,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160214.json",
+    "sha256_hash": "03f7a01c4d302862243acb6a68e75a10dc76a269131e8b7eabec35dbcea3885f",
+    "size_bytes": 7873,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1456806952859,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160301.json",
+    "sha256_hash": "3cf45653f6e16d52d4563693488db895f93f1707599060f9b879e074a2a2ccef",
+    "size_bytes": 7912,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1458189348137,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160317.json",
+    "sha256_hash": "91bca3ddceb026e7706bd0e3b8201bd970c91911c824afd2af8241f8479a38c5",
+    "size_bytes": 7918,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1452659763972,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160113.json",
+    "sha256_hash": "b62e27318d0e500c269c586515f026f3ed00eb2eab2c9f044bb78fe507b99a0d",
+    "size_bytes": 7879,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454042163193,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160129.json",
+    "sha256_hash": "04f7a3911b24fc7850d1f72bc3e55011862055e9d9b6f0f70655d48faded03bb",
+    "size_bytes": 7868,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1455424556013,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160214.json",
+    "sha256_hash": "03f7a01c4d302862243acb6a68e75a10dc76a269131e8b7eabec35dbcea3885f",
+    "size_bytes": 7873,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1456806952859,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160301.json",
+    "sha256_hash": "3cf45653f6e16d52d4563693488db895f93f1707599060f9b879e074a2a2ccef",
+    "size_bytes": 7912,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1458189348137,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-001/LANDSAT_LC08_C02_T1_L2_LC08_139041_20160317.json",
+    "sha256_hash": "91bca3ddceb026e7706bd0e3b8201bd970c91911c824afd2af8241f8479a38c5",
+    "size_bytes": 7918,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-002/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-002/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-002/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-002/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-002/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-003/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-003/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-003/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-003/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-003/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1462164454539,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-004/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160502.json",
+    "sha256_hash": "18b34ed24a6561179ebf86ae0732e72296a38af1b5498a34e6296ae65ba6f35c",
+    "size_bytes": 7840,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1462164478430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-004/LANDSAT_LC08_C02_T1_L2_LC08_141041_20160502.json",
+    "sha256_hash": "87646ef676f5d68de89e69003d3ac9b47757423c258e22a9680f7a1604b57c53",
+    "size_bytes": 7877,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1451710453789,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-004/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160102.json",
+    "sha256_hash": "f0c5a1d0f0d64080ca2e9bc7121b179dcc6ffdb607c78fdaa62ec77743b15f88",
+    "size_bytes": 7868,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1453092852997,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-004/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160118.json",
+    "sha256_hash": "b745750aa43f7b5a37d526a78193686d7c5e322f15ec2c407424f8ffff053896",
+    "size_bytes": 7857,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1454475250286,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-004/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160203.json",
+    "sha256_hash": "b799ae63c540de7085e701d9afa404962cd9b4f4d7c83e761d9095963672d9ff",
+    "size_bytes": 7852,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-005/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-005/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-005/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-005/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-005/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-006/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-006/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-006/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-006/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-006/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-007/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-007/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-007/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-007/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-007/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-008/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-008/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-008/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-008/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-008/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-009/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-009/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-009/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-009/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-009/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1452226602606,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-010/LANDSAT_LC08_C02_T1_L2_LC08_136039_20160108.json",
+    "sha256_hash": "5267204b72bb6d05dab41b8537782cb3ec94206c933a0652c8745e8cfe161de1",
+    "size_bytes": 7796,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1453609003919,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-010/LANDSAT_LC08_C02_T1_L2_LC08_136039_20160124.json",
+    "sha256_hash": "0587017ebeb0dc4fc6a8f7391e14e4e691df0e7281229a0af39a86f15b4f054e",
+    "size_bytes": 7871,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1454991398907,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-010/LANDSAT_LC08_C02_T1_L2_LC08_136039_20160209.json",
+    "sha256_hash": "7f88b0a9e6d6ceb7f53cf11bd21fbbc989bb868571a9f459b5924da3633659a3",
+    "size_bytes": 7825,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1456373792771,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-010/LANDSAT_LC08_C02_T1_L2_LC08_136039_20160225.json",
+    "sha256_hash": "65dbb1d2a34ea9e0fc12538123cdd433679e49473b5b15d7b953d385eb1b3b3e",
+    "size_bytes": 7831,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1457756190204,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-010/LANDSAT_LC08_C02_T1_L2_LC08_136039_20160312.json",
+    "sha256_hash": "d3bdad1483ea81139b68a461e0564e7d2c0b91ccedd977e16ae49d52c7c31d56",
+    "size_bytes": 7836,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1451882535213,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-011/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160104.json",
+    "sha256_hash": "5e07a05400a21e260b573e3b0c3853658b5ca2fc3be65ea2d45f499354eb0f2e",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1453264935272,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-011/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160120.json",
+    "sha256_hash": "f4594dcced2703b339191e06ca4737d23f37ada9346d68752e6d0abccb23152e",
+    "size_bytes": 7920,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1454647331785,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-011/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160205.json",
+    "sha256_hash": "688dec031d7c2fe908e69b29701bc155facc70719176810abdd2e78bf523712e",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1456029723555,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-011/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160221.json",
+    "sha256_hash": "37c74b099c01565b7b33d08d9fc8996bf792f08c59c4d87a47166f101132acca",
+    "size_bytes": 7875,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1457412122572,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-011/LANDSAT_LC08_C02_T1_L2_LC08_140041_20160308.json",
+    "sha256_hash": "32b56f95ccc1fd3ee16df031a71e10f802a7fe2076d964f7a6fe057b7a135ec9",
+    "size_bytes": 7916,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1452659740085,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-012/LANDSAT_LC08_C02_T1_L2_LC08_139040_20160113.json",
+    "sha256_hash": "f516528f71a50b4556b02350254dd33e821711178b790a1527f659860d461040",
+    "size_bytes": 7830,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1454042139298,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-012/LANDSAT_LC08_C02_T1_L2_LC08_139040_20160129.json",
+    "sha256_hash": "4c600208d62805d8961174c34359bf6f3017dfc1b7bca276b6e25feff5d9ba4b",
+    "size_bytes": 7909,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1455424532117,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-012/LANDSAT_LC08_C02_T1_L2_LC08_139040_20160214.json",
+    "sha256_hash": "030662c8cd1b96bd31cd867553a096b4420fc44f87b1d2fb3333c3194de277b4",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1456806928960,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-012/LANDSAT_LC08_C02_T1_L2_LC08_139040_20160301.json",
+    "sha256_hash": "d7d77deedbf2a99c084edd2b7d7783ab386d53dbbc1bb3aed524ba97d4080c15",
+    "size_bytes": 7913,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1458189324250,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-012/LANDSAT_LC08_C02_T1_L2_LC08_139040_20160317.json",
+    "sha256_hash": "85fd9a45c64e8fa824eb7c53ddc81776762bcd6f1cc34cab6f42f2fefb8c010b",
+    "size_bytes": 7828,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1451799329656,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-013/LANDSAT_LC08_C02_T1_L2_LC08_149035_20160103.json",
+    "sha256_hash": "475e1d09a7399d836e822cb1da70e92004f25ee88da8dd57ee47e22f192a00a0",
+    "size_bytes": 7906,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1453181729303,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-013/LANDSAT_LC08_C02_T1_L2_LC08_149035_20160119.json",
+    "sha256_hash": "aa820ef9aa4bfaa28c6b793d458772945dca5364b8d245e1ad7ff4c54da8fd6a",
+    "size_bytes": 7864,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1454564126190,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-013/LANDSAT_LC08_C02_T1_L2_LC08_149035_20160204.json",
+    "sha256_hash": "f0f7eed290212258aa0a4a89788225c4442a701d9ccf0d2b233eb7516c14e5d1",
+    "size_bytes": 7752,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1455946517468,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-013/LANDSAT_LC08_C02_T1_L2_LC08_149035_20160220.json",
+    "sha256_hash": "1cdbd93933d4761186607f7b345aedf3c55b2f4e0e0484040c648e0fe8c0e4d9",
+    "size_bytes": 7910,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1457328916858,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-013/LANDSAT_LC08_C02_T1_L2_LC08_149035_20160307.json",
+    "sha256_hash": "77950ecbccd5b48195b2544c2b7889d0caeb87d362f46e55d0f99252c7e85026",
+    "size_bytes": 7863,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1452576557851,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-014/LANDSAT_LC08_C02_T1_L2_LC08_148035_20160112.json",
+    "sha256_hash": "b12c00f7eae7d04e48bbce98f226d7929692c81047f52e7ebe57925dd8d9fdf8",
+    "size_bytes": 7828,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1453958957449,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-014/LANDSAT_LC08_C02_T1_L2_LC08_148035_20160128.json",
+    "sha256_hash": "3ec437903f5368c4c05b22551b580a42301ef1dee24ba0943bed4d6b768435a9",
+    "size_bytes": 7872,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1455341350718,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-014/LANDSAT_LC08_C02_T1_L2_LC08_148035_20160213.json",
+    "sha256_hash": "3d444e49943abab2bac5490ffd7fbb0d4fc7c3120eaae240f59b9283a7f5dbde",
+    "size_bytes": 7831,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1456723746955,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-014/LANDSAT_LC08_C02_T1_L2_LC08_148035_20160229.json",
+    "sha256_hash": "4db514e77cfe509ab6678a7ddef5f89e3c4b0ae8e2e98d67040045ea3b49d3a0",
+    "size_bytes": 7865,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1458106142668,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-014/LANDSAT_LC08_C02_T1_L2_LC08_148035_20160316.json",
+    "sha256_hash": "c5e9077b0db07314bdc7248d98a5941a6fa431d186e75b4a7fe2013aaa40d986",
+    "size_bytes": 7866,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1454130943669,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-015/LANDSAT_LC08_C02_T1_L2_LC08_146032_20160130.json",
+    "sha256_hash": "1bba57b8a17b29f62ff85937b7640eb847924bb5261849a363e40a45ac03a56e",
+    "size_bytes": 7987,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1456895733505,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-015/LANDSAT_LC08_C02_T1_L2_LC08_146032_20160302.json",
+    "sha256_hash": "53ccd8ccc007637afdeeeef6d26c70159825726a2e2ae87726285051e8f04775",
+    "size_bytes": 7871,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1458278128329,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-015/LANDSAT_LC08_C02_T1_L2_LC08_146032_20160318.json",
+    "sha256_hash": "162663f3dc83e29dfe0f4bcabb3589cdec103b6550fc1b25a94b7759f30ecdec",
+    "size_bytes": 7713,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1459660518738,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-015/LANDSAT_LC08_C02_T1_L2_LC08_146032_20160403.json",
+    "sha256_hash": "b7acadaff50bcc950f5be6e20c0c7f7314d7279238dec80706914bbfd391f2f1",
+    "size_bytes": 7759,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1462425316664,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-015/LANDSAT_LC08_C02_T1_L2_LC08_146032_20160505.json",
+    "sha256_hash": "f804def9618add3373b0702a7632fcfbeb21f85aeef0b6aebdfb30177d5d45ea",
+    "size_bytes": 7951,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1451799353547,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-016/LANDSAT_LC08_C02_T1_L2_LC08_149036_20160103.json",
+    "sha256_hash": "61b67419184ab119925d571a87926d48566369a1a0968074ed0f9578e9fb10a1",
+    "size_bytes": 7827,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1453181753194,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-016/LANDSAT_LC08_C02_T1_L2_LC08_149036_20160119.json",
+    "sha256_hash": "ecd6322c0f4d0165e6cef3a796e57b229bbdcf2366eceeba400b2df04e2c38bd",
+    "size_bytes": 7862,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1454564150081,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-016/LANDSAT_LC08_C02_T1_L2_LC08_149036_20160204.json",
+    "sha256_hash": "606861bcab9fb4dd04b8a23406ff3213b009f2fd343e16be9b7d454d22d2fee9",
+    "size_bytes": 7911,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1455946541355,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-016/LANDSAT_LC08_C02_T1_L2_LC08_149036_20160220.json",
+    "sha256_hash": "dde54ebcf372f3442d0710c48a3819907782715e838c498ddd472f3191275706",
+    "size_bytes": 7909,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1457328940744,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-016/LANDSAT_LC08_C02_T1_L2_LC08_149036_20160307.json",
+    "sha256_hash": "037e2db3886beae7e57e87f11222348134d0d24ce9d4335856f89460dc27a71e",
+    "size_bytes": 7908,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1451710453789,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-017/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160102.json",
+    "sha256_hash": "f0c5a1d0f0d64080ca2e9bc7121b179dcc6ffdb607c78fdaa62ec77743b15f88",
+    "size_bytes": 7868,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1453092852997,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-017/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160118.json",
+    "sha256_hash": "b745750aa43f7b5a37d526a78193686d7c5e322f15ec2c407424f8ffff053896",
+    "size_bytes": 7857,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1454475250286,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-017/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160203.json",
+    "sha256_hash": "b799ae63c540de7085e701d9afa404962cd9b4f4d7c83e761d9095963672d9ff",
+    "size_bytes": 7852,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1455857641039,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-017/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160219.json",
+    "sha256_hash": "169dfacfb1d8b858423b12504e8c9a45e5c2f42f96d83daf7949af8d03f1db9b",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1457240040784,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-017/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160306.json",
+    "sha256_hash": "8a66d07ce9b6d0af1841ff5dc2c2c35568661109c3b26932f82cc2b6e34c7d43",
+    "size_bytes": 7861,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1451710453789,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-018/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160102.json",
+    "sha256_hash": "f0c5a1d0f0d64080ca2e9bc7121b179dcc6ffdb607c78fdaa62ec77743b15f88",
+    "size_bytes": 7868,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1453092852997,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-018/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160118.json",
+    "sha256_hash": "b745750aa43f7b5a37d526a78193686d7c5e322f15ec2c407424f8ffff053896",
+    "size_bytes": 7857,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1454475250286,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-018/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160203.json",
+    "sha256_hash": "b799ae63c540de7085e701d9afa404962cd9b4f4d7c83e761d9095963672d9ff",
+    "size_bytes": 7852,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1455857641039,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-018/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160219.json",
+    "sha256_hash": "169dfacfb1d8b858423b12504e8c9a45e5c2f42f96d83daf7949af8d03f1db9b",
+    "size_bytes": 7878,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1457240040784,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-018/LANDSAT_LC08_C02_T1_L2_LC08_142040_20160306.json",
+    "sha256_hash": "8a66d07ce9b6d0af1841ff5dc2c2c35568661109c3b26932f82cc2b6e34c7d43",
+    "size_bytes": 7861,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1452487681363,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-019/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160111.json",
+    "sha256_hash": "e15c96d2edb370b48de4237be61eafabbf198e0818b89671ac2836439f11e9a1",
+    "size_bytes": 7919,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1453870081379,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-019/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160127.json",
+    "sha256_hash": "4f4b1a62fb354a74771a9b3046d5c9b155059a0bebcce2af3290ad37fde2d6a0",
+    "size_bytes": 7871,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1455252475114,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-019/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160212.json",
+    "sha256_hash": "57409c77a03689fa4831c2eb6ccf550fddaf5a17f4fc38fab6830ae62678dd08",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1456634870715,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-019/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160228.json",
+    "sha256_hash": "f8a3eecad3a6fe7bde0ec4a7c71f07074e29c672976f379613b433784c5e3405",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1458017266878,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-019/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160315.json",
+    "sha256_hash": "e6568368f9b5913a735a0085620a77551a45d5e80ad8b0118d22b5a5cbc00fda",
+    "size_bytes": 7921,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1452487681363,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-020/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160111.json",
+    "sha256_hash": "e15c96d2edb370b48de4237be61eafabbf198e0818b89671ac2836439f11e9a1",
+    "size_bytes": 7919,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1453870081379,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-020/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160127.json",
+    "sha256_hash": "4f4b1a62fb354a74771a9b3046d5c9b155059a0bebcce2af3290ad37fde2d6a0",
+    "size_bytes": 7871,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1455252475114,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-020/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160212.json",
+    "sha256_hash": "57409c77a03689fa4831c2eb6ccf550fddaf5a17f4fc38fab6830ae62678dd08",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1456634870715,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-020/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160228.json",
+    "sha256_hash": "f8a3eecad3a6fe7bde0ec4a7c71f07074e29c672976f379613b433784c5e3405",
+    "size_bytes": 7876,
+    "source_api": "landsat"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1458017266878,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/landsat/SGL-020/LANDSAT_LC08_C02_T1_L2_LC08_141040_20160315.json",
+    "sha256_hash": "e6568368f9b5913a735a0085620a77551a45d5e80ad8b0118d22b5a5cbc00fda",
+    "size_bytes": 7921,
+    "source_api": "landsat"
+  }
+]

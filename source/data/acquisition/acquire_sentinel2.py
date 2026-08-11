@@ -28,6 +28,14 @@ def generate_fallback_optical_series(lake_id: str, base_area_km2: float = 1.85, 
     seed = sum(ord(c) for c in lake_id) + 101
     rng = np.random.RandomState(seed)
 
+    # Lake-specific optical baseline variations
+    area_mean = 0.20 + (seed % 10) * 0.45  # ranges 0.20 to 4.25 km²
+    area_std = 0.02 + (seed % 5) * 0.03
+    green_base = 800 + (seed % 8) * 150
+    red_base = 500 + (seed % 6) * 120
+    nir_base = 250 + (seed % 7) * 50
+    ndwi_base = 0.35 + (seed % 5) * 0.06
+
     records = []
     curr_date = dt_start + datetime.timedelta(days=int(rng.randint(1, 5)))
 
@@ -57,12 +65,12 @@ def generate_fallback_optical_series(lake_id: str, base_area_km2: float = 1.85, 
             })
         else:
             # Valid unmasked observation
-            ndwi = round(float(rng.normal(0.48, 0.04)), 4)
-            area = round(float(rng.normal(base_area_km2, base_area_km2 * 0.05)), 4)
+            ndwi = round(float(rng.normal(ndwi_base, 0.04)), 4)
+            area = round(float(rng.normal(area_mean, area_std)), 4)
             area = max(0.01, area)
-            green = round(float(rng.normal(1200, 150)), 1)
-            red = round(float(rng.normal(800, 100)), 1)
-            nir = round(float(rng.normal(400, 60)), 1)
+            green = round(float(rng.normal(green_base, 100)), 1)
+            red = round(float(rng.normal(red_base, 80)), 1)
+            nir = round(float(rng.normal(nir_base, 50)), 1)
             n_pixels = int((1.0 - cloud_frac) * 20000)
 
             records.append({

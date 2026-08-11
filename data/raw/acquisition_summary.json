@@ -1,0 +1,682 @@
+{
+  "overall": {
+    "total_lakes": 20,
+    "total_files": 421,
+    "total_size_bytes": 2567335,
+    "success_rate": 0.9568181818181818
+  },
+  "per_source": {
+    "sentinel1": {
+      "successful": 100,
+      "failed": 0,
+      "size_bytes": 375224
+    },
+    "sentinel2": {
+      "successful": 100,
+      "failed": 0,
+      "size_bytes": 1004278
+    },
+    "landsat": {
+      "successful": 100,
+      "failed": 0,
+      "size_bytes": 787792
+    },
+    "modis": {
+      "successful": 100,
+      "failed": 0,
+      "size_bytes": 347280
+    },
+    "itslive": {
+      "successful": 20,
+      "failed": 0,
+      "size_bytes": 1031
+    },
+    "era5": {
+      "successful": 1,
+      "failed": 19,
+      "size_bytes": 51730
+    }
+  },
+  "per_lake": {
+    "SGL-001": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18870
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50216
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39450
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 54
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-002": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50140
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 52
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-003": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50140
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 53
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-004": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18404
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50540
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39294
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 52
+      },
+      "era5": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 51730
+      }
+    },
+    "SGL-005": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50129
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 53
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-006": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50140
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 53
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-007": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50140
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 51
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-008": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50140
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 52
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-009": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50140
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 49
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-010": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18816
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50377
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39159
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 50
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-011": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18815
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50209
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39465
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 53
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-012": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18884
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 49939
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39356
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 53
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-013": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18850
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50062
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39295
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 52
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-014": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18851
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50112
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39262
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 49
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-015": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18805
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50166
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39281
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 51
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-016": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18936
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50091
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39417
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 50
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-017": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18489
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50540
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39316
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 50
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-018": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18489
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50440
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39316
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 51
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-019": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18655
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50259
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39463
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 51
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    },
+    "SGL-020": {
+      "sentinel1": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 18655
+      },
+      "sentinel2": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 50358
+      },
+      "landsat": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 39463
+      },
+      "modis": {
+        "successful": 5,
+        "failed": 0,
+        "bytes": 17364
+      },
+      "itslive": {
+        "successful": 1,
+        "failed": 0,
+        "bytes": 52
+      },
+      "era5": {
+        "successful": 0,
+        "failed": 1,
+        "bytes": 0
+      }
+    }
+  }
+}

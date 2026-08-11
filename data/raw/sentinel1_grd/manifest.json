@@ -1,0 +1,842 @@
+[
+  {
+    "lake_id": "SGL-001",
+    "date": 1454284956520,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160201T000236_20160201T000305_009745_00E3D7_8ACB.json",
+    "sha256_hash": "53d4cd8f794d8fd9d62829c6c88895715b4009e9c1f69bac30eef95b5f7f685f",
+    "size_bytes": 3758,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454284956520,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160201T000236_20160201T000305_009745_00E3D7_AA83.json",
+    "sha256_hash": "9ef908e8e9cd67a076a5374589b4952d01b3d054584b193217dd662a60d34663",
+    "size_bytes": 3793,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1456358556160,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160225T000236_20160225T000305_010095_00EE10_2A14.json",
+    "sha256_hash": "f341eee823bb8c85c3b6b46c87340ec603983a349ef8c141bc4e1d812a17898d",
+    "size_bytes": 3758,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1460505757510,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160413T000237_20160413T000306_010795_010234_032E.json",
+    "sha256_hash": "52e0742382ff29ec6f6f87f617c8a048bda36cc2bfbe93a3f8e298f2ce183192",
+    "size_bytes": 3799,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1464652959870,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160531T000239_20160531T000308_011495_01186C_3B8B.json",
+    "sha256_hash": "1cd1346a596a8d4f239d49bbbdfbd3d1864f7113dc72b5b50a76be5b8a811cbb",
+    "size_bytes": 3762,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454284956520,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160201T000236_20160201T000305_009745_00E3D7_8ACB.json",
+    "sha256_hash": "53d4cd8f794d8fd9d62829c6c88895715b4009e9c1f69bac30eef95b5f7f685f",
+    "size_bytes": 3758,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1454284956520,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160201T000236_20160201T000305_009745_00E3D7_AA83.json",
+    "sha256_hash": "9ef908e8e9cd67a076a5374589b4952d01b3d054584b193217dd662a60d34663",
+    "size_bytes": 3793,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1456358556160,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160225T000236_20160225T000305_010095_00EE10_2A14.json",
+    "sha256_hash": "f341eee823bb8c85c3b6b46c87340ec603983a349ef8c141bc4e1d812a17898d",
+    "size_bytes": 3758,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1460505757510,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160413T000237_20160413T000306_010795_010234_032E.json",
+    "sha256_hash": "52e0742382ff29ec6f6f87f617c8a048bda36cc2bfbe93a3f8e298f2ce183192",
+    "size_bytes": 3799,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-001",
+    "date": 1464652959870,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-001/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160531T000239_20160531T000308_011495_01186C_3B8B.json",
+    "sha256_hash": "1cd1346a596a8d4f239d49bbbdfbd3d1864f7113dc72b5b50a76be5b8a811cbb",
+    "size_bytes": 3762,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-002/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-002/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-002/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-002/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-002",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-002/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-003/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-003/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-003/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-003/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-003",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-003/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1474849141000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-004/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160926T001901_20160926T001930_013216_01507B_98B4.json",
+    "sha256_hash": "c2585736d7a621288e87b60d2ae5b6508d4207355f0538e00d236aa61fb35d39",
+    "size_bytes": 3675,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1475885941000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-004/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161008T001901_20161008T001930_013391_0155F3_E199.json",
+    "sha256_hash": "c4c7dbafba379c36d7b4874aa81b855a88e96c8d61ee90565dabec618ee642ff",
+    "size_bytes": 3678,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1476922741000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-004/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161020T001901_20161020T001930_013566_015B8C_3515.json",
+    "sha256_hash": "3845c174e83f6a97a629c01fbaf3ee1f1f43cfb34fa992a21bbfc4eb3a85aec2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1477959542000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-004/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161101T001902_20161101T001931_013741_0160E6_7754.json",
+    "sha256_hash": "74c2b3a8a05cf01e411ed6db764858957611d7162c0a148cb60881daa416a618",
+    "size_bytes": 3676,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-004",
+    "date": 1478996341000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-004/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161113T001901_20161113T001930_013916_016672_8C91.json",
+    "sha256_hash": "c4d27a243f686d08e06195566927af28ae22e7cae4ce7baff2631e6320639459",
+    "size_bytes": 3690,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-005/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-005/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-005/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-005/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-005",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-005/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-006/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-006/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-006/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-006/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-006",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-006/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-007/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-007/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-007/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-007/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-007",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-007/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-008/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-008/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-008/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-008/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-008",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-008/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-009/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-009/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-009/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-009/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-009",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-009/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1486986572000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-010/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170213T114932_20170213T114957_015265_01902C_1A03.json",
+    "sha256_hash": "e5679a902ee75a98de100eecc5d9a12b67d3882dde24b5b2a1b78e79e117c1cb",
+    "size_bytes": 3759,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1487634341000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-010/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170220T234541_20170220T234606_015374_01939B_DF22.json",
+    "sha256_hash": "fdb7cb36a6d5d8b77cc84ac4eefca34091d974dd767b2abf9ec30eda6016da37",
+    "size_bytes": 3716,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1488023365770,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-010/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170225T114925_20170225T114950_015440_019585_B964.json",
+    "sha256_hash": "1a941a2ca297087c5baab17d42eecf21821bd538843e5fd3e21ca724096e3def",
+    "size_bytes": 3850,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1488671141000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-010/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170304T234541_20170304T234606_015549_0198E2_928E.json",
+    "sha256_hash": "c0ac267b6c9ef5c7ff985cd4488d9547305319ddbe06c4692eb3d025de4e1ac0",
+    "size_bytes": 3726,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-010",
+    "date": 1489060165000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-010/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170309T114925_20170309T114950_015615_019AD0_9E1A.json",
+    "sha256_hash": "fbf9cb35fa8cc8d722fe287fbf6d8210fbb57f9f9d5bed61338205f509bef13d",
+    "size_bytes": 3765,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-011/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-011/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1477527060430,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-011/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161027T001100_20161027T001129_013668_015EAE_A028.json",
+    "sha256_hash": "fc4fb7e5cda454ae5246d1e936e3c77a0d80f288834020672193c8554d0cd7f2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1478563860200,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-011/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161108T001100_20161108T001129_013843_016424_C4A3.json",
+    "sha256_hash": "f3d7bdaad3978389179437797a247dd1e4721d1836fc93692f7dfe248191fd42",
+    "size_bytes": 3795,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-011",
+    "date": 1479600660000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-011/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161120T001100_20161120T001129_014018_016989_D76B.json",
+    "sha256_hash": "5ccaca78db53b7024beeaa671ffe3ef8e70246efb26661b39cd2841e08fd7468",
+    "size_bytes": 3718,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1486814735000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-012/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170211T120535_20170211T120600_015236_018F46_6493.json",
+    "sha256_hash": "3b7ea6baa8f61f6454b6f9cdfbb10e56923d31832b67cf05ccb89e3417440228",
+    "size_bytes": 3849,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1487462553730,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-012/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170219T000233_20170219T000258_015345_0192A5_186C.json",
+    "sha256_hash": "58f9f909ae67e4d22352dbd0c82f71752b0cedbbdee377c6aae44ccef3e08db4",
+    "size_bytes": 3726,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1487851532840,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-012/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170223T120532_20170223T120557_015411_0194AE_4647.json",
+    "sha256_hash": "a28dde889f2205c959669d5aa1740e3cc31af68616380121f37a3542fb9d16c7",
+    "size_bytes": 3810,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1488499353530,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-012/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170303T000233_20170303T000258_015520_0197F1_B814.json",
+    "sha256_hash": "177282c0917dee11637476718da9e7070c40b94b5482bd9d29ca2563a402e9a1",
+    "size_bytes": 3810,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-012",
+    "date": 1488888332780,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-012/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170307T120532_20170307T120557_015586_0199F9_BD33.json",
+    "sha256_hash": "df3d82d89dc50c63da07d8a9c7323b94b68e7aec19930360e9681041509bd5df",
+    "size_bytes": 3689,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1456707968880,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-013/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160229T010608_20160229T010637_010154_00EFA8_D403.json",
+    "sha256_hash": "79b32987de1772069df534534f663e25b4308f7462a29df321e0b958b821b04e",
+    "size_bytes": 3752,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1463922310420,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-013/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160522T130510_20160522T130535_011372_01146B_1CDA.json",
+    "sha256_hash": "762b8e3220b179eae58a483f4e4ee779ce526d5a03e758327fbba6d2f51942c9",
+    "size_bytes": 3791,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1474937892210,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-013/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160927T005812_20160927T005841_013231_0150F5_CDFD.json",
+    "sha256_hash": "87e5b366686e766d9a4fc5f00e842335a2a1fbefd99d9c7d772b36e67a931e35",
+    "size_bytes": 3752,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1475974692210,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-013/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161009T005812_20161009T005841_013406_015672_BEE5.json",
+    "sha256_hash": "80d85433b7008f0c49fcfcb5a872f01acc3dfe2d31c4b58ed82b4cab742e36f9",
+    "size_bytes": 3793,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-013",
+    "date": 1477011492110,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-013/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161021T005812_20161021T005841_013581_015C01_E6FC.json",
+    "sha256_hash": "82a247129a7f8c61bfc28888becb9e68192331e5224f13d117705eabfd0943e2",
+    "size_bytes": 3762,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1474937892210,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-014/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160927T005812_20160927T005841_013231_0150F5_CDFD.json",
+    "sha256_hash": "87e5b366686e766d9a4fc5f00e842335a2a1fbefd99d9c7d772b36e67a931e35",
+    "size_bytes": 3752,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1475974692210,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-014/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161009T005812_20161009T005841_013406_015672_BEE5.json",
+    "sha256_hash": "80d85433b7008f0c49fcfcb5a872f01acc3dfe2d31c4b58ed82b4cab742e36f9",
+    "size_bytes": 3793,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1477011492110,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-014/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161021T005812_20161021T005841_013581_015C01_E6FC.json",
+    "sha256_hash": "82a247129a7f8c61bfc28888becb9e68192331e5224f13d117705eabfd0943e2",
+    "size_bytes": 3762,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1478048292180,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-014/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161102T005812_20161102T005841_013756_016164_EA19.json",
+    "sha256_hash": "cf6b0563556ac77b8740f4543ce05b760859dcf22e642aacb1286cb44d7a8c66",
+    "size_bytes": 3750,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-014",
+    "date": 1479085092020,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-014/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161114T005812_20161114T005841_013931_0166E8_A995.json",
+    "sha256_hash": "bfb45fd2a0cc3aafb081a252fccf127a0f41fc7cb6cf2945e11dcfdd2266a72b",
+    "size_bytes": 3794,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1486471279340,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-015/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170207T124119_20170207T124144_015178_018D75_8479.json",
+    "sha256_hash": "e6f527f0c8f87b6396d19bd186085847edbfe22283ccf30b5a96db54182f2935",
+    "size_bytes": 3743,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1487075608580,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-015/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170214T123328_20170214T123353_015280_0190A7_90B4.json",
+    "sha256_hash": "0df08ff911cc048abb7dbd6f3d5f5687a1c4839d47228bcb8811476120a2ba54",
+    "size_bytes": 3799,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1487508079080,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-015/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170219T124119_20170219T124144_015353_0192EC_EEF0.json",
+    "sha256_hash": "ca1a38054dfd59955ae829760d798cef6433c241da3153f1a90a859ac46f00f9",
+    "size_bytes": 3747,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1487551228000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-015/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170220T004028_20170220T004053_015360_01932B_4484.json",
+    "sha256_hash": "6f19dc33f10fe910b8d3e51b266ee7c98b07dd46542cc7623521131f6a6c1b82",
+    "size_bytes": 3763,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-015",
+    "date": 1487983709000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-015/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20170225T004829_20170225T004859_015433_019558_DEA5.json",
+    "sha256_hash": "4ae8d782933e2806e7037f44bf4a34879ec757e244899aeeb6e095a4232cebf4",
+    "size_bytes": 3753,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1456707997900,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-016/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160229T010637_20160229T010702_010154_00EFA8_0286.json",
+    "sha256_hash": "fc6ce6d075765f06d2ed0aa32f41e87bad54282c31c9f33618dc835bd1683ca0",
+    "size_bytes": 3791,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1463922285420,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-016/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160522T130445_20160522T130510_011372_01146B_DC49.json",
+    "sha256_hash": "44f091923ecc013101a21bd2c6f90bca14ad23fb38e39b99dc4e6f625520680f",
+    "size_bytes": 3761,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1474937921230,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-016/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160927T005841_20160927T005906_013231_0150F5_DA07.json",
+    "sha256_hash": "254658a08aa2eca30eebe475149fc490ea641b851d6d1e22686f5907c02f5f07",
+    "size_bytes": 3800,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1475370400000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-016/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161002T010640_20161002T010709_013304_015346_9D17.json",
+    "sha256_hash": "08c80060ef853162041ae4a0e05a209ed12fae6893a1d061fb7ddf79602f2d4f",
+    "size_bytes": 3790,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-016",
+    "date": 1475974721000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-016/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161009T005841_20161009T005906_013406_015672_439B.json",
+    "sha256_hash": "78e7330527fe894d5e93f85e336b306547cc1437310ad636831c9f4e07191d7f",
+    "size_bytes": 3794,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1474849141000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-017/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160926T001901_20160926T001930_013216_01507B_98B4.json",
+    "sha256_hash": "c2585736d7a621288e87b60d2ae5b6508d4207355f0538e00d236aa61fb35d39",
+    "size_bytes": 3675,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1475281617000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-017/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161001T002657_20161001T002726_013289_0152C9_3A57.json",
+    "sha256_hash": "dbf72c0d9607bc056b5a54461ea10a3b5051865ad7635ac7453b32787a9b33ae",
+    "size_bytes": 3725,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1475885941000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-017/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161008T001901_20161008T001930_013391_0155F3_E199.json",
+    "sha256_hash": "c4c7dbafba379c36d7b4874aa81b855a88e96c8d61ee90565dabec618ee642ff",
+    "size_bytes": 3678,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1476318417120,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-017/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161013T002657_20161013T002726_013464_015852_563F.json",
+    "sha256_hash": "db57b571f7afe5a3694082fad17a337ea666e92408e7850ba13817f280d902a4",
+    "size_bytes": 3726,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-017",
+    "date": 1476922741000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-017/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161020T001901_20161020T001930_013566_015B8C_3515.json",
+    "sha256_hash": "3845c174e83f6a97a629c01fbaf3ee1f1f43cfb34fa992a21bbfc4eb3a85aec2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1474849141000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-018/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160926T001901_20160926T001930_013216_01507B_98B4.json",
+    "sha256_hash": "c2585736d7a621288e87b60d2ae5b6508d4207355f0538e00d236aa61fb35d39",
+    "size_bytes": 3675,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1475281617000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-018/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161001T002657_20161001T002726_013289_0152C9_3A57.json",
+    "sha256_hash": "dbf72c0d9607bc056b5a54461ea10a3b5051865ad7635ac7453b32787a9b33ae",
+    "size_bytes": 3725,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1475885941000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-018/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161008T001901_20161008T001930_013391_0155F3_E199.json",
+    "sha256_hash": "c4c7dbafba379c36d7b4874aa81b855a88e96c8d61ee90565dabec618ee642ff",
+    "size_bytes": 3678,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1476318417120,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-018/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161013T002657_20161013T002726_013464_015852_563F.json",
+    "sha256_hash": "db57b571f7afe5a3694082fad17a337ea666e92408e7850ba13817f280d902a4",
+    "size_bytes": 3726,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-018",
+    "date": 1476922741000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-018/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161020T001901_20161020T001930_013566_015B8C_3515.json",
+    "sha256_hash": "3845c174e83f6a97a629c01fbaf3ee1f1f43cfb34fa992a21bbfc4eb3a85aec2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1474849141000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-019/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160926T001901_20160926T001930_013216_01507B_98B4.json",
+    "sha256_hash": "c2585736d7a621288e87b60d2ae5b6508d4207355f0538e00d236aa61fb35d39",
+    "size_bytes": 3675,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-019/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1475885941000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-019/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161008T001901_20161008T001930_013391_0155F3_E199.json",
+    "sha256_hash": "c4c7dbafba379c36d7b4874aa81b855a88e96c8d61ee90565dabec618ee642ff",
+    "size_bytes": 3678,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-019/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-019",
+    "date": 1476922741000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-019/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161020T001901_20161020T001930_013566_015B8C_3515.json",
+    "sha256_hash": "3845c174e83f6a97a629c01fbaf3ee1f1f43cfb34fa992a21bbfc4eb3a85aec2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1474849141000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-020/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20160926T001901_20160926T001930_013216_01507B_98B4.json",
+    "sha256_hash": "c2585736d7a621288e87b60d2ae5b6508d4207355f0538e00d236aa61fb35d39",
+    "size_bytes": 3675,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1475453460000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-020/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161003T001100_20161003T001129_013318_0153B6_CE92.json",
+    "sha256_hash": "80e68709796a714ecc32c8242db057e5edc3a6ce0d612c1a515e2716a7c97779",
+    "size_bytes": 3814,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1475885941000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-020/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161008T001901_20161008T001930_013391_0155F3_E199.json",
+    "sha256_hash": "c4c7dbafba379c36d7b4874aa81b855a88e96c8d61ee90565dabec618ee642ff",
+    "size_bytes": 3678,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1476490260000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-020/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161015T001100_20161015T001129_013493_01593D_5B68.json",
+    "sha256_hash": "2103a2c52d0f6da388fd9373693a3792bf787ba27b3f1ae92a4b844845793be7",
+    "size_bytes": 3803,
+    "source_api": "sentinel1"
+  },
+  {
+    "lake_id": "SGL-020",
+    "date": 1476922741000,
+    "file_path": "/Users/adi/Desktop/Computer Vision/data/raw/sentinel1/SGL-020/COPERNICUS_S1_GRD_S1A_IW_GRDH_1SDV_20161020T001901_20161020T001930_013566_015B8C_3515.json",
+    "sha256_hash": "3845c174e83f6a97a629c01fbaf3ee1f1f43cfb34fa992a21bbfc4eb3a85aec2",
+    "size_bytes": 3685,
+    "source_api": "sentinel1"
+  }
+]
