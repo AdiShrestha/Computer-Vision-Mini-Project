@@ -1,0 +1,15 @@
+{
+  "0": "CH-01_lake_area_km2",
+  "1": "CH-02a_green_reflectance",
+  "2": "CH-02b_red_reflectance",
+  "3": "CH-02c_nir_reflectance",
+  "4": "CH-02d_ndwi",
+  "5": "CH-03a_glacier_velocity_x",
+  "6": "CH-03b_glacier_velocity_y",
+  "7": "CH-04_lst_anomaly_k",
+  "8": "CH-05a_vv_backscatter_lake_db",
+  "9": "CH-05b_vh_backscatter_lake_db",
+  "10": "CH-05c_vv_backscatter_moraine_db",
+  "11": "CH-08a_temperature_2m_k",
+  "12": "CH-08b_total_precip_m_day"
+}

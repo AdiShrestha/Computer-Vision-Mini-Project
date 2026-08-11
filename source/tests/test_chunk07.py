@@ -216,4 +216,58 @@ def test_no_ch07_coherence_files():
     )
 
 
+# ============================================================
+# C07-04: Feature Matrix Assembly & Reality Gate Verification
+# ============================================================
+
+def test_feature_matrices_13_channels():
+    """All feature matrices have exactly 13 channels."""
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        npz_path = os.path.join(repo_root, 'data', 'features_real', lake['id'], 'feature_matrix.npz')
+        assert os.path.exists(npz_path), f"Missing features for {lake['id']}"
+        data = np.load(npz_path)
+        assert data['features'].shape[1] == 13, (
+            f"{lake['id']} has {data['features'].shape[1]} channels, expected 13"
+        )
+
+
+def test_feature_matrices_all_lakes():
+    """All 20 lakes have feature matrices."""
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        assert os.path.exists(os.path.join(repo_root, 'data', 'features_real', lake['id'], 'feature_matrix.npz'))
+
+
+def test_reality_gate_no_fail():
+    """Reality Gate has no FAIL verdicts."""
+    gate_path = os.path.join(repo_root, 'results', 'reality_gate', 'reality_gate_data.json')
+    with open(gate_path, 'r', encoding='utf-8') as f:
+        gate = json.load(f)
+    for name, check in gate['checks'].items():
+        assert check['verdict'] != 'FAIL', (
+            f"Reality Gate FAIL on {name}: {check['reason']}"
+        )
+
+
+def test_normalization_training_only():
+    """Normalization stats computed from training-role lakes only (INV-002)."""
+    norm_path = os.path.join(repo_root, 'data', 'features_real', 'normalization_stats.json')
+    with open(norm_path, 'r', encoding='utf-8') as f:
+        stats = json.load(f)
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    training_ids = {l['id'] for l in registry['lakes'] if l['role'] == 'training'}
+    computed_from = set(stats['computed_from'])
+    assert computed_from == training_ids, (
+        f"Normalization used non-training lakes: {computed_from - training_ids}"
+    )
+
+
+
 
