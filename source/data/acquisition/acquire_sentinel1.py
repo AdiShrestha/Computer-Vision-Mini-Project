@@ -184,6 +184,13 @@ def acquire_all(registry_path: str, output_dir: str, start_date: str = '2016-01-
     return manifest
 
 
+def acquire(lake_id: str = None, start_date: str = '2016-01-01', end_date: str = '2024-10-31'):
+    """Module alias for acquire_sentinel1."""
+    if lake_id:
+        return acquire_lake_s1(lake_id, start_date=start_date, end_date=end_date)
+    return acquire_sentinel1(start_date=start_date, end_date=end_date)
+
+
 if __name__ == '__main__':
     # acquire_sentinel1.py is located in source/data/acquisition/
     curr_dir = os.path.dirname(os.path.abspath(__file__))

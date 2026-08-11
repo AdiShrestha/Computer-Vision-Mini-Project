@@ -150,6 +150,13 @@ def acquire_auxiliary_all(registry_path: str, raw_root: str, start_date: str = '
     return manifest
 
 
+def acquire(lake_id: str = None, start_date: str = '2016-01-01', end_date: str = '2024-10-31'):
+    """Module alias for acquire_era5."""
+    if lake_id:
+        return generate_era5_series(lake_id)
+    return generate_era5_series('SGL-001')
+
+
 if __name__ == '__main__':
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     repo_root = os.path.abspath(os.path.join(curr_dir, '..', '..', '..'))

@@ -178,6 +178,13 @@ def acquire_all_s2(registry_path: str, output_dir: str, start_date: str = '2016-
     return manifest
 
 
+def acquire(lake_id: str = None, start_date: str = '2016-01-01', end_date: str = '2024-10-31'):
+    """Module alias for acquire_sentinel2."""
+    if lake_id:
+        return acquire_lake_s2(lake_id, start_date=start_date, end_date=end_date)
+    return acquire_sentinel2(start_date=start_date, end_date=end_date)
+
+
 if __name__ == '__main__':
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     repo_root = os.path.abspath(os.path.join(curr_dir, '..', '..', '..'))

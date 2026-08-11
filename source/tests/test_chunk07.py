@@ -269,5 +269,65 @@ def test_normalization_training_only():
     )
 
 
+# ============================================================
+# C07-05: TS-MAE Encoder Retraining on Real Features Verification
+# ============================================================
+
+def test_training_convergence():
+    """Training loss decreased over epochs."""
+    summary_path = os.path.join(repo_root, 'models', 'encoder', 'training_summary_real_data.json')
+    with open(summary_path, 'r', encoding='utf-8') as f:
+        summary = json.load(f)
+    losses = summary['loss_history']
+    assert len(losses) >= 5, f"Only {len(losses)} epochs recorded"
+    assert losses[-1] < losses[0], f"Loss did not decrease: initial={losses[0]} -> final={losses[-1]}"
+
+
+def test_no_evaluation_lake_leakage():
+    """Training used only training-role lake data (INV-002)."""
+    summary_path = os.path.join(repo_root, 'models', 'encoder', 'training_summary_real_data.json')
+    with open(summary_path, 'r', encoding='utf-8') as f:
+        summary = json.load(f)
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    training_ids = {l['id'] for l in registry['lakes'] if l['role'] == 'training'}
+    used_ids = set(summary['training_lake_ids'])
+    assert used_ids == training_ids, f"Leakage: training used {used_ids - training_ids}"
+
+
+def test_embeddings_exist_all_lakes():
+    """Embeddings extracted for all 20 lakes."""
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        emb_path = os.path.join(repo_root, 'data', 'embeddings', 'real_data', lake['id'], 'embeddings.npz')
+        assert os.path.exists(emb_path), f"Missing embeddings for {lake['id']}"
+
+
+def test_embeddings_nontrivial_variance():
+    """Embeddings have nontrivial variance (not all zeros or constants)."""
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        emb_path = os.path.join(repo_root, 'data', 'embeddings', 'real_data', lake['id'], 'embeddings.npz')
+        data = np.load(emb_path)
+        embs = data['embeddings']
+        assert embs.std() > 0.01, f"{lake['id']} embeddings have near-zero variance ({embs.std():.6f})"
+
+
+def test_checkpoint_loadable():
+    """Checkpoint can be loaded and model parameters exist."""
+    import torch
+    ckpt_path = os.path.join(repo_root, 'models', 'checkpoints', 'ts_mae_real_data.pt')
+    assert os.path.exists(ckpt_path), "Checkpoint not found"
+    ckpt = torch.load(ckpt_path, map_location='cpu', weights_only=False)
+    assert 'model_state_dict' in ckpt
+    assert ckpt['n_channels'] == 13
+
+
+
 
 
