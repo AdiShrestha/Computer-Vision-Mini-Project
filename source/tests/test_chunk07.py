@@ -45,3 +45,55 @@ def test_inv011_revision_note_exists():
         content = f.read()
     assert 'C07-00' in content, "Missing C07-00 revision note in invariants.md"
     assert 'Decision 003' in content, "Revision note must reference Decision 003"
+
+
+# ============================================================
+# C07-01: Real Data Acquisition — Sentinel-1 GRD Verification
+# ============================================================
+
+def test_sentinel1_all_lakes_present():
+    """Every lake in the registry has a backscatter_timeseries.csv."""
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        csv_path = os.path.join(repo_root, 'data', 'raw', 'sentinel1', lake['id'], 'backscatter_timeseries.csv')
+        assert os.path.exists(csv_path), f"Missing S1 data for {lake['id']}"
+
+
+def test_sentinel1_date_range():
+    """S1 data covers >=80% of 2016-01-01 to 2024-10-31 for every lake."""
+    manifest_path = os.path.join(repo_root, 'data', 'raw', 'sentinel1', 'acquisition_manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+    for lake_id, stats in manifest['per_lake_stats'].items():
+        assert stats['coverage_pct'] >= 80.0, (
+            f"{lake_id} S1 coverage {stats['coverage_pct']:.1f}% < 80%"
+        )
+
+
+def test_sentinel1_has_gaps():
+    """S1 data has gaps (real data is not 100% complete)."""
+    manifest_path = os.path.join(repo_root, 'data', 'raw', 'sentinel1', 'acquisition_manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+    coverages = [s['coverage_pct'] for s in manifest['per_lake_stats'].values()]
+    assert any(c < 100.0 for c in coverages), (
+        "All lakes have 100% S1 coverage — suspicious for real data"
+    )
+
+
+def test_sentinel1_vv_vh_present():
+    """S1 CSV files contain VV and VH columns."""
+    import csv
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    lake_id = registry['lakes'][0]['id']
+    csv_path = os.path.join(repo_root, 'data', 'raw', 'sentinel1', lake_id, 'backscatter_timeseries.csv')
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        headers = reader.fieldnames
+    assert 'vv_lake_db' in headers, "Missing VV column"
+    assert 'vh_lake_db' in headers, "Missing VH column"
+

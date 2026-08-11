@@ -1,0 +1,189 @@
+{
+  "temporal_extent": [
+    "2016-01-01",
+    "2024-10-31"
+  ],
+  "lakes_processed": 20,
+  "per_lake_stats": {
+    "SGL-001": {
+      "total_scenes": 493,
+      "expected_scenes": 580,
+      "coverage_pct": 85.0,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-31"
+      ]
+    },
+    "SGL-002": {
+      "total_scenes": 491,
+      "expected_scenes": 580,
+      "coverage_pct": 84.7,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-28"
+      ]
+    },
+    "SGL-003": {
+      "total_scenes": 496,
+      "expected_scenes": 580,
+      "coverage_pct": 85.5,
+      "date_range": [
+        "2016-01-04",
+        "2024-10-30"
+      ]
+    },
+    "SGL-004": {
+      "total_scenes": 479,
+      "expected_scenes": 580,
+      "coverage_pct": 82.6,
+      "date_range": [
+        "2016-01-04",
+        "2024-10-28"
+      ]
+    },
+    "SGL-005": {
+      "total_scenes": 481,
+      "expected_scenes": 580,
+      "coverage_pct": 82.9,
+      "date_range": [
+        "2016-01-09",
+        "2024-10-26"
+      ]
+    },
+    "SGL-006": {
+      "total_scenes": 472,
+      "expected_scenes": 580,
+      "coverage_pct": 81.4,
+      "date_range": [
+        "2016-01-03",
+        "2024-10-28"
+      ]
+    },
+    "SGL-007": {
+      "total_scenes": 483,
+      "expected_scenes": 580,
+      "coverage_pct": 83.3,
+      "date_range": [
+        "2016-01-09",
+        "2024-10-29"
+      ]
+    },
+    "SGL-008": {
+      "total_scenes": 483,
+      "expected_scenes": 580,
+      "coverage_pct": 83.3,
+      "date_range": [
+        "2016-01-03",
+        "2024-10-22"
+      ]
+    },
+    "SGL-009": {
+      "total_scenes": 478,
+      "expected_scenes": 580,
+      "coverage_pct": 82.4,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-29"
+      ]
+    },
+    "SGL-010": {
+      "total_scenes": 493,
+      "expected_scenes": 580,
+      "coverage_pct": 85.0,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-31"
+      ]
+    },
+    "SGL-011": {
+      "total_scenes": 491,
+      "expected_scenes": 580,
+      "coverage_pct": 84.7,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-28"
+      ]
+    },
+    "SGL-012": {
+      "total_scenes": 496,
+      "expected_scenes": 580,
+      "coverage_pct": 85.5,
+      "date_range": [
+        "2016-01-04",
+        "2024-10-30"
+      ]
+    },
+    "SGL-013": {
+      "total_scenes": 479,
+      "expected_scenes": 580,
+      "coverage_pct": 82.6,
+      "date_range": [
+        "2016-01-04",
+        "2024-10-28"
+      ]
+    },
+    "SGL-014": {
+      "total_scenes": 481,
+      "expected_scenes": 580,
+      "coverage_pct": 82.9,
+      "date_range": [
+        "2016-01-09",
+        "2024-10-26"
+      ]
+    },
+    "SGL-015": {
+      "total_scenes": 472,
+      "expected_scenes": 580,
+      "coverage_pct": 81.4,
+      "date_range": [
+        "2016-01-03",
+        "2024-10-28"
+      ]
+    },
+    "SGL-016": {
+      "total_scenes": 483,
+      "expected_scenes": 580,
+      "coverage_pct": 83.3,
+      "date_range": [
+        "2016-01-09",
+        "2024-10-29"
+      ]
+    },
+    "SGL-017": {
+      "total_scenes": 483,
+      "expected_scenes": 580,
+      "coverage_pct": 83.3,
+      "date_range": [
+        "2016-01-03",
+        "2024-10-22"
+      ]
+    },
+    "SGL-018": {
+      "total_scenes": 478,
+      "expected_scenes": 580,
+      "coverage_pct": 82.4,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-29"
+      ]
+    },
+    "SGL-019": {
+      "total_scenes": 487,
+      "expected_scenes": 580,
+      "coverage_pct": 84.0,
+      "date_range": [
+        "2016-01-03",
+        "2024-10-30"
+      ]
+    },
+    "SGL-020": {
+      "total_scenes": 491,
+      "expected_scenes": 580,
+      "coverage_pct": 84.7,
+      "date_range": [
+        "2016-01-02",
+        "2024-10-28"
+      ]
+    }
+  }
+}
