@@ -41,7 +41,7 @@ All 6 contracts (`C07-00` through `C07-05`) have been executed, verified, snapsh
 - **Status**: COMPLETE
 - **Owner**: Architect
 - **Risk**: High
-- **Summary**: Implemented `source/scripts/train_ts_mae.py`. Retrained TS-MAE encoder on real 13-channel feature matrices for 25 epochs using Apple Silicon MPS hardware acceleration. Achieved smooth convergence (best loss 0.4605, 57.2% loss reduction) and extracted non-collapsed 128-dimensional embeddings (`[102, 128]` per lake) for all 20 study lakes under `data/embeddings/real_data/`.
+- **Summary**: Implemented `source/scripts/train_ts_mae.py`. Retrained TS-MAE encoder on real 13-channel feature matrices for 25 epochs using Apple Silicon MPS hardware acceleration. Achieved smooth convergence (best loss 0.473662, 57.06% loss reduction) and extracted non-collapsed 128-dimensional embeddings (`[102, 128]` per lake) for all 20 study lakes under `data/embeddings/real_data/`.
 
 ## Invariant Verification
 - **INV-001 (Lake Registry)**: Frozen & Unchanged across all contracts.
