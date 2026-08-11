@@ -97,3 +97,70 @@ def test_sentinel1_vv_vh_present():
     assert 'vv_lake_db' in headers, "Missing VV column"
     assert 'vh_lake_db' in headers, "Missing VH column"
 
+
+# ============================================================
+# C07-02: Real Data Acquisition — Sentinel-2 L2A Verification
+# ============================================================
+
+def test_sentinel2_all_lakes_present():
+    """Every lake has an optical_timeseries.csv."""
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    for lake in registry['lakes']:
+        csv_path = os.path.join(repo_root, 'data', 'raw', 'sentinel2', lake['id'], 'optical_timeseries.csv')
+        assert os.path.exists(csv_path), f"Missing S2 data for {lake['id']}"
+
+
+def test_sentinel2_cloud_fraction_column():
+    """S2 CSVs contain cloud_fraction column with values > 0.5 somewhere."""
+    import csv
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    lake_id = registry['lakes'][0]['id']
+    csv_path = os.path.join(repo_root, 'data', 'raw', 'sentinel2', lake_id, 'optical_timeseries.csv')
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        assert 'cloud_fraction' in reader.fieldnames
+        cloud_fracs = [float(row['cloud_fraction']) for row in reader
+                       if row['cloud_fraction'] not in ('', 'nan', 'NaN')]
+    assert any(cf > 0.5 for cf in cloud_fracs), (
+        "No cloud fractions > 0.5 — suspicious for HKH optical data"
+    )
+
+
+def test_sentinel2_has_monsoon_gaps():
+    """S2 data has NaN/missing values during monsoon months for >=60% of lakes."""
+    manifest_path = os.path.join(repo_root, 'data', 'raw', 'sentinel2', 'acquisition_manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest = json.load(f)
+    lakes_with_monsoon_gaps = 0
+    for lake_id, stats in manifest['per_lake_stats'].items():
+        if stats['gap_rate_monsoon_jun_sep'] > 0.15:
+            lakes_with_monsoon_gaps += 1
+    frac = lakes_with_monsoon_gaps / len(manifest['per_lake_stats'])
+    assert frac >= 0.60, (
+        f"Only {frac*100:.0f}% of lakes have monsoon gaps > 15% — expected >=60% for real HKH data"
+    )
+
+
+def test_sentinel2_lake_area_plausible():
+    """Lake areas are physically plausible (0.001–50 km²)."""
+    import csv, math
+    registry_path = os.path.join(source_root, 'data', 'registry', 'lake_registry.json')
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
+    lake_id = registry['lakes'][0]['id']
+    csv_path = os.path.join(repo_root, 'data', 'raw', 'sentinel2', lake_id, 'optical_timeseries.csv')
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        areas = [float(row['lake_area_km2']) for row in reader
+                 if row['lake_area_km2'] not in ('', 'nan', 'NaN')
+                 and not math.isnan(float(row['lake_area_km2']))]
+    assert len(areas) > 0, "No valid lake area measurements"
+    assert all(0.001 <= a <= 50.0 for a in areas), (
+        f"Lake area outside plausible range: min={min(areas)}, max={max(areas)}"
+    )
+
+

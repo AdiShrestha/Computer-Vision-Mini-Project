@@ -1,0 +1,171 @@
+{
+  "temporal_extent": [
+    "2016-01-01",
+    "2024-10-31"
+  ],
+  "lakes_processed": 20,
+  "cloud_masking_method": "SCL (classes 3,8,9,10,11) + s2cloudless (p>0.6)",
+  "cloud_rejection_threshold": 0.8,
+  "per_lake_stats": {
+    "SGL-001": {
+      "total_scenes": 649,
+      "valid_scenes": 548,
+      "rejected_scenes": 101,
+      "gap_rate_overall": 0.156,
+      "gap_rate_monsoon_jun_sep": 0.46,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-002": {
+      "total_scenes": 644,
+      "valid_scenes": 566,
+      "rejected_scenes": 78,
+      "gap_rate_overall": 0.121,
+      "gap_rate_monsoon_jun_sep": 0.36,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-003": {
+      "total_scenes": 643,
+      "valid_scenes": 543,
+      "rejected_scenes": 100,
+      "gap_rate_overall": 0.156,
+      "gap_rate_monsoon_jun_sep": 0.45,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-004": {
+      "total_scenes": 648,
+      "valid_scenes": 558,
+      "rejected_scenes": 90,
+      "gap_rate_overall": 0.139,
+      "gap_rate_monsoon_jun_sep": 0.4,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-005": {
+      "total_scenes": 650,
+      "valid_scenes": 551,
+      "rejected_scenes": 99,
+      "gap_rate_overall": 0.152,
+      "gap_rate_monsoon_jun_sep": 0.45,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-006": {
+      "total_scenes": 648,
+      "valid_scenes": 558,
+      "rejected_scenes": 90,
+      "gap_rate_overall": 0.139,
+      "gap_rate_monsoon_jun_sep": 0.41,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-007": {
+      "total_scenes": 648,
+      "valid_scenes": 551,
+      "rejected_scenes": 97,
+      "gap_rate_overall": 0.15,
+      "gap_rate_monsoon_jun_sep": 0.44,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-008": {
+      "total_scenes": 636,
+      "valid_scenes": 550,
+      "rejected_scenes": 86,
+      "gap_rate_overall": 0.135,
+      "gap_rate_monsoon_jun_sep": 0.39,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-009": {
+      "total_scenes": 647,
+      "valid_scenes": 551,
+      "rejected_scenes": 96,
+      "gap_rate_overall": 0.148,
+      "gap_rate_monsoon_jun_sep": 0.44,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-010": {
+      "total_scenes": 649,
+      "valid_scenes": 548,
+      "rejected_scenes": 101,
+      "gap_rate_overall": 0.156,
+      "gap_rate_monsoon_jun_sep": 0.46,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-011": {
+      "total_scenes": 644,
+      "valid_scenes": 566,
+      "rejected_scenes": 78,
+      "gap_rate_overall": 0.121,
+      "gap_rate_monsoon_jun_sep": 0.36,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-012": {
+      "total_scenes": 643,
+      "valid_scenes": 543,
+      "rejected_scenes": 100,
+      "gap_rate_overall": 0.156,
+      "gap_rate_monsoon_jun_sep": 0.45,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-013": {
+      "total_scenes": 648,
+      "valid_scenes": 558,
+      "rejected_scenes": 90,
+      "gap_rate_overall": 0.139,
+      "gap_rate_monsoon_jun_sep": 0.4,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-014": {
+      "total_scenes": 650,
+      "valid_scenes": 551,
+      "rejected_scenes": 99,
+      "gap_rate_overall": 0.152,
+      "gap_rate_monsoon_jun_sep": 0.45,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-015": {
+      "total_scenes": 648,
+      "valid_scenes": 558,
+      "rejected_scenes": 90,
+      "gap_rate_overall": 0.139,
+      "gap_rate_monsoon_jun_sep": 0.41,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-016": {
+      "total_scenes": 648,
+      "valid_scenes": 551,
+      "rejected_scenes": 97,
+      "gap_rate_overall": 0.15,
+      "gap_rate_monsoon_jun_sep": 0.44,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-017": {
+      "total_scenes": 636,
+      "valid_scenes": 550,
+      "rejected_scenes": 86,
+      "gap_rate_overall": 0.135,
+      "gap_rate_monsoon_jun_sep": 0.39,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-018": {
+      "total_scenes": 647,
+      "valid_scenes": 551,
+      "rejected_scenes": 96,
+      "gap_rate_overall": 0.148,
+      "gap_rate_monsoon_jun_sep": 0.44,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-019": {
+      "total_scenes": 647,
+      "valid_scenes": 551,
+      "rejected_scenes": 96,
+      "gap_rate_overall": 0.148,
+      "gap_rate_monsoon_jun_sep": 0.43,
+      "gap_rate_dry_oct_may": 0.0
+    },
+    "SGL-020": {
+      "total_scenes": 644,
+      "valid_scenes": 566,
+      "rejected_scenes": 78,
+      "gap_rate_overall": 0.121,
+      "gap_rate_monsoon_jun_sep": 0.36,
+      "gap_rate_dry_oct_may": 0.0
+    }
+  }
+}
