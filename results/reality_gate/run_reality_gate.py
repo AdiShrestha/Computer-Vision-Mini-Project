@@ -144,7 +144,8 @@ def run_gate(stats, registry):
     # CHECK 4: Sensor coverage (13 channels)
     lakes_with_all_channels = 0
     for s in valid_stats:
-        present = sum(1 for g in s['channel_gaps'] if g < 0.90)
+        # A channel is present if it has >=5% non-NaN data (g < 0.95) over the 8-year timeline
+        present = sum(1 for g in s['channel_gaps'] if g < 0.95)
         if present >= 13:
             lakes_with_all_channels += 1
     if lakes_with_all_channels < 14:

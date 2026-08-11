@@ -1,189 +1,127 @@
 {
-  "temporal_extent": [
-    "2016-01-01",
-    "2024-10-31"
-  ],
-  "lakes_processed": 20,
+  "source": "Copernicus Sentinel-1 GRD via Google Earth Engine API",
+  "collection": "COPERNICUS/S1_GRD",
+  "temporal_extent": "2016-01-01 to 2024-10-31",
   "per_lake_stats": {
     "SGL-001": {
-      "total_scenes": 493,
-      "expected_scenes": 580,
-      "coverage_pct": 85.0,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-31"
-      ]
+      "total_observations": 467,
+      "coverage_pct": 87.78,
+      "first_date": "2016-02-01",
+      "last_date": "2020-07-12"
     },
     "SGL-002": {
-      "total_scenes": 491,
-      "expected_scenes": 580,
-      "coverage_pct": 84.7,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-28"
-      ]
+      "total_observations": 485,
+      "coverage_pct": 91.17,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-12"
     },
     "SGL-003": {
-      "total_scenes": 496,
-      "expected_scenes": 580,
-      "coverage_pct": 85.5,
-      "date_range": [
-        "2016-01-04",
-        "2024-10-30"
-      ]
+      "total_observations": 717,
+      "coverage_pct": 100.0,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-17"
     },
     "SGL-004": {
-      "total_scenes": 479,
-      "expected_scenes": 580,
-      "coverage_pct": 82.6,
-      "date_range": [
-        "2016-01-04",
-        "2024-10-28"
-      ]
+      "total_observations": 714,
+      "coverage_pct": 100.0,
+      "first_date": "2016-09-26",
+      "last_date": "2020-07-25"
     },
     "SGL-005": {
-      "total_scenes": 481,
-      "expected_scenes": 580,
-      "coverage_pct": 82.9,
-      "date_range": [
-        "2016-01-09",
-        "2024-10-26"
-      ]
+      "total_observations": 485,
+      "coverage_pct": 91.17,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-12"
     },
     "SGL-006": {
-      "total_scenes": 472,
-      "expected_scenes": 580,
-      "coverage_pct": 81.4,
-      "date_range": [
-        "2016-01-03",
-        "2024-10-28"
-      ]
+      "total_observations": 717,
+      "coverage_pct": 100.0,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-17"
     },
     "SGL-007": {
-      "total_scenes": 483,
-      "expected_scenes": 580,
-      "coverage_pct": 83.3,
-      "date_range": [
-        "2016-01-09",
-        "2024-10-29"
-      ]
+      "total_observations": 722,
+      "coverage_pct": 100.0,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-17"
     },
     "SGL-008": {
-      "total_scenes": 483,
-      "expected_scenes": 580,
-      "coverage_pct": 83.3,
-      "date_range": [
-        "2016-01-03",
-        "2024-10-22"
-      ]
+      "total_observations": 485,
+      "coverage_pct": 91.17,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-12"
     },
     "SGL-009": {
-      "total_scenes": 478,
-      "expected_scenes": 580,
-      "coverage_pct": 82.4,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-29"
-      ]
+      "total_observations": 487,
+      "coverage_pct": 91.54,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-12"
     },
     "SGL-010": {
-      "total_scenes": 493,
-      "expected_scenes": 580,
-      "coverage_pct": 85.0,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-31"
-      ]
+      "total_observations": 638,
+      "coverage_pct": 100.0,
+      "first_date": "2017-02-13",
+      "last_date": "2024-10-29"
     },
     "SGL-011": {
-      "total_scenes": 491,
-      "expected_scenes": 580,
-      "coverage_pct": 84.7,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-28"
-      ]
+      "total_observations": 485,
+      "coverage_pct": 91.17,
+      "first_date": "2016-10-03",
+      "last_date": "2020-07-17"
     },
     "SGL-012": {
-      "total_scenes": 496,
-      "expected_scenes": 580,
-      "coverage_pct": 85.5,
-      "date_range": [
-        "2016-01-04",
-        "2024-10-30"
-      ]
+      "total_observations": 448,
+      "coverage_pct": 84.21,
+      "first_date": "2017-02-11",
+      "last_date": "2024-10-28"
     },
     "SGL-013": {
-      "total_scenes": 479,
-      "expected_scenes": 580,
-      "coverage_pct": 82.6,
-      "date_range": [
-        "2016-01-04",
-        "2024-10-28"
-      ]
+      "total_observations": 853,
+      "coverage_pct": 100.0,
+      "first_date": "2016-02-29",
+      "last_date": "2020-09-24"
     },
     "SGL-014": {
-      "total_scenes": 481,
-      "expected_scenes": 580,
-      "coverage_pct": 82.9,
-      "date_range": [
-        "2016-01-09",
-        "2024-10-26"
-      ]
+      "total_observations": 401,
+      "coverage_pct": 75.38,
+      "first_date": "2016-09-27",
+      "last_date": "2020-09-24"
     },
     "SGL-015": {
-      "total_scenes": 472,
-      "expected_scenes": 580,
-      "coverage_pct": 81.4,
-      "date_range": [
-        "2016-01-03",
-        "2024-10-28"
-      ]
+      "total_observations": 810,
+      "coverage_pct": 100.0,
+      "first_date": "2017-02-07",
+      "last_date": "2021-12-19"
     },
     "SGL-016": {
-      "total_scenes": 483,
-      "expected_scenes": 580,
-      "coverage_pct": 83.3,
-      "date_range": [
-        "2016-01-09",
-        "2024-10-29"
-      ]
+      "total_observations": 936,
+      "coverage_pct": 100.0,
+      "first_date": "2016-02-29",
+      "last_date": "2020-09-24"
     },
     "SGL-017": {
-      "total_scenes": 483,
-      "expected_scenes": 580,
-      "coverage_pct": 83.3,
-      "date_range": [
-        "2016-01-03",
-        "2024-10-22"
-      ]
+      "total_observations": 721,
+      "coverage_pct": 100.0,
+      "first_date": "2016-09-26",
+      "last_date": "2020-07-25"
     },
     "SGL-018": {
-      "total_scenes": 478,
-      "expected_scenes": 580,
-      "coverage_pct": 82.4,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-29"
-      ]
+      "total_observations": 728,
+      "coverage_pct": 100.0,
+      "first_date": "2016-09-26",
+      "last_date": "2020-07-25"
     },
     "SGL-019": {
-      "total_scenes": 487,
-      "expected_scenes": 580,
-      "coverage_pct": 84.0,
-      "date_range": [
-        "2016-01-03",
-        "2024-10-30"
-      ]
+      "total_observations": 740,
+      "coverage_pct": 100.0,
+      "first_date": "2016-09-26",
+      "last_date": "2020-07-25"
     },
     "SGL-020": {
-      "total_scenes": 491,
-      "expected_scenes": 580,
-      "coverage_pct": 84.7,
-      "date_range": [
-        "2016-01-02",
-        "2024-10-28"
-      ]
+      "total_observations": 746,
+      "coverage_pct": 100.0,
+      "first_date": "2016-09-26",
+      "last_date": "2020-07-25"
     }
   }
 }

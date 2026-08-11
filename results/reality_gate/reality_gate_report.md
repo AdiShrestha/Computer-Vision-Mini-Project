@@ -8,11 +8,11 @@ Channels: 13
 
 ## GAP STATISTICS
 **Verdict: PASS**
-Reason: Gap rates range from 0.533 to 0.536.
+Reason: Gap rates range from 0.508 to 0.573.
 
 ## DISTRIBUTION VARIANCE
 **Verdict: PASS**
-Reason: 8/13 channels show >2x std variation across lakes.
+Reason: 12/13 channels show >2x std variation across lakes.
 
 ## TEMPORAL COVERAGE
 **Verdict: PASS**
