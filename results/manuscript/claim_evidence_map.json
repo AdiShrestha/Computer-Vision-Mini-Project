@@ -109,15 +109,15 @@
       "chunk08_version": "v1.0"
     },
     "CL-16": {
-      "claim_text": "Score-C 95% AUC-ROC bootstrap CI mean is 0.8011",
-      "value": 0.8011,
+      "claim_text": "Score-C 95% AUC-ROC bootstrap CI mean is 0.8260",
+      "value": 0.826,
       "source_file": "results/evaluation/statistical_significance.json",
       "json_path": "bootstrap_confidence_intervals.score_c.auc_roc_mean",
       "chunk08_version": "v1.0"
     },
     "CL-17": {
-      "claim_text": "Isolation Forest 95% AUC-ROC bootstrap CI mean is 0.8262",
-      "value": 0.8262,
+      "claim_text": "Isolation Forest 95% AUC-ROC bootstrap CI mean is 0.8236",
+      "value": 0.8236,
       "source_file": "results/evaluation/statistical_significance.json",
       "json_path": "bootstrap_confidence_intervals.isolation_forest.auc_roc_mean",
       "chunk08_version": "v1.0"
