@@ -250,7 +250,7 @@ def main():
     best_loss = float('inf')
     losses = []
 
-    n_epochs = 10
+    n_epochs = 25
     for epoch in range(1, n_epochs + 1):
         loss = train_epoch(model, dataloader, optimizer, device, masking_ratio=0.5)
         scheduler.step()

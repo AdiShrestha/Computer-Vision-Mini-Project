@@ -1,171 +1,127 @@
 {
-  "temporal_extent": [
-    "2016-01-01",
-    "2024-10-31"
-  ],
-  "lakes_processed": 20,
-  "cloud_masking_method": "SCL (classes 3,8,9,10,11) + s2cloudless (p>0.6)",
-  "cloud_rejection_threshold": 0.8,
+  "source": "Copernicus Sentinel-2 L2A via Google Earth Engine API",
+  "collection": "COPERNICUS/S2_SR_HARMONIZED",
+  "temporal_extent": "2016-01-01 to 2024-10-31",
   "per_lake_stats": {
     "SGL-001": {
-      "total_scenes": 649,
-      "valid_scenes": 548,
-      "rejected_scenes": 101,
-      "gap_rate_overall": 0.156,
-      "gap_rate_monsoon_jun_sep": 0.46,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 1819,
+      "gap_rate_monsoon_jun_sep": 0.6565,
+      "first_date": "2016-01-01",
+      "last_date": "2024-10-30"
     },
     "SGL-002": {
-      "total_scenes": 644,
-      "valid_scenes": 566,
-      "rejected_scenes": 78,
-      "gap_rate_overall": 0.121,
-      "gap_rate_monsoon_jun_sep": 0.36,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 449,
+      "gap_rate_monsoon_jun_sep": 0.4228,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-003": {
-      "total_scenes": 643,
-      "valid_scenes": 543,
-      "rejected_scenes": 100,
-      "gap_rate_overall": 0.156,
-      "gap_rate_monsoon_jun_sep": 0.45,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 451,
+      "gap_rate_monsoon_jun_sep": 0.5503,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-004": {
-      "total_scenes": 648,
-      "valid_scenes": 558,
-      "rejected_scenes": 90,
-      "gap_rate_overall": 0.139,
-      "gap_rate_monsoon_jun_sep": 0.4,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 451,
+      "gap_rate_monsoon_jun_sep": 0.6414,
+      "first_date": "2016-10-23",
+      "last_date": "2024-10-26"
     },
     "SGL-005": {
-      "total_scenes": 650,
-      "valid_scenes": 551,
-      "rejected_scenes": 99,
-      "gap_rate_overall": 0.152,
-      "gap_rate_monsoon_jun_sep": 0.45,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 450,
+      "gap_rate_monsoon_jun_sep": 0.7248,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-006": {
-      "total_scenes": 648,
-      "valid_scenes": 558,
-      "rejected_scenes": 90,
-      "gap_rate_overall": 0.139,
-      "gap_rate_monsoon_jun_sep": 0.41,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 451,
+      "gap_rate_monsoon_jun_sep": 0.5302,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-007": {
-      "total_scenes": 648,
-      "valid_scenes": 551,
-      "rejected_scenes": 97,
-      "gap_rate_overall": 0.15,
-      "gap_rate_monsoon_jun_sep": 0.44,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 450,
+      "gap_rate_monsoon_jun_sep": 0.5906,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-008": {
-      "total_scenes": 636,
-      "valid_scenes": 550,
-      "rejected_scenes": 86,
-      "gap_rate_overall": 0.135,
-      "gap_rate_monsoon_jun_sep": 0.39,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 451,
+      "gap_rate_monsoon_jun_sep": 0.5369,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-009": {
-      "total_scenes": 647,
-      "valid_scenes": 551,
-      "rejected_scenes": 96,
-      "gap_rate_overall": 0.148,
-      "gap_rate_monsoon_jun_sep": 0.44,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 451,
+      "gap_rate_monsoon_jun_sep": 0.4631,
+      "first_date": "2016-02-13",
+      "last_date": "2024-10-28"
     },
     "SGL-010": {
-      "total_scenes": 649,
-      "valid_scenes": 548,
-      "rejected_scenes": 101,
-      "gap_rate_overall": 0.156,
-      "gap_rate_monsoon_jun_sep": 0.46,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 1804,
+      "gap_rate_monsoon_jun_sep": 0.4561,
+      "first_date": "2016-01-05",
+      "last_date": "2024-10-29"
     },
     "SGL-011": {
-      "total_scenes": 644,
-      "valid_scenes": 566,
-      "rejected_scenes": 78,
-      "gap_rate_overall": 0.121,
-      "gap_rate_monsoon_jun_sep": 0.36,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 921,
+      "gap_rate_monsoon_jun_sep": 0.6187,
+      "first_date": "2016-01-14",
+      "last_date": "2024-10-28"
     },
     "SGL-012": {
-      "total_scenes": 643,
-      "valid_scenes": 543,
-      "rejected_scenes": 100,
-      "gap_rate_overall": 0.156,
-      "gap_rate_monsoon_jun_sep": 0.45,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 472,
+      "gap_rate_monsoon_jun_sep": 0.1986,
+      "first_date": "2016-01-01",
+      "last_date": "2024-10-30"
     },
     "SGL-013": {
-      "total_scenes": 648,
-      "valid_scenes": 558,
-      "rejected_scenes": 90,
-      "gap_rate_overall": 0.139,
-      "gap_rate_monsoon_jun_sep": 0.4,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 441,
+      "gap_rate_monsoon_jun_sep": 0.3862,
+      "first_date": "2016-05-01",
+      "last_date": "2024-10-26"
     },
     "SGL-014": {
-      "total_scenes": 650,
-      "valid_scenes": 551,
-      "rejected_scenes": 99,
-      "gap_rate_overall": 0.152,
-      "gap_rate_monsoon_jun_sep": 0.45,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 891,
+      "gap_rate_monsoon_jun_sep": 0.3791,
+      "first_date": "2016-11-14",
+      "last_date": "2024-10-28"
     },
     "SGL-015": {
-      "total_scenes": 648,
-      "valid_scenes": 558,
-      "rejected_scenes": 90,
-      "gap_rate_overall": 0.139,
-      "gap_rate_monsoon_jun_sep": 0.41,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 911,
+      "gap_rate_monsoon_jun_sep": 0.4067,
+      "first_date": "2016-06-24",
+      "last_date": "2024-10-30"
     },
     "SGL-016": {
-      "total_scenes": 648,
-      "valid_scenes": 551,
-      "rejected_scenes": 97,
-      "gap_rate_overall": 0.15,
-      "gap_rate_monsoon_jun_sep": 0.44,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 901,
+      "gap_rate_monsoon_jun_sep": 0.3967,
+      "first_date": "2016-02-01",
+      "last_date": "2024-10-28"
     },
     "SGL-017": {
-      "total_scenes": 636,
-      "valid_scenes": 550,
-      "rejected_scenes": 86,
-      "gap_rate_overall": 0.135,
-      "gap_rate_monsoon_jun_sep": 0.39,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 900,
+      "gap_rate_monsoon_jun_sep": 0.686,
+      "first_date": "2016-10-23",
+      "last_date": "2024-10-26"
     },
     "SGL-018": {
-      "total_scenes": 647,
-      "valid_scenes": 551,
-      "rejected_scenes": 96,
-      "gap_rate_overall": 0.148,
-      "gap_rate_monsoon_jun_sep": 0.44,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 451,
+      "gap_rate_monsoon_jun_sep": 0.4726,
+      "first_date": "2016-10-23",
+      "last_date": "2024-10-26"
     },
     "SGL-019": {
-      "total_scenes": 647,
-      "valid_scenes": 551,
-      "rejected_scenes": 96,
-      "gap_rate_overall": 0.148,
-      "gap_rate_monsoon_jun_sep": 0.43,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 1820,
+      "gap_rate_monsoon_jun_sep": 0.854,
+      "first_date": "2016-01-14",
+      "last_date": "2024-10-28"
     },
     "SGL-020": {
-      "total_scenes": 644,
-      "valid_scenes": 566,
-      "rejected_scenes": 78,
-      "gap_rate_overall": 0.121,
-      "gap_rate_monsoon_jun_sep": 0.36,
-      "gap_rate_dry_oct_may": 0.0
+      "total_observations": 918,
+      "gap_rate_monsoon_jun_sep": 0.6881,
+      "first_date": "2016-01-14",
+      "last_date": "2024-10-28"
     }
   }
 }

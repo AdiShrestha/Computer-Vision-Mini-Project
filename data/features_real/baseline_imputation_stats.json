@@ -1,0 +1,186 @@
+{
+  "policy_version": "v1.0",
+  "training_lakes_used_for_medians": [
+    "SGL-006",
+    "SGL-007",
+    "SGL-008",
+    "SGL-009",
+    "SGL-010",
+    "SGL-011",
+    "SGL-012",
+    "SGL-013",
+    "SGL-014",
+    "SGL-015",
+    "SGL-016",
+    "SGL-017",
+    "SGL-018",
+    "SGL-019",
+    "SGL-020"
+  ],
+  "n_training_lakes": 15,
+  "total_windows_evaluated": 2040,
+  "retained_windows": 176,
+  "excluded_windows": 1864,
+  "exclusion_threshold_valid_ratio": 0.5,
+  "total_imputed_elements": 201266,
+  "total_feature_elements": 411840,
+  "imputed_fraction": 0.488699,
+  "imputed_percentage": 48.87,
+  "per_channel_medians": [
+    1.9956,
+    1196.5,
+    736.2,
+    446.6,
+    0.4651,
+    18.157,
+    -10.082,
+    0.02,
+    -11.5114,
+    -18.05605,
+    -10.7995,
+    265.18,
+    0.0
+  ],
+  "per_lake_summary": {
+    "SGL-001": {
+      "total_windows": 102,
+      "retained_windows": 31,
+      "excluded_windows": 71,
+      "imputed_element_count": 34717,
+      "total_element_count": 72540
+    },
+    "SGL-002": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-003": {
+      "total_windows": 102,
+      "retained_windows": 3,
+      "excluded_windows": 99,
+      "imputed_element_count": 3500,
+      "total_element_count": 7020
+    },
+    "SGL-004": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-005": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-006": {
+      "total_windows": 102,
+      "retained_windows": 2,
+      "excluded_windows": 100,
+      "imputed_element_count": 2339,
+      "total_element_count": 4680
+    },
+    "SGL-007": {
+      "total_windows": 102,
+      "retained_windows": 2,
+      "excluded_windows": 100,
+      "imputed_element_count": 2331,
+      "total_element_count": 4680
+    },
+    "SGL-008": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-009": {
+      "total_windows": 102,
+      "retained_windows": 3,
+      "excluded_windows": 99,
+      "imputed_element_count": 3495,
+      "total_element_count": 7020
+    },
+    "SGL-010": {
+      "total_windows": 102,
+      "retained_windows": 25,
+      "excluded_windows": 77,
+      "imputed_element_count": 28962,
+      "total_element_count": 58500
+    },
+    "SGL-011": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-012": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-013": {
+      "total_windows": 102,
+      "retained_windows": 71,
+      "excluded_windows": 31,
+      "imputed_element_count": 81152,
+      "total_element_count": 166140
+    },
+    "SGL-014": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-015": {
+      "total_windows": 102,
+      "retained_windows": 39,
+      "excluded_windows": 63,
+      "imputed_element_count": 44770,
+      "total_element_count": 91260
+    },
+    "SGL-016": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-017": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-018": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-019": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    },
+    "SGL-020": {
+      "total_windows": 102,
+      "retained_windows": 0,
+      "excluded_windows": 102,
+      "imputed_element_count": 0,
+      "total_element_count": 0
+    }
+  }
+}

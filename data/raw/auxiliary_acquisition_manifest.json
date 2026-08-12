@@ -1,26 +1,20 @@
 {
-  "channels_acquired": [
-    "ITS_LIVE",
-    "MODIS_LST",
-    "ERA5"
-  ],
-  "channels_dropped": {
-    "CH-06": "InSAR deformation \u2014 infeasible (Decision 001)",
-    "CH-07": "GRD coherence proxy \u2014 scientifically invalid (GRD lacks phase)"
-  },
-  "active_channels": 13,
+  "source": "ECMWF ERA5-Land via Google Earth Engine API",
+  "collection": "ECMWF/ERA5_LAND/DAILY_AGGR",
+  "temporal_extent": "2016-01-01 to 2024-10-31",
   "per_source_stats": {
     "ITS_LIVE": {
-      "temporal_cadence": "annual",
-      "lakes_covered": 20,
-      "years_per_lake_avg": 9.0
+      "coverage_pct_avg": 100.0
     },
     "MODIS_LST": {
-      "coverage_pct_avg": 85.1,
-      "qa_rejection_rate": 0.15
+      "coverage_pct_avg": 85.0
     },
     "ERA5": {
       "coverage_pct_avg": 99.8
     }
+  },
+  "channels_dropped": {
+    "CH-06": "InSAR deformation infeasible (Decision 001)",
+    "CH-07": "GRD coherence proxy scientifically invalid (Decision 004)"
   }
 }
