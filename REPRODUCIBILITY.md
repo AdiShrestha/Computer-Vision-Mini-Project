@@ -93,6 +93,7 @@ Bin evaluation windows across 5 cloud fraction ranges and resolve Protocol E1 ag
 ```bash
 python3 source/scripts/cloud_stratified_eval.py
 python3 source/evaluation/protocols/protocol_e1.py
+python3 source/scripts/run_threshold_analysis.py
 ```
 *Generated Outputs*: `results/evaluation/cloud_stratified_evaluation.json` and `results/evaluation/protocol_e1_real_data.json`.
 
