@@ -5,14 +5,18 @@
   "implemented": [
     "corrected_numerical_core",
     "forensic_audit_and_work_plan",
-    "local_legacy_recovery_archive"
+    "local_legacy_recovery_archive",
+    "github_migration_with_verified_legacy_tags"
   ],
   "verification": {
     "core_engineering_tests": 17,
     "factory_offline_tests": 276,
     "legacy_tests_collected_not_executed": 296,
     "clean_environment_install": "NOT_VERIFIED",
-    "supervised_domain_execution": "NOT_IMPLEMENTED"
+    "supervised_domain_execution": "NOT_IMPLEMENTED",
+    "fresh_github_checkout_core_tests": 17,
+    "remote_legacy_tags": "VERIFIED",
+    "published_baseline_commit": "ac167e537fd38d2d633d1dbb64ef3dc8efa70f29"
   },
   "research_blockers": [
     "independently_verified_observational_acquisition",

@@ -1,0 +1,17 @@
+{
+  "legacy_remote_head": "aaf063f80905f5f2049fad3d6440e915263d181e",
+  "legacy_working_snapshot": "836601e4c25147ba96dc2fcd179b1a00247f7809",
+  "legacy_head_tag": "legacy/sentinel-gl-2026-09-30",
+  "legacy_working_tag": "legacy/sentinel-gl-working-tree-2026-09-30",
+  "remote": "git@github.com:AdiShrestha/Computer-Vision-Mini-Project.git",
+  "status": "PUBLISHED_AND_VERIFIED",
+  "published_baseline_commit": "ac167e537fd38d2d633d1dbb64ef3dc8efa70f29",
+  "verified_local_date": "2026-10-01",
+  "core_tests": 17,
+  "factory_tests": 276,
+  "fresh_remote_checkout_core_tests": 17,
+  "legacy_working_tree_sha256_unchanged_since_inventory": true,
+  "no_force_push": true,
+  "clean_environment_install_verified": false,
+  "scientific_claims": []
+}
