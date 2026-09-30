@@ -1,29 +1,20 @@
-factory/
-project/
-bootstrap.sh
-DROP_HERE/
-TAKE_THIS/
-.DS_Store
-__MACOSX/
+# Local recoverable legacy backup; never admitted as research inputs.
+.migration/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.venv/
+.env
+.env.*
+.DS_Store
+# Provider credentials and local supervisor state.
+.credentials/
+.cdsapirc
+project/.factory/
+project/supervisor_private.key
+# Bulk provider data and generated evidence are released through manifests/bundles.
 data/raw/
-data/test_tiles/
-data/processed/
-data/features/
-data/embeddings/
-data/interim/
-models/checkpoints/
-runs/
-wandb/
-results/*
-!results/release/
-!results/release/**
-results/work/
-results/logs/
-results/tmp/
-manuscript/*.aux
-manuscript/*.bbl
-manuscript/*.log
-Legecy factory (archive)
+data/derived/
+artifacts/
+TAKE_THIS/
+DROP_HERE/

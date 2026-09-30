@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "updated_local_date": "2026-10-01",
+  "status": "RESEARCH_NOT_READY",
+  "implemented": [
+    "corrected_numerical_core",
+    "forensic_audit_and_work_plan",
+    "local_legacy_recovery_archive"
+  ],
+  "verification": {
+    "core_engineering_tests": 17,
+    "factory_offline_tests": 276,
+    "legacy_tests_collected_not_executed": 296,
+    "clean_environment_install": "NOT_VERIFIED",
+    "supervised_domain_execution": "NOT_IMPLEMENTED"
+  },
+  "research_blockers": [
+    "independently_verified_observational_acquisition",
+    "lake_event_registry_and_selection",
+    "feature_spatial_units_quality_and_temporal_lineage",
+    "reviewed_domain_factory_profile_and_runtime",
+    "truthful_receipts_and_scoped_assurance",
+    "frozen_task_specific_methodology_and_splits",
+    "actual_fair_baselines_predictions_calibration_and_statistics",
+    "verified_claims_figures_reproduction_and_submission_review"
+  ],
+  "scientific_claims": [],
+  "next_packages": [
+    "WP01",
+    "WP02",
+    "WP03"
+  ],
+  "plan": "plan.md"
+}

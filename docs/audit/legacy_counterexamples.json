@@ -1,0 +1,68 @@
+{
+  "kind": "engineering_counterexamples_not_research_results",
+  "unfitted_score_b_mutates_on_test_input": true,
+  "unmasked_model_loss_is_nan": true,
+  "single_class_auc_placeholder": {
+    "auc_roc": 0.5,
+    "auc_pr": 0.0
+  },
+  "empty_control_fpr_placeholder": 0.0,
+  "auc_mix_counterexample": {
+    "labels": [
+      0,
+      1
+    ],
+    "scores_a": [
+      0.0,
+      1.0
+    ],
+    "scores_b": [
+      0.0,
+      -0.1
+    ],
+    "auc_a": 1.0,
+    "auc_b": 0.0,
+    "auc_half_scores": 1.0,
+    "linear_average_of_aucs": 0.5,
+    "note": "AUC of mixed scores is not the mixture of AUCs; constructed engineering fixture."
+  },
+  "final_six_center_dates": [
+    "2024-02-18",
+    "2024-03-19",
+    "2024-04-18",
+    "2024-05-18",
+    "2024-06-17",
+    "2024-07-17"
+  ],
+  "final_six_latest_input_dates": [
+    "2024-05-17",
+    "2024-06-16",
+    "2024-07-16",
+    "2024-08-15",
+    "2024-09-14",
+    "2024-10-14"
+  ],
+  "bootstrap_probability_omitting_only_event_lake": 0.3276800000000001,
+  "checkpoint_metadata": {
+    "models/checkpoints/ts_mae_best.pt": {
+      "safe_load_error": "Weights only load failed. This file can still be loaded, to do so you have two options, \u001b[1mdo those steps only if you trust the source of the checkpoint\u001b[0m. \n\t(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.\n\t(2) Alternatively, to load with `weig"
+    },
+    "models/checkpoints/ts_mae_final.pt": {
+      "safe_load_error": "Weights only load failed. This file can still be loaded, to do so you have two options, \u001b[1mdo those steps only if you trust the source of the checkpoint\u001b[0m. \n\t(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.\n\t(2) Alternatively, to load with `weig"
+    },
+    "models/checkpoints/ts_mae_real_data.pt": {
+      "keys": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "loss",
+        "n_channels",
+        "window_size",
+        "seed"
+      ],
+      "epoch": 24,
+      "norm_stats_present": false,
+      "architecture_config_present": false
+    }
+  }
+}
