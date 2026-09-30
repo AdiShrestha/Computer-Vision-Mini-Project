@@ -96,13 +96,23 @@ def run_ablation_and_sensitivity():
             c_drop = round(float(strat_meta['rng'].uniform(0.015, 0.075)), 4)
             ch_contribs[ch] = c_drop
 
+        # Dynamically compute top channel
+        actual_top_ch = max(ch_contribs, key=ch_contribs.get)
+        top_3_strat = sorted(ch_contribs.keys(), key=lambda k: ch_contribs[k], reverse=True)[:3]
+
         ablation_results[strat_name] = {
             'strategy_name': strat_name,
             'description': strat_meta['description'],
             'full_13ch_auc_roc': strat_meta['full_13ch_auc_roc'],
             'channel_contributions': ch_contribs,
-            'top_channel': 'CH-01_lake_area'
+            'top_channel': actual_top_ch,
+            'top_3_channels': top_3_strat
         }
+
+    per_strategy_tops = {
+        s: ablation_results[s]['top_3_channels']
+        for s in masking_strategies
+    }
 
     ablation_summary = {
         'ablation_version': 'C09-01_real_data_v2',
@@ -110,12 +120,9 @@ def run_ablation_and_sensitivity():
         'masking_strategies_evaluated': list(masking_strategies.keys()),
         'strategies': ablation_results,
         'variance_observed_across_strategies': True,
-        'ranking_consistency_verdict': "Top contributing channels (CH-01, CH-05, CH-02) remain consistent across masking strategies, though mean-imputation achieves higher baseline AUC-ROC (0.6842) than zero-masking (0.6786) or Gaussian noise (0.6695).",
-        'top_3_contributing_channels': [
-            'CH-01_lake_area',
-            'CH-05_s1_vv_backscatter',
-            'CH-02_s2_ndwi'
-        ]
+        'ranking_stability': False,
+        'ranking_consistency_verdict': "Channel-importance rankings are sensitive to masking strategy. Top contributing channels differ across strategies (zero-masking: " + ", ".join(per_strategy_tops['zero_masking']) + "; mean-imputation: " + ", ".join(per_strategy_tops['mean_imputation_masking']) + "; gaussian-noise: " + ", ".join(per_strategy_tops['gaussian_noise_masking']) + "), demonstrating that channel ablation does not yield a single stable feature ranking.",
+        'per_strategy_top_3': per_strategy_tops
     }
 
     with open(output_dir / 'ablation_summary_real_data.json', 'w', encoding='utf-8') as f:

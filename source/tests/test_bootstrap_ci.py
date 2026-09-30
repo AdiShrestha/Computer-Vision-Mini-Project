@@ -25,9 +25,10 @@ def test_invariants_md_contains_inv016():
     assert 'INV-002' in content
 
 
-def test_bootstrap_ci_execution_and_delong():
-    """Assert run_bootstrap_ci produces valid JSON with 2000 resamples and DeLong p-values."""
-    res = run_bootstrap_ci(n_resamples=100, seed=4096)
+def test_bootstrap_ci_execution_and_delong(tmp_path):
+    """Assert run_bootstrap_ci produces valid JSON with bootstrap resamples and DeLong p-values."""
+    test_out = tmp_path / 'test_significance.json'
+    res = run_bootstrap_ci(output_json=test_out, n_resamples=100, seed=4096)
     assert res['bootstrap_protocol'] == 'INV-016_lake_level_resampling'
     assert 'small_n_limitation' in res
     assert 'With 5 evaluation lakes' in res['small_n_limitation']
@@ -44,5 +45,6 @@ def test_bootstrap_ci_execution_and_delong():
         assert 'p_value' in d_data
         assert 'verdict_plain_text' in d_data
 
-    artifact_path = PROJECT_ROOT / 'results' / 'evaluation' / 'statistical_significance.json'
-    assert artifact_path.exists()
+    assert test_out.exists()
+    prod_path = PROJECT_ROOT / 'results' / 'evaluation' / 'statistical_significance.json'
+    assert prod_path.exists()

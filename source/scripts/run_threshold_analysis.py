@@ -31,9 +31,9 @@ def main():
     config = load_config()
 
     repo_root = os.path.dirname(source_root)
-    ckpt_path = os.path.join(repo_root, "models", "checkpoints", "ts_mae_best.pt")
-    features_dir = os.path.join(repo_root, config['paths']['features'])
-    embeddings_dir = os.path.join(repo_root, 'data', 'embeddings')
+    ckpt_path = os.path.join(repo_root, "models", "checkpoints", "ts_mae_real_data.pt")
+    features_dir = os.path.join(repo_root, "data", "features_real")
+    embeddings_dir = os.path.join(repo_root, "data", "embeddings", "real_data")
     registry_path = os.path.join(repo_root, config['paths']['lake_registry'])
     output_dir = os.path.join(repo_root, 'results', 'ablation')
     os.makedirs(output_dir, exist_ok=True)
@@ -43,6 +43,13 @@ def main():
 
     training_ids = by_role.get('training', [])
     control_ids = by_role.get('evaluation_control', [])
+
+    def minmax_normalize(arr: np.ndarray) -> np.ndarray:
+        min_v = float(np.min(arr))
+        max_v = float(np.max(arr))
+        if max_v - min_v < 1e-8:
+            return np.zeros_like(arr)
+        return (arr - min_v) / (max_v - min_v)
 
     # 1. Load features & embeddings for training & control lakes
     features_map = {}
@@ -59,82 +66,76 @@ def main():
     score_a_inst = ReconstructionScorer(checkpoint_path=ckpt_path)
     training_embs = {lid: embeddings_map[lid] for lid in training_ids if lid in embeddings_map}
     score_b_inst = EmbeddingDistanceScorer(training_embeddings=training_embs)
-    score_c_inst = CombinedScorer(score_a_scorer=score_a_inst, score_b_scorer=score_b_inst, alpha=0.5)
 
-    # 3. Compute Score-C smoothed time series for control lakes
-    control_feats = {lid: features_map[lid] for lid in control_ids if lid in features_map}
+    # 3. Compute Score-C smoothed time series for control lakes using sliding windows
     control_smoothed = {}
-    for lid, feat in control_feats.items():
-        emb = embeddings_map[lid]
-        sc = score_c_inst.score(feat, emb)
-        control_smoothed[lid] = ema_smooth(sc, span=5)
+    for lid in control_ids:
+        if lid in features_map and lid in embeddings_map:
+            feat = features_map[lid]   # (3227, 13)
+            emb = embeddings_map[lid]   # (102, 128)
+
+            # Window slicing: 102 windows of (180, 13)
+            T = feat.shape[0]
+            w_list = []
+            for start in range(0, T - 180 + 1, 30):
+                w = feat[start:start + 180]
+                w_clean = np.nan_to_num(w, nan=0.0)
+                w_list.append(w_clean)
+
+            windows = np.array(w_list, dtype=np.float32)
+            sa = score_a_inst.score(windows)
+            sb = score_b_inst.score(emb)
+
+            sa_norm = minmax_normalize(sa)
+            sb_norm = minmax_normalize(sb)
+            sc = 0.5 * sa_norm + 0.5 * sb_norm
+
+            control_smoothed[lid] = ema_smooth(sc, span=5)
 
     all_ctrl_scores = np.concatenate(list(control_smoothed.values()))
     original_threshold = float(np.percentile(all_ctrl_scores, 85))
     original_fp_rate = compute_false_positive_rate(control_smoothed, original_threshold)
 
     # 4. Sweep percentiles from 50 to 99
-    injector = SyntheticInjector(seed=2023)
     sweep_table = []
-    
-    refined_threshold = None
-    refined_fp_rate = None
-    refined_det_rate = None
-    best_det_rate = -1.0
+    inv007_threshold = None
+    inv007_percentile = None
 
     for pct in range(50, 100):
         thresh = float(np.percentile(all_ctrl_scores, pct))
         fp = compute_false_positive_rate(control_smoothed, thresh)
 
-        # Run E3 synthetic injection evaluation at this threshold
-        detections = []
-        for lid, feat in control_feats.items():
-            injections = injector.generate_injections(feat, lid)
-            for mod_feat, meta in injections:
-                mod_emb = score_a_inst.get_embeddings(mod_feat)
-                sc_mod = score_c_inst.score(mod_feat, mod_emb)
-                sc_smoothed = ema_smooth(sc_mod, span=5)
-
-                inj_w = meta['window_idx']
-                dur = meta.get('duration_windows', 1)
-                inj_end = min(inj_w + dur, len(sc_smoothed))
-                det = bool(np.any(sc_smoothed[inj_w:inj_end] > thresh))
-                detections.append(det)
-
-        det_rate = compute_synthetic_detection_rate(detections)
-
         sweep_table.append({
             "percentile": pct,
             "threshold": thresh,
-            "false_positive_rate": float(fp),
-            "synthetic_detection_rate": float(det_rate)
+            "false_positive_rate": float(fp)
         })
 
-        # Check INV-007 compliance constraint: fp <= 0.10
-        if fp <= 0.10 and det_rate > best_det_rate:
-            best_det_rate = det_rate
-            refined_threshold = thresh
-            refined_fp_rate = float(fp)
-            refined_det_rate = float(det_rate)
-
-    # Fallback to highest percentile (pct=90) if exact match not found
-    if refined_threshold is None:
-        thresh_90 = float(np.percentile(all_ctrl_scores, 90))
-        refined_threshold = thresh_90
-        refined_fp_rate = float(compute_false_positive_rate(control_smoothed, thresh_90))
-        refined_det_rate = float(next(e['synthetic_detection_rate'] for e in sweep_table if e['percentile'] == 90))
+        if fp <= 0.10 and inv007_threshold is None:
+            inv007_threshold = thresh
+            inv007_percentile = pct
 
     result = {
-        "method": "roc_threshold_sweep",
+        "method": "real_gee_threshold_analysis",
         "sweep_percentiles": list(range(50, 100)),
-        "original_threshold": original_threshold,
+        "original_threshold": float(original_threshold),
         "original_fp_rate": float(original_fp_rate),
-        "refined_threshold": float(refined_threshold),
-        "refined_fp_rate": float(refined_fp_rate),
-        "refined_detection_rate": float(refined_det_rate),
+        "score_c_85th_percentile_threshold": float(original_threshold),
+        "score_c_85th_fp_rate": float(original_fp_rate),
+        "score_c_85th_inv007_compliant": bool(original_fp_rate <= 0.10),
+        "refined_threshold": float(inv007_threshold) if inv007_threshold is not None else float(original_threshold),
+        "refined_fp_rate": float(compute_false_positive_rate(control_smoothed, inv007_threshold)) if inv007_threshold is not None else float(original_fp_rate),
+        "inv007_compliant_threshold": float(inv007_threshold) if inv007_threshold is not None else None,
+        "inv007_compliant_percentile": int(inv007_percentile) if inv007_percentile is not None else None,
+        "inv007_compliant_fp_rate": float(compute_false_positive_rate(control_smoothed, inv007_threshold)) if inv007_threshold is not None else None,
         "inv007_target": 0.10,
-        "inv007_compliant": bool(refined_fp_rate <= 0.10),
-        "source_file": "results/ablation/ablation_summary.json",
+        "inv007_compliant": bool(inv007_threshold is not None and compute_false_positive_rate(control_smoothed, inv007_threshold) <= 0.10),
+        "honest_assessment": (
+            f"At the 85th percentile operating threshold ({original_threshold:.6f}), Score-C exhibits a false-positive rate of {original_fp_rate*100:.2f}% on control lakes, which exceeds the INV-007 target of <=10%. "
+            f"INV-007 compliance (FP <= 10%) is only achieved at or above the {inv007_percentile}th percentile (threshold = {inv007_threshold:.6f}, FP = {compute_false_positive_rate(control_smoothed, inv007_threshold)*100:.2f}%)."
+            if inv007_threshold is not None else
+            f"Score-C does not achieve FP <= 10% across the evaluated percentiles."
+        ),
         "threshold_sweep_table": sweep_table
     }
 
@@ -143,7 +144,9 @@ def main():
         json.dump(result, f, indent=2)
 
     logger.info(f"Threshold analysis saved to {out_file}")
-    print(f"Refined Threshold: {refined_threshold:.6f} | FP Rate: {refined_fp_rate*100:.2f}% | Compliant: {result['inv007_compliant']}")
+    print(f"85th Percentile Threshold: {result['score_c_85th_percentile_threshold']:.6f} | FP Rate: {result['score_c_85th_fp_rate']*100:.2f}% | 85th Compliant: {result['score_c_85th_inv007_compliant']}")
+    if result['inv007_compliant_threshold'] is not None:
+        print(f"INV-007 Compliant Threshold: {result['inv007_compliant_threshold']:.6f} ({result['inv007_compliant_percentile']}th percentile) | FP Rate: {result['inv007_compliant_fp_rate']*100:.2f}%")
 
 
 if __name__ == '__main__':

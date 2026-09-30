@@ -139,6 +139,22 @@ def run_evaluation_real_data(
             smoothed_scores['score_b'][lid] = ema_smooth(sb, span=5)
             smoothed_scores['score_c'][lid] = ema_smooth(sc, span=5)
 
+            # Save real per-lake anomaly scores CSV (normalized space as per INV-002 / test specification)
+            per_lake_dir = output_dir / 'per_lake' / lid
+            per_lake_dir.mkdir(parents=True, exist_ok=True)
+            df_lake = pd.DataFrame({
+                'window_idx': np.arange(len(sa)),
+                'score_a_raw': sa_norm,
+                'score_a_smoothed': ema_smooth(sa_norm, span=5),
+                'score_a_unnormalized_mse': sa,
+                'score_b_raw': sb_norm,
+                'score_b_smoothed': ema_smooth(sb_norm, span=5),
+                'score_b_unnormalized': sb,
+                'score_c_raw': sc,
+                'score_c_smoothed': smoothed_scores['score_c'][lid]
+            })
+            df_lake.to_csv(per_lake_dir / 'anomaly_scores.csv', index=False)
+
     # 4. Scorer Non-Identity Verification across ALL evaluation lakes (H2)
     for eval_lid in eval_ids:
         sa_l = raw_scores['score_a'][eval_lid]
