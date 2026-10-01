@@ -71,7 +71,7 @@ def test_unmasked_and_unobserved_losses_do_not_become_nan_or_zero():
     with pytest.raises(ValueError,match='no observed masked'):m(x,mask=torch.zeros(1,6,dtype=torch.bool),validity=v)
     with pytest.raises(ValueError):m(torch.zeros_like(x),validity=torch.zeros_like(v))
     badmask=torch.tensor([[True,False,False,False,False,False],[True,True,False,False,False,False]])
-    with pytest.raises(ValueError):m.encode(x.expand(2,-1,-1),mask=badmask)
+    with pytest.raises(ValueError):m.encode(x.expand(2,-1,-1),mask=badmask,validity=v.expand(2,-1,-1))
 
 
 def test_missing_targets_do_not_contribute_and_hidden_values_do_not_leak():
@@ -103,9 +103,9 @@ def test_ranking_ties_and_single_class_estimability():
 
 
 def test_sustained_alarm_is_not_backdated_and_post_event_is_excluded():
-    result=first_sustained_alarm([1.,1.,1.],['2023-10-01','2023-10-02','2023-10-04'],.5,'2023-10-04',2,180)
+    result=first_sustained_alarm([1.,1.,1.],['2023-10-01','2023-10-02','2023-10-04'],.5,'2023-10-04',2,180,eligible=[True]*3,max_gap_days=1)
     assert result['alarm_date']=='2023-10-02' and result['lead_time_days']==2
-    result=first_sustained_alarm([0.,1.],['2023-10-02','2023-10-04'],.5,'2023-10-04',1,180)
+    result=first_sustained_alarm([0.,1.],['2023-10-02','2023-10-04'],.5,'2023-10-04',1,180,eligible=[True]*2,max_gap_days=1)
     assert result['lead_time_days'] is None
 
 

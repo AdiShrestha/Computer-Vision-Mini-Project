@@ -12,7 +12,7 @@ def number(x):
         raise EvidenceError('boolean is not a numeric measurement')
     try:
         v = float(x)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         raise EvidenceError(f'not numeric: {x!r}')
     if not math.isfinite(v):
         raise EvidenceError('non-finite measurement; never sanitize into a score')
@@ -77,19 +77,19 @@ def paired_inference(a, b, *, seed=314159, draws=10000, alpha=0.05):
     """
     if len(a) != len(b) or len(a) < 2:
         raise EvidenceError('paired inference needs >=2 aligned independent units')
-    d = [number(x)-number(y) for x,y in zip(a,b)]
+    d = [number(number(x)-number(y)) for x,y in zip(a,b)]
     n = len(d); observed = mean(d)
-    if not 0 < alpha < 1 or draws < 1000:
+    if type(seed) is not int or type(draws) is not int or draws < 1000 or isinstance(alpha,bool) or not 0 < number(alpha) < 1:
         raise EvidenceError('invalid inference settings')
     rng = random.Random(seed)
     boot = [mean(rng.choices(d, k=n)) for _ in range(draws)]
     if n <= 16:
-        extreme = sum(abs(sum(x*t for x,t in zip(d,signs))/n) >= abs(observed)-1e-14
+        extreme = sum(abs(mean(x*t for x,t in zip(d,signs))) >= abs(observed)
                       for signs in itertools.product((-1,1), repeat=n))
         p = extreme / (2**n)
         method = 'exact_two_sided_paired_sign_flip'
     else:
-        extreme = sum(abs(sum(x*rng.choice((-1,1)) for x in d)/n) >= abs(observed)-1e-14
+        extreme = sum(abs(mean(x*rng.choice((-1,1)) for x in d)) >= abs(observed)
                       for _ in range(draws))
         p = (extreme+1)/(draws+1)
         method = 'monte_carlo_two_sided_paired_sign_flip_plus_one'

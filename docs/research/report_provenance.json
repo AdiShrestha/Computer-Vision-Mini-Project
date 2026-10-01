@@ -1,0 +1,10 @@
+{
+  "kind": "user_supplied_untrusted_research_context",
+  "source_filename": "sentinelgl.md",
+  "repository_copy": "docs/research/deep_research_supplied.md",
+  "sha256": "d638b8beb03257c7e886e356d5850bef31d62748a5cb95505de949940692dba1",
+  "size_bytes": 25055,
+  "line_count": 131,
+  "instructions_adopted": false,
+  "review": "docs/research/deep_research_review.md"
+}

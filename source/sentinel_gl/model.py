@@ -14,6 +14,34 @@ import math
 from typing import Tuple, Optional
 
 
+def evaluation_masks(validity, partitions=2):
+    """Value-independent cross masks, balanced by observed time positions.
+
+    Each position is hidden exactly once. Fold capacities depend only on T,
+    so each fold has equal visible counts across batch samples. At least two
+    observed time positions are needed to retain real visible context.
+    """
+    if validity.dtype != torch.bool or validity.ndim != 3:
+        raise ValueError("validity must be a boolean B,T,C tensor")
+    batch, steps, _ = validity.shape
+    if type(partitions) is not int or not 2 <= partitions <= steps:
+        raise ValueError("partitions must be an integer between two and context length")
+    masks = [torch.zeros(batch, steps, dtype=torch.bool, device=validity.device)
+             for _ in range(partitions)]
+    capacities = [len(range(part, steps, partitions)) for part in range(partitions)]
+    for row in range(batch):
+        observed = validity[row].any(dim=-1)
+        indices = torch.nonzero(observed).flatten().tolist()
+        if len(indices) < 2:
+            raise ValueError("masked scoring needs at least two observed time positions")
+        groups = [indices[part::partitions] for part in range(partitions)]
+        missing = iter(torch.nonzero(~observed).flatten().tolist())
+        for part, group in enumerate(groups):
+            group.extend(next(missing) for _ in range(capacities[part]-len(group)))
+            masks[part][row, group] = True
+    return tuple(masks)
+
+
 class PatchProjection(nn.Module):
 
     def __init__(self, n_channels: int, d_model: int):
@@ -102,12 +130,17 @@ class TimeSeriesMAE(nn.Module):
         dropout: float = 0.1,
     ):
         super().__init__()
-        if type(n_channels) is not int or n_channels < 1 or type(n_windows) is not int or n_windows < 2:
-            raise ValueError("n_channels >= 1 and n_windows >= 2 are required")
-        if not 0 < masking_ratio < 1 or isinstance(masking_ratio, bool):
+        dimensions = (n_channels, n_windows, d_model, n_encoder_layers,
+                      n_decoder_layers, n_encoder_heads, n_decoder_heads,
+                      d_ff_encoder, d_ff_decoder)
+        if any(type(value) is not int or value < 1 for value in dimensions) or n_windows < 2:
+            raise ValueError("model dimensions must be positive integers; n_windows >= 2")
+        if d_model % n_encoder_heads or d_model % n_decoder_heads:
+            raise ValueError("model dimension must be divisible by both attention head counts")
+        if type(masking_ratio) not in (int, float) or not math.isfinite(masking_ratio) or not 0 < masking_ratio < 1:
             raise ValueError("masking_ratio must be strictly between zero and one")
-        if n_encoder_layers < 1 or n_decoder_layers < 1:
-            raise ValueError("encoder and decoder require at least one layer")
+        if type(dropout) not in (int, float) or not math.isfinite(dropout) or not 0 <= dropout < 1:
+            raise ValueError("dropout must be finite and in [0,1)")
         self.n_channels = n_channels
         self.n_windows = n_windows
         self.d_model = d_model
@@ -156,7 +189,7 @@ class TimeSeriesMAE(nn.Module):
                 nn.init.zeros_(module.bias)
 
     def _generate_mask(self, batch_size: int, seq_len: int,
-                       device: torch.device) -> torch.Tensor:
+                       device: torch.device, validity: torch.Tensor) -> torch.Tensor:
         if seq_len < 2:
             raise ValueError("masked reconstruction needs at least two time steps")
         n_masked = min(seq_len - 1, max(1, int(seq_len * self.masking_ratio)))
@@ -167,9 +200,17 @@ class TimeSeriesMAE(nn.Module):
         ids_shuffle = torch.argsort(noise, dim=1)
 
         mask = torch.zeros(batch_size, seq_len, dtype=torch.bool, device=device)
-        # The first n_masked positions in the shuffled order are masked
-        mask_indices = ids_shuffle[:, :n_masked]
-        mask.scatter_(1, mask_indices, True)
+        # Preserve one observed target and one observed visible time position.
+        # No measurement values or event labels influence mask selection.
+        for row in range(batch_size):
+            order = ids_shuffle[row]
+            observed = order[validity[row].any(dim=-1)[order]]
+            if observed.numel() < 2:
+                raise ValueError("masked training needs at least two observed time positions")
+            target, visible = observed[0], observed[1]
+            remainder = order[(order != target) & (order != visible)]
+            chosen = torch.cat((target.reshape(1), remainder[:n_masked-1]))
+            mask[row, chosen] = True
 
         return mask
 
@@ -178,6 +219,8 @@ class TimeSeriesMAE(nn.Module):
         validity = self._validate_input(x, validity)
         if mask is not None:
             self._validate_mask(mask, x)
+            if torch.any(((~mask).unsqueeze(-1) & validity).sum(dim=(1, 2)) == 0):
+                raise ValueError("masked reconstruction requires observed visible context")
         x = self.patch_projection(x, validity)
         x = self.pos_embedding(x)
 
@@ -240,11 +283,13 @@ class TimeSeriesMAE(nn.Module):
         if not x.is_floating_point() or not torch.isfinite(x).all():
             raise ValueError("model input must be finite floating point normalized values")
         if validity is None:
-            validity = torch.ones_like(x, dtype=torch.bool)
+            raise ValueError("an explicit observation validity mask is required")
         if validity.dtype != torch.bool or validity.shape != x.shape or validity.device != x.device:
             raise ValueError("validity must be a boolean tensor matching input shape/device")
         if torch.any(x[~validity] != 0):
             raise ValueError("unobserved model inputs must be explicitly zero imputed in normalized space")
+        if torch.any(validity.sum(dim=(1, 2)) == 0):
+            raise ValueError("one or more contexts contain no observed input")
         return validity
 
     def _validate_mask(self, mask, x):
@@ -264,10 +309,10 @@ class TimeSeriesMAE(nn.Module):
     def forward(self, x, mask=None, validity=None):
         validity = self._validate_input(x, validity)
         if mask is None:
-            mask = self._generate_mask(x.shape[0], x.shape[1], x.device)
+            mask = self._generate_mask(x.shape[0], x.shape[1], x.device, validity)
         reconstruction, latent = self.reconstruct(x, mask, validity)
         loss_mask = mask.unsqueeze(-1) & validity
-        if not loss_mask.any():
+        if torch.any(loss_mask.sum(dim=(1, 2)) == 0):
             raise ValueError("no observed masked targets: loss is not estimable")
         loss = ((reconstruction[loss_mask] - x[loss_mask]) ** 2).mean()
         if not torch.isfinite(loss):

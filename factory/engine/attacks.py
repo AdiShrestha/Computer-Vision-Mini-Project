@@ -79,7 +79,7 @@ ATTACK_REGISTRY = [
     {
         'id': 'ATK-009',
         'invariant': 'no_failed_attempt_deletion',
-        'description': 'Missing failed attempts must be detected by the audit',
+        'description': 'Retain failed attempts and reject gaps in numbered history; complete/trailing history deletion needs an external witness',
         'implementation': 'engine.audit.Audit.experiment',
         'attack_fixture': 'tests.test_v3_3_hardening.AttackTests.test_failed_attempt_deletion_detected',
         'expected_transition': 'BLOCKED',

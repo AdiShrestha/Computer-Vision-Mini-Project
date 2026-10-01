@@ -1,0 +1,11 @@
+{
+  "kind": "constructed_engineering_counterexamples_not_research_results",
+  "json_exponent_overflow_accepted": true,
+  "tiny_nonconstant_channel_misclassified_as_constant": true,
+  "combiner_public_mutation_changes_score": true,
+  "streak_bridges_nine_month_gap": {
+    "status": "DETECTED",
+    "alarm_date": "2023-10-01",
+    "lead_time_days": 3
+  }
+}

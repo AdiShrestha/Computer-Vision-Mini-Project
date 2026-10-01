@@ -9,7 +9,10 @@ from .integrity import digest
 
 
 def observed_array(values, valid):
-    values = np.asarray(values, dtype=np.float64)
+    values = np.asarray(values)
+    if values.dtype.kind not in "iuf":
+        raise ValueError("measurements must be real numeric values, not strings or booleans")
+    values = values.astype(np.float64)
     valid = np.asarray(valid)
     if values.ndim != 2 or not values.size or valid.shape != values.shape or valid.dtype != np.bool_:
         raise ValueError("values and boolean valid mask must be matching nonempty T,C matrices")
@@ -46,8 +49,16 @@ class FeatureNormalizer:
     checks declared IDs, not provider truth or an external split manifest.
     """
     def __init__(self, scope: FitScope):
-        self.scope = scope
-        self.state = None
+        self._scope = scope
+        self._state = None
+
+    @property
+    def scope(self):
+        return self._scope
+
+    @property
+    def state(self):
+        return self._state
 
     def fit(self, panels: Mapping[str, tuple[np.ndarray, np.ndarray]]):
         if self.state is not None:
@@ -59,13 +70,20 @@ class FeatureNormalizer:
         stack = np.concatenate(arrays)
         if np.any(np.isfinite(stack).sum(axis=0) == 0):
             raise ValueError("entirely missing training channel")
-        mean = np.nanmean(stack, axis=0)
-        std = np.nanstd(stack, axis=0)
-        constant = std == 0
+        # Scale before calculating variance: squaring tiny physical values can
+        # otherwise underflow and falsely label a nonconstant channel constant.
+        magnitude = np.nanmax(np.abs(stack), axis=0)
+        factor = np.where(magnitude == 0, 1., magnitude)
+        scaled = stack / factor
+        mean = np.nanmean(scaled, axis=0) * factor
+        std = np.nanstd(scaled, axis=0) * factor
+        constant = np.nanmin(stack, axis=0) == np.nanmax(stack, axis=0)
+        if np.any((std == 0) & ~constant):
+            raise ValueError("nonconstant channel variance cannot be represented")
         scale = np.where(constant, 1., std)
         if not np.isfinite(mean).all() or not np.isfinite(scale).all():
             raise ValueError("nonfinite fitted transform")
-        self.state = MappingProxyType({"mean": tuple(mean.tolist()), "scale": tuple(scale.tolist()),
+        self._state = MappingProxyType({"mean": tuple(mean.tolist()), "scale": tuple(scale.tolist()),
             "constant_channels": tuple(np.flatnonzero(constant).tolist()),
             "fit_lake_ids": tuple(sorted(panels))})
         return self
@@ -111,6 +129,8 @@ def trailing_windows(dates, available_dates, length: int, stride: int):
     av = [date.fromisoformat(str(x)) for x in available_dates]
     if not ds or len(ds) != len(av):
         raise ValueError("observation and availability dates must be equal and nonempty")
+    if len(ds) < length:
+        raise ValueError("insufficient calendar support for a complete trailing window")
     if any((b-a).days != 1 for a, b in zip(ds, ds[1:])):
         raise ValueError("daily panel requires ordered consecutive calendar dates")
     if any(a < d for d, a in zip(ds, av)):

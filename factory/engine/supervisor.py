@@ -1,17 +1,11 @@
-"""Trusted supervisor: receipt signing, key management, runtime attestation.
+"""Local receipt signatures and runtime metadata with an explicit trust limit.
 
-The supervisor owns the signing key and generates receipts. The worker process
-cannot access the private key. Receipts are cryptographically authentic and
-bind all 16 fields specified by the trust model.
-
-Uses Ed25519 via the standard library's hashlib + hmac as a baseline. When
-the ``cryptography`` package is available, real Ed25519 signatures are used.
-Otherwise, falls back to HMAC-SHA256 keyed receipts with a clear disclosure.
+Ed25519 is required. Verification reads only the public key. No HMAC secret
+is exported as public verification material. Workers still run as the same OS
+user, so signatures do not establish a hostile-worker isolation boundary.
 """
 import base64
 import hashlib
-import hmac
-import json
 import locale
 import os
 import platform
@@ -27,7 +21,6 @@ _KEY_ENV = 'FACTORY_SUPERVISOR_KEY'
 
 # Signature schemes
 SCHEME_ED25519 = 'ed25519'
-SCHEME_HMAC_SHA256 = 'hmac-sha256'
 
 
 def _key_dir():
@@ -70,10 +63,12 @@ def init_supervisor_keys(force=False):
     priv = _key_path()
     pub = _pub_key_path()
 
-    if priv.exists() and pub.exists() and not force:
-        scheme = pub.read_text().splitlines()[0].strip() if pub.exists() else SCHEME_HMAC_SHA256
-        if scheme.startswith('#'):
-            scheme = scheme.lstrip('#').strip()
+    if not _try_ed25519():
+        raise EvidenceError('Ed25519 signing requires cryptography; HMAC public-key fallback is forbidden')
+    if (priv.exists() or pub.exists()) and not force:
+        if not (priv.exists() and pub.exists()):
+            raise EvidenceError('incomplete supervisor keypair; explicit repair is required')
+        _, scheme = _load_public_key(pub)
         return priv, pub, scheme
 
     priv.parent.mkdir(parents=True, exist_ok=True)
@@ -96,36 +91,35 @@ def init_supervisor_keys(force=False):
         os.chmod(priv, 0o600)
         pub.write_text(f'# {SCHEME_ED25519}\n{base64.b64encode(pub_bytes).decode()}\n')
         return priv, pub, SCHEME_ED25519
-    else:
-        # HMAC-SHA256 fallback: generate a 32-byte secret
-        secret = os.urandom(32)
-        priv.write_bytes(secret)
-        os.chmod(priv, 0o600)
-        pub.write_text(f'# {SCHEME_HMAC_SHA256}\n{base64.b64encode(secret).decode()}\n')
-        return priv, pub, SCHEME_HMAC_SHA256
+
+
+def _load_public_key(path=None):
+    pub = Path(path) if path is not None else _pub_key_path()
+    try:
+        lines = pub.read_text().splitlines()
+        if len(lines) != 2 or lines[0].strip() != '# ed25519':
+            raise EvidenceError('only Ed25519 public verification is supported; legacy HMAC keys require explicit rotation')
+        data = base64.b64decode(lines[1], validate=True)
+        if len(data) != 32:
+            raise EvidenceError('malformed Ed25519 public key')
+    except (OSError, ValueError) as error:
+        raise EvidenceError('public verification key unavailable or malformed') from error
+    return data, SCHEME_ED25519
 
 
 def _load_keys():
-    """Load the supervisor keys. Returns (private_bytes, public_info, scheme)."""
-    priv = _key_path()
-    pub = _pub_key_path()
-
-    if not priv.exists() or not pub.exists():
+    priv, pub = _key_path(), _pub_key_path()
+    if not priv.exists() and not pub.exists():
         init_supervisor_keys()
-
-    priv_bytes = priv.read_bytes()
-    pub_lines = pub.read_text().splitlines()
-    scheme = SCHEME_HMAC_SHA256
-    pub_data = b''
-    for line in pub_lines:
-        line = line.strip()
-        if line.startswith('#'):
-            s = line.lstrip('#').strip()
-            if s in (SCHEME_ED25519, SCHEME_HMAC_SHA256):
-                scheme = s
-        elif line:
-            pub_data = base64.b64decode(line)
-
+    pub_data, scheme = _load_public_key(pub)
+    if not _try_ed25519():
+        raise EvidenceError('Ed25519 signing requires cryptography')
+    try:
+        priv_bytes = priv.read_bytes()
+    except OSError as error:
+        raise EvidenceError('private signing key unavailable') from error
+    if len(priv_bytes) != 32:
+        raise EvidenceError('malformed private signing key')
     return priv_bytes, pub_data, scheme
 
 
@@ -142,15 +136,9 @@ def sign_receipt(receipt_dict):
                if k not in ('supervisor_signature', 'signature_scheme', 'public_key_id')}
     payload = canonical(to_sign)
 
-    if scheme == SCHEME_ED25519 and _try_ed25519():
-        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-        private_key = Ed25519PrivateKey.from_private_bytes(priv_bytes)
-        sig = private_key.sign(payload)
-        sig_b64 = base64.b64encode(sig).decode()
-    else:
-        sig = hmac.new(priv_bytes, payload, hashlib.sha256).digest()
-        sig_b64 = base64.b64encode(sig).decode()
-        scheme = SCHEME_HMAC_SHA256
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+    private_key = Ed25519PrivateKey.from_private_bytes(priv_bytes)
+    sig_b64 = base64.b64encode(private_key.sign(payload)).decode()
 
     pub_id = hashlib.sha256(pub_data).hexdigest()[:16]
 
@@ -162,7 +150,7 @@ def sign_receipt(receipt_dict):
     return signed
 
 
-def verify_receipt_signature(receipt_dict):
+def verify_receipt_signature(receipt_dict, *, public_key_path=None):
     """Verify the supervisor signature on a receipt.
 
     Returns True if valid, raises EvidenceError if invalid or missing.
@@ -178,7 +166,9 @@ def verify_receipt_signature(receipt_dict):
                  if k not in ('supervisor_signature', 'signature_scheme', 'public_key_id')}
     payload = canonical(to_verify)
 
-    _, pub_data, stored_scheme = _load_keys()
+    pub_data, stored_scheme = _load_public_key(public_key_path)
+    if scheme != stored_scheme or scheme != SCHEME_ED25519:
+        raise EvidenceError("receipt signature scheme is not the trusted Ed25519 scheme")
 
     # Verify key identity
     expected_id = hashlib.sha256(pub_data).hexdigest()[:16]
@@ -186,7 +176,7 @@ def verify_receipt_signature(receipt_dict):
         raise EvidenceError('receipt signed by unknown supervisor key')
 
     try:
-        sig = base64.b64decode(sig_b64)
+        sig = base64.b64decode(sig_b64, validate=True)
     except Exception:
         raise EvidenceError('receipt signature is malformed or truncated')
 
@@ -196,10 +186,6 @@ def verify_receipt_signature(receipt_dict):
         try:
             public_key.verify(sig, payload)
         except Exception:
-            raise EvidenceError('receipt signature verification failed')
-    elif scheme == SCHEME_HMAC_SHA256:
-        expected = hmac.new(pub_data, payload, hashlib.sha256).digest()
-        if not hmac.compare_digest(sig, expected):
             raise EvidenceError('receipt signature verification failed')
     else:
         raise EvidenceError(f'unknown signature scheme: {scheme}')
@@ -211,10 +197,11 @@ def build_receipt(*, run_nonce, project_id, epoch, experiment_id,
                   snapshot_merkle_root, input_root, runtime_id,
                   interpreter_hash, dependency_lock_hash, launch_spec,
                   seed, output_root, exit_status, cpu_time, memory_peak,
-                  started_at, finished_at, supervisor_version, policy_version):
+                  started_at, finished_at, supervisor_version, policy_version,
+                  resource_observations=None):
     """Build a complete supervisor receipt binding all 16 required fields."""
     receipt = {
-        'receipt_version': 1,
+        'receipt_version': 2,
         'run_nonce': run_nonce,
         'project_id': project_id,
         'epoch': epoch,
@@ -228,9 +215,9 @@ def build_receipt(*, run_nonce, project_id, epoch, experiment_id,
         'seed': seed,
         'output_root': output_root,
         'exit_status': exit_status,
-        'resource_observations': {
-            'cpu_time_seconds': cpu_time,
-            'memory_peak_bytes': memory_peak,
+        'resource_observations': resource_observations if resource_observations is not None else {
+            'cpu_time_seconds': cpu_time, 'memory_peak_bytes': memory_peak,
+            'measurement_method': 'caller_supplied_not_independently_verified',
         },
         'started_at': started_at,
         'finished_at': finished_at,

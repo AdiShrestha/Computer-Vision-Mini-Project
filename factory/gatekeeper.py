@@ -10,6 +10,7 @@ from engine.io import EvidenceError,read_json,inside,inventory,sha,write_json,di
 from engine.plan import validate
 from engine.audit import Audit,verify_review
 from engine.contract import validate_contract,resolve_contract,command_to_contract,runtime_binary_hash,KNOWN_RUNTIMES
+from engine.telemetry import observed_run
 from engine.supervisor import sign_receipt,verify_receipt_signature,build_receipt,runtime_attestation,init_supervisor_keys
 from engine.schema import (expect_bool,expect_int,expect_float,expect_str,expect_list,expect_dict,expect_enum,
                            validate_training_manifest,validate_split_manifest,validate_plausibility_entry,
@@ -129,7 +130,7 @@ def execution_env(seed):
   blocked=sorted(k for k in os.environ if k in blocked_exact or k.startswith('DYLD_'))
   if blocked:
    die('unsafe process environment variables present: '+', '.join(blocked))
-  env=os.environ.copy()
+  env={k:v for k,v in os.environ.items() if k != 'FACTORY_SUPERVISOR_KEY' and not k.startswith(('AWS_','CDSAPI_','EARTHENGINE_')) and k not in {'GOOGLE_APPLICATION_CREDENTIALS','EE_PRIVATE_KEY'}}
   # Bind Python's hash randomization to the preregistered experiment seed so
   # dictionary/set iteration cannot silently vary across fresh processes.
   env['PYTHONHASHSEED']=str(int(seed) % (2**32))
@@ -144,6 +145,11 @@ def run_exp(r,eid):
   e=next((x for x in p['experiments'] if x['id']==eid),None)
   if not e:die('unknown experiment '+str(eid))
   base=ep/'runs'/eid;base.mkdir(parents=True,exist_ok=True);existing=sorted(base.glob('attempt*'))
+  if any(not re.fullmatch(r'attempt[0-9]{4,}',a.name) or not a.is_dir() or a.is_symlink() for a in existing):
+   die('malformed attempt history')
+  existing.sort(key=lambda a:int(a.name[7:]))
+  if [a.name for a in existing]!=[f'attempt{i:04d}' for i in range(1,len(existing)+1)]:
+   die('missing or noncanonical numbered attempt; history must be preserved')
   if existing:
    last=read_json(existing[-1]/'execution.json')
    if last.get('exit_code')==0 and not last.get('record_error'):
@@ -167,11 +173,17 @@ def run_exp(r,eid):
   pre={'factory_version':VERSION,'epoch':epoch,'experiment_id':eid,'seed':seed,'argv':argv,'freeze_sha256':sha(ep/'freeze.json'),'engine_sha256':engine_hash(),'inputs_before':inputs,'started_at':now(),'run_nonce':run_nonce,'runtime_attestation':rt,'snapshot_merkle_root':f.get('snapshot_merkle_root',''),'interpreter_hash':rt.get('interpreter_hash',''),'dependency_lock_hash':sha(r/p['dependency_lock'])}
   write_json(a/'execution.json',pre);env.update({'FACTORY_RUN_DIR':str(a.resolve()),'FACTORY_SEED':str(seed),'FACTORY_EXPERIMENT_ID':eid})
   t=time.monotonic()
+  observations={'wall_time_seconds':None,'cpu_time_seconds':None,'memory_peak_bytes':None,
+                'measurement_method':'not_measured','unavailable_reason':'PROCESS_NOT_STARTED'}
   try:
+   if contract and contract.get('network')=='disabled':
+    raise OSError('network denial is unsupported on this local runtime; refusing an unenforced contract')
    with (a/'stdout.log').open('w') as stdout,(a/'stderr.log').open('w') as stderr:
-    code=subprocess.run(argv,cwd=r,env=env,stdout=stdout,stderr=stderr,check=False,preexec_fn=preexec).returncode
-  except KeyboardInterrupt:code=130
-  except OSError as ex:(a/'stderr.log').write_text(str(ex));code=None
+    code,observations=observed_run(argv,cwd=r,env=env,stdout=stdout,stderr=stderr,preexec_fn=preexec)
+  except KeyboardInterrupt:
+   code=130
+   observations['unavailable_reason']='INTERRUPTED_NO_RESOURCE_RESULT'
+  except (OSError,subprocess.SubprocessError) as ex:(a/'stderr.log').write_text(str(ex));code=None
   outputs=inventory(r,[relpath(a,r)],reject_dangerous_ext=False);outputs.pop(relpath(a/'execution.json',r),None)
   post=inventory(r,p['frozen_paths']);rec={**pre,'returncode':code,'exit_code':code,'duration_sec':time.monotonic()-t,'finished_at':now(),'inputs_after':post,'outputs':outputs}
   # Generate supervisor-signed receipt
@@ -182,7 +194,7 @@ def run_exp(r,eid):
     input_root=digest(inputs),runtime_id=contract.get('runtime_id','python-cpu-v1') if contract else 'python-cpu-v1',
     interpreter_hash=rt.get('interpreter_hash',''),dependency_lock_hash=sha(r/p['dependency_lock']),
     launch_spec=digest(argv),seed=seed,output_root=digest(outputs),
-    exit_status=code,cpu_time=time.monotonic()-t,memory_peak=0,
+    exit_status=code,cpu_time=None,memory_peak=None,resource_observations=observations,
     started_at=rec['started_at'],finished_at=rec['finished_at'],
     supervisor_version=VERSION,policy_version=str(p.get('schema_version',3)))
    rec['supervisor_receipt']=signed
@@ -252,19 +264,15 @@ def _compute_assurance_level(out):
      """Determine the highest achieved assurance level."""
      if out.get('errors'):
          return 'BLOCKED'
-     # Check for supervisor attestation: at least one run has a signed receipt
-     has_signed_receipts=False
-     for eid,run_data in out.get('computed_runs',{}).items():
-         if isinstance(run_data,dict):
-             rpath=run_data.get('result_path','')
-             if rpath:  # We know a result was validated
-                 has_signed_receipts=True
-     # Level determination
-     if not out.get('checks_executed'):
+     runs=out.get('computed_runs',{})
+     if not out.get('checks_executed') or not runs:
          return 'STRUCTURALLY_VALIDATED'
-     if not has_signed_receipts:
+     if not all(isinstance(run,dict) and run.get('receipt_verified') is True for run in runs.values()):
          return 'STRUCTURALLY_VALIDATED'
-     return 'SEALED_EVALUATION_ATTESTED'
+     # Public-key verification binds local receipts. Same-user execution does
+     # not establish sealed evaluation or denial of signing-key access.
+     return 'SUPERVISOR_ATTESTED'
+
 
 def _assurance_with_review(base_level, has_review):
      """Promote assurance level when independent review is complete."""
@@ -293,11 +301,13 @@ def certify(r):
   except (EvidenceError,KeyError,TypeError,ValueError) as ex:print(json.dumps({'status':'NOT_CERTIFIED','reason':str(ex)},indent=2));return EXIT_REVIEW
   if p['intent']=='fixture' or p['data_origin']=='fixture':
    print(json.dumps({'status':'FIXTURE_ONLY','reason':'fixture evidence never certifies research'}));return EXIT_REVIEW
+  if not out.get('computed_runs') or not all(x.get('receipt_verified') is True for x in out['computed_runs'].values()):
+   print(json.dumps({'status':'NOT_CERTIFIED','reason':'every research run requires a verified and field-bound local supervisor receipt'}));return EXIT_EVIDENCE
   # Promote assurance level with review
   final_assurance=_assurance_with_review(out.get('assurance_level','STRUCTURALLY_VALIDATED'),True)
   if final_assurance not in ('BLOCKED',):
    final_assurance='READY_FOR_HUMAN_SUBMISSION_REVIEW'
-  cert={'factory_version':VERSION,'status':final_assurance,'issued_at':now(),'scope':'immutable evidence admissibility and disclosed adversarial review; not a claim of publication acceptance or scientific truth','epoch':epoch,'audit_sha256':sha(r/'project/audit_report.json'),'review_sha256':sha(r/'project/review.json'),'checks_executed':out['checks_executed'],'diagnostics_resolved':len(out['diagnostics']),'not_automated':out['not_automated'],'limitations':review['limitations'],'review_disclosure':{k:review[k] for k in ('reviewer_model','session_id','review_mode')},'assurance_level':final_assurance,'assurance_components':{'byte_integrity':'verified','execution_provenance':'supervisor_attested' if out.get('computed_runs') else 'local_only','runtime_integrity':'attested','evaluation_integrity':'independently_recomputed','statistical_validity':'checked' if 'STATISTICS' in out.get('checks_executed',[]) else 'not_applicable','not_automated':out['not_automated']}}
+  cert={'factory_version':VERSION,'status':final_assurance,'issued_at':now(),'scope':'immutable evidence admissibility and disclosed adversarial review; not a claim of publication acceptance or scientific truth','epoch':epoch,'audit_sha256':sha(r/'project/audit_report.json'),'review_sha256':sha(r/'project/review.json'),'checks_executed':out['checks_executed'],'diagnostics_resolved':len(out['diagnostics']),'not_automated':out['not_automated'],'limitations':review['limitations'],'review_disclosure':{k:review[k] for k in ('reviewer_model','session_id','review_mode')},'assurance_level':final_assurance,'assurance_components':{'byte_integrity':'verified','execution_provenance':'verified_local_receipts' if all(x.get('receipt_verified') is True for x in out.get('computed_runs',{}).values()) and out.get('computed_runs') else 'local_only','runtime_integrity':'recorded_runtime_metadata','evaluation_integrity':'independently_recomputed','statistical_validity':'checked' if 'STATISTICS' in out.get('checks_executed',[]) else 'not_applicable','not_automated':out['not_automated']}}
   cert['evidence_digest']=out['evidence_digest'];cert['engine_sha256']=engine_hash()
   write_json(inside(r,'project/RELEASE_CERTIFICATION.json'),cert);print(json.dumps(cert,indent=2));return 0
 
@@ -443,13 +453,10 @@ def _deep_result_findings(obj, _path='root', _depth=0):
 def _result_findings_single(e):
     """Check a single dict for plausibility issues."""
     findings = []
-    chance_names = ('auroc', 'auc', 'accuracy', 'balanced_accuracy', 'f1', 'precision', 'recall')
     name = str(e.get('metric', e.get('name', ''))).lower()
     v = _metric_value(e)
-    if v is not None and any(x in name for x in chance_names):
-        chance = .5
-        if 'accuracy' in name and isinstance(e.get('n_classes'), int) and e['n_classes'] > 1:
-            chance = 1 / e['n_classes']
+    chance = .5 if name in ('auroc', 'roc_auc') else e.get('chance_reference')
+    if v is not None and type(chance) in (int,float) and math.isfinite(chance):
         verdict = str(e.get('verdict', '')).lower()
         if v <= chance and not any(x in verdict for x in ('null', 'inconclusive', 'not supported', 'unsupported')):
             findings.append(('below_chance', e))
@@ -478,24 +485,10 @@ def _metric_value(e):
 
 def _result_findings(obj):
     entries=_flatten_entries(obj); findings=[]
-    chance_names=('auroc','auc','accuracy','balanced_accuracy','f1','precision','recall')
     for e in entries:
-        name=str(e.get('metric',e.get('name',''))).lower(); v=_metric_value(e)
-        if v is not None and any(x in name for x in chance_names):
-            chance=.5
-            if 'accuracy' in name and isinstance(e.get('n_classes'),int) and e['n_classes']>1: chance=1/e['n_classes']
-            verdict=str(e.get('verdict','')).lower()
-            if v<=chance and not any(x in verdict for x in ('null','inconclusive','not supported','unsupported')): findings.append(('below_chance',e))
-        p=e.get('p_value',e.get('p'))
-        if p==0 or p==0.0: findings.append(('exact_zero_p',e))
-        ci=e.get('confidence_interval',e.get('ci'))
-        if isinstance(ci,list) and len(ci)==2:
-            try:
-                width=float(ci[1])-float(ci[0]); n=e.get('n',e.get('sample_size',0))
-                if width<=0 or (n and width < 1e-6/max(1,math.sqrt(float(n)))): findings.append(('implausibly_narrow_ci',e))
-            except (TypeError,ValueError): pass
+        findings.extend(_result_findings_single(e))
     verdicts=[str(e.get('verdict','')).lower() for e in entries if e.get('verdict') is not None]
-    if len(verdicts)>=3 and all(any(x in v for x in ('supported','confirmed','pass')) for v in verdicts): findings.append(('all_supported',{'count':len(verdicts)}))
+    if len(verdicts)>=3 and all(v in ('supported','confirmed','pass','passed') for v in verdicts): findings.append(('all_supported',{'count':len(verdicts)}))
     return findings
 
 def _coverage_entries(path):
@@ -592,6 +585,22 @@ def verify_split_integrity(path,tier=None):
 def verify_result_plausibility(path):
     try: obj=path if isinstance(path,(dict,list)) else _json_load(path)
     except Exception as e: print(json.dumps({'status':'FAIL','error':str(e)})); return EXIT_PLAUSIBILITY
+    def validate_domains(value,field='result',entry=True):
+        if isinstance(value,dict):
+            # A generic model configuration's parameter named p is not a
+            # p-value. Explicit inferential fields and result entries are.
+            if entry or 'p_value' in value or 'confidence_interval' in value or ('ci' in value and any(k in value for k in ('test','effect','p_raw'))):
+                validate_plausibility_entry(value,field)
+            if 'chance_reference' in value:
+                expect_float(value['chance_reference'],field+'.chance_reference')
+            for key,child in value.items():
+                validate_domains(child,field+'.'+str(key),key in ('entries','comparisons','claims','hypotheses','results','verdicts'))
+        elif isinstance(value,list):
+            for i,child in enumerate(value):
+                validate_domains(child,field+'['+str(i)+']',entry)
+    try: validate_domains(obj)
+    except ValidationError as e:
+        print(json.dumps({'status':'FAIL','error':str(e)})); return EXIT_PLAUSIBILITY
     # Use recursive deep findings in addition to flat findings
     findings=_result_findings(obj)
     deep_findings=_deep_result_findings(obj) if isinstance(obj,(dict,list)) else []

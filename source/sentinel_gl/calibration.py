@@ -16,14 +16,21 @@ def calibrate_false_alert_threshold(scores, calibration_ids, final_ids, target: 
         raise ValueError("calibration overlaps evaluation")
     if isinstance(target, bool) or not np.isfinite(target) or not 0 <= target < 1:
         raise ValueError("target false alert fraction must be in [0,1)")
-    candidates = np.unique(np.append(s, np.nextafter(s.max(), np.inf)))
-    for t in candidates:
-        fraction = float(np.mean(s >= t))
-        if fraction <= target:
-            if not np.isfinite(t):
-                raise ValueError("no finite threshold can meet this empirical target")
-            return {"threshold": float(t), "observed_false_alert_fraction": fraction,
-                    "target": float(target), "n_calibration": len(s),
-                    "calibration_ids": calibration_ids, "comparator": ">=",
-                    "scope": "empirical calibration fraction only; no population guarantee"}
-    raise ValueError("no finite threshold satisfies the empirical calibration budget")
+    # Sorted unique thresholds and their exact tail counts avoid an O(n^2)
+    # repeated scan. The comparator and tie handling remain >= throughout.
+    candidates, counts = np.unique(s, return_counts=True)
+    fractions = np.cumsum(counts[::-1])[::-1] / len(s)
+    feasible = np.flatnonzero(fractions <= target)
+    if feasible.size:
+        index = int(feasible[0])
+        threshold, fraction = float(candidates[index]), float(fractions[index])
+    else:
+        with np.errstate(over="ignore"):
+            threshold = float(np.nextafter(s.max(), np.inf))
+        if not np.isfinite(threshold):
+            raise ValueError("no finite threshold can meet this empirical target")
+        fraction = 0.
+    return {"threshold": threshold, "observed_false_alert_fraction": fraction,
+            "target": float(target), "n_calibration": len(s),
+            "calibration_ids": calibration_ids, "comparator": ">=",
+            "scope": "empirical calibration WINDOW fraction only; not episodes per lake-year or a population guarantee"}

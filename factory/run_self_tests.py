@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the v3 standard-library regression suite, offline."""
+"""Run the v3 offline suite. Receipt tests require the cryptography dependency."""
 import unittest
 from pathlib import Path
 if __name__=='__main__':

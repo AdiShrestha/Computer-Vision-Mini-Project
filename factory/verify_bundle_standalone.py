@@ -15,11 +15,11 @@ Usage:
 import argparse
 import base64
 import hashlib
-import hmac
 import json
+import math
 import sys
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 MANIFEST = 'BUNDLE_MANIFEST.json'
 
@@ -29,7 +29,25 @@ def sha256_bytes(data):
 
 
 def canonical(obj):
-    return json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()
+    return json.dumps(obj, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+
+
+def strict_json(raw):
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            if key in result:
+                raise ValueError('duplicate JSON key: '+key)
+            result[key] = value
+        return result
+    def reject(value):
+        raise ValueError('nonfinite JSON constant: '+value)
+    def finite(value):
+        result = float(value)
+        if not math.isfinite(result):
+            raise ValueError('nonfinite JSON number: '+value)
+        return result
+    return json.loads(raw, object_pairs_hook=pairs, parse_constant=reject, parse_float=finite)
 
 
 def _verify_receipt_sig(receipt_data, pub_key_bytes, scheme):
@@ -42,12 +60,14 @@ def _verify_receipt_sig(receipt_data, pub_key_bytes, scheme):
     if rec_scheme != scheme:
         return False, f"signature scheme mismatch: receipt has {rec_scheme}, key is {scheme}"
     try:
-        sig = base64.b64decode(sig_b64)
+        sig = base64.b64decode(sig_b64, validate=True)
     except Exception:
         return False, "malformed base64 signature"
     to_verify = {k: v for k, v in receipt_data.items()
                  if k not in ('supervisor_signature', 'signature_scheme', 'public_key_id')}
     payload = canonical(to_verify)
+    if receipt_data.get('public_key_id') != hashlib.sha256(pub_key_bytes).hexdigest()[:16]:
+        return False, 'receipt public-key identity mismatch'
     if scheme == 'ed25519':
         try:
             from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
@@ -56,11 +76,6 @@ def _verify_receipt_sig(receipt_data, pub_key_bytes, scheme):
             return True, None
         except Exception as e:
             return False, f"ed25519 signature verification failed: {e}"
-    elif scheme == 'hmac-sha256':
-        expected = hmac.new(pub_key_bytes, payload, hashlib.sha256).digest()
-        if hmac.compare_digest(sig, expected):
-            return True, None
-        return False, "hmac signature mismatch"
     else:
         return False, f"unsupported signature scheme: {scheme}"
 
@@ -80,7 +95,8 @@ def verify_bundle(path, public_key_path=None):
 
             # Check for unsafe names
             for name in names:
-                if not name or '..' in name or name.startswith('/') or '\\' in name:
+                member = PurePosixPath(name)
+                if not name or '..' in member.parts or member.is_absolute() or '\\' in name or ':' in name or str(member) != name or name == '.':
                     errors.append(f'unsafe member name: {name}')
 
             # Duplicates
@@ -106,8 +122,8 @@ def verify_bundle(path, public_key_path=None):
             # Parse manifest
             raw = archive.read(MANIFEST)
             try:
-                manifest = json.loads(raw)
-            except json.JSONDecodeError as e:
+                manifest = strict_json(raw)
+            except ValueError as e:
                 errors.append(f'invalid manifest JSON: {e}')
                 return {'status': 'FAIL', 'errors': errors}
 
@@ -145,30 +161,48 @@ def verify_bundle(path, public_key_path=None):
                     errors.append(f'hash mismatch: {name}')
 
             signatures_verified = 0
+            execution_bindings_verified = 0
+            execution_members = sorted(name for name in archive_members if name.endswith('execution.json'))
             if public_key_path and not errors:
                 pk_path = Path(public_key_path)
                 if not pk_path.is_file():
                     errors.append(f'public key file not found: {public_key_path}')
                 else:
                     try:
-                        pk_content = pk_path.read_text().strip()
-                        lines = pk_content.splitlines()
-                        scheme = 'hmac-sha256'
-                        key_b64 = pk_content
-                        if lines and lines[0].startswith('#'):
-                            scheme = lines[0].lstrip('#').strip()
-                            key_b64 = '\n'.join(lines[1:]).strip()
-                        pub_bytes = base64.b64decode(key_b64)
+                        lines = pk_path.read_text().splitlines()
+                        if len(lines) != 2 or lines[0].strip() != '# ed25519':
+                            raise ValueError('only Ed25519 public verification keys are supported')
+                        scheme = 'ed25519'
+                        pub_bytes = base64.b64decode(lines[1], validate=True)
+                        if len(pub_bytes) != 32:
+                            raise ValueError('malformed Ed25519 public key')
 
                         for name in archive_members:
                             if name.endswith('execution.json'):
                                 try:
-                                    receipt_json = json.loads(archive.read(name))
+                                    record = strict_json(archive.read(name))
+                                    if not isinstance(record, dict):
+                                        raise ValueError('execution record must be an object')
+                                    receipt_json = record.get('supervisor_receipt', record)
                                     ok, msg = _verify_receipt_sig(receipt_json, pub_bytes, scheme)
                                     if not ok:
                                         errors.append(f'invalid receipt signature in {name}: {msg}')
                                     else:
                                         signatures_verified += 1
+                                        if 'supervisor_receipt' in record:
+                                            bound = {key: record.get(key) for key in ('run_nonce', 'epoch', 'experiment_id', 'seed', 'started_at', 'finished_at', 'interpreter_hash', 'dependency_lock_hash', 'snapshot_merkle_root')}
+                                            bound.update({'exit_status': record.get('exit_code'),
+                                                'launch_spec': sha256_bytes(canonical(record.get('argv'))),
+                                                'input_root': sha256_bytes(canonical(record.get('inputs_before'))),
+                                                'output_root': sha256_bytes(canonical(record.get('outputs')))})
+                                            if any(type(receipt_json.get(k)) is not type(v) or receipt_json.get(k) != v for k,v in bound.items()):
+                                                raise ValueError('signed fields disagree with execution record')
+                                            if record.get('inputs_before') != record.get('inputs_after'):
+                                                raise ValueError('execution inputs changed')
+                                            outputs = record.get('outputs')
+                                            if not isinstance(outputs, dict) or not outputs or any(files.get(k) != v for k,v in outputs.items()):
+                                                raise ValueError('execution output membership/hashes are not present in bundle')
+                                            execution_bindings_verified += 1
                                 except Exception as e:
                                     errors.append(f'could not verify receipt in {name}: {e}')
                     except Exception as e:
@@ -181,11 +215,13 @@ def verify_bundle(path, public_key_path=None):
         'status': 'PASS' if not errors else 'FAIL',
         'files_checked': len(files) if not errors else 0,
         'signatures_verified': signatures_verified if not errors else 0,
+        'execution_bindings_verified': execution_bindings_verified if not errors else 0,
         'errors': errors,
         'release_status': manifest.get('release_status', 'unknown'),
         'factory_version': manifest.get('factory_version', 'unknown'),
-        'assurance_level': manifest.get('assurance_level', 'unknown'),
-        'scope': 'standalone verification: membership, byte integrity, and supervisor signatures',
+        'declared_assurance_level': manifest.get('assurance_level', 'unknown'),
+        'assurance_level': 'BLOCKED' if errors else ('SUPERVISOR_ATTESTED' if execution_members and execution_bindings_verified == len(execution_members) else 'STRUCTURALLY_VALIDATED'),
+        'scope': 'standalone membership, bytes, optional trusted Ed25519 signatures and local execution-field/output bindings; no sealed isolation, provider authenticity, or domain/scientific validation',
     }
 
     return result

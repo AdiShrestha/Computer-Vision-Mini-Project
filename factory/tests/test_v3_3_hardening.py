@@ -382,7 +382,7 @@ class RecursivePlausibilityTests(unittest.TestCase):
         obj = {
             'derived_analyses': {
                 'sensitivity': {
-                    'results': [{'metric': 'accuracy', 'value': 0.3, 'verdict': 'SUPPORTED'}]
+                    'results': [{'metric': 'accuracy', 'value': 0.3, 'chance_reference': 0.5, 'verdict': 'SUPPORTED'}]
                 }
             }
         }
@@ -406,10 +406,15 @@ class AssuranceLevelTests(unittest.TestCase):
         out = {'errors': [], 'checks_executed': ['X'], 'computed_runs': {}}
         self.assertEqual(g._compute_assurance_level(out), 'STRUCTURALLY_VALIDATED')
 
-    def test_sealed_evaluation_with_receipts(self):
+    def test_result_path_does_not_prove_receipts_or_sealed_evaluation(self):
         out = {'errors': [], 'checks_executed': ['X'],
                'computed_runs': {'exp1': {'result_path': 'some/path'}}}
-        self.assertEqual(g._compute_assurance_level(out), 'SEALED_EVALUATION_ATTESTED')
+        self.assertEqual(g._compute_assurance_level(out), 'STRUCTURALLY_VALIDATED')
+
+    def test_verified_local_receipts_only_establish_local_attestation(self):
+        out = {'errors': [], 'checks_executed': ['X'],
+               'computed_runs': {'exp1': {'receipt_verified': True}}}
+        self.assertEqual(g._compute_assurance_level(out), 'SUPERVISOR_ATTESTED')
 
     def test_review_promotes_assurance(self):
         self.assertEqual(
@@ -857,4 +862,3 @@ class StandaloneVerifierTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

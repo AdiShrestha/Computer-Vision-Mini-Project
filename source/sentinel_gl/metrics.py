@@ -30,28 +30,49 @@ def false_alert_fraction(scores, threshold: float):
 
 
 def first_sustained_alarm(scores, decision_dates, threshold: float, event_date: str,
-                          min_consecutive: int, horizon_days: int):
-    """Alarm exists when the sustaining observation ARRIVES, not at streak start.
+                          min_consecutive: int, horizon_days: int, *, eligible,
+                          max_gap_days: int):
+    """Declare on the sustaining arrival; explicit abstentions/gaps reset streaks.
 
-    This estimates a retrospective alarm timing, not physical precursor truth.
-    Censored/dropped dates must be handled by the caller's frozen observation
-    protocol; this primitive does not bridge missing rows automatically.
+    This is a retrospective date-only calculation, not proof of a precursor.
+    The caller supplies every scheduled decision, its eligibility, and the
+    maximum permissible inter-decision gap from a frozen monitoring protocol.
+    Noneligible scores may be NaN/None, never infinities. Event-day is excluded.
     """
-    s = finite_vector(scores)
+    s = np.asarray(scores)
+    if s.ndim != 1:
+        raise ValueError("scores must be a one-dimensional vector")
+    if s.dtype.kind not in "iuf" and not (s.dtype.kind == "O" and all(x is None or type(x) in (int,float) for x in s)):
+        raise ValueError("scores must be numeric or null for ineligible decisions")
+    s = s.astype(float)
+    ok = np.asarray(eligible)
     ds = [date.fromisoformat(str(x)) for x in decision_dates]
     event = date.fromisoformat(event_date)
+    if s.ndim != 1 or ok.shape != s.shape or (ok.size and ok.dtype != np.bool_):
+        raise ValueError("explicit boolean eligibility must match the score vector")
+    if np.isinf(s).any() or np.any(ok.astype(bool) & ~np.isfinite(s)):
+        raise ValueError("eligible scores must be finite; infinities are never admissible")
     if len(ds) != len(s) or any(b <= a for a,b in zip(ds,ds[1:])):
         raise ValueError("decision dates must be strictly ordered and match scores")
-    if type(min_consecutive) is not int or min_consecutive < 1 or type(horizon_days) is not int or horizon_days < 1:
-        raise ValueError("streak length and horizon must be positive integers")
+    if any(type(v) is not int or v < 1 for v in (min_consecutive,horizon_days,max_gap_days)):
+        raise ValueError("streak, horizon and maximum gap must be positive integers")
     if isinstance(threshold, bool) or not np.isfinite(threshold):
         raise ValueError("threshold must be finite")
-    streak = 0
-    for score, day in zip(s, ds):
-        if day >= event or (event-day).days > horizon_days:
+    streak, support, previous = 0, 0, None
+    for score, day, valid in zip(s, ds, ok):
+        if previous is not None and (day-previous).days > max_gap_days:
+            streak = 0
+        previous = day
+        if not valid or day >= event or (event-day).days > horizon_days:
             streak = 0
             continue
+        support += 1
         streak = streak+1 if score >= threshold else 0
         if streak >= min_consecutive:
-            return {"status": "DETECTED", "alarm_date": day.isoformat(), "lead_time_days": (event-day).days}
-    return {"status": "NOT_DETECTED", "alarm_date": None, "lead_time_days": None}
+            return {"status": "DETECTED", "alarm_date": day.isoformat(),
+                    "lead_time_days": (event-day).days, "eligible_decisions_seen": support}
+    if not support:
+        return {"status": "NOT_ESTIMABLE", "reason": "NO_ELIGIBLE_PRE_EVENT_DECISIONS",
+                "alarm_date": None, "lead_time_days": None, "eligible_decisions_seen": 0}
+    return {"status": "NOT_DETECTED", "alarm_date": None, "lead_time_days": None,
+            "eligible_decisions_seen": support}

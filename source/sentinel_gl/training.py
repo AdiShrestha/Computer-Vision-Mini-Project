@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 import numpy as np
 import torch
-from .model import TimeSeriesMAE
+from .model import TimeSeriesMAE, evaluation_masks
 
 
 @dataclass(frozen=True)
@@ -36,15 +36,14 @@ def seed_everything(seed: int):
 
 
 def validation_loss(model, batches, device):
-    """Fixed two-part cross masks make checkpoint selection independent of new RNG draws."""
+    """Observed-time balanced cross masks do not draw new validation randomness."""
     model.eval()
     total, count = 0., 0
     with torch.inference_mode():
         for x, valid in batches:
             x, valid = x.to(device), valid.to(device)
             model._validate_input(x,valid)
-            for part in (0,1):
-                mask = (torch.arange(x.shape[1],device=device) % 2 == part).expand(x.shape[0],-1)
+            for mask in evaluation_masks(valid, 2):
                 pred,_ = model.reconstruct(x,mask,valid)
                 targets = mask.unsqueeze(-1) & valid
                 total += float(((pred-x).square()*targets).sum().item())
@@ -83,8 +82,11 @@ def fit_masked_autoencoder(*, model_config, train_batches, validation_batches,
     configuration.apply_defaults()
     model_config = dict(configuration.arguments)
     model = TimeSeriesMAE(**model_config).to(device)
-    mean = np.asarray(transform_state["mean"], dtype=float)
-    scale = np.asarray(transform_state["scale"], dtype=float)
+    mean = np.asarray(transform_state["mean"])
+    scale = np.asarray(transform_state["scale"])
+    if mean.dtype.kind not in "iuf" or scale.dtype.kind not in "iuf":
+        raise ValueError("normalization metadata must contain real numeric values, not strings or booleans")
+    mean, scale = mean.astype(float), scale.astype(float)
     if mean.shape != (model.n_channels,) or scale.shape != mean.shape or not np.isfinite(mean).all() or not np.isfinite(scale).all() or np.any(scale <= 0):
         raise ValueError("normalization metadata must match channels and have finite positive scales")
     for x,valid in (*train_batches,*validation_batches):
@@ -92,7 +94,7 @@ def fit_masked_autoencoder(*, model_config, train_batches, validation_batches,
     out = Path(output_dir)
     out.mkdir(parents=True,exist_ok=False)
     optimizer = torch.optim.AdamW(model.parameters(),lr=learning_rate,weight_decay=weight_decay)
-    best, best_epoch, bad = float("inf"),0,0
+    best, significant_best, best_epoch, bad = float("inf"),float("inf"),0,0
     history = []
     start = time.perf_counter()
     for epoch in range(1,stop_rule.max_epochs+1):
@@ -114,14 +116,18 @@ def fit_masked_autoencoder(*, model_config, train_batches, validation_batches,
         history.append(row)
         with (out/'history.jsonl').open('a') as f:
             f.write(json.dumps(row,allow_nan=False)+'\n')
-        if val < best-stop_rule.min_delta:
-            best,best_epoch,bad=val,epoch,0
-            checkpoint={"format_version":1,"model_config":dict(model_config),
+        if val < best:
+            best,best_epoch=val,epoch
+            checkpoint={"format_version":2,"model_config":dict(model_config),
                         "model_state_dict":model.state_dict(),"optimizer_state_dict":optimizer.state_dict(),
                         "normalization":dict(transform_state),"seed":seed,"epoch":epoch,
-                        "selection":"validation_loss_with_min_delta","validation_loss":val,
+                        "selection":"minimum_observed_validation_loss","validation_loss":val,
+                        "training_mask_policy":"observed_target_and_visible_context_v1",
+                        "evaluation_mask_policy":"observed_time_balanced_cross_masks_v1",
                         "stop_rule":asdict(stop_rule),"torch_rng_state":torch.get_rng_state()}
             torch.save(checkpoint,out/'checkpoint_best.pt')
+        if val < significant_best-stop_rule.min_delta:
+            significant_best,bad=val,0
         else:
             bad+=1
         if epoch >= stop_rule.min_epochs and bad >= stop_rule.patience:
@@ -138,5 +144,7 @@ def fit_masked_autoencoder(*, model_config, train_batches, validation_batches,
              "batch_sizes":[int(x.shape[0]) for x,_ in train_batches],
              "learning_rate":learning_rate,"weight_decay":weight_decay,
              "scientific_claims":[],"history":history}
+    summary["split_integrity"] = "CALLER_LINEAGE_VERIFICATION_REQUIRED"
+    summary["resume_supported"] = False
     (out/'training_summary.json').write_text(json.dumps(summary,indent=2,allow_nan=False)+'\n')
     return model,summary

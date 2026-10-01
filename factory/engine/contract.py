@@ -11,6 +11,7 @@ import re
 import sys
 from pathlib import Path
 
+from .io import inside
 from .metrics import EvidenceError
 from .schema import (ValidationError, expect_dict, expect_enum, expect_float,
                      expect_int, expect_str)
@@ -67,7 +68,7 @@ def validate_contract(contract, root, frozen_code_paths):
         raise EvidenceError(
             f'entrypoint {entrypoint} must be inside a declared frozen code_path'
         )
-    ep_path = root / entrypoint
+    ep_path = inside(root, entrypoint)
     if not ep_path.is_file():
         raise EvidenceError(f'entrypoint not found: {entrypoint}')
     if ep_path.is_symlink():
@@ -79,6 +80,11 @@ def validate_contract(contract, root, frozen_code_paths):
     allowed_arg_values = {'supervisor_bound', 'plan_seed', 'plan_id'}
     for k, v in args.items():
         expect_str(v, f'execution_contract.arguments.{k}')
+        if k not in {'run_dir','seed','experiment_id'} or v not in allowed_arg_values:
+            raise EvidenceError('unknown execution argument or unsupported placeholder')
+        expected = {'run_dir':'supervisor_bound','seed':'plan_seed','experiment_id':'plan_id'}
+        if v != expected[k]:
+            raise EvidenceError('execution argument bound to the wrong placeholder')
 
     # resource limits
     if 'cpu_seconds' in contract:
@@ -149,15 +155,9 @@ def _build_preexec(contract):
         if cpu:
             resource.setrlimit(resource.RLIMIT_CPU, (cpu, cpu))
         if mem:
-            try:
-                resource.setrlimit(resource.RLIMIT_AS, (mem, mem))
-            except (ValueError, OSError):
-                pass  # RLIMIT_AS not available on all platforms
+            resource.setrlimit(resource.RLIMIT_AS, (mem, mem))
         if nproc:
-            try:
-                resource.setrlimit(resource.RLIMIT_NPROC, (nproc, nproc))
-            except (ValueError, OSError):
-                pass  # RLIMIT_NPROC not available on all platforms
+            resource.setrlimit(resource.RLIMIT_NPROC, (nproc, nproc))
 
     return _set_limits
 

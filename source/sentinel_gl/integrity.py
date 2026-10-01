@@ -2,6 +2,7 @@
 from __future__ import annotations
 import hashlib
 import json
+import math
 from pathlib import Path
 
 
@@ -19,10 +20,28 @@ def _constant(value):
 
 
 def loads_strict(text: str):
-    return json.loads(text, object_pairs_hook=_pairs, parse_constant=_constant)
+    def finite_float(value):
+        result = float(value)
+        if not math.isfinite(result):
+            raise ValueError("nonfinite JSON number: " + value)
+        return result
+    return json.loads(text, object_pairs_hook=_pairs, parse_constant=_constant,
+                      parse_float=finite_float)
 
 
 def digest(value) -> str:
+    def validate(item):
+        if isinstance(item, dict):
+            if any(type(key) is not str for key in item):
+                raise ValueError("canonical JSON object keys must be strings")
+            for child in item.values():
+                validate(child)
+        elif isinstance(item, (list, tuple)):
+            for child in item:
+                validate(child)
+        elif item is not None and type(item) not in (str, int, float, bool):
+            raise ValueError("canonical JSON values must have explicit builtin types")
+    validate(value)
     encoded = json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
     return hashlib.sha256(encoded.encode()).hexdigest()
 

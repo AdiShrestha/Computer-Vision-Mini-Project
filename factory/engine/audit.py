@@ -10,6 +10,8 @@ from statistics import mean
 from .io import read_json,read_csv,inside,sha,digest,inventory
 from .metrics import binary_metrics,paired_inference,holm,number,quantile,EvidenceError
 from .plan import validate,need,REVIEW_TOPICS
+from .contract import validate_contract,resolve_contract
+from .supervisor import verify_receipt_signature
 
 class Audit:
     def __init__(self,root,plan,epoch,freeze,engine_hash):
@@ -87,7 +89,10 @@ class Audit:
         eid=e['id'];base=self.epoch/'runs'/eid
         attempts=sorted(base.glob('attempt*')) if base.exists() else []
         need(bool(attempts),eid+': no execution receipt')
-        good=[]
+        need(all(re.fullmatch(r'attempt[0-9]{4,}',a.name) and a.is_dir() and not a.is_symlink() for a in attempts),eid+': malformed attempt path')
+        attempts.sort(key=lambda a:int(a.name[7:]))
+        need([a.name for a in attempts]==[f'attempt{i:04d}' for i in range(1,len(attempts)+1)],eid+': missing or noncanonical numbered attempt; history must be preserved')
+        good=[];verified={}
         for a in attempts:
             rel=str((a/'execution.json').relative_to(self.root));r=self.j(rel)
             need(r.get('experiment_id')==eid and r.get('seed')==e['seed'],eid+': execution identity mismatch')
@@ -95,10 +100,15 @@ class Audit:
             need(r.get('inputs_before')==self.freeze['files'],eid+': pre-execution input binding mismatch')
             need(r.get('inputs_after')==self.freeze['files'],eid+': source/data changed during run')
             need(r.get('engine_sha256')==self.engine_hash,eid+': code binding mismatch')
-            expected=[arg.replace('{run_dir}',str(a.resolve())).replace('{seed}',str(e['seed'])).replace('{experiment_id}',eid) for arg in e['command']]
+            if e.get('execution_contract'):
+                contract=validate_contract(e['execution_contract'],self.root,e['code_paths'])
+                expected=resolve_contract(contract,a,e['seed'],eid)[0]
+            else:
+                expected=[arg.replace('{run_dir}',str(a.resolve())).replace('{seed}',str(e['seed'])).replace('{experiment_id}',eid) for arg in e['command']]
             need(r.get('argv')==expected,eid+': executed command differs from plan')
             outputs=inventory(self.root,[str(a.relative_to(self.root))]);outputs.pop(rel,None)
             need(outputs==r.get('outputs'),eid+': output hash/membership changed since execution')
+            verified[a]=self.execution_receipt(e,r,expected,outputs)
             self.bindings.update(outputs)
             if r.get('exit_code')==0 and not r.get('record_error'):good.append(a)
             else:self.diagnostic('FAILED_ATTEMPT',f'{eid}: {a.name}, exit {r.get("exit_code")}; retained; no silent deletion')
@@ -131,8 +141,39 @@ class Audit:
             if metrics['auroc']<.5:self.diagnostic('BELOW_CHANCE',eid+': '+split)
             if metrics['auroc']==1.:self.diagnostic('PERFECT_RANKING',eid+': '+split)
         self.training(e,r,a)
-        self.computed[eid]={'metrics':out,'seed':e['seed'],'model':e['model'],'predictions_sha256':sha(predpath),'result_path':str((a/'result.json').relative_to(self.root))}
+        self.computed[eid]={'metrics':out,'seed':e['seed'],'model':e['model'],'predictions_sha256':sha(predpath),'result_path':str((a/'result.json').relative_to(self.root)),
+                            'receipt_verified':verified[a],'receipt_scope':'local_same_user_execution'}
         self.observed[eid]=data;self.reports[eid]=r
+    def execution_receipt(self,e,record,expected,outputs):
+        """Verify the trusted public-key signature AND bind the signed run fields.
+
+        A valid signature on some other run is not evidence for this attempt.
+        Missing legacy signatures remain explicitly unverified; research
+        certification requires verified receipts for every accepted run.
+        """
+        receipt=record.get('supervisor_receipt')
+        if receipt is None:
+            self.diagnostic('UNSIGNED_EXECUTION',e['id']+': no verified local supervisor receipt')
+            return False
+        need(isinstance(receipt,dict),'supervisor receipt must be an object')
+        verify_receipt_signature(receipt)
+        need(receipt.get('receipt_version')==2,'unsupported receipt version; preserve old epoch and re-run prospectively')
+        fields={
+            'run_nonce':record.get('run_nonce'),'project_id':self.p['project_id'],
+            'epoch':self.freeze['epoch'],'experiment_id':e['id'],'seed':e['seed'],
+            'snapshot_merkle_root':self.freeze.get('snapshot_merkle_root',''),
+            'input_root':digest(self.freeze['files']),'output_root':digest(outputs),
+            'launch_spec':digest(expected),'dependency_lock_hash':sha(self.root/self.p['dependency_lock']),
+            'runtime_id':e.get('execution_contract',{}).get('runtime_id','python-cpu-v1'),
+            'interpreter_hash':record.get('runtime_attestation',{}).get('interpreter_hash'),
+            'exit_status':record.get('exit_code'),'started_at':record.get('started_at'),
+            'finished_at':record.get('finished_at'),
+            'supervisor_version':record.get('factory_version'),'policy_version':str(self.p.get('schema_version',3)),
+        }
+        for key,value in fields.items():
+            need(type(receipt.get(key)) is type(value) and receipt.get(key)==value,e['id']+': signed receipt binding mismatch: '+key)
+        need(bool(fields['run_nonce']),'missing run nonce')
+        return True
     def training(self,e,result,a):
         t=e['training'];eid=e['id']
         if t['mode']=='deterministic':
@@ -153,7 +194,7 @@ class Audit:
                 else:bad+=1
                 if epoch>=t['min_epochs'] and bad>=t['patience']:stop=epoch;break
             need(stop==len(rows),eid+': early-stop event not supported by validation trace; budget exhaustion is not convergence')
-            need(chosen==best_epoch,eid+': selected checkpoint violates frozen validation selection')
+            need(chosen==min(range(len(va)),key=lambda i:va[i])+1,eid+': selected checkpoint is not the minimum observed validation loss')
         else:
             w=t['tail_window'];need(len(rows)==t['max_epochs'],eid+': fixed budget not completed')
             drift=abs(mean(va[-w:])-mean(va[-2*w:-w]))/max(abs(mean(va[-2*w:-w])),1e-12)

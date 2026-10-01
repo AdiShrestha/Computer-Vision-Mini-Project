@@ -35,10 +35,17 @@ def fixture(r):
 def evaluate(r):
  p=g.plan_at(r);_,ep,f=g.active(r);return Audit(r,p,ep,f,g.engine_hash()).run()
 
-def forged_output_rehash(r):
+def forged_output_rehash(r, *, resign_fixture=False):
  _,ep,f=g.active(r);a=ep/'runs/known/attempt0001';rec=read_json(a/'execution.json')
  files=inventory(r,[str(a.relative_to(r))]);files.pop(str((a/'execution.json').relative_to(r)))
- rec['outputs']=files;write_json(a/'execution.json',rec)
+ rec['outputs']=files
+ if resign_fixture:
+  # Constructed trusted-producer error: exercise metric recomputation after
+  # cryptographic binding passes. This helper is confined to fixture tests.
+  from engine.supervisor import sign_receipt
+  rec['supervisor_receipt']['output_root']=g.digest(files)
+  rec['supervisor_receipt']=sign_receipt(rec['supervisor_receipt'])
+ write_json(a/'execution.json',rec)
 
 class MetricTests(unittest.TestCase):
  def test_perfect_direction(self):self.assertEqual(binary_metrics([0,1],[.1,.9])['auroc'],1.)
@@ -87,7 +94,7 @@ class LifecycleTests(unittest.TestCase):
  def test_mutated_prediction_hash(self):
   self.execute();_,ep,_=g.active(self.r);p=ep/'runs/known/attempt0001/predictions.csv';p.write_text(p.read_text().replace('0.8','0.9'));self.assertTrue(evaluate(self.r)['errors'])
  def test_forged_metrics_even_after_rehash(self):
-  self.execute();_,ep,_=g.active(self.r);p=ep/'runs/known/attempt0001/result.json';x=read_json(p);x['reported_metrics']['test']['auroc']=0.;write_json(p,x);forged_output_rehash(self.r)
+  self.execute();_,ep,_=g.active(self.r);p=ep/'runs/known/attempt0001/result.json';x=read_json(p);x['reported_metrics']['test']['auroc']=0.;write_json(p,x);forged_output_rehash(self.r,resign_fixture=True)
   self.assertTrue(any('independent recomputation' in x['detail'] for x in evaluate(self.r)['errors']))
  def test_phantom_prediction_even_after_rehash(self):
   self.execute();_,ep,_=g.active(self.r);p=ep/'runs/known/attempt0001/predictions.csv';p.write_text(p.read_text().replace('s8,','phantom,'));forged_output_rehash(self.r);self.assertTrue(evaluate(self.r)['errors'])

@@ -6,24 +6,36 @@
     "corrected_numerical_core",
     "forensic_audit_and_work_plan",
     "local_legacy_recovery_archive",
-    "github_migration_with_verified_legacy_tags"
+    "github_migration_with_verified_legacy_tags",
+    "followup_numerical_integrity_repairs",
+    "local_factory_integrity_maintenance_pending_independent_review",
+    "critical_deep_research_report_review",
+    "draft_measurement_first_research_charter"
   ],
   "verification": {
-    "core_engineering_tests": 17,
-    "factory_offline_tests": 276,
+    "core_engineering_tests": 41,
+    "factory_offline_tests": 302,
     "legacy_tests_collected_not_executed": 296,
     "clean_environment_install": "NOT_VERIFIED",
     "supervised_domain_execution": "NOT_IMPLEMENTED",
-    "fresh_github_checkout_core_tests": 17,
     "remote_legacy_tags": "VERIFIED",
-    "published_baseline_commit": "ac167e537fd38d2d633d1dbb64ef3dc8efa70f29"
+    "published_baseline_commit": "ac167e537fd38d2d633d1dbb64ef3dc8efa70f29",
+    "migration_baseline_core_engineering_tests": 17,
+    "migration_baseline_factory_offline_tests": 276,
+    "followup_evidence": "docs/audit/followup/verification.json",
+    "independent_factory_maintenance_review": "PENDING",
+    "observational_experiments": "NOT_EXECUTED",
+    "mps_domain_run": "NOT_EXECUTED",
+    "current_clean_environment_install": "NOT_VERIFIED",
+    "migration_baseline_fresh_github_checkout_core_tests": 17,
+    "current_fresh_github_checkout": "NOT_RERUN"
   },
   "research_blockers": [
     "independently_verified_observational_acquisition",
     "lake_event_registry_and_selection",
     "feature_spatial_units_quality_and_temporal_lineage",
     "reviewed_domain_factory_profile_and_runtime",
-    "truthful_receipts_and_scoped_assurance",
+    "reviewed_factory_maintenance_and_supported_domain_runtime",
     "frozen_task_specific_methodology_and_splits",
     "actual_fair_baselines_predictions_calibration_and_statistics",
     "verified_claims_figures_reproduction_and_submission_review"
@@ -34,5 +46,13 @@
     "WP02",
     "WP03"
   ],
-  "plan": "plan.md"
+  "plan": "plan.md",
+  "package_status": {
+    "WP00": "MIGRATION_COMPLETE_WITH_FOLLOWUP_CORE_REPAIRS",
+    "WP01": "DRAFT_CHARTER_AND_REPORT_REVIEW_ONLY",
+    "WP02": "LOCAL_MAINTENANCE_IMPLEMENTED_REVIEW_AND_DOMAIN_RUNTIME_PENDING",
+    "WP03": "NO_VERIFIED_PROVIDER_PILOT"
+  },
+  "research_charter": "project/research_charter.md",
+  "deep_research_review": "docs/research/deep_research_review.md"
 }
