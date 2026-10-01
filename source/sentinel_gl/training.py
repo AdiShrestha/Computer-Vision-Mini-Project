@@ -2,13 +2,13 @@
 from __future__ import annotations
 from dataclasses import asdict, dataclass
 import json
-import inspect
 import random
 import time
 from pathlib import Path
 import numpy as np
 import torch
 from .model import TimeSeriesMAE, evaluation_masks
+from .contracts import instance_ids
 
 
 @dataclass(frozen=True)
@@ -75,13 +75,12 @@ def fit_masked_autoencoder(*, model_config, train_batches, validation_batches,
     required = {"mean","scale","fit_lake_ids","constant_channels"}
     if set(transform_state) != required or not transform_state["fit_lake_ids"]:
         raise ValueError("explicit fitted normalization state is required")
+    instance_ids(transform_state["fit_lake_ids"])
     if any(isinstance(x,bool) or not np.isfinite(x) for x in (learning_rate,weight_decay,max_grad_norm)) or learning_rate <= 0 or weight_decay < 0 or max_grad_norm <= 0:
         raise ValueError("invalid optimization settings")
     seed_everything(seed)
-    configuration = inspect.signature(TimeSeriesMAE).bind(**model_config)
-    configuration.apply_defaults()
-    model_config = dict(configuration.arguments)
     model = TimeSeriesMAE(**model_config).to(device)
+    model_config = model.configuration
     mean = np.asarray(transform_state["mean"])
     scale = np.asarray(transform_state["scale"])
     if mean.dtype.kind not in "iuf" or scale.dtype.kind not in "iuf":
@@ -118,7 +117,7 @@ def fit_masked_autoencoder(*, model_config, train_batches, validation_batches,
             f.write(json.dumps(row,allow_nan=False)+'\n')
         if val < best:
             best,best_epoch=val,epoch
-            checkpoint={"format_version":2,"model_config":dict(model_config),
+            checkpoint={"format_version":3,"model_config":dict(model_config),
                         "model_state_dict":model.state_dict(),"optimizer_state_dict":optimizer.state_dict(),
                         "normalization":dict(transform_state),"seed":seed,"epoch":epoch,
                         "selection":"minimum_observed_validation_loss","validation_loss":val,

@@ -1,3 +1,5 @@
+> **Supplied factory background — not Sentinel-GL measurements or current verification.** The retained text below describes the supplied factory and may contain superseded guarantees or another project’s results. Read [active policy](../factory/README.md), [local maintenance](../factory/LOCAL_PATCHES.md), [readiness](../project/READINESS.json) and [the current plan](../plan.md). Historical validation counts remain historical.
+
 # Release scope and limits
 
 `READY_FOR_HUMAN_SUBMISSION_REVIEW` means the frozen evidence is internally admissible and the required adversarial review is recorded. It is not “publication ready,” a guarantee of scientific truth, external validity, causal identification, novelty, or journal acceptance.

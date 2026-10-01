@@ -1,0 +1,13 @@
+{
+  "kind": "historical_byte_identity_check_not_scientific_validation",
+  "reference_commit": "7f0a7d8084c3df362b917643a1d7bdb4b5ef3478",
+  "inventory_rows": 147,
+  "files_hashed_at_recorded_commit": 147,
+  "hash_errors": [],
+  "tracked_files_outside_inventory_and_declared_exclusions": [],
+  "local_legacy_tag_targets": {
+    "legacy/sentinel-gl-2026-09-30": "aaf063f80905f5f2049fad3d6440e915263d181e",
+    "legacy/sentinel-gl-working-tree-2026-09-30": "836601e4c25147ba96dc2fcd179b1a00247f7809"
+  },
+  "status": "PASS"
+}

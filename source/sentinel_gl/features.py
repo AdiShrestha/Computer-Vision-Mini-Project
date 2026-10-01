@@ -6,6 +6,7 @@ from types import MappingProxyType
 from typing import Mapping
 import numpy as np
 from .integrity import digest
+from .contracts import instance_ids
 
 
 def observed_array(values, valid):
@@ -28,15 +29,14 @@ class FitScope:
 
     def __post_init__(self):
         for ids in (self.allowed_lake_ids, self.forbidden_lake_ids):
-            if not isinstance(ids, tuple) or not ids or len(set(ids)) != len(ids):
+            if not isinstance(ids, tuple):
                 raise ValueError("fit and holdout IDs must be nonempty unique tuples")
-            if any(not isinstance(x, str) or not x.strip() for x in ids):
-                raise ValueError("lake IDs must be nonempty strings")
+            instance_ids(ids)
         if set(self.allowed_lake_ids) & set(self.forbidden_lake_ids):
             raise ValueError("fit lakes overlap final evaluation lakes")
 
     def check(self, lake_ids):
-        ids = tuple(lake_ids)
+        ids = instance_ids(tuple(lake_ids.keys()) if isinstance(lake_ids, Mapping) else lake_ids)
         if not ids or len(set(ids)) != len(ids) or not set(ids) <= set(self.allowed_lake_ids):
             raise ValueError("fit data include undeclared or duplicate lake IDs")
 
@@ -115,12 +115,18 @@ class Window:
     latest_observation_date: str
     decision_date: str
 
+    @property
+    def earliest_available_date(self):
+        """Earliest permissible date, not proof an alarm was actually executed."""
+        return self.decision_date
+
 
 def trailing_windows(dates, available_dates, length: int, stride: int):
     """One row per date; available_dates records latest source availability per row.
 
-    Windows include indices [start, stop). Decision date is the latest of the
+    Windows include indices [start, stop). The legacy-named decision_date is the latest of the
     final observation date and all source availability dates in the window.
+    It is an earliest permissible date, not an actual execution timestamp.
     Daily gaps in the calendar must be inserted explicitly before this stage.
     """
     if type(length) is not int or length < 2 or type(stride) is not int or stride < 1:

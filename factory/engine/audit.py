@@ -293,6 +293,11 @@ class Audit:
     def hardware(self):
         h=self.p.get('hardware')
         if not h:return
+        # Hashing a worker-written timing/device table authenticates its bytes,
+        # not its measurements. No reviewed trial-measurement adapter exists.
+        # Fixture arithmetic remains available, with its origin made explicit.
+        need(self.p.get('intent')=='fixture',
+             'research hardware trials unsupported: a reviewed supervisor-bound measurement adapter is required')
         # Trial rows come from an executed experiment's already hashed output directory.
         eid=h['experiment_id'];need(eid in self.computed,'hardware run not validated')
         result=self.reports[eid];base=Path(self.computed[eid]['result_path']).parent
@@ -306,7 +311,7 @@ class Audit:
         total_samples=sum(number(r['samples']) for r in measured if r['phase']=='inference')
         span=max(number(r['elapsed_sec']) for r in measured)-min(number(r['elapsed_sec']) for r in measured)
         need(span>=number(h['minimum_sustained_seconds']),'sustained measurement shorter than registered duration')
-        self.hardware_results={'latency_ms':{str(q):quantile(batch1,q) for q in (.5,.9,.99)},'throughput_samples_sec':total_samples/total_time,'sustained_span_sec':span}
+        self.hardware_results={'scope':'constructed_fixture_project_reported_trials_not_research_measurements','latency_ms':{str(q):quantile(batch1,q) for q in (.5,.9,.99)},'throughput_samples_sec':total_samples/total_time,'sustained_span_sec':span}
         if h.get('energy_claim'):
             need(all('energy_joules' in r for r in measured),'energy claim needs measured joules per trial')
             self.hardware_results['joules_per_sample']=sum(number(r['energy_joules']) for r in measured)/sum(number(r['samples']) for r in measured)

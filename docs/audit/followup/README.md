@@ -1,3 +1,5 @@
+> **Historical first follow-up epoch:** this package records commit `7f0a7d8` and its 41/302 checks. Its manifests describe those bytes, not later working-tree edits. See [the subsequent review](../../research/claude_review_check.md) and [current readiness](../../../project/READINESS.json).
+
 # Follow-up integrity audit
 
 Date: 2026-10-01. Baseline: commit `665440ae0be0b1cf7f150c29bc185d131d98006e`. Scope: current migrated numerical core, factory execution/evidence paths, current-file coverage and critical appraisal of the supplied Deep Research report. **These artifacts are audit evidence and constructed engineering fixtures, never provider measurements or empirical research results.**

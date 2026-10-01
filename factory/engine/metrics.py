@@ -79,17 +79,24 @@ def paired_inference(a, b, *, seed=314159, draws=10000, alpha=0.05):
         raise EvidenceError('paired inference needs >=2 aligned independent units')
     d = [number(number(x)-number(y)) for x,y in zip(a,b)]
     n = len(d); observed = mean(d)
+    # Every finite binary64 value is an exact integer / power of two. Compare
+    # signed sums in that representation: rounding the means can turn distinct
+    # permutations into ties. The common divisor n cancels from the comparison.
+    ratios = [x.as_integer_ratio() for x in d]
+    denominator = max(q for _, q in ratios)
+    exact_d = [p * (denominator // q) for p, q in ratios]
+    exact_observed = abs(sum(exact_d))
     if type(seed) is not int or type(draws) is not int or draws < 1000 or isinstance(alpha,bool) or not 0 < number(alpha) < 1:
         raise EvidenceError('invalid inference settings')
     rng = random.Random(seed)
     boot = [mean(rng.choices(d, k=n)) for _ in range(draws)]
     if n <= 16:
-        extreme = sum(abs(mean(x*t for x,t in zip(d,signs))) >= abs(observed)
+        extreme = sum(abs(sum(x*t for x,t in zip(exact_d,signs))) >= exact_observed
                       for signs in itertools.product((-1,1), repeat=n))
         p = extreme / (2**n)
         method = 'exact_two_sided_paired_sign_flip'
     else:
-        extreme = sum(abs(mean(x*rng.choice((-1,1)) for x in d)) >= abs(observed)
+        extreme = sum(abs(sum(x*rng.choice((-1,1)) for x in exact_d)) >= exact_observed
                       for _ in range(draws))
         p = (extreme+1)/(draws+1)
         method = 'monte_carlo_two_sided_paired_sign_flip_plus_one'

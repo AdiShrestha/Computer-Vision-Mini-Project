@@ -1,0 +1,12 @@
+{
+  "kind": "executed_read_only_template_status_not_research_certification",
+  "argv": [
+    "python3",
+    "factory/gatekeeper.py",
+    "status",
+    "."
+  ],
+  "exit_code": 31,
+  "output": "{\n  \"status\": \"NOT_CERTIFIED\",\n  \"error\": \"project_id must be meaningful text\",\n  \"code\": 31\n}\n",
+  "research_plan_sha256": "e2e7e10efc4c2a91cb643d3805aec836c82e26706f796692e5a4bded35caf24f"
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "user_supplied_untrusted_reviews_not_execution_evidence",
+  "review_files": [
+    {
+      "path": "docs/research/claude_review_1.txt",
+      "sha256": "273cb96dbd64c66c69d1afd6c24522f6989bd684090bb7a8953df0a0761dd1e2",
+      "bytes": 9610
+    },
+    {
+      "path": "docs/research/claude_review_2.txt",
+      "sha256": "b13433b9cbd899fb30de2297a024c7794685c4af033ed76e38bb9ae2590c7a39",
+      "bytes": 7584
+    }
+  ],
+  "second_review_is_suffix_of_first": false,
+  "scope": "Pasted report text only. No Claude archive, raw logs, differential script or captured execution environment was supplied."
+}

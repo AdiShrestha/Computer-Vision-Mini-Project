@@ -1,0 +1,58 @@
+........FFF...............................................               [100%]
+=================================== FAILURES ===================================
+___________ test_training_metadata_rejects_malformed_fit_ids[train] ____________
+
+ids = 'train'
+tmp_path = PosixPath('/private/var/folders/9p/6sf6gv2144l27mm74tx4dqrr0000gn/T/pytest-of-adi/pytest-29/test_training_metadata_rejects0')
+
+    @pytest.mark.parametrize('ids', ['train', ['train', 'train'], [True]])
+    def test_training_metadata_rejects_malformed_fit_ids(ids, tmp_path):
+        x = torch.ones(1, 6, 2)
+        valid = torch.ones_like(x, dtype=torch.bool)
+        state = {'mean':(0., 0.), 'scale':(1., 1.), 'constant_channels':(), 'fit_lake_ids':ids}
+        with pytest.raises(ValueError):
+>           fit_masked_autoencoder([(x, valid)], [(x, valid)],
+                model_config=small_model().configuration, transform_state=state, seed=7,
+                stop_rule=StopRule(1, 1, 1, 0.), output_dir=tmp_path/'not_created')
+E           TypeError: fit_masked_autoencoder() takes 0 positional arguments but 2 positional arguments (and 5 keyword-only arguments) were given
+
+source/tests/test_claude_review_regressions.py:64: TypeError
+____________ test_training_metadata_rejects_malformed_fit_ids[ids1] ____________
+
+ids = ['train', 'train']
+tmp_path = PosixPath('/private/var/folders/9p/6sf6gv2144l27mm74tx4dqrr0000gn/T/pytest-of-adi/pytest-29/test_training_metadata_rejects1')
+
+    @pytest.mark.parametrize('ids', ['train', ['train', 'train'], [True]])
+    def test_training_metadata_rejects_malformed_fit_ids(ids, tmp_path):
+        x = torch.ones(1, 6, 2)
+        valid = torch.ones_like(x, dtype=torch.bool)
+        state = {'mean':(0., 0.), 'scale':(1., 1.), 'constant_channels':(), 'fit_lake_ids':ids}
+        with pytest.raises(ValueError):
+>           fit_masked_autoencoder([(x, valid)], [(x, valid)],
+                model_config=small_model().configuration, transform_state=state, seed=7,
+                stop_rule=StopRule(1, 1, 1, 0.), output_dir=tmp_path/'not_created')
+E           TypeError: fit_masked_autoencoder() takes 0 positional arguments but 2 positional arguments (and 5 keyword-only arguments) were given
+
+source/tests/test_claude_review_regressions.py:64: TypeError
+____________ test_training_metadata_rejects_malformed_fit_ids[ids2] ____________
+
+ids = [True]
+tmp_path = PosixPath('/private/var/folders/9p/6sf6gv2144l27mm74tx4dqrr0000gn/T/pytest-of-adi/pytest-29/test_training_metadata_rejects2')
+
+    @pytest.mark.parametrize('ids', ['train', ['train', 'train'], [True]])
+    def test_training_metadata_rejects_malformed_fit_ids(ids, tmp_path):
+        x = torch.ones(1, 6, 2)
+        valid = torch.ones_like(x, dtype=torch.bool)
+        state = {'mean':(0., 0.), 'scale':(1., 1.), 'constant_channels':(), 'fit_lake_ids':ids}
+        with pytest.raises(ValueError):
+>           fit_masked_autoencoder([(x, valid)], [(x, valid)],
+                model_config=small_model().configuration, transform_state=state, seed=7,
+                stop_rule=StopRule(1, 1, 1, 0.), output_dir=tmp_path/'not_created')
+E           TypeError: fit_masked_autoencoder() takes 0 positional arguments but 2 positional arguments (and 5 keyword-only arguments) were given
+
+source/tests/test_claude_review_regressions.py:64: TypeError
+=========================== short test summary info ============================
+FAILED source/tests/test_claude_review_regressions.py::test_training_metadata_rejects_malformed_fit_ids[train]
+FAILED source/tests/test_claude_review_regressions.py::test_training_metadata_rejects_malformed_fit_ids[ids1]
+FAILED source/tests/test_claude_review_regressions.py::test_training_metadata_rejects_malformed_fit_ids[ids2]
+3 failed, 55 passed in 3.94s

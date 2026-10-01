@@ -12,7 +12,7 @@ from sentinel_gl.training import fit_masked_autoencoder,StopRule
 
 
 def small_model():
-    return TimeSeriesMAE(n_channels=2,n_windows=6,d_model=8,n_encoder_layers=1,
+    return TimeSeriesMAE(n_channels=2,max_time_steps=6,d_model=8,n_encoder_layers=1,
         n_decoder_layers=1,n_encoder_heads=2,n_decoder_heads=2,d_ff_encoder=16,d_ff_decoder=16,dropout=0.)
 
 
@@ -121,7 +121,7 @@ def test_ema_uses_only_past_and_current_observations():
 
 
 def test_tiny_training_records_budget_and_exact_checkpoint(tmp_path):
-    config=dict(n_channels=2,n_windows=6,d_model=8,n_encoder_layers=1,n_decoder_layers=1,
+    config=dict(n_channels=2,max_time_steps=6,d_model=8,n_encoder_layers=1,n_decoder_layers=1,
                 n_encoder_heads=2,n_decoder_heads=2,d_ff_encoder=16,d_ff_decoder=16,dropout=0.)
     x=torch.arange(12,dtype=torch.float32).reshape(1,6,2)/12;v=torch.ones_like(x,dtype=torch.bool)
     raw=x.squeeze(0).numpy().astype(float)

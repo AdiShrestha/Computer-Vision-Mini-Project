@@ -9,3 +9,5 @@ This checkout contains local integrity maintenance over the supplied v3.3.0 base
 Machine checks establish evidence admissibility within their declared scope. Review establishes a recorded scientific assessment, not independent proof. A stale or missing review never passes the release gate.
 
 Scientific commands include `verify-constitution-coverage`, `verify-training-sufficiency`, `verify-split-integrity`, `verify-result-plausibility`, `verify-cross-artifact-traceability`, `verify-reproducibility`, `acquisition-audit`, `tier-check`, and `verify-bundle`. Use `python3 factory/run_self_tests.py` for the complete offline suite.
+
+Worker environments inherit only named OS essentials and supervisor-bound controls; arbitrary credential variables and unknown environment settings are omitted. Code-loading hooks such as `NODE_PATH` still cause a prelaunch error even though they would be omitted by the allowlist. This is an environment boundary, not same-user filesystem or network isolation. Research trial-table hardware claims are blocked pending a reviewed measurement adapter; fixture arithmetic is explicitly nonresearch.

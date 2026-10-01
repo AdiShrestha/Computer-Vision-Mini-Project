@@ -11,6 +11,7 @@ Legacy checkpoints are incompatible with the explicit observation-mask input.
 import torch
 import torch.nn as nn
 import math
+import warnings
 from typing import Tuple, Optional
 
 
@@ -118,7 +119,7 @@ class TimeSeriesMAE(nn.Module):
     def __init__(
         self,
         n_channels: int = 15,
-        n_windows: int = 108,
+        n_windows: Optional[int] = None,
         d_model: int = 128,
         n_encoder_layers: int = 4,
         n_decoder_layers: int = 2,
@@ -128,13 +129,20 @@ class TimeSeriesMAE(nn.Module):
         d_ff_decoder: int = 256,
         masking_ratio: float = 0.5,
         dropout: float = 0.1,
+        *,
+        max_time_steps: Optional[int] = None,
     ):
         super().__init__()
-        dimensions = (n_channels, n_windows, d_model, n_encoder_layers,
+        if n_windows is not None and max_time_steps is not None:
+            raise ValueError("specify max_time_steps only; n_windows is a deprecated alias")
+        if n_windows is not None:
+            warnings.warn("n_windows means time steps; use max_time_steps", DeprecationWarning, stacklevel=2)
+        capacity = max_time_steps if max_time_steps is not None else n_windows if n_windows is not None else 108
+        dimensions = (n_channels, capacity, d_model, n_encoder_layers,
                       n_decoder_layers, n_encoder_heads, n_decoder_heads,
                       d_ff_encoder, d_ff_decoder)
-        if any(type(value) is not int or value < 1 for value in dimensions) or n_windows < 2:
-            raise ValueError("model dimensions must be positive integers; n_windows >= 2")
+        if any(type(value) is not int or value < 1 for value in dimensions) or capacity < 2:
+            raise ValueError("model dimensions must be positive integers; max_time_steps >= 2")
         if d_model % n_encoder_heads or d_model % n_decoder_heads:
             raise ValueError("model dimension must be divisible by both attention head counts")
         if type(masking_ratio) not in (int, float) or not math.isfinite(masking_ratio) or not 0 < masking_ratio < 1:
@@ -142,15 +150,20 @@ class TimeSeriesMAE(nn.Module):
         if type(dropout) not in (int, float) or not math.isfinite(dropout) or not 0 <= dropout < 1:
             raise ValueError("dropout must be finite and in [0,1)")
         self.n_channels = n_channels
-        self.n_windows = n_windows
+        self.max_time_steps = capacity
         self.d_model = d_model
         self.masking_ratio = masking_ratio
+        self._configuration = dict(n_channels=n_channels, max_time_steps=capacity,
+            d_model=d_model, n_encoder_layers=n_encoder_layers,
+            n_decoder_layers=n_decoder_layers, n_encoder_heads=n_encoder_heads,
+            n_decoder_heads=n_decoder_heads, d_ff_encoder=d_ff_encoder,
+            d_ff_decoder=d_ff_decoder, masking_ratio=masking_ratio, dropout=dropout)
 
         # Input projection: values plus observation mask, 2C → d_model
         self.patch_projection = PatchProjection(n_channels, d_model)
 
         # Positional embeddings
-        self.pos_embedding = LearnedPositionalEmbedding(n_windows, d_model)
+        self.pos_embedding = LearnedPositionalEmbedding(capacity, d_model)
 
         # Encoder
         self.encoder_layers = nn.ModuleList([
@@ -163,7 +176,7 @@ class TimeSeriesMAE(nn.Module):
         self.mask_token = nn.Parameter(torch.randn(1, 1, d_model) * 0.02)
 
         # Decoder positional embeddings (separate from encoder's)
-        self.decoder_pos_embedding = LearnedPositionalEmbedding(n_windows, d_model)
+        self.decoder_pos_embedding = LearnedPositionalEmbedding(capacity, d_model)
 
         # Decoder
         self.decoder_layers = nn.ModuleList([
@@ -177,6 +190,16 @@ class TimeSeriesMAE(nn.Module):
 
         # Initialize weights
         self._init_weights()
+
+    @property
+    def n_windows(self):
+        """Deprecated read-only alias for maximum time steps, not context count."""
+        return self.max_time_steps
+
+    @property
+    def configuration(self):
+        """Resolved constructor defaults for prospective checkpoint metadata."""
+        return self._configuration.copy()
 
     def _init_weights(self):
         for module in self.modules():
@@ -278,7 +301,7 @@ class TimeSeriesMAE(nn.Module):
         return full_sequence
 
     def _validate_input(self, x, validity):
-        if x.ndim != 3 or x.shape[0] == 0 or not 2 <= x.shape[1] <= self.n_windows or x.shape[2] != self.n_channels:
+        if x.ndim != 3 or x.shape[0] == 0 or not 2 <= x.shape[1] <= self.max_time_steps or x.shape[2] != self.n_channels:
             raise ValueError("input must be nonempty B,T,C within configured dimensions")
         if not x.is_floating_point() or not torch.isfinite(x).all():
             raise ValueError("model input must be finite floating point normalized values")
@@ -324,6 +347,12 @@ class TimeSeriesMAE(nn.Module):
         return self.encode(x, mask=None, validity=validity)
 
     def get_pooled_embedding(self, x: torch.Tensor, validity: Optional[torch.Tensor] = None) -> torch.Tensor:
+        """Mean over calendar positions, including explicitly missing positions.
+
+        They carry observation masks and time positions, not implicit padding.
+        Missingness can affect embeddings; baselines/ablations must test whether
+        it explains apparent skill before any physical interpretation.
+        """
         full_emb = self.get_full_embeddings(x, validity=validity)
         return full_emb.mean(dim=1)  # Mean pool over time
 

@@ -1,3 +1,5 @@
+> **Supplied factory background — not Sentinel-GL measurements or current verification.** The retained text below describes the supplied factory and may contain superseded guarantees or another project’s results. Read [active policy](../factory/README.md), [local maintenance](../factory/LOCAL_PATCHES.md), [readiness](../project/READINESS.json) and [the current plan](../plan.md). Historical validation counts remain historical.
+
 # Standards used by v3
 
 - Nature Portfolio reporting and availability policy: https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards

@@ -8,26 +8,7 @@ from sklearn.neighbors import NearestNeighbors
 from .features import FitScope
 from .model import evaluation_masks
 from .integrity import digest
-
-
-def finite_vector(values):
-    arr = np.asarray(values)
-    if arr.dtype.kind not in "iuf":
-        raise ValueError("scores must be real numeric values, not strings or booleans")
-    arr = arr.astype(float)
-    if arr.ndim != 1 or not arr.size or not np.isfinite(arr).all():
-        raise ValueError("scores must be a finite nonempty one-dimensional vector")
-    return arr
-
-
-def finite_matrix(values):
-    arr = np.asarray(values)
-    if arr.dtype.kind not in "iuf" or arr.ndim != 2 or not arr.size:
-        raise ValueError("embeddings must be nonempty real numeric matrices")
-    arr = arr.astype(float)
-    if not np.isfinite(arr).all():
-        raise ValueError("embeddings must be finite")
-    return arr
+from .contracts import finite_vector, finite_matrix
 
 
 class EmbeddingDistanceScorer:
@@ -36,6 +17,7 @@ class EmbeddingDistanceScorer:
             raise ValueError("k_neighbors and n_components must be positive integers")
         self._scope, self._k_neighbors, self._n_components = scope, k_neighbors, n_components
         self._pca = self._bank = None
+        self._reference = None
         self._fit_lake_ids = ()
 
     scope = property(lambda self: self._scope)
@@ -51,7 +33,7 @@ class EmbeddingDistanceScorer:
             raise RuntimeError("density scorer has not been fitted")
         return digest({"fit_lake_ids": self.fit_lake_ids, "k": self.k_neighbors,
             "components": self._pca.components_.tolist(), "mean": self._pca.mean_.tolist(),
-            "reference": self._bank._fit_X.tolist()})
+            "reference": self._reference.tolist()})
 
     def fit(self, embeddings):
         if self._bank is not None:
@@ -73,6 +55,8 @@ class EmbeddingDistanceScorer:
             raise ValueError("nonfinite fitted embedding transform")
         bank = NearestNeighbors(n_neighbors=self.k_neighbors, algorithm="brute").fit(projected)
         self._pca, self._bank = pca, bank
+        self._reference = projected.copy()
+        self._reference.setflags(write=False)
         self._fit_lake_ids = tuple(sorted(embeddings))
         return self
 

@@ -1,3 +1,5 @@
+> **Supplied factory background — not Sentinel-GL measurements or current verification.** The retained text below describes the supplied factory and may contain superseded guarantees or another project’s results. Read [active policy](../factory/README.md), [local maintenance](../factory/LOCAL_PATCHES.md), [readiness](../project/READINESS.json) and [the current plan](../plan.md). Historical validation counts remain historical.
+
 # v3 plan and evidence schema
 
 The only active project control file is `project/research_plan.json`. It contains the project population and license, explicit observational/simulation/fixture origin, cohort/source-record paths, methodology and dependency lock, paths to freeze, experiments, comparisons, claims, derived analysis plans, release files, and policy. Every experiment has one preregistered seed, model/config, command argv, evaluation splits, threshold, role, and training policy. A comparison gives explicit aligned pairs, the estimand metric, sampling unit (`seed_fixed_test`), alpha, minimum effect, precision target, and decision rule. A claim names its exact estimand, population, scope, and evidence experiments.

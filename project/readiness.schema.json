@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sentinel-gl:readiness:2",
+  "title": "Current engineering readiness and research blockers; not a research certificate",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "updated_local_date",
+    "status",
+    "implemented",
+    "verification",
+    "research_blockers",
+    "scientific_claims",
+    "next_packages",
+    "plan",
+    "package_status",
+    "research_charter",
+    "deep_research_review",
+    "claude_review_check"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 2
+    },
+    "updated_local_date": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "const": "RESEARCH_NOT_READY"
+    },
+    "implemented": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "core_engineering_tests",
+        "factory_offline_tests",
+        "legacy_tests_collected_not_executed",
+        "clean_environment_install",
+        "supervised_domain_execution",
+        "remote_legacy_tags",
+        "published_baseline_commit",
+        "migration_baseline_core_engineering_tests",
+        "migration_baseline_factory_offline_tests",
+        "followup_evidence",
+        "independent_factory_maintenance_review",
+        "observational_experiments",
+        "mps_domain_run",
+        "migration_baseline_fresh_github_checkout_core_tests",
+        "current_fresh_github_checkout",
+        "current_evidence",
+        "claude_cross_platform_replication",
+        "credential_patch_boundary_review",
+        "research_hardware_trials"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "core_engineering_tests": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "factory_offline_tests": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "legacy_tests_collected_not_executed": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "clean_environment_install": {
+          "type": "string",
+          "enum": [
+            "NOT_VERIFIED"
+          ]
+        },
+        "supervised_domain_execution": {
+          "type": "string",
+          "enum": [
+            "NOT_IMPLEMENTED"
+          ]
+        },
+        "remote_legacy_tags": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_baseline_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "migration_baseline_core_engineering_tests": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "migration_baseline_factory_offline_tests": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "followup_evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "independent_factory_maintenance_review": {
+          "type": "string",
+          "enum": [
+            "PENDING"
+          ]
+        },
+        "observational_experiments": {
+          "type": "string",
+          "enum": [
+            "NOT_EXECUTED"
+          ]
+        },
+        "mps_domain_run": {
+          "type": "string",
+          "enum": [
+            "NOT_EXECUTED"
+          ]
+        },
+        "migration_baseline_fresh_github_checkout_core_tests": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "current_fresh_github_checkout": {
+          "type": "string",
+          "enum": [
+            "NOT_RERUN"
+          ]
+        },
+        "current_evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claude_cross_platform_replication": {
+          "type": "string",
+          "enum": [
+            "USER_REPORTED_NOT_INDEPENDENTLY_EXECUTED_HERE"
+          ]
+        },
+        "credential_patch_boundary_review": {
+          "type": "string",
+          "enum": [
+            "FRESH_READ_ONLY_AGENT_REVIEW_COMPLETE"
+          ]
+        },
+        "research_hardware_trials": {
+          "type": "string",
+          "enum": [
+            "BLOCKED_PENDING_REVIEWED_MEASUREMENT_ADAPTER"
+          ]
+        }
+      }
+    },
+    "research_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "scientific_claims": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "next_packages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^WP[0-9]{2}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "plan": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_status": {
+      "type": "object",
+      "required": [
+        "WP00",
+        "WP01",
+        "WP02",
+        "WP03"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "research_charter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deep_research_review": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claude_review_check": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

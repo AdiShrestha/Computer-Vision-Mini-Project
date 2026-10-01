@@ -30,6 +30,12 @@ def loads_strict(text: str):
 
 
 def digest(value) -> str:
+    """SHA-256 of Python sorted compact JSON (python-json-v1), not RFC 8785.
+
+    Integers and floats keep their JSON spellings; tuples become JSON arrays.
+    Cross-language verification must reproduce these bytes or migrate to an
+    explicitly versioned serialization contract without rewriting old epochs.
+    """
     def validate(item):
         if isinstance(item, dict):
             if any(type(key) is not str for key in item):

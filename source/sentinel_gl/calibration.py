@@ -1,17 +1,13 @@
 """Calibration on explicit reference IDs; empirical budgets are not guarantees."""
 import numpy as np
-from .scoring import finite_vector
+from .contracts import finite_vector, instance_ids
 
 
 def calibrate_false_alert_threshold(scores, calibration_ids, final_ids, target: float):
     s = finite_vector(scores)
-    calibration_ids, final_ids = tuple(calibration_ids), tuple(final_ids)
+    calibration_ids, final_ids = instance_ids(calibration_ids), instance_ids(final_ids)
     if len(calibration_ids) != len(s) or not calibration_ids or not final_ids:
         raise ValueError("identify every calibration observation and the final evaluation instances")
-    if any(not isinstance(x, str) or not x.strip() for x in calibration_ids+final_ids):
-        raise ValueError("instance IDs must be nonempty strings")
-    if len(set(calibration_ids)) != len(calibration_ids) or len(set(final_ids)) != len(final_ids):
-        raise ValueError("duplicate instance IDs")
     if set(calibration_ids) & set(final_ids):
         raise ValueError("calibration overlaps evaluation")
     if isinstance(target, bool) or not np.isfinite(target) or not 0 <= target < 1:

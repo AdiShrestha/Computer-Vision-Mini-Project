@@ -72,7 +72,7 @@ def test_cross_masks_retain_context_under_sparse_acquisition_cadence(cadence):
         assert torch.all((mask[..., None] & valid).sum((1, 2)) > 0)
         assert torch.all(((~mask)[..., None] & valid).sum((1, 2)) > 0)
         assert len(set((~mask).sum(1).tolist())) == 1
-    model = TimeSeriesMAE(n_channels=2, n_windows=steps, d_model=8,
+    model = TimeSeriesMAE(n_channels=2, max_time_steps=steps, d_model=8,
         n_encoder_layers=1, n_decoder_layers=1, n_encoder_heads=2,
         n_decoder_heads=2, d_ff_encoder=16, d_ff_decoder=16, dropout=0.)
     x = valid.float()
@@ -96,7 +96,7 @@ def test_generated_training_masks_always_have_real_target_and_context():
         MaskedReconstructionScorer(model).score(valid.float(), valid)
 
 
-@pytest.mark.parametrize('config', [{'n_windows': 1}, {'n_channels': True}, {'dropout': float('nan')}, {'masking_ratio': 1.}])
+@pytest.mark.parametrize('config', [{'max_time_steps': 1}, {'n_channels': True}, {'dropout': float('nan')}, {'masking_ratio': 1.}])
 def test_invalid_architecture_settings_are_rejected(config):
     with pytest.raises(ValueError):
         TimeSeriesMAE(**config)
@@ -138,7 +138,7 @@ def test_best_checkpoint_is_separate_from_patience_min_delta(tmp_path, monkeypat
     import sentinel_gl.training as training
     losses = iter([1., .95, .90])  # Constructed validation trace; no observational claim.
     monkeypatch.setattr(training, 'validation_loss', lambda *args: next(losses))
-    config = dict(n_channels=2, n_windows=6, d_model=8, n_encoder_layers=1,
+    config = dict(n_channels=2, max_time_steps=6, d_model=8, n_encoder_layers=1,
         n_decoder_layers=1, n_encoder_heads=2, n_decoder_heads=2,
         d_ff_encoder=16, d_ff_decoder=16, dropout=0.)
     x = torch.arange(12, dtype=torch.float32).reshape(1, 6, 2)/12
@@ -150,13 +150,13 @@ def test_best_checkpoint_is_separate_from_patience_min_delta(tmp_path, monkeypat
         learning_rate=.001, weight_decay=.01, max_grad_norm=1.)
     assert result['status'] == 'EARLY_STOPPED' and result['checkpoint_epoch'] == 3
     checkpoint = torch.load(tmp_path/'fixture/checkpoint_best.pt', weights_only=True)
-    assert checkpoint['validation_loss'] == .90 and checkpoint['format_version'] == 2
+    assert checkpoint['validation_loss'] == .90 and checkpoint['format_version'] == 3
     assert result['split_integrity'] == 'CALLER_LINEAGE_VERIFICATION_REQUIRED'
 
 
 @pytest.mark.parametrize('mean', [('0', '1'), (False, True)])
 def test_checkpoint_normalization_metadata_cannot_coerce_fake_numbers(tmp_path, mean):
-    config = dict(n_channels=2, n_windows=6, d_model=8, n_encoder_layers=1,
+    config = dict(n_channels=2, max_time_steps=6, d_model=8, n_encoder_layers=1,
         n_decoder_layers=1, n_encoder_heads=2, n_decoder_heads=2,
         d_ff_encoder=16, d_ff_decoder=16, dropout=0.)
     x = torch.ones(1, 6, 2)

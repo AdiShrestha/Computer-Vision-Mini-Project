@@ -121,7 +121,11 @@ def safe_args(args,run,seed,eid):
   return out
 
 def execution_env(seed):
-  """Return the inherited environment after rejecting code-loading hooks."""
+  """Inherit only named OS essentials; reject code hooks before filtering.
+
+  This removes inherited credential variables, not same-user filesystem access.
+  Provider retrieval needs a separately reviewed authenticated acquisition path.
+  """
   blocked_exact={'PYTHONPATH','PYTHONHOME','PYTHONSTARTUP','PYTHONINSPECT',
                  'PYTHONBREAKPOINT','PYTHONWARNINGS','LD_PRELOAD','LD_LIBRARY_PATH',
                  'LD_AUDIT','NODE_OPTIONS','NODE_PATH','RUBYOPT','RUBYLIB',
@@ -130,7 +134,10 @@ def execution_env(seed):
   blocked=sorted(k for k in os.environ if k in blocked_exact or k.startswith('DYLD_'))
   if blocked:
    die('unsafe process environment variables present: '+', '.join(blocked))
-  env={k:v for k,v in os.environ.items() if k != 'FACTORY_SUPERVISOR_KEY' and not k.startswith(('AWS_','CDSAPI_','EARTHENGINE_')) and k not in {'GOOGLE_APPLICATION_CREDENTIALS','EE_PRIVATE_KEY'}}
+  inherited_allowed={'PATH','HOME','TMPDIR','TMP','TEMP','LANG','LANGUAGE','TZ',
+                     'LC_ALL','LC_CTYPE','LC_COLLATE','LC_MESSAGES','LC_MONETARY',
+                     'LC_NUMERIC','LC_TIME'}
+  env={k:v for k,v in os.environ.items() if k in inherited_allowed}
   # Bind Python's hash randomization to the preregistered experiment seed so
   # dictionary/set iteration cannot silently vary across fresh processes.
   env['PYTHONHASHSEED']=str(int(seed) % (2**32))

@@ -2,7 +2,7 @@
 from datetime import date
 import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
-from .scoring import finite_vector
+from .contracts import finite_vector
 
 
 def ranking_metrics(labels, scores):
