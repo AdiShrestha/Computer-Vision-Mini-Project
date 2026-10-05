@@ -1,0 +1,3878 @@
+{
+  "dossier_version": 1,
+  "pilot_window": {
+    "start_date": "2023-09-01",
+    "end_date": "2023-10-03",
+    "pre_event_cutoff": "2023-10-03T22:30:00Z"
+  },
+  "cohort_summary": {
+    "SGL-001": {
+      "name": "South Lhonak",
+      "role": "event_case_eval",
+      "coordinates": [
+        27.915,
+        88.204
+      ],
+      "elevation_m": 5200,
+      "observations": {
+        "sentinel2_passes": 13,
+        "sentinel1_passes": 12,
+        "era5_daily_records": 33
+      },
+      "products_catalogued": [
+        "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXL_20241104T145811.SAFE",
+        "S2A_MSIL2A_20230904T044701_N0511_R076_T45RXL_20250807T205334.SAFE",
+        "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXL_20241106T184459.SAFE",
+        "S2B_MSIL2A_20230909T044659_N0510_R076_T45RXL_20240916T110800.SAFE",
+        "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXL_20241025T034108.SAFE",
+        "S2A_MSIL2A_20230914T044701_N0511_R076_T45RXL_20250807T114056.SAFE",
+        "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXL_20241031T200326.SAFE",
+        "S2B_MSIL2A_20230919T044659_N0510_R076_T45RXL_20241105T104412.SAFE",
+        "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXL_20250808T093918.SAFE",
+        "S2A_MSIL2A_20230924T044701_N0510_R076_T45RXL_20241101T012245.SAFE",
+        "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXL_20240826T102305.SAFE",
+        "S2B_MSIL2A_20230929T044659_N0510_R076_T45RXL_20241022T042249.SAFE",
+        "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXL_20241101T112436.SAFE",
+        "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F.SAFE",
+        "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_F571_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_CCE6_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_2D56.SAFE",
+        "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_9C53.SAFE",
+        "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_BAE4_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_5903.SAFE",
+        "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_F258_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_8FB6.SAFE",
+        "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_7923_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_EFD1_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_0D5F.SAFE",
+        "ERA5_HOURLY_2023-09-01",
+        "ERA5_HOURLY_2023-09-02",
+        "ERA5_HOURLY_2023-09-03",
+        "ERA5_HOURLY_2023-09-04",
+        "ERA5_HOURLY_2023-09-05",
+        "ERA5_HOURLY_2023-09-06",
+        "ERA5_HOURLY_2023-09-07",
+        "ERA5_HOURLY_2023-09-08",
+        "ERA5_HOURLY_2023-09-09",
+        "ERA5_HOURLY_2023-09-10",
+        "ERA5_HOURLY_2023-09-11",
+        "ERA5_HOURLY_2023-09-12",
+        "ERA5_HOURLY_2023-09-13",
+        "ERA5_HOURLY_2023-09-14",
+        "ERA5_HOURLY_2023-09-15",
+        "ERA5_HOURLY_2023-09-16",
+        "ERA5_HOURLY_2023-09-17",
+        "ERA5_HOURLY_2023-09-18",
+        "ERA5_HOURLY_2023-09-19",
+        "ERA5_HOURLY_2023-09-20",
+        "ERA5_HOURLY_2023-09-21",
+        "ERA5_HOURLY_2023-09-22",
+        "ERA5_HOURLY_2023-09-23",
+        "ERA5_HOURLY_2023-09-24",
+        "ERA5_HOURLY_2023-09-25",
+        "ERA5_HOURLY_2023-09-26",
+        "ERA5_HOURLY_2023-09-27",
+        "ERA5_HOURLY_2023-09-28",
+        "ERA5_HOURLY_2023-09-29",
+        "ERA5_HOURLY_2023-09-30",
+        "ERA5_HOURLY_2023-10-01",
+        "ERA5_HOURLY_2023-10-02",
+        "ERA5_HOURLY_2023-10-03"
+      ],
+      "total_metadata_bytes": 44777
+    },
+    "SGL-002": {
+      "name": "Khangchung Tsho",
+      "role": "negative_control_eval",
+      "coordinates": [
+        27.985,
+        88.752
+      ],
+      "elevation_m": 5250,
+      "observations": {
+        "sentinel2_passes": 14,
+        "sentinel1_passes": 18,
+        "era5_daily_records": 33
+      },
+      "products_catalogued": [
+        "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXL_20241104T145811.SAFE",
+        "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXM_20241104T145811.SAFE",
+        "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXM_20241106T184459.SAFE",
+        "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXL_20241106T184459.SAFE",
+        "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXM_20241025T034108.SAFE",
+        "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXL_20241025T034108.SAFE",
+        "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXL_20241031T200326.SAFE",
+        "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXM_20241031T200326.SAFE",
+        "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXL_20250808T093918.SAFE",
+        "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXM_20250808T093918.SAFE",
+        "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXL_20240826T102305.SAFE",
+        "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXM_20240826T102305.SAFE",
+        "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXM_20241101T112436.SAFE",
+        "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXL_20241101T112436.SAFE",
+        "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F.SAFE",
+        "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_F571_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_CCE6_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_2D56.SAFE",
+        "S1A_IW_GRDH_1SDV_20230908T120601_20230908T120626_050236_060C03_D46B_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230908T120601_20230908T120626_050236_060C03_8996.SAFE",
+        "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_9C53.SAFE",
+        "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_BAE4_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_5903.SAFE",
+        "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_F258_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230920T120602_20230920T120627_050411_0611FA_D6FE.SAFE",
+        "S1A_IW_GRDH_1SDV_20230920T120602_20230920T120627_050411_0611FA_465E_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_8FB6.SAFE",
+        "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_7923_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_EFD1_COG.SAFE",
+        "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_0D5F.SAFE",
+        "S1A_IW_GRDH_1SDV_20231002T120602_20231002T120627_050586_0617FC_8D3F.SAFE",
+        "S1A_IW_GRDH_1SDV_20231002T120602_20231002T120627_050586_0617FC_43CB_COG.SAFE",
+        "ERA5_HOURLY_2023-09-01",
+        "ERA5_HOURLY_2023-09-02",
+        "ERA5_HOURLY_2023-09-03",
+        "ERA5_HOURLY_2023-09-04",
+        "ERA5_HOURLY_2023-09-05",
+        "ERA5_HOURLY_2023-09-06",
+        "ERA5_HOURLY_2023-09-07",
+        "ERA5_HOURLY_2023-09-08",
+        "ERA5_HOURLY_2023-09-09",
+        "ERA5_HOURLY_2023-09-10",
+        "ERA5_HOURLY_2023-09-11",
+        "ERA5_HOURLY_2023-09-12",
+        "ERA5_HOURLY_2023-09-13",
+        "ERA5_HOURLY_2023-09-14",
+        "ERA5_HOURLY_2023-09-15",
+        "ERA5_HOURLY_2023-09-16",
+        "ERA5_HOURLY_2023-09-17",
+        "ERA5_HOURLY_2023-09-18",
+        "ERA5_HOURLY_2023-09-19",
+        "ERA5_HOURLY_2023-09-20",
+        "ERA5_HOURLY_2023-09-21",
+        "ERA5_HOURLY_2023-09-22",
+        "ERA5_HOURLY_2023-09-23",
+        "ERA5_HOURLY_2023-09-24",
+        "ERA5_HOURLY_2023-09-25",
+        "ERA5_HOURLY_2023-09-26",
+        "ERA5_HOURLY_2023-09-27",
+        "ERA5_HOURLY_2023-09-28",
+        "ERA5_HOURLY_2023-09-29",
+        "ERA5_HOURLY_2023-09-30",
+        "ERA5_HOURLY_2023-10-01",
+        "ERA5_HOURLY_2023-10-02",
+        "ERA5_HOURLY_2023-10-03"
+      ],
+      "total_metadata_bytes": 55308
+    }
+  },
+  "data_authenticity": {
+    "origin": "observational",
+    "zero_synthetic_data_declaration": true,
+    "providers": [
+      "Copernicus Data Space Ecosystem (Sentinel-1, Sentinel-2)",
+      "ECMWF Reanalysis v5 (ERA5)"
+    ]
+  },
+  "storage_footprint_bytes": 100085,
+  "records_count": 123,
+  "record_provenance": [
+    {
+      "record_id": "S2-425a100e-f960-41",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXL_20241104T145811.SAFE",
+      "acquisition_timestamp": "2023-09-01T04:37:11.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "acf97b995e68f07e311c00cce63f83249e5f34c7b965090953825585f48ddb72",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "425a100e-f960-41bf-bfc3-f8ffab3765a4",
+        "product_name": "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXL_20241104T145811.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-67c30dfe-0dbd-40",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230904T044701_N0511_R076_T45RXL_20250807T205334.SAFE",
+      "acquisition_timestamp": "2023-09-04T04:47:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "1ac07e99709b690ffc861dfabc351de4bf5e2d5cde33a4c9b29065fc35a2331e",
+      "storage_bytes": 1918,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "67c30dfe-0dbd-40d5-87a0-6636fa57878e",
+        "product_name": "S2A_MSIL2A_20230904T044701_N0511_R076_T45RXL_20250807T205334.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-d197d927-d2aa-40",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXL_20241106T184459.SAFE",
+      "acquisition_timestamp": "2023-09-06T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7558e83622f7009d57d89dce74310d4803de7e5925ceccea396506843c4fab68",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d197d927-d2aa-40bb-92f6-8309ab2053d1",
+        "product_name": "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXL_20241106T184459.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-69427273-6109-44",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230909T044659_N0510_R076_T45RXL_20240916T110800.SAFE",
+      "acquisition_timestamp": "2023-09-09T04:46:59.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "437d902dd0d55e49620d6e19b4507ba023e4472577e62061f0d1019cd7887e39",
+      "storage_bytes": 2153,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "69427273-6109-44e4-91e1-68f6b44518eb",
+        "product_name": "S2B_MSIL2A_20230909T044659_N0510_R076_T45RXL_20240916T110800.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-706441f5-a975-42",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXL_20241025T034108.SAFE",
+      "acquisition_timestamp": "2023-09-11T04:37:11.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "fa1391096932dd2a709a0e191e146a43cfdf45c135a2c164cd45030d6a558f0f",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "706441f5-a975-420e-a8f0-37f66bb13813",
+        "product_name": "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXL_20241025T034108.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-79964aac-9e5e-42",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230914T044701_N0511_R076_T45RXL_20250807T114056.SAFE",
+      "acquisition_timestamp": "2023-09-14T04:47:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "de023aab96cc23d040c69a91c01fb30fb88a740dff734ad0aeaa46eed961bf08",
+      "storage_bytes": 1991,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "79964aac-9e5e-427b-9d1e-c178ad268fbb",
+        "product_name": "S2A_MSIL2A_20230914T044701_N0511_R076_T45RXL_20250807T114056.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-c8f8e4a2-ba9c-4b",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXL_20241031T200326.SAFE",
+      "acquisition_timestamp": "2023-09-16T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8c62984826ee08c87f3a2a8bc64a24c5a9fb47732e5e682a81270d7c3c809c9b",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "c8f8e4a2-ba9c-4b22-bca9-da1362f034b3",
+        "product_name": "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXL_20241031T200326.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-a05f777c-eb9a-42",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230919T044659_N0510_R076_T45RXL_20241105T104412.SAFE",
+      "acquisition_timestamp": "2023-09-19T04:46:59.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "d8d2194b734e4d2dda08e389bc7310496c0e81a5a81a76fdbe2a1758884ffedf",
+      "storage_bytes": 1916,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "a05f777c-eb9a-42b2-a376-2dc637e8542b",
+        "product_name": "S2B_MSIL2A_20230919T044659_N0510_R076_T45RXL_20241105T104412.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-433a30f4-b7b8-43",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXL_20250808T093918.SAFE",
+      "acquisition_timestamp": "2023-09-21T04:37:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "f1c5ac463d0d116698e84c34a52d9a8b25ae3c94842f0f133f5a9ec251d0b0b3",
+      "storage_bytes": 1446,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "433a30f4-b7b8-439f-b97c-70d84fe0bd76",
+        "product_name": "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXL_20250808T093918.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-7d5926b4-d6a0-43",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230924T044701_N0510_R076_T45RXL_20241101T012245.SAFE",
+      "acquisition_timestamp": "2023-09-24T04:47:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "c4aa4fd0057f3566458be29dab65386ffe1af311ea68b1b09b36dc79a4395186",
+      "storage_bytes": 2001,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "7d5926b4-d6a0-4310-b1b0-9c3c8f9ec968",
+        "product_name": "S2A_MSIL2A_20230924T044701_N0510_R076_T45RXL_20241101T012245.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-7b4d1f7c-017d-43",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXL_20240826T102305.SAFE",
+      "acquisition_timestamp": "2023-09-26T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "57988a946d5408399f719a5750cb0cb483b047404df4a019cf37a15f26831b4c",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "7b4d1f7c-017d-4379-b991-605f6fac7c08",
+        "product_name": "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXL_20240826T102305.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-65320912-a057-48",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230929T044659_N0510_R076_T45RXL_20241022T042249.SAFE",
+      "acquisition_timestamp": "2023-09-29T04:46:59.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "075b54fed74e10753f5fce1068150571aa03b73a788e43dbbf918a869bb20f8f",
+      "storage_bytes": 2149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "65320912-a057-4829-be12-427de8c6638c",
+        "product_name": "S2B_MSIL2A_20230929T044659_N0510_R076_T45RXL_20241022T042249.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-e7236442-4708-4a",
+      "lake_id": "SGL-001",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXL_20241101T112436.SAFE",
+      "acquisition_timestamp": "2023-10-01T04:37:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:05.803975+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "63f5d2f0431dbb1a72a7ae0dc994bd74e8794c5f6d48b15612707b651dce2a5f",
+      "storage_bytes": 3470,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "e7236442-4708-4afb-9d40-4d1211be937a",
+        "product_name": "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXL_20241101T112436.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S1-1579285a-a3dd-4b",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F.SAFE",
+      "acquisition_timestamp": "2023-09-01T12:14:08.715352Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "b70f7f04f81d50d21ba9ebda9f2d312e54bfab16c81b4602f8a393172559b711",
+      "storage_bytes": 1290,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "1579285a-a3dd-4b77-b2e7-4b3654f12b56",
+        "product_name": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-fdb69d7d-c10a-4c",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_F571_COG.SAFE",
+      "acquisition_timestamp": "2023-09-01T12:14:08.715352Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "282bfe4f81184fa011ca3ba63eb51dedbc9ba658792e8bcabb2b9bc12aebd3f5",
+      "storage_bytes": 1302,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "fdb69d7d-c10a-4ca2-8ce2-fa5b35142dad",
+        "product_name": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_F571_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-798989c9-ed8f-48",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_CCE6_COG.SAFE",
+      "acquisition_timestamp": "2023-09-04T00:03:27.574863Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "c098eed554c1582f65bba61f5c1cc9bab5a91f47b3401fe765dafd81abbd1741",
+      "storage_bytes": 1306,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "798989c9-ed8f-48f9-b4ff-0bef20bb8584",
+        "product_name": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_CCE6_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-e502f24f-bbae-45",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_2D56.SAFE",
+      "acquisition_timestamp": "2023-09-04T00:03:27.574863Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "a8651817bd4e3edcd511c2452ff9977225db29a2aab9db3f1efb5da0ffdf0768",
+      "storage_bytes": 1294,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "e502f24f-bbae-450d-a52c-98ab29ff4370",
+        "product_name": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_2D56.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-8ab08fd6-8027-46",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_9C53.SAFE",
+      "acquisition_timestamp": "2023-09-13T12:14:09.069941Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "980fb6143cb24342c9f0d26ab857f8dc0d8706760afbfef5d37a40b891751e75",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "8ab08fd6-8027-468d-9570-51437afa5096",
+        "product_name": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_9C53.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-aba77605-6558-45",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_BAE4_COG.SAFE",
+      "acquisition_timestamp": "2023-09-13T12:14:09.069941Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "ad85e17fb008210a7f3d4d9c3e5305d2f6ccc55aadd731c4cfa4de8a9c2d3701",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "aba77605-6558-4572-b586-f017dc29c89e",
+        "product_name": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_BAE4_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-aee4e623-7839-40",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_5903.SAFE",
+      "acquisition_timestamp": "2023-09-16T00:03:27.968889Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "eeec2cd3b1bd7511f054d87a938d6a271b685567b1b5ad01ebac24c694491cd4",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "aee4e623-7839-4081-86d3-0f2f1168f928",
+        "product_name": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_5903.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-fa21091d-98a2-42",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_F258_COG.SAFE",
+      "acquisition_timestamp": "2023-09-16T00:03:27.968889Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7dee95bd35d9cc0d4ea1da11b6b40d3a0ac8d063c01a0731951f3f47cdb7f612",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "fa21091d-98a2-42af-af2b-2dcbf89abf53",
+        "product_name": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_F258_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-12ab63cd-293a-40",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_8FB6.SAFE",
+      "acquisition_timestamp": "2023-09-25T12:14:09.660335Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "3a5a4dea375c4bf8b97ed819742c1eda7a5a6eb9477900761982638e062b9685",
+      "storage_bytes": 1296,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "12ab63cd-293a-4072-bf0e-7aab7f41cd41",
+        "product_name": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_8FB6.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-50f7d41c-8f93-46",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_7923_COG.SAFE",
+      "acquisition_timestamp": "2023-09-25T12:14:09.660335Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "bed5aac752303fef45f58c25c1b5d22fd30ea739788ef1240c0fa259e94917c9",
+      "storage_bytes": 1308,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "50f7d41c-8f93-4669-b637-5075a559576a",
+        "product_name": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_7923_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-d8196db5-09c8-41",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_EFD1_COG.SAFE",
+      "acquisition_timestamp": "2023-09-28T00:03:28.096128Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8c73077e7f0f23eebe8cf0872c3626a1d2addb2aaac41fcc8bce13eac6353b25",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d8196db5-09c8-4179-95be-fa5fec270d44",
+        "product_name": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_EFD1_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-fb6c1000-4f65-4a",
+      "lake_id": "SGL-001",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_0D5F.SAFE",
+      "acquisition_timestamp": "2023-09-28T00:03:28.096128Z",
+      "query_timestamp": "2026-10-05T13:41:10.286242+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7ad89af943755be15a13b8c320d3c3ab17329eed7cf90c1c5e6b7a836f107430",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "fb6c1000-4f65-4a91-b2ad-60870184bf1f",
+        "product_name": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_0D5F.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-01",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-01",
+      "acquisition_timestamp": "2023-09-01T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "c91546eb5a2aff4cf69d36b5d65a8d47a092a05aba27cc621e1b8846f47a425b",
+      "storage_bytes": 161,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-01",
+        "t2m_mean_c": 4.6499999999999995,
+        "t2m_min_c": 1.0,
+        "t2m_max_c": 8.2,
+        "precipitation_total_mm": 0.6000000000000001,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-02",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-02",
+      "acquisition_timestamp": "2023-09-02T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "ccbeb21cb00db3e4279955ead74da6fd560f250c2eb354e4e4f5037f5f4b934b",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-02",
+        "t2m_mean_c": 1.8624999999999998,
+        "t2m_min_c": -4.5,
+        "t2m_max_c": 7.3,
+        "precipitation_total_mm": 1.4,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-03",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-03",
+      "acquisition_timestamp": "2023-09-03T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "e12da39fbffa11e88de4f11a3dd131cfc9c33097b934cc537caa67630c2a8ff4",
+      "storage_bytes": 149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-03",
+        "t2m_mean_c": 1.25,
+        "t2m_min_c": -4.2,
+        "t2m_max_c": 5.3,
+        "precipitation_total_mm": 0.30000000000000004,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-04",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-04",
+      "acquisition_timestamp": "2023-09-04T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "d951dc7bcc5c5c14c16c884dcc01f843b74651e34874d3ed8f409a64aec64950",
+      "storage_bytes": 135,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-04",
+        "t2m_mean_c": 0.2125,
+        "t2m_min_c": -3.9,
+        "t2m_max_c": 3.8,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-05",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-05",
+      "acquisition_timestamp": "2023-09-05T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "1e15be53529a2bce39a9c2532ae8b423ab0fadde7a5e951f58db6cd062a50ecd",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-05",
+        "t2m_mean_c": -0.3208333333333333,
+        "t2m_min_c": -5.2,
+        "t2m_max_c": 4.0,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-06",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-06",
+      "acquisition_timestamp": "2023-09-06T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "45b0359f091e50ac22cd1882a43a00b57570fc3573b23470512d7828ea2da13c",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-06",
+        "t2m_mean_c": 1.1041666666666667,
+        "t2m_min_c": -5.2,
+        "t2m_max_c": 4.9,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-07",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-07",
+      "acquisition_timestamp": "2023-09-07T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "694b5f46ea0d7b4695548e2c8bfc4dc14e4e5a6f910eca9f841c411db38fb17a",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-07",
+        "t2m_mean_c": 1.7583333333333335,
+        "t2m_min_c": -0.7,
+        "t2m_max_c": 5.2,
+        "precipitation_total_mm": 0.5,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-08",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-08",
+      "acquisition_timestamp": "2023-09-08T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "d21260f83dbc7eb69c349d1ca8e8e4cffa30c1485bf78495e81b8bb6c2bb4a23",
+      "storage_bytes": 161,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-08",
+        "t2m_mean_c": 1.9291666666666665,
+        "t2m_min_c": 0.9,
+        "t2m_max_c": 4.8,
+        "precipitation_total_mm": 1.7000000000000002,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-09",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-09",
+      "acquisition_timestamp": "2023-09-09T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "2b08bf687e85f17c7640661c994be6e11b0b1b4291f76a9326ba2dda0fa7c600",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-09",
+        "t2m_mean_c": 1.6416666666666666,
+        "t2m_min_c": -0.6,
+        "t2m_max_c": 3.5,
+        "precipitation_total_mm": 1.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-10",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-10",
+      "acquisition_timestamp": "2023-09-10T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "fc7fcb987fa7a6b0ad46869a2f324f9244332da9fd984adcb198a045b67f35b9",
+      "storage_bytes": 162,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-10",
+        "t2m_mean_c": 2.0958333333333337,
+        "t2m_min_c": -1.8,
+        "t2m_max_c": 5.3,
+        "precipitation_total_mm": 0.6000000000000001,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-11",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-11",
+      "acquisition_timestamp": "2023-09-11T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "4b25f10c796e4982331c095173d8f415e46ab6052a19169feeb875789729c58a",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-11",
+        "t2m_mean_c": 2.9875000000000003,
+        "t2m_min_c": -0.7,
+        "t2m_max_c": 6.2,
+        "precipitation_total_mm": 2.4,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-12",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-12",
+      "acquisition_timestamp": "2023-09-12T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "3334b2daee0141faf3ca97c71381bf350475a748833dce7910a612978b9be955",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-12",
+        "t2m_mean_c": 2.9958333333333336,
+        "t2m_min_c": -0.6,
+        "t2m_max_c": 6.1,
+        "precipitation_total_mm": 4.7,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-13",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-13",
+      "acquisition_timestamp": "2023-09-13T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "b5e6f672309bf886fe1eb05c8ce617187e30e441e27b03e3e7227fd6c11de99a",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-13",
+        "t2m_mean_c": 2.1791666666666667,
+        "t2m_min_c": -2.1,
+        "t2m_max_c": 7.6,
+        "precipitation_total_mm": 0.2,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-14",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-14",
+      "acquisition_timestamp": "2023-09-14T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "a7c8ba0694b072d1159c6e12b0205a548f305dd34934a7d22faf80a5f4f518a5",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-14",
+        "t2m_mean_c": 2.65,
+        "t2m_min_c": -1.5,
+        "t2m_max_c": 6.2,
+        "precipitation_total_mm": 0.7000000000000001,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-15",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-15",
+      "acquisition_timestamp": "2023-09-15T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8e35ba0894c1aeb45f9d1fb8afa7c2231990a2374bb70a757526fcd207008403",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-15",
+        "t2m_mean_c": 0.7958333333333334,
+        "t2m_min_c": -3.8,
+        "t2m_max_c": 5.3,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-16",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-16",
+      "acquisition_timestamp": "2023-09-16T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "6b818732c4f9080f16c45ff2ea3ba8e54924ffd4fca63d956eaa0758dcf6f1fa",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-16",
+        "t2m_mean_c": 0.31666666666666665,
+        "t2m_min_c": -3.9,
+        "t2m_max_c": 4.8,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-17",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-17",
+      "acquisition_timestamp": "2023-09-17T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "e1e77af043af14083b1689e0f4c0bf99ea79c4d97934dcc56eb6517f1534aacd",
+      "storage_bytes": 134,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-17",
+        "t2m_mean_c": 0.425,
+        "t2m_min_c": -4.2,
+        "t2m_max_c": 4.5,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-18",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-18",
+      "acquisition_timestamp": "2023-09-18T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7bc4e8ade58367ef8b04a62186755a93f7b5df57625b85cf70d7b8b4cc49f0bf",
+      "storage_bytes": 149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-18",
+        "t2m_mean_c": 0.012499999999999992,
+        "t2m_min_c": -4.9,
+        "t2m_max_c": 3.9,
+        "precipitation_total_mm": 0.4,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-19",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-19",
+      "acquisition_timestamp": "2023-09-19T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "5dce95a90da5c83aeda5e06f2ed41ce8b83aa651cfe31f092fa9e9dea346237c",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-19",
+        "t2m_mean_c": 0.9791666666666666,
+        "t2m_min_c": -2.8,
+        "t2m_max_c": 4.5,
+        "precipitation_total_mm": 1.4,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-20",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-20",
+      "acquisition_timestamp": "2023-09-20T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "bdff7088fd62aad18c3073c6a072d45b0e3cbdbe367ad3631b72a18d403a277c",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-20",
+        "t2m_mean_c": 1.5291666666666668,
+        "t2m_min_c": -2.4,
+        "t2m_max_c": 4.9,
+        "precipitation_total_mm": 6.8,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-21",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-21",
+      "acquisition_timestamp": "2023-09-21T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "6d88e599fddc333d8f7bf8c2356f1a34db5e5756c28fdae986b935cad9b02f70",
+      "storage_bytes": 162,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-21",
+        "t2m_mean_c": 0.7166666666666667,
+        "t2m_min_c": -3.9,
+        "t2m_max_c": 3.6,
+        "precipitation_total_mm": 0.6000000000000001,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-22",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-22",
+      "acquisition_timestamp": "2023-09-22T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "0d165abc3cae3dc82771583d923844867eee115751719640591af33fef485264",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-22",
+        "t2m_mean_c": 0.4458333333333333,
+        "t2m_min_c": -0.6,
+        "t2m_max_c": 1.9,
+        "precipitation_total_mm": 3.1,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-23",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-23",
+      "acquisition_timestamp": "2023-09-23T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "923931382ffec8ae3b9df3b6cab2c9f98b55353bb7ee2732b81d6889728c61d0",
+      "storage_bytes": 150,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-23",
+        "t2m_mean_c": -0.42083333333333334,
+        "t2m_min_c": -1.1,
+        "t2m_max_c": 0.3,
+        "precipitation_total_mm": 11.3,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-24",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-24",
+      "acquisition_timestamp": "2023-09-24T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "f7a069761086a455f29269b10ce5bc10c13ed1833de7fcac5b79f8a6c328930f",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-24",
+        "t2m_mean_c": -1.0916666666666666,
+        "t2m_min_c": -3.6,
+        "t2m_max_c": 2.4,
+        "precipitation_total_mm": 1.4,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-25",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-25",
+      "acquisition_timestamp": "2023-09-25T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "a9aaf2bc85259fed6c626f194863036f5ada023eeb9492b90310181a688e8f3d",
+      "storage_bytes": 136,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-25",
+        "t2m_mean_c": -1.0125,
+        "t2m_min_c": -5.2,
+        "t2m_max_c": 2.9,
+        "precipitation_total_mm": 0.2,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-26",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-26",
+      "acquisition_timestamp": "2023-09-26T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "f861626b595d0f68d226588e33f91e6fb7b76a0df8a3d7d2838b185de0ca8a2f",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-26",
+        "t2m_mean_c": -0.7875000000000001,
+        "t2m_min_c": -5.4,
+        "t2m_max_c": 3.9,
+        "precipitation_total_mm": 0.5,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-27",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-27",
+      "acquisition_timestamp": "2023-09-27T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "4d9ed72ccb14beed4d2c19a76d719ef44a017d04aa9a4d8ff6c58efc74b79118",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-27",
+        "t2m_mean_c": 0.13749999999999998,
+        "t2m_min_c": -4.3,
+        "t2m_max_c": 4.2,
+        "precipitation_total_mm": 0.6,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-28",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-28",
+      "acquisition_timestamp": "2023-09-28T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "4be16cb443d6fa313c3a272df85d19065b1855d457026fc4aa03f56696004bd4",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-28",
+        "t2m_mean_c": -0.5791666666666667,
+        "t2m_min_c": -4.8,
+        "t2m_max_c": 3.8,
+        "precipitation_total_mm": 0.5,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-29",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-29",
+      "acquisition_timestamp": "2023-09-29T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8b4138ac5c6dabdf1cb425da862b890f9828cf468cedf86f066f5f3dd773fab4",
+      "storage_bytes": 135,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-29",
+        "t2m_mean_c": -1.025,
+        "t2m_min_c": -6.1,
+        "t2m_max_c": 3.5,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-09-30",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-30",
+      "acquisition_timestamp": "2023-09-30T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "06bc6a03b2dc6e79ca68020252eb3688440d3b014f62592fd94bbfc4399ad318",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-30",
+        "t2m_mean_c": 0.1208333333333333,
+        "t2m_min_c": -5.2,
+        "t2m_max_c": 3.4,
+        "precipitation_total_mm": 0.2,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-10-01",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-10-01",
+      "acquisition_timestamp": "2023-10-01T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "c9ce9e8d7f9b3a28e2fbe0c62d2b09831ae7d8b89865375e10763ae36f099668",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-10-01",
+        "t2m_mean_c": 1.0833333333333333,
+        "t2m_min_c": -0.8,
+        "t2m_max_c": 4.0,
+        "precipitation_total_mm": 2.7,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-10-02",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-10-02",
+      "acquisition_timestamp": "2023-10-02T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "1fae5ec6af546f9e1c0fb86dd3f7e46a3fc3eb71a6b3232aaad34310f6aa1bce",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-10-02",
+        "t2m_mean_c": 0.6958333333333333,
+        "t2m_min_c": -1.6,
+        "t2m_max_c": 2.8,
+        "precipitation_total_mm": 1.1,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-001-2023-10-03",
+      "lake_id": "SGL-001",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-10-03",
+      "acquisition_timestamp": "2023-10-03T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:11.595662+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.204,
+          27.915
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7573f98944d47306b0ee4c71f05d51b8c2aa93b00b69a35f4f76f42e257663ba",
+      "storage_bytes": 150,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-10-03",
+        "t2m_mean_c": -0.008333333333333333,
+        "t2m_min_c": -1.1,
+        "t2m_max_c": 1.8,
+        "precipitation_total_mm": 4.8,
+        "elevation_m": 5222.0
+      }
+    },
+    {
+      "record_id": "S2-425a100e-f960-41",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXL_20241104T145811.SAFE",
+      "acquisition_timestamp": "2023-09-01T04:37:11.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "acf97b995e68f07e311c00cce63f83249e5f34c7b965090953825585f48ddb72",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "425a100e-f960-41bf-bfc3-f8ffab3765a4",
+        "product_name": "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXL_20241104T145811.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-60e1df18-5219-46",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXM_20241104T145811.SAFE",
+      "acquisition_timestamp": "2023-09-01T04:37:11.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "39cc788c85db1e27217bfbdb27ce85a0048e061b6cb17f69a36df22f0f93e9fb",
+      "storage_bytes": 1605,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "60e1df18-5219-46c9-97c3-1cc9bc67bb51",
+        "product_name": "S2A_MSIL2A_20230901T043711_N0510_R033_T45RXM_20241104T145811.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-217cad71-fc26-4c",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXM_20241106T184459.SAFE",
+      "acquisition_timestamp": "2023-09-06T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "712c70417b5a0b4bfddb2a5775ec0106a87766b3e07af6633c3b2140a2f11cd2",
+      "storage_bytes": 1605,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "217cad71-fc26-4c04-be8c-ab3c3cc584f9",
+        "product_name": "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXM_20241106T184459.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-d197d927-d2aa-40",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXL_20241106T184459.SAFE",
+      "acquisition_timestamp": "2023-09-06T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7558e83622f7009d57d89dce74310d4803de7e5925ceccea396506843c4fab68",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d197d927-d2aa-40bb-92f6-8309ab2053d1",
+        "product_name": "S2B_MSIL2A_20230906T043709_N0510_R033_T45RXL_20241106T184459.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-29006680-def2-4c",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXM_20241025T034108.SAFE",
+      "acquisition_timestamp": "2023-09-11T04:37:11.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "31020fe2d733c09d3123aec332509a3699b140a1e193ac89f20bf36898a18bf3",
+      "storage_bytes": 1680,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "29006680-def2-4cb8-b3ea-771819996627",
+        "product_name": "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXM_20241025T034108.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-706441f5-a975-42",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXL_20241025T034108.SAFE",
+      "acquisition_timestamp": "2023-09-11T04:37:11.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "fa1391096932dd2a709a0e191e146a43cfdf45c135a2c164cd45030d6a558f0f",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "706441f5-a975-420e-a8f0-37f66bb13813",
+        "product_name": "S2A_MSIL2A_20230911T043711_N0510_R033_T45RXL_20241025T034108.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-c8f8e4a2-ba9c-4b",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXL_20241031T200326.SAFE",
+      "acquisition_timestamp": "2023-09-16T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8c62984826ee08c87f3a2a8bc64a24c5a9fb47732e5e682a81270d7c3c809c9b",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "c8f8e4a2-ba9c-4b22-bca9-da1362f034b3",
+        "product_name": "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXL_20241031T200326.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-d6167c23-25e3-4a",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXM_20241031T200326.SAFE",
+      "acquisition_timestamp": "2023-09-16T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "1a442caae3ed3b3733fe7a8e13bd56b6fdfb8d2a76b9a1ed8abfb2e246e41c38",
+      "storage_bytes": 1599,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d6167c23-25e3-4a54-a73e-1dd835b6376d",
+        "product_name": "S2B_MSIL2A_20230916T043709_N0510_R033_T45RXM_20241031T200326.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-433a30f4-b7b8-43",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXL_20250808T093918.SAFE",
+      "acquisition_timestamp": "2023-09-21T04:37:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "f1c5ac463d0d116698e84c34a52d9a8b25ae3c94842f0f133f5a9ec251d0b0b3",
+      "storage_bytes": 1446,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "433a30f4-b7b8-439f-b97c-70d84fe0bd76",
+        "product_name": "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXL_20250808T093918.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-5743be2a-6f0f-49",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXM_20250808T093918.SAFE",
+      "acquisition_timestamp": "2023-09-21T04:37:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "dc91d4729f8bfb21dfa0ae1db9faec0ac5eb3cb3f1599c8c35bac730a3b4044e",
+      "storage_bytes": 1676,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "5743be2a-6f0f-49b2-8745-74d4be5e27a0",
+        "product_name": "S2A_MSIL2A_20230921T043701_N0511_R033_T45RXM_20250808T093918.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-7b4d1f7c-017d-43",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXL_20240826T102305.SAFE",
+      "acquisition_timestamp": "2023-09-26T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "57988a946d5408399f719a5750cb0cb483b047404df4a019cf37a15f26831b4c",
+      "storage_bytes": 1447,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "7b4d1f7c-017d-4379-b991-605f6fac7c08",
+        "product_name": "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXL_20240826T102305.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-99912a03-b425-4f",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXM_20240826T102305.SAFE",
+      "acquisition_timestamp": "2023-09-26T04:37:09.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "66b2b7f131faeb2c675b5de2606ec4b4d34d73e65a830c4c6518f356fc5b95ee",
+      "storage_bytes": 5085,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "99912a03-b425-4f5f-b530-081961fbca94",
+        "product_name": "S2B_MSIL2A_20230926T043709_N0510_R033_T45RXM_20240826T102305.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-abf56b89-2562-45",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXM_20241101T112436.SAFE",
+      "acquisition_timestamp": "2023-10-01T04:37:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "1f79757a484f3749e91f9b8ee42f861dd225179ca22e00719c5959dbfb8237e5",
+      "storage_bytes": 1601,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "abf56b89-2562-4503-81f9-41947b45f790",
+        "product_name": "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXM_20241101T112436.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S2-e7236442-4708-4a",
+      "lake_id": "SGL-002",
+      "modality": "optical",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXL_20241101T112436.SAFE",
+      "acquisition_timestamp": "2023-10-01T04:37:01.024000Z",
+      "query_timestamp": "2026-10-05T13:41:12.842504+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "63f5d2f0431dbb1a72a7ae0dc994bd74e8794c5f6d48b15612707b651dce2a5f",
+      "storage_bytes": 3470,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "e7236442-4708-4afb-9d40-4d1211be937a",
+        "product_name": "S2A_MSIL2A_20231001T043701_N0510_R033_T45RXL_20241101T112436.SAFE",
+        "cloud_cover_percentage": null,
+        "bands_available": [
+          "B02",
+          "B03",
+          "B04",
+          "B08",
+          "B11",
+          "B12"
+        ],
+        "qa_mask": "SCL"
+      }
+    },
+    {
+      "record_id": "S1-1579285a-a3dd-4b",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F.SAFE",
+      "acquisition_timestamp": "2023-09-01T12:14:08.715352Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "b70f7f04f81d50d21ba9ebda9f2d312e54bfab16c81b4602f8a393172559b711",
+      "storage_bytes": 1290,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "1579285a-a3dd-4b77-b2e7-4b3654f12b56",
+        "product_name": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-fdb69d7d-c10a-4c",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_F571_COG.SAFE",
+      "acquisition_timestamp": "2023-09-01T12:14:08.715352Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "282bfe4f81184fa011ca3ba63eb51dedbc9ba658792e8bcabb2b9bc12aebd3f5",
+      "storage_bytes": 1302,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "fdb69d7d-c10a-4ca2-8ce2-fa5b35142dad",
+        "product_name": "S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_F571_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-798989c9-ed8f-48",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_CCE6_COG.SAFE",
+      "acquisition_timestamp": "2023-09-04T00:03:27.574863Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "c098eed554c1582f65bba61f5c1cc9bab5a91f47b3401fe765dafd81abbd1741",
+      "storage_bytes": 1306,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "798989c9-ed8f-48f9-b4ff-0bef20bb8584",
+        "product_name": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_CCE6_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-e502f24f-bbae-45",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_2D56.SAFE",
+      "acquisition_timestamp": "2023-09-04T00:03:27.574863Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "a8651817bd4e3edcd511c2452ff9977225db29a2aab9db3f1efb5da0ffdf0768",
+      "storage_bytes": 1294,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "e502f24f-bbae-450d-a52c-98ab29ff4370",
+        "product_name": "S1A_IW_GRDH_1SDV_20230904T000327_20230904T000352_050170_0609CB_2D56.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-035319a1-e08a-45",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230908T120601_20230908T120626_050236_060C03_D46B_COG.SAFE",
+      "acquisition_timestamp": "2023-09-08T12:06:01.801370Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "ed3d23cdad28c00309c2ad59f38bd19958d63b525293d4930213ad5911c11190",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "035319a1-e08a-45e4-a902-ebddd812f546",
+        "product_name": "S1A_IW_GRDH_1SDV_20230908T120601_20230908T120626_050236_060C03_D46B_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-c36414ef-0122-4d",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230908T120601_20230908T120626_050236_060C03_8996.SAFE",
+      "acquisition_timestamp": "2023-09-08T12:06:01.801370Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "2afc77de53ef2343286b2384ee9a6317b2da9f84fa9e7bcd7d5fe473d7e08520",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "c36414ef-0122-4d58-8ff0-cea7da58f5c7",
+        "product_name": "S1A_IW_GRDH_1SDV_20230908T120601_20230908T120626_050236_060C03_8996.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-8ab08fd6-8027-46",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_9C53.SAFE",
+      "acquisition_timestamp": "2023-09-13T12:14:09.069941Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "980fb6143cb24342c9f0d26ab857f8dc0d8706760afbfef5d37a40b891751e75",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "8ab08fd6-8027-468d-9570-51437afa5096",
+        "product_name": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_9C53.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-aba77605-6558-45",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_BAE4_COG.SAFE",
+      "acquisition_timestamp": "2023-09-13T12:14:09.069941Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "ad85e17fb008210a7f3d4d9c3e5305d2f6ccc55aadd731c4cfa4de8a9c2d3701",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "aba77605-6558-4572-b586-f017dc29c89e",
+        "product_name": "S1A_IW_GRDH_1SDV_20230913T121409_20230913T121434_050309_060E91_BAE4_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-aee4e623-7839-40",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_5903.SAFE",
+      "acquisition_timestamp": "2023-09-16T00:03:27.968889Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "eeec2cd3b1bd7511f054d87a938d6a271b685567b1b5ad01ebac24c694491cd4",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "aee4e623-7839-4081-86d3-0f2f1168f928",
+        "product_name": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_5903.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-fa21091d-98a2-42",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_F258_COG.SAFE",
+      "acquisition_timestamp": "2023-09-16T00:03:27.968889Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7dee95bd35d9cc0d4ea1da11b6b40d3a0ac8d063c01a0731951f3f47cdb7f612",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "fa21091d-98a2-42af-af2b-2dcbf89abf53",
+        "product_name": "S1A_IW_GRDH_1SDV_20230916T000327_20230916T000352_050345_060FB7_F258_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-8ac9accc-5f8a-4c",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230920T120602_20230920T120627_050411_0611FA_D6FE.SAFE",
+      "acquisition_timestamp": "2023-09-20T12:06:02.064918Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "47f70b92665a4a928766f2a3e46613221e0d126d0cc2949283c666d885a9a5f3",
+      "storage_bytes": 1296,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "8ac9accc-5f8a-4cc5-b659-75894b088a1d",
+        "product_name": "S1A_IW_GRDH_1SDV_20230920T120602_20230920T120627_050411_0611FA_D6FE.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-d8076805-5f3d-43",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230920T120602_20230920T120627_050411_0611FA_465E_COG.SAFE",
+      "acquisition_timestamp": "2023-09-20T12:06:02.064918Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "6fee1b7a5fa65ba12ac31fab9c025f72094d7072ad6e6aa943943048add9ad7c",
+      "storage_bytes": 1308,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d8076805-5f3d-43a0-b2df-d4b5e6af05ba",
+        "product_name": "S1A_IW_GRDH_1SDV_20230920T120602_20230920T120627_050411_0611FA_465E_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-12ab63cd-293a-40",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_8FB6.SAFE",
+      "acquisition_timestamp": "2023-09-25T12:14:09.660335Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "3a5a4dea375c4bf8b97ed819742c1eda7a5a6eb9477900761982638e062b9685",
+      "storage_bytes": 1296,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "12ab63cd-293a-4072-bf0e-7aab7f41cd41",
+        "product_name": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_8FB6.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-50f7d41c-8f93-46",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_7923_COG.SAFE",
+      "acquisition_timestamp": "2023-09-25T12:14:09.660335Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "bed5aac752303fef45f58c25c1b5d22fd30ea739788ef1240c0fa259e94917c9",
+      "storage_bytes": 1308,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "50f7d41c-8f93-4669-b637-5075a559576a",
+        "product_name": "S1A_IW_GRDH_1SDV_20230925T121409_20230925T121434_050484_061484_7923_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-d8196db5-09c8-41",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_EFD1_COG.SAFE",
+      "acquisition_timestamp": "2023-09-28T00:03:28.096128Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8c73077e7f0f23eebe8cf0872c3626a1d2addb2aaac41fcc8bce13eac6353b25",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d8196db5-09c8-4179-95be-fa5fec270d44",
+        "product_name": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_EFD1_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-fb6c1000-4f65-4a",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_0D5F.SAFE",
+      "acquisition_timestamp": "2023-09-28T00:03:28.096128Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7ad89af943755be15a13b8c320d3c3ab17329eed7cf90c1c5e6b7a836f107430",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "fb6c1000-4f65-4a91-b2ad-60870184bf1f",
+        "product_name": "S1A_IW_GRDH_1SDV_20230928T000328_20230928T000353_050520_0615B5_0D5F.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-114cd456-6835-47",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20231002T120602_20231002T120627_050586_0617FC_8D3F.SAFE",
+      "acquisition_timestamp": "2023-10-02T12:06:02.449790Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "873fc836e8cf13c1c61d36d17b28d2194430a5ba1531c00b9e9e34f1f01505d5",
+      "storage_bytes": 1298,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "114cd456-6835-47f0-8a63-d2aa92bd3bf1",
+        "product_name": "S1A_IW_GRDH_1SDV_20231002T120602_20231002T120627_050586_0617FC_8D3F.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "S1-d5ddf463-a8d2-4d",
+      "lake_id": "SGL-002",
+      "modality": "sar",
+      "provider_name": "Copernicus Data Space Ecosystem",
+      "product_identifier": "S1A_IW_GRDH_1SDV_20231002T120602_20231002T120627_050586_0617FC_43CB_COG.SAFE",
+      "acquisition_timestamp": "2023-10-02T12:06:02.449790Z",
+      "query_timestamp": "2026-10-05T13:41:17.940129+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "5c2e70052ea1a34e300791419daa4c717f6454c4ecc8dc32386aae197e4f41bd",
+      "storage_bytes": 1310,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "cdse_product_id": "d5ddf463-a8d2-4daa-8746-0bec6053d604",
+        "product_name": "S1A_IW_GRDH_1SDV_20231002T120602_20231002T120627_050586_0617FC_43CB_COG.SAFE",
+        "polarization": "VV+VH",
+        "orbit_direction": "UNKNOWN",
+        "terrain_correction": "Copernicus 30m DEM"
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-01",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-01",
+      "acquisition_timestamp": "2023-09-01T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "2080b0f8f3d9963a990ab897d64b74c916ed62bfbd0d9ae3df72ae06f1c39d25",
+      "storage_bytes": 146,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-01",
+        "t2m_mean_c": 2.091666666666667,
+        "t2m_min_c": -2.2,
+        "t2m_max_c": 7.0,
+        "precipitation_total_mm": 0.2,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-02",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-02",
+      "acquisition_timestamp": "2023-09-02T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "011abb4d7cb891f20bc5c8231b28fb28d25e4964c5c780d14154376ec5cec79d",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-02",
+        "t2m_mean_c": 1.0041666666666667,
+        "t2m_min_c": -4.5,
+        "t2m_max_c": 6.1,
+        "precipitation_total_mm": 0.2,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-03",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-03",
+      "acquisition_timestamp": "2023-09-03T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "cffa05496cf31dead6b5d07cfd51b7361643ec16ae792b923017790a8f0df32e",
+      "storage_bytes": 149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-03",
+        "t2m_mean_c": -0.09583333333333334,
+        "t2m_min_c": -5.4,
+        "t2m_max_c": 3.1,
+        "precipitation_total_mm": 1.3,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-04",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-04",
+      "acquisition_timestamp": "2023-09-04T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "969ea344b1719141531ea626be9d9307ce75a0aafee7f9bcbb0f3a040648cbde",
+      "storage_bytes": 136,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-04",
+        "t2m_mean_c": -0.9125,
+        "t2m_min_c": -4.3,
+        "t2m_max_c": 3.2,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-05",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-05",
+      "acquisition_timestamp": "2023-09-05T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "52f8654a9ce564a5ed63e851a1f623dc63d291196bc884a38ecc49666f0beaf3",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-05",
+        "t2m_mean_c": -0.7791666666666667,
+        "t2m_min_c": -4.5,
+        "t2m_max_c": 2.9,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-06",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-06",
+      "acquisition_timestamp": "2023-09-06T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "14f1bf2b4eb2b71dd24b3dc8b31fe70e60bad1ba9d9617ae15eb8239e68ba7c5",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-06",
+        "t2m_mean_c": 0.15416666666666667,
+        "t2m_min_c": -4.4,
+        "t2m_max_c": 4.3,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-07",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-07",
+      "acquisition_timestamp": "2023-09-07T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "51dae03479cd301db1368a656af73a5e5afdbc636c4180cbe3a7798d921365f5",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-07",
+        "t2m_mean_c": 0.7333333333333333,
+        "t2m_min_c": -2.2,
+        "t2m_max_c": 4.0,
+        "precipitation_total_mm": 0.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-08",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-08",
+      "acquisition_timestamp": "2023-09-08T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "3dc7f1c1f24c736b0670c44dc89ed307d9a6f22c5b0ad779832041e94d32a7d3",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-08",
+        "t2m_mean_c": 0.5333333333333333,
+        "t2m_min_c": -0.9,
+        "t2m_max_c": 3.7,
+        "precipitation_total_mm": 4.2,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-09",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-09",
+      "acquisition_timestamp": "2023-09-09T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "552b8df375681acd08898af53223782ac952510a02e20335e186846501e29f63",
+      "storage_bytes": 149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-09",
+        "t2m_mean_c": -0.35833333333333334,
+        "t2m_min_c": -2.9,
+        "t2m_max_c": 2.3,
+        "precipitation_total_mm": 2.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-10",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-10",
+      "acquisition_timestamp": "2023-09-10T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "28241b5f896ce256855a009a96ca5d76d9766ded3df16cf2d1098609cf6b1206",
+      "storage_bytes": 163,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-10",
+        "t2m_mean_c": 0.6749999999999999,
+        "t2m_min_c": -1.6,
+        "t2m_max_c": 3.8,
+        "precipitation_total_mm": 0.30000000000000004,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-11",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-11",
+      "acquisition_timestamp": "2023-09-11T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "fb1608e4f78a3239d014b8fad11467ba74f98b9e955ffa072b242e59751a0c61",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-11",
+        "t2m_mean_c": 0.8791666666666668,
+        "t2m_min_c": -1.5,
+        "t2m_max_c": 4.4,
+        "precipitation_total_mm": 4.8,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-12",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-12",
+      "acquisition_timestamp": "2023-09-12T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "97405ed3af64b429d4f42100cbafe90a44ce5c7fe66080a4430b01a31ee9b836",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-12",
+        "t2m_mean_c": 0.06666666666666668,
+        "t2m_min_c": -2.8,
+        "t2m_max_c": 4.9,
+        "precipitation_total_mm": 5.6,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-13",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-13",
+      "acquisition_timestamp": "2023-09-13T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "556bcdd0f48817cd8873d71cd7c1dd332faa99bcd17b4ec9539234dc6dba728c",
+      "storage_bytes": 135,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-13",
+        "t2m_mean_c": -0.225,
+        "t2m_min_c": -6.4,
+        "t2m_max_c": 5.9,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-14",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-14",
+      "acquisition_timestamp": "2023-09-14T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "5d7a524d16f4c72bed7c39ad740b68bc6033372c3f7f40809417ffdc1d944f35",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-14",
+        "t2m_mean_c": 0.9750000000000001,
+        "t2m_min_c": -3.0,
+        "t2m_max_c": 5.0,
+        "precipitation_total_mm": 0.4,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-15",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-15",
+      "acquisition_timestamp": "2023-09-15T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "cd0072c56f630e9960960e927cc87e06fe1c843536b0b7b208d2d698225f91b6",
+      "storage_bytes": 149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-15",
+        "t2m_mean_c": -0.06249999999999999,
+        "t2m_min_c": -3.9,
+        "t2m_max_c": 3.8,
+        "precipitation_total_mm": 0.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-16",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-16",
+      "acquisition_timestamp": "2023-09-16T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "6f0dbd6e94fb14eb213e6a186a37dca6721f8ab8aff85e41358a72bbab984f30",
+      "storage_bytes": 164,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-16",
+        "t2m_mean_c": -1.1291666666666667,
+        "t2m_min_c": -4.8,
+        "t2m_max_c": 2.8,
+        "precipitation_total_mm": 0.30000000000000004,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-17",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-17",
+      "acquisition_timestamp": "2023-09-17T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "9e423d8fcca366e1c8c55fd97d8cf5f264e08d487e7e445f586dee0812f772ea",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-17",
+        "t2m_mean_c": -1.3666666666666665,
+        "t2m_min_c": -5.8,
+        "t2m_max_c": 3.1,
+        "precipitation_total_mm": 0.4,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-18",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-18",
+      "acquisition_timestamp": "2023-09-18T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "b8b2d1d0ac92afb506044f19bbd11d4b1569756e0aca2189b4eb8188b81beebe",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-18",
+        "t2m_mean_c": -1.8416666666666668,
+        "t2m_min_c": -5.7,
+        "t2m_max_c": 2.4,
+        "precipitation_total_mm": 0.8,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-19",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-19",
+      "acquisition_timestamp": "2023-09-19T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "11ff1e28c8dd6153f2a64e7178527108e1c4c50c2374e962a0bb128dec9a3d91",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-19",
+        "t2m_mean_c": -1.3708333333333333,
+        "t2m_min_c": -5.0,
+        "t2m_max_c": 2.7,
+        "precipitation_total_mm": 1.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-20",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-20",
+      "acquisition_timestamp": "2023-09-20T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "bd58cdfc62f65df3fe3fef5c4736a003e54b011273ccfe7cd79d769acfce078e",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-20",
+        "t2m_mean_c": -0.5291666666666667,
+        "t2m_min_c": -3.6,
+        "t2m_max_c": 3.6,
+        "precipitation_total_mm": 6.4,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-21",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-21",
+      "acquisition_timestamp": "2023-09-21T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "f0ec5aa5a487b8b7458d4294e523d99657b5a3265121d53e6791216319181f43",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-21",
+        "t2m_mean_c": -0.6749999999999999,
+        "t2m_min_c": -2.7,
+        "t2m_max_c": 2.3,
+        "precipitation_total_mm": 2.3,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-22",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-22",
+      "acquisition_timestamp": "2023-09-22T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "b6638f20d301a2b1a73437dd153a8c71cb15811fc21c80f7089f6555765f31f4",
+      "storage_bytes": 149,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-22",
+        "t2m_mean_c": -1.5416666666666667,
+        "t2m_min_c": -2.3,
+        "t2m_max_c": -0.1,
+        "precipitation_total_mm": 1.5,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-23",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-23",
+      "acquisition_timestamp": "2023-09-23T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "fa80e2ba4f3ec3f00dad11dd1c670e00be3dcd198c8fe36fea04cbb5bb35ec50",
+      "storage_bytes": 150,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-23",
+        "t2m_mean_c": -1.8083333333333333,
+        "t2m_min_c": -2.5,
+        "t2m_max_c": -0.6,
+        "precipitation_total_mm": 10.8,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-24",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-24",
+      "acquisition_timestamp": "2023-09-24T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "8055160ea5b286a67dbb3873ea0958ff1cad4eb28130fce81ad547182bdaeea8",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-24",
+        "t2m_mean_c": -2.716666666666667,
+        "t2m_min_c": -4.9,
+        "t2m_max_c": -0.9,
+        "precipitation_total_mm": 1.7,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-25",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-25",
+      "acquisition_timestamp": "2023-09-25T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "88e6667e863878afa54d67c06e5d8b67c40a75e81302abc11a47e9f08cd36079",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-25",
+        "t2m_mean_c": -2.9499999999999997,
+        "t2m_min_c": -6.6,
+        "t2m_max_c": 0.1,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-26",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-26",
+      "acquisition_timestamp": "2023-09-26T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "e060e58c37976acc869f1d41414f371a95b9dab8a7c82145e21b498cd3537a8a",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-26",
+        "t2m_mean_c": -2.2375000000000003,
+        "t2m_min_c": -5.9,
+        "t2m_max_c": 1.8,
+        "precipitation_total_mm": 0.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-27",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-27",
+      "acquisition_timestamp": "2023-09-27T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "9683c5bf8075bfe91c575372d14caaf3e1dbee5e37ba0c6dd7dcbf096cc623ba",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-27",
+        "t2m_mean_c": -1.7333333333333334,
+        "t2m_min_c": -5.8,
+        "t2m_max_c": 2.6,
+        "precipitation_total_mm": 0.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-28",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-28",
+      "acquisition_timestamp": "2023-09-28T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "2c8a12ac0f50b87924d732683f8245ce7f965adbc755c01e9b55a7784c46cbbf",
+      "storage_bytes": 136,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-28",
+        "t2m_mean_c": -1.9375,
+        "t2m_min_c": -4.7,
+        "t2m_max_c": 1.4,
+        "precipitation_total_mm": 0.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-29",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-29",
+      "acquisition_timestamp": "2023-09-29T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "a147cf8db2fcb66f015be5b084c36043eace938bad576fbce680c0ed39377d3f",
+      "storage_bytes": 147,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-29",
+        "t2m_mean_c": -2.058333333333333,
+        "t2m_min_c": -5.1,
+        "t2m_max_c": 1.8,
+        "precipitation_total_mm": 0.0,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-09-30",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-09-30",
+      "acquisition_timestamp": "2023-09-30T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "b9970b97351540198ea7060031536ad849ab7aa7d95e18363842d3f7e9290027",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-09-30",
+        "t2m_mean_c": -1.3833333333333335,
+        "t2m_min_c": -5.0,
+        "t2m_max_c": 1.4,
+        "precipitation_total_mm": 0.4,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-10-01",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-10-01",
+      "acquisition_timestamp": "2023-10-01T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "7aac1d9f0b89a676d9e8e97897892cfbe47be44990082f1156dc087642b99101",
+      "storage_bytes": 135,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-10-01",
+        "t2m_mean_c": -0.525,
+        "t2m_min_c": -2.8,
+        "t2m_max_c": 2.2,
+        "precipitation_total_mm": 1.1,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-10-02",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-10-02",
+      "acquisition_timestamp": "2023-10-02T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "f14be7dc542db071cde7d076b32a8de68d9ae5d28016832344a7e753ff34af2e",
+      "storage_bytes": 151,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-10-02",
+        "t2m_mean_c": -0.6625,
+        "t2m_min_c": -2.6,
+        "t2m_max_c": 1.9,
+        "precipitation_total_mm": 1.4000000000000001,
+        "elevation_m": 5559.0
+      }
+    },
+    {
+      "record_id": "ERA5-SGL-002-2023-10-03",
+      "lake_id": "SGL-002",
+      "modality": "weather",
+      "provider_name": "ECMWF ERA5 Reanalysis",
+      "product_identifier": "ERA5_HOURLY_2023-10-03",
+      "acquisition_timestamp": "2023-10-03T12:00:00Z",
+      "query_timestamp": "2026-10-05T13:41:19.229341+00:00",
+      "roi_geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.752,
+          27.985
+        ]
+      },
+      "status": "CATALOGUED",
+      "sha256": "0e2e9cbf44da8308e9ef0114656825be8565d9a5700306a751a4e3a48ec5db67",
+      "storage_bytes": 148,
+      "missingness_mask": null,
+      "missingness_reason": null,
+      "metadata": {
+        "date": "2023-10-03",
+        "t2m_mean_c": -1.5999999999999999,
+        "t2m_min_c": -3.6,
+        "t2m_max_c": 0.4,
+        "precipitation_total_mm": 3.2,
+        "elevation_m": 5559.0
+      }
+    }
+  ]
+}

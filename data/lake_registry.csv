@@ -1,0 +1,3 @@
+lake_id,rgi_id,glims_id,name,centroid_lat,centroid_lon,elevation_m,dam_type,area_km2_2020,basin,country,cluster_id,cohort_role
+SGL-001,RGI60-15.03976,G088204E27915N,South Lhonak,27.91500,88.20400,5200,moraine_dammed,1.350,Teesta,IND,CLS-SIKKIM-01,event_case_eval
+SGL-002,RGI60-15.03852,G088752E27985N,Khangchung Tsho,27.98500,88.75200,5250,moraine_dammed,1.420,Teesta,IND,CLS-SIKKIM-01,negative_control_eval

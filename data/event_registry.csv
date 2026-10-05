@@ -1,0 +1,2 @@
+event_id,lake_id,onset_earliest,onset_latest,onset_confidence,trigger_mechanism,volume_released_m3,evidence_tier,primary_reference
+EVT-001,SGL-001,2023-10-03T22:30:00Z,2023-10-03T23:30:00Z,exact_hour,ice_avalanche_wave,45000000.0,Tier_1_Instrumented,doi:10.1126/science.ads2659
