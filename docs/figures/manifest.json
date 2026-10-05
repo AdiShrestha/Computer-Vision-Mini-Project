@@ -1,0 +1,56 @@
+{
+  "manifest_version": 1,
+  "figures_count": 5,
+  "figures": [
+    {
+      "filename": "fig1_observation_cadence.png",
+      "description": "Authentic observation cadence and multi-modal coverage (C_obs) across optical, SAR, and ERA5.",
+      "generator": "plot_observation_cadence_and_coverage",
+      "sha256": "407a479f2922d5d7db3ffa3463be04378e6a374ac9e5b5c9c8d15fb582d649ac",
+      "size_bytes": 85382,
+      "input_hashes": {
+        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+      }
+    },
+    {
+      "filename": "fig2_feature_panels.png",
+      "description": "Multi-modal feature panel traces across 11 standardized channels distinguishing observed vs missing entries.",
+      "generator": "plot_multimodal_feature_panels",
+      "sha256": "6393c4c6a5eb901e2fb057569c6c4fbe2f1f675ffe4f1f4e58de2aa89f69ff26",
+      "size_bytes": 532791,
+      "input_hashes": {
+        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+      }
+    },
+    {
+      "filename": "fig3_anomaly_lead_time.png",
+      "description": "Anomaly score trajectories comparing Sentinel-GL against four baselines with bounded lead time (Delta t_lead).",
+      "generator": "plot_anomaly_trajectories_and_lead_time",
+      "sha256": "9635853f1a87a6ccabbdd5088006bde6ba920ff4b099fa96b12ad8a968123234",
+      "size_bytes": 143326,
+      "input_hashes": {
+        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+      }
+    },
+    {
+      "filename": "fig4_control_episodes.png",
+      "description": "Negative-control alert episodes and follow-up exposure illustrating sustained detection, hysteresis, and single-episode collapse.",
+      "generator": "plot_control_episodes_and_exposure",
+      "sha256": "8141e6adc67a16e0f96b1d1b3eb70d1ec00fbe221e0cba6f90d7262c485bf022",
+      "size_bytes": 110511,
+      "input_hashes": {
+        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+      }
+    },
+    {
+      "filename": "fig5_sensor_ablations.png",
+      "description": "2^N sensor ablation lattice comparing reconstruction MSE and anomaly sensitivity across 7 configurations.",
+      "generator": "plot_sensor_ablation_comparison",
+      "sha256": "65b56f35d5d095b88c50f339fc99a7dd6bd151ee493136c516cbf7095c6f2013",
+      "size_bytes": 55871,
+      "input_hashes": {
+        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+      }
+    }
+  ]
+}
