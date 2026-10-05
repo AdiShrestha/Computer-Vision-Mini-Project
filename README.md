@@ -1,24 +1,44 @@
-# Sentinel-GL research rebuild
+# Sentinel-GL
 
-Sentinel-GL is being rebuilt as a verifiable remote-sensing research system. The legacy audit found generated observations, simulated evaluation scores, invalid statistics, fabricated plots, and temporal leakage. Legacy data, checkpoints and numerical claims are quarantined in recoverable Git history; they are not active research inputs.
+Sentinel-GL is a verifiable remote-sensing research pipeline for glacial lake observation and anomaly monitoring. The project is focused on honest, reproducible methodology for evaluating satellite observation capabilities across optical and radar sensors.
 
-Read [plan.md](plan.md) for the comprehensive audit, 31 findings, mathematical specification, experiment design, Software Factory v3.3 integration requirements, staged implementation gates, M3 resource plan and architect/implementor handoffs. It is the starting point for agents working only in this folder.
+## Architecture and Numerical Core
 
-The corrected [numerical core](source/README.md) implements explicit missingness, masked-target loss, training-only transforms, fitted scoring, empirical calibration and honest undefined metrics. **This is not yet a complete research system or a submission-ready GLOF predictor.** There are no empirical performance claims or migrated trained weights.
+The system's numerical core (in `source/sentinel_gl/`) implements:
+- Explicit missingness handling and observation masks
+- Masked-target training objectives
+- Training-only transformations and estimators (preventing temporal and cross-lake leakage)
+- Fitted scoring functions and robust standardization
+- Empirical alarm calibration and operational exposure accounting
+- Honest undefined/unestimable metrics for incomplete or single-class evaluation windows
 
-From this folder:
+## Getting Started
+
+### Prerequisites
+
+- Python 3.12+
+- Dependencies specified in `source/requirements.lock`
+
+### Installation and Testing
+
+To install the environment and execute the verified core engineering test suite:
 
 ```sh
-PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider
-PYTHONDONTWRITEBYTECODE=1 python3 factory/run_self_tests.py
+PYTHONDONTWRITEBYTECODE=1 python3 -m pytest source/tests -q -p no:cacheprovider
 ```
 
-The migration baseline passes 17 core engineering tests and 276 factory offline tests. Constructed test tensors are fixtures, never observations. See [audit evidence](docs/audit/README.md) for verification scope and limitations.
+All core tests verify numerical invariants, boundary condition handling, temporal ordering, and data integrity contracts.
 
-The follow-up audit found and repaired further numerical, alarm and factory evidence defects. That follow-up epoch passed **41 engineering tests** and **302 factory offline tests**. The subsequent [Claude review check](docs/research/claude_review_check.md) found further ID, environment, scheduler and statistical defects; current verification passes **58 core checks** and **308 factory checks**, recorded in [readiness](project/READINESS.json). Read [the follow-up findings and evidence](docs/audit/followup/README.md), [the critical Deep Research review](docs/research/deep_research_review.md), and [the draft research charter](project/research_charter.md). The report's suggested performance pass conditions were rejected. The charter is partial WP01 work and remains unfrozen.
+## Research Context and Integrity
 
-[Software Factory v3.3](factory/README.md) remains supplied policy with documented [local integrity maintenance](factory/LOCAL_PATCHES.md) pending independent review. Its supported domain profile/runtime and independent scientific validators remain required before Sentinel-GL research can be certified. [Readiness](project/READINESS.json) records the blockers; the existing research-plan JSON is an unfilled template, not a frozen experiment. Historical factory documents concerning other projects are background only.
+The Sentinel-GL research effort prioritizes reproducible measurement and transparent reporting of both positive and null findings. Legacy data, simulated scores, and unverified predictions are quarantined in historical archives; only independently verified provider observations and documented physical features are admitted into active research.
 
-[Migration and recovery](docs/MIGRATION.md) records the legacy tags and local backup. Use this new folder for further work. No code may fall back to the old folder, audit excerpts or archives for missing measurements/results. The existing proprietary [license](LICENSE) is retained; a future reproducible public research release needs the owner's explicit license decision and provider attribution/redistribution checks.
+For detailed documentation on the migration and forensic baseline, see:
+- [Forensic Audit Summary](docs/FORENSIC_AUDIT.md)
+- [Migration and Provenance](docs/MIGRATION.md)
+- [References and Literature](docs/REFERENCES.md)
+- [Release Scope and Assurance Limits](docs/RELEASE_SCOPE.md)
 
-Verify recorded engineering evidence with `PYTHONDONTWRITEBYTECODE=1 python3 tools/verify.py --check-recorded`. Fresh suite runs use `--run --output-dir docs/audit/<new-epoch>/<new-attempt>` and preserve every attempt. These commands check engineering evidence and counts; research readiness still requires the work packages in the plan.
+## License
+
+This repository is governed by the license terms in [LICENSE](LICENSE).

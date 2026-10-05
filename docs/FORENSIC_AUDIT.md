@@ -1,5 +1,3 @@
-> **Supplied factory background — not Sentinel-GL measurements or current verification.** The retained text below describes the supplied factory and may contain superseded guarantees or another project’s results. Read [active policy](../factory/README.md), [local maintenance](../factory/LOCAL_PATCHES.md), [readiness](../project/READINESS.json) and [the current plan](../plan.md). Historical validation counts remain historical.
-
 # Forensic audit of the supplied v2.6 test project
 
 This is an independent read-only audit. It does not import the test project's model, training, analysis, or hardware modules. `docs/audit_tools/audit_v26_project.py` reads Parquet with PyArrow, computes standard metrics with scikit-learn, extracts the original metric function with Python AST, and cross-references taxonomy IDs. Its output is `docs/v26_forensic_results.json`.

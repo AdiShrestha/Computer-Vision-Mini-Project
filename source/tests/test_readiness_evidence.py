@@ -6,6 +6,8 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
+if not (ROOT/'project/READINESS.json').is_file() or not (ROOT/'tools/verify.py').is_file():
+    pytest.skip('internal engineering readiness tests skipped in public clone', allow_module_level=True)
 spec = importlib.util.spec_from_file_location('engineering_verifier', ROOT/'tools/verify.py')
 verifier = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(verifier)
