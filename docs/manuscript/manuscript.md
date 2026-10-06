@@ -6,11 +6,19 @@
 **Status:** Working Paper / Pre-Print Under Peer Review  
 **Reproducibility Repository:** `https://github.com/AdiShrestha/Computer-Vision-Mini-Project`  
 
+> [!IMPORTANT]
+> **Scientific Integrity & Simulation Provenance Notice:**  
+> This manuscript specifies the complete mathematical and software architecture of the Sentinel-GL pipeline. All architectural contracts, statistical formulations, and release verification gates are fully implemented and verified via automated engineering test suites (118 core tests, 474 factory tests). However, per the project research charter and `project/READINESS.json`, observational acquisition from live provider APIs remains pending (`observational_experiments: NOT_EXECUTED`).  
+> 
+> The comparative evaluation results in Section 5 (e.g., the 33-day lead time on South Lhonak, alert burden estimates, and baseline paired contrasts) and the sensor ablation scores in Section 6 are evaluated on **deterministic computational verification fixtures** designed to demonstrate pipeline execution end-to-end. They illustrate the behavior of the retrospective decision scheduler, alert episode engine, and Holm-Bonferroni hypothesis tests under controlled contracts, and **must not be interpreted as empirical observational measurements from live satellite rasters**.  
+> 
+> The InSAR coherence decay values ($\gamma_{\text{total}} = 0.0176$) in Section 2.3 are derived from **analytical physical forward-modeling** of Himalayan terrain geometry and monsoon moisture decorrelation, not processed Single Look Complex (SLC) interferograms. The sample size threshold ($N \ge 30$) and statistical power bounds ($1 - \beta < 0.20$) in Section 4.2 are **closed-form mathematical derivations** establishing the fundamental limitations of empirical satellite early warning claims across High Mountain Asia.
+
 ---
 
 ## Abstract
 
-Glacial Lake Outburst Floods (GLOFs) present severe, escalating hazards across High Mountain Asia (HMA) as climate change accelerates glacial retreat and lake expansion. Machine learning approaches leveraging Earth observation (EO) satellites have been widely proposed for early warning; however, severe cloud obscuration during the summer monsoon, steep terrain radar distortions, interferometric coherence collapse, and small historical event cohorts severely challenge operational viability. In this paper, we evaluate a multi-modal temporal anomaly detection framework—**Sentinel-GL**—combining optical surface reflectance (Sentinel-2 MSI), synthetic aperture radar backscatter (Sentinel-1 SAR GRD), and reanalysis meteorology (ERA5) within 180-day retrospective closed windows.
+Glacial Lake Outburst Floods (GLOFs) present severe, escalating hazards across High Mountain Asia (HMA) as climate change accelerates glacial retreat and lake expansion. Machine learning approaches leveraging Earth observation (EO) satellites have been widely proposed for early warning; however, severe cloud obscuration during the summer monsoon, steep terrain radar distortions, interferometric coherence collapse, and small historical event cohorts severely challenge operational viability. In this paper, we evaluate a multi-modal temporal anomaly detection framework—**Sentinel-GL**—combining optical surface reflectance (Sentinel-2 MSI), synthetic aperture radar backscatter (Sentinel-1 SAR GRD), and reanalysis meteorology (ERA5) within 180-day retrospective closed windows. *(Note: Empirical observational acquisition across live provider APIs remains pending; evaluation results reported below demonstrate pipeline contracts on deterministic simulation fixtures).*
 
 We define strict **population bounds** centered on High Mountain Asia moraine-dammed and ice-dammed proglacial lakes, evaluating an expanded regional cohort of $N=8$ candidate lakes (4 verified historical outburst events and 4 matched negative controls) spanning four major river basins: Teesta (South Lhonak SGL-001 / Khangchung Tsho SGL-002), Hunza (Shishper SGL-003 / Passu SGL-006), Gyirong/Poiqu (Gongbatongsha SGL-004 / Galong Tsho SGL-007), and Jinsha/Pumqu (Baige SGL-005 / Longbasaba SGL-008). We enforce rigorous anti-leakage contracts: strict retrospective availability ($t_{\text{acq}} < t_{\text{decision}}$), spatial basin clustering with $\ge 50$ km buffers, training-only normalizer fitting, and split-isolated threshold calibration.
 
@@ -48,7 +56,7 @@ We ingest authentic observational records directly from provider archives withou
 Optical observation frequencies are severely bounded by the South Asian summer monsoon. As shown in **Figure 1**, between June and September 2023, over $80\%$ of optical acquisitions over the Sikkim Himalaya were obscured by persistent cloud cover. Optical lake area and spectral indices (NDWI, MNDWI, NDSI) exhibited multi-week data voids. Multi-modal integration with all-weather Sentinel-1 SAR backscatter and ERA5 atmospheric reanalysis is therefore essential to maintain continuous surveillance.
 
 ### 2.3 InSAR SLC Feasibility & Monsoon Coherence Collapse Analysis
-A persistent hypothesis in remote sensing is that repeat-pass Synthetic Aperture Radar Interferometry (InSAR) Single Look Complex (SLC) phase tracking can measure sub-centimeter moraine crest creep prior to GLOF failure. We conducted a rigorous physical and computational audit of Sentinel-1 SLC interferometry across three dimensions:
+A persistent hypothesis in remote sensing is that repeat-pass Synthetic Aperture Radar Interferometry (InSAR) Single Look Complex (SLC) phase tracking can measure sub-centimeter moraine crest creep prior to GLOF failure. We conducted a rigorous analytical physical forward-modeling audit of Sentinel-1 SLC interferometry (evaluating theoretical coherence formulas and synthetic orbital geometry rather than empirical SLC interferograms) across three dimensions:
 
 1. **Workstation Storage Budget:** Full-scene Sentinel-1 SLC archives produce $\sim 4.2\text{ GB}$ per compressed frame ($\sim 8.0\text{ GB}$ uncompressed). Constructing a multi-temporal interferometric stack for our 8 study lakes over 30 acquisition epochs requires $938.8\text{ GB}$ of storage, dramatically exceeding the local workstation budget ($114\text{ GB}$ free). Processing requires burst-cropped ROI sub-setting ($\le 1.0\text{ GB}$ per lake ROI, totaling $223.5\text{ GB}$).
 2. **Geometric Radar Distortions in Steep Mountain Terrain:** High-relief glaciated cirques introduce severe geometric distortions governed by the local incidence angle:
@@ -121,6 +129,10 @@ Even under optimistic paired variance assumptions, a rigorous statistical sample
 
 ## 5. Comparative Results
 
+> [!NOTE]
+> **Evaluation Provenance Disclosure:**  
+> The comparative evaluation results reported below are evaluated on deterministic verification fixtures to demonstrate the scoring, episode declaration, and hypothesis testing pipeline end-to-end. While event dates and spatial coordinates reflect verified historical records, these numerical results represent an illustrative forward demonstration of the software contracts, not empirical discoveries from live satellite rasters.
+
 The comparative evaluation results are summarized in **Table 1**:
 
 ### Case Detection & Bounded Lead Time ($\Delta t_{\text{lead}}$)
@@ -144,6 +156,10 @@ Three of the four baseline contrasts fail to maintain significance under family-
 ---
 
 ## 6. Ablation & Sensitivity Analysis
+
+> [!NOTE]
+> **Evaluation Provenance Disclosure:**  
+> Sensor ablation sensitivity scores represent illustrative computational fixtures exercising the $2^N$ ablation lattice pipeline.
 
 We systematically evaluate the $2^N$ sensor ablation lattice across all 7 combinations of Optical, SAR, and ERA5 channels (**Table 2** and **Figure 5**):
 - **Full Modality (Opt+SAR+ERA5):** Lowest reconstruction error (MSE $= 0.0820$) and highest precursor sensitivity (0.850).
@@ -170,6 +186,7 @@ To guide operational cryospheric monitoring, we categorize failure modes into an
 ### Open Science Disclosures
 - **Code & Environment Availability:** Complete implementation source code, test suites, and report generators are available in the public repository under the Apache 2.0 open license. Exact dependency specifications are pinned in `source/requirements.lock`.
 - **Data Lineage:** Pilot dossiers, lake registries, and event catalogs contain verified CDSE and ECMWF product identifiers and SHA-256 byte digests.
+- **Observational Research Readiness:** As declared in `project/READINESS.json` (`status: RESEARCH_NOT_READY`), observational experiments across live provider APIs remain unexecuted (`observational_experiments: NOT_EXECUTED`). All software scaffolding and statistical machinery are fully frozen and reproducible.
 - **Non-Operational Research Scope:** Sentinel-GL is a retrospective scientific benchmarking system. It has **NOT** been certified for operational civil protection or real-time life-safety warning. Operational deployment requires real-time telemetry, automated satellite downlinks, and downstream hydrodynamic flood routing models beyond the scope of this work.
 
 ---
