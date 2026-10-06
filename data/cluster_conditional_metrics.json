@@ -1,0 +1,53 @@
+{
+  "status": "ESTIMATED",
+  "reason": null,
+  "n_clusters": 1,
+  "clusters": {
+    "CLS-SIKKIM-01": {
+      "cluster_id": "CLS-SIKKIM-01",
+      "lake_ids": [
+        "SGL-001",
+        "SGL-002"
+      ],
+      "n_lakes": 2,
+      "metrics": {
+        "mean_score": {
+          "status": "ESTIMATED",
+          "reason": null,
+          "mean": 1.4307810833333332,
+          "std": 1.3116150789989214,
+          "min": 0.5033291666666667,
+          "max": 2.358233,
+          "n_valid": 2
+        },
+        "n_eligible_windows": {
+          "status": "ESTIMATED",
+          "reason": null,
+          "mean": 5.5,
+          "std": 0.7071067811865476,
+          "min": 5.0,
+          "max": 6.0,
+          "n_valid": 2
+        },
+        "n_total_windows": {
+          "status": "ESTIMATED",
+          "reason": null,
+          "mean": 7.0,
+          "std": 0.0,
+          "min": 7.0,
+          "max": 7.0,
+          "n_valid": 2
+        },
+        "peak_score": {
+          "status": "ESTIMATED",
+          "reason": null,
+          "mean": 1.639367,
+          "std": 1.419869002409025,
+          "min": 0.635368,
+          "max": 2.643366,
+          "n_valid": 2
+        }
+      }
+    }
+  }
+}

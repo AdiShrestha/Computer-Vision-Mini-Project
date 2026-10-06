@@ -7,7 +7,13 @@ and conservative claims table reporting in offline unit tests only. They do not
 represent real physical observations and must never support scientific claims.
 """
 from __future__ import annotations
+import csv
+import json
 import math
+import os
+from pathlib import Path
+import subprocess
+import sys
 import numpy as np
 import pytest
 
@@ -293,3 +299,183 @@ def test_claims_table_conservative_non_rejection():
     # Check that all non-significant baselines report FAIL_TO_REJECT
     for comp in claims.baseline_comparisons:
         assert comp.claim_finding == "FAIL_TO_REJECT"
+
+
+# ---------------------------------------------------------------------------
+# Test 8: End-to-End Inference & Diagnostics Runner Execution
+# ---------------------------------------------------------------------------
+
+def test_run_inference_diagnostics_end_to_end(tmp_path: Path):
+    """Verify run_inference_diagnostics end-to-end execution and output artifacts.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    from runners.run_inference_diagnostics import run_inference_diagnostics
+
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    predictions_path = repo_root / "data" / "prediction_ledger.csv"
+    calibration_path = repo_root / "data" / "calibration_thresholds.json"
+    manifest_path = repo_root / "data" / "split_manifest.json"
+    panels_path = repo_root / "data" / "feature_panels.npz"
+    lake_registry_path = repo_root / "data" / "lake_registry.csv"
+    event_registry_path = repo_root / "data" / "event_registry.csv"
+
+    out_claims = tmp_path / "claims_table.json"
+    out_diag = tmp_path / "diagnostic_report.json"
+    out_cluster = tmp_path / "cluster_metrics.json"
+
+    res = run_inference_diagnostics(
+        predictions_path=predictions_path,
+        calibration_path=calibration_path,
+        manifest_path=manifest_path,
+        panels_path=panels_path,
+        lake_registry_path=lake_registry_path,
+        event_registry_path=event_registry_path,
+        output_claims_path=out_claims,
+        output_diagnostics_path=out_diag,
+        output_cluster_metrics_path=out_cluster,
+        alpha=0.05,
+        stride_days=5,
+    )
+
+    assert res["status"] == "COMPLETED"
+    assert res["n_evaluations"] > 0
+    assert out_claims.exists()
+    assert out_diag.exists()
+    assert out_cluster.exists()
+
+    # 1. Inspect claims table
+    with open(out_claims, "r", encoding="utf-8") as f:
+        claims_data = json.load(f)
+        assert claims_data["status"] == "COMPLETE"
+        assert len(claims_data["case_detections"]) > 0
+        assert len(claims_data["baseline_comparisons"]) == 4
+        assert claims_data["alert_burden"]["status"] == "ESTIMATED"
+
+    # 2. Inspect diagnostic report
+    with open(out_diag, "r", encoding="utf-8") as f:
+        diag_data = json.load(f)
+        assert diag_data["total_evaluations"] > 0
+        assert "ERR_CLOUD_OBSCURATION" in diag_data["failure_counts"]
+        assert len(diag_data["report_hash"]) == 64
+
+    # 3. Inspect cluster metrics
+    with open(out_cluster, "r", encoding="utf-8") as f:
+        cluster_data = json.load(f)
+        assert cluster_data["status"] == "ESTIMATED"
+        assert "CLS-SIKKIM-01" in cluster_data["clusters"]
+
+
+# ---------------------------------------------------------------------------
+# Test 9: CLI Runner Subprocess Invocation
+# ---------------------------------------------------------------------------
+
+def test_run_inference_diagnostics_cli_subprocess(tmp_path: Path):
+    """Verify source/runners/run_inference_diagnostics.py executes cleanly via CLI subprocess.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    runner_script = repo_root / "source" / "runners" / "run_inference_diagnostics.py"
+
+    out_claims = tmp_path / "cli_claims.json"
+    out_diag = tmp_path / "cli_diag.json"
+    out_cluster = tmp_path / "cli_cluster.json"
+
+    cmd = [
+        sys.executable,
+        "-B",
+        str(runner_script),
+        "--predictions", str(repo_root / "data" / "prediction_ledger.csv"),
+        "--calibration", str(repo_root / "data" / "calibration_thresholds.json"),
+        "--manifest", str(repo_root / "data" / "split_manifest.json"),
+        "--panels", str(repo_root / "data" / "feature_panels.npz"),
+        "--lake-registry", str(repo_root / "data" / "lake_registry.csv"),
+        "--event-registry", str(repo_root / "data" / "event_registry.csv"),
+        "--output-claims", str(out_claims),
+        "--output-diagnostics", str(out_diag),
+        "--output-cluster-metrics", str(out_cluster),
+        "--alpha", "0.05",
+        "--stride-days", "5",
+    ]
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        check=False,
+        env={**os.environ, "PYTHONPATH": str(repo_root / "source")},
+    )
+
+    assert result.returncode == 0, f"CLI runner failed with error:\nSTDOUT: {result.stdout}\nSTDERR: {result.stderr}"
+    assert "Sentinel-GL Independent Inference, Diagnostics & Claims Table Complete" in result.stdout
+    assert out_claims.exists()
+    assert out_diag.exists()
+    assert out_cluster.exists()
+
+
+# ---------------------------------------------------------------------------
+# Test 10: Claims Table Schema and Conservative Reporting Invariants
+# ---------------------------------------------------------------------------
+
+def test_claims_table_schema_and_conservative_invariants():
+    """Verify claims table schema, presence of non-rejections, and absence of placeholders.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    claims_path = repo_root / "data" / "claims_table.json"
+
+    assert claims_path.exists(), "data/claims_table.json must be materialized"
+    with open(claims_path, "r", encoding="utf-8") as f:
+        claims = json.load(f)
+
+    # Required top-level keys
+    for key in ("case_detections", "alert_burden", "baseline_comparisons", "cluster_aggregation", "alpha", "status", "report_hash"):
+        assert key in claims
+
+    # Bounded lead time integrity: missed event must be NOT_DETECTED with null lead time, NEVER 0.0 or 0
+    for case in claims["case_detections"]:
+        assert case["status"] in ("DETECTED", "NOT_DETECTED", "NOT_ESTIMABLE")
+        if case["status"] == "NOT_DETECTED":
+            assert case["lead_time_days"] is None
+            assert case["lead_time_days"] != 0
+
+    # Baseline comparison claims: verify conservative non-rejection
+    findings = [b["claim_finding"] for b in claims["baseline_comparisons"]]
+    assert "FAIL_TO_REJECT" in findings, "Conservative non-rejection must be present for non-significant contrasts"
+
+    # Verify absence of forbidden placeholders (-1.0, 999.0)
+    for b in claims["baseline_comparisons"]:
+        if b["claim_finding"] == "NOT_ESTIMABLE":
+            assert b["unadjusted_p_value"] is None
+            assert b["adjusted_p_value"] is None
+
+
+# ---------------------------------------------------------------------------
+# Test 11: Diagnostic Report Taxonomy Consistency
+# ---------------------------------------------------------------------------
+
+def test_diagnostic_report_taxonomy_consistency():
+    """Verify diagnostic report failure categories, failure rates, and hash determinism.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    diag_path = repo_root / "data" / "diagnostic_report.json"
+
+    assert diag_path.exists(), "data/diagnostic_report.json must be materialized"
+    with open(diag_path, "r", encoding="utf-8") as f:
+        diag = json.load(f)
+
+    assert diag["total_evaluations"] >= diag["total_failures"]
+    assert "ERR_CLOUD_OBSCURATION" in diag["failure_counts"]
+    assert "ERR_INSUFFICIENT_OBSERVATIONS" in diag["failure_counts"]
+
+    # If failures exist, rates must sum to approx 1.0
+    if diag["total_failures"] > 0:
+        total_rate = sum(diag["failure_rates"].values())
+        assert total_rate == pytest.approx(1.0, rel=1e-5)
+
+    assert len(diag["report_hash"]) == 64
+

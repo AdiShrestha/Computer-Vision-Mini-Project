@@ -1,0 +1,99 @@
+{
+  "case_detections": [
+    {
+      "event_id": "EV-SGL-001",
+      "lake_id": "SGL-001",
+      "status": "NOT_DETECTED",
+      "lead_time_days": null,
+      "onset_date": "2023-10-03",
+      "declaration_date": null,
+      "warning_horizon_days": 180
+    }
+  ],
+  "alert_burden": {
+    "status": "ESTIMATED",
+    "reason": null,
+    "lambda_alert": 0.0,
+    "poisson_ci_lower": 0.0,
+    "poisson_ci_upper": 43.76764851662381,
+    "confidence_level": 0.95,
+    "n_episodes": 0,
+    "total_lake_years": 0.06844626967830253
+  },
+  "baseline_comparisons": [
+    {
+      "baseline_id": "area_trend",
+      "n_paired_windows": 11,
+      "mean_delta_s": 1.3464672727272726,
+      "abs_statistic": 1.3464672727272726,
+      "unadjusted_p_value": 0.0009765625,
+      "adjusted_p_value": 0.00390625,
+      "claim_finding": "REJECT_NULL_SUPERIOR"
+    },
+    {
+      "baseline_id": "climatology",
+      "n_paired_windows": 11,
+      "mean_delta_s": -93274.597359,
+      "abs_statistic": 93274.597359,
+      "unadjusted_p_value": 0.25,
+      "adjusted_p_value": 0.5,
+      "claim_finding": "FAIL_TO_REJECT"
+    },
+    {
+      "baseline_id": "rpca",
+      "n_paired_windows": 11,
+      "mean_delta_s": 1.0702095454545455,
+      "abs_statistic": 1.0702095454545455,
+      "unadjusted_p_value": 0.0009765625,
+      "adjusted_p_value": 0.00390625,
+      "claim_finding": "REJECT_NULL_SUPERIOR"
+    },
+    {
+      "baseline_id": "weather_only",
+      "n_paired_windows": 11,
+      "mean_delta_s": 0.08800263636363632,
+      "abs_statistic": 0.08800263636363632,
+      "unadjusted_p_value": 0.5966796875,
+      "adjusted_p_value": 0.5966796875,
+      "claim_finding": "FAIL_TO_REJECT"
+    }
+  ],
+  "cluster_aggregation": {
+    "status": "ESTIMATED",
+    "reason": null,
+    "n_clusters": 1,
+    "clusters": {
+      "CLS-SIKKIM-01": {
+        "cluster_id": "CLS-SIKKIM-01",
+        "lake_ids": [
+          "SGL-001",
+          "SGL-002"
+        ],
+        "n_lakes": 2,
+        "metrics": {
+          "mean_score": {
+            "status": "ESTIMATED",
+            "reason": null,
+            "mean": 1.4307810833333332,
+            "std": 1.3116150789989214,
+            "min": 0.5033291666666667,
+            "max": 2.358233,
+            "n_valid": 2
+          },
+          "n_windows": {
+            "status": "ESTIMATED",
+            "reason": null,
+            "mean": 5.5,
+            "std": 0.7071067811865476,
+            "min": 5.0,
+            "max": 6.0,
+            "n_valid": 2
+          }
+        }
+      }
+    }
+  },
+  "alpha": 0.05,
+  "status": "COMPLETE",
+  "report_hash": "fbbc75d3cb05249680ea256e0b7f732364c634af39ed6a2529ad98f9c7deb4d7"
+}
