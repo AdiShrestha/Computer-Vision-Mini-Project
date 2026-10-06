@@ -1,0 +1,281 @@
+{
+  "status": "SUCCESS",
+  "summary_version": 1,
+  "created_at": "2026-10-06T13:52:32.383423+00:00",
+  "total_windows": 14,
+  "eligible_windows": 12,
+  "ineligible_windows": 2,
+  "window_days": 180,
+  "num_channels": 11,
+  "channel_names": [
+    "optical_lake_area_km2",
+    "ndwi_mean",
+    "mndwi_mean",
+    "ndsi_mean",
+    "sar_vv_db_mean",
+    "sar_vh_db_mean",
+    "sar_cross_ratio_db",
+    "sar_vv_spatial_variance",
+    "era5_temp_2m_c_mean",
+    "era5_precip_mm_sum",
+    "era5_temp_2m_anomaly"
+  ],
+  "channels": {
+    "optical_lake_area_km2": {
+      "channel_index": 0,
+      "total_slots": 2520,
+      "observed_count": 63,
+      "missing_count": 2457,
+      "missingness_fraction": 0.975,
+      "coverage_percentage": 2.5,
+      "distribution": {
+        "min": 1.35,
+        "max": 1.42,
+        "mean": 1.3733333333333335,
+        "std": 0.032998316455372136,
+        "median": 1.35
+      },
+      "physical_bounds": [
+        0.05,
+        5.0
+      ],
+      "domain_violations": 0
+    },
+    "ndwi_mean": {
+      "channel_index": 1,
+      "total_slots": 2520,
+      "observed_count": 63,
+      "missing_count": 2457,
+      "missingness_fraction": 0.975,
+      "coverage_percentage": 2.5,
+      "distribution": {
+        "min": 0.45,
+        "max": 0.45,
+        "mean": 0.44999999999999996,
+        "std": 5.551115123125783e-17,
+        "median": 0.45
+      },
+      "physical_bounds": [
+        -1.0,
+        1.0
+      ],
+      "domain_violations": 0
+    },
+    "mndwi_mean": {
+      "channel_index": 2,
+      "total_slots": 2520,
+      "observed_count": 63,
+      "missing_count": 2457,
+      "missingness_fraction": 0.975,
+      "coverage_percentage": 2.5,
+      "distribution": {
+        "min": 0.5,
+        "max": 0.5,
+        "mean": 0.5,
+        "std": 0.0,
+        "median": 0.5
+      },
+      "physical_bounds": [
+        -1.0,
+        1.0
+      ],
+      "domain_violations": 0
+    },
+    "ndsi_mean": {
+      "channel_index": 3,
+      "total_slots": 2520,
+      "observed_count": 63,
+      "missing_count": 2457,
+      "missingness_fraction": 0.975,
+      "coverage_percentage": 2.5,
+      "distribution": {
+        "min": 0.3,
+        "max": 0.3,
+        "mean": 0.3000000000000001,
+        "std": 1.1102230246251565e-16,
+        "median": 0.3
+      },
+      "physical_bounds": [
+        -1.0,
+        1.0
+      ],
+      "domain_violations": 0
+    },
+    "sar_vv_db_mean": {
+      "channel_index": 4,
+      "total_slots": 2520,
+      "observed_count": 52,
+      "missing_count": 2468,
+      "missingness_fraction": 0.9794,
+      "coverage_percentage": 2.06,
+      "distribution": {
+        "min": -16.5,
+        "max": -16.5,
+        "mean": -16.5,
+        "std": 0.0,
+        "median": -16.5
+      },
+      "physical_bounds": [
+        -35.0,
+        5.0
+      ],
+      "domain_violations": 0
+    },
+    "sar_vh_db_mean": {
+      "channel_index": 5,
+      "total_slots": 2520,
+      "observed_count": 52,
+      "missing_count": 2468,
+      "missingness_fraction": 0.9794,
+      "coverage_percentage": 2.06,
+      "distribution": {
+        "min": -24.0,
+        "max": -24.0,
+        "mean": -24.0,
+        "std": 0.0,
+        "median": -24.0
+      },
+      "physical_bounds": [
+        -45.0,
+        0.0
+      ],
+      "domain_violations": 0
+    },
+    "sar_cross_ratio_db": {
+      "channel_index": 6,
+      "total_slots": 2520,
+      "observed_count": 52,
+      "missing_count": 2468,
+      "missingness_fraction": 0.9794,
+      "coverage_percentage": 2.06,
+      "distribution": {
+        "min": -7.5,
+        "max": -7.5,
+        "mean": -7.5,
+        "std": 0.0,
+        "median": -7.5
+      },
+      "physical_bounds": [
+        -25.0,
+        5.0
+      ],
+      "domain_violations": 0
+    },
+    "sar_vv_spatial_variance": {
+      "channel_index": 7,
+      "total_slots": 2520,
+      "observed_count": 52,
+      "missing_count": 2468,
+      "missingness_fraction": 0.9794,
+      "coverage_percentage": 2.06,
+      "distribution": {
+        "min": 0.005,
+        "max": 0.005,
+        "mean": 0.005,
+        "std": 0.0,
+        "median": 0.005
+      },
+      "physical_bounds": [
+        0.0,
+        null
+      ],
+      "domain_violations": 0
+    },
+    "era5_temp_2m_c_mean": {
+      "channel_index": 8,
+      "total_slots": 2520,
+      "observed_count": 210,
+      "missing_count": 2310,
+      "missingness_fraction": 0.9167,
+      "coverage_percentage": 8.33,
+      "distribution": {
+        "min": -2.9499999999999997,
+        "max": 4.6499999999999995,
+        "mean": 0.5502777777777778,
+        "std": 1.4746606154556425,
+        "median": 0.5333333333333333
+      },
+      "physical_bounds": [
+        -40.0,
+        35.0
+      ],
+      "domain_violations": 0
+    },
+    "era5_precip_mm_sum": {
+      "channel_index": 9,
+      "total_slots": 2520,
+      "observed_count": 210,
+      "missing_count": 2310,
+      "missingness_fraction": 0.9167,
+      "coverage_percentage": 8.33,
+      "distribution": {
+        "min": 0.0,
+        "max": 11.3,
+        "mean": 1.2995238095238095,
+        "std": 2.1198269834845713,
+        "median": 0.4
+      },
+      "physical_bounds": [
+        0.0,
+        null
+      ],
+      "domain_violations": 0
+    },
+    "era5_temp_2m_anomaly": {
+      "channel_index": 10,
+      "total_slots": 2520,
+      "observed_count": 210,
+      "missing_count": 2310,
+      "missingness_fraction": 0.9167,
+      "coverage_percentage": 8.33,
+      "distribution": {
+        "min": -1.4645833333333336,
+        "max": 1.4645833333333333,
+        "mean": 6.767073673905717e-17,
+        "std": 0.8410420733708238,
+        "median": 5.551115123125783e-17
+      },
+      "physical_bounds": [
+        null,
+        null
+      ],
+      "domain_violations": 0
+    }
+  },
+  "lakes": {
+    "SGL-001": {
+      "windows_count": 7,
+      "total_slots": 13860,
+      "observed_slots": 571,
+      "missing_slots": 13289,
+      "static_topography": {
+        "elevation_m": 5200.0,
+        "moraine_slope_deg": 28.5,
+        "catchment_area_km2": 15.2
+      }
+    },
+    "SGL-002": {
+      "windows_count": 7,
+      "total_slots": 13860,
+      "observed_slots": 519,
+      "missing_slots": 13341,
+      "static_topography": {
+        "elevation_m": 5250.0,
+        "moraine_slope_deg": 26.0,
+        "catchment_area_km2": 18.5
+      }
+    }
+  },
+  "provenance": {
+    "split_manifest_path": "data/split_manifest.json",
+    "split_manifest_sha256": "bdfb3a179321a4dca6ad2ae9cf862be3b7df9b49b8fa0903182d5b6062b76601",
+    "dossier_path": "data/pilot_dossier.json",
+    "dossier_sha256": "4967b8dbb15980ff96fe3d02a2e2595f207e8d218136d7ff7f242de6e0129563",
+    "lake_registry_path": "data/lake_registry.csv",
+    "lake_registry_sha256": "ec275066e320ce7f422a16aa597acc17282b74b3ecd6e2a16f6e66f74afeb927",
+    "output_panels_path": "data/feature_panels.npz",
+    "output_panels_sha256": "3d4d8833a9a902ac59eac2ae6c58772add43bfc7dc4d9e064910471d1cdedef2",
+    "cloud_cover_threshold_pct": 30.0,
+    "zero_synthetic_data_declaration": true
+  }
+}

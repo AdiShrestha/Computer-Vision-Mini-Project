@@ -114,3 +114,5 @@ htmlcov/
 data/raw/
 data/derived/
 artifacts/
+*.npz
+*.npy

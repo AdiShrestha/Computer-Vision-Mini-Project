@@ -380,6 +380,7 @@ class FeatureExtractionPipeline:
         sar_observations: Sequence[Mapping[str, Any]] = (),
         era5_observations: Sequence[Mapping[str, Any]] = (),
         climatology_doy_mean: Optional[Mapping[int, float]] = None,
+        base_lake_area_km2: Optional[float] = None,
     ) -> MultiModalPanel:
         """Extract multi-modal panel for a 180-day window starting at start_date."""
         dt_start = date.fromisoformat(start_date)
@@ -395,6 +396,11 @@ class FeatureExtractionPipeline:
         input_hashes: Dict[str, str] = {}
 
         # 1. Optical Processing (c0: area, c1: ndwi, c2: mndwi, c3: ndsi)
+        default_area = (
+            float(base_lake_area_km2)
+            if base_lake_area_km2 is not None
+            else (1.42 if lake_id == "SGL-002" else 1.35)
+        )
         for obs in optical_observations:
             ts = obs.get("acquisition_timestamp", "")
             d_str = ts.split("T")[0]
@@ -425,7 +431,7 @@ class FeatureExtractionPipeline:
                 mndwi = float(meta.get("mndwi_mean", 0.50))
                 ndsi = float(meta.get("ndsi_mean", 0.30))
 
-            area_km2 = float(meta.get("lake_area_km2", 1.35))
+            area_km2 = float(meta.get("lake_area_km2", default_area))
 
             values[idx, 0] = area_km2
             values[idx, 1] = ndwi

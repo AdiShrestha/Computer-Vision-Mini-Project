@@ -8,7 +8,11 @@ must never be used to support scientific claims.
 """
 from __future__ import annotations
 import dataclasses
+import json
 import math
+from pathlib import Path
+import subprocess
+import sys
 import numpy as np
 import pytest
 
@@ -317,3 +321,218 @@ def test_panel_immutability_under_future_appends():
     assert np.array_equal(np.isnan(panel_initial.values), np.isnan(panel_re_extracted.values))
     valid_idx = panel_initial.mask
     assert np.allclose(panel_initial.values[valid_idx], panel_re_extracted.values[valid_idx])
+
+
+def test_optical_cloud_obscuration_masking():
+    """Verify observations with cloud cover >= threshold are masked out as NaN."""
+    pipeline = FeatureExtractionPipeline(cloud_cover_threshold_pct=30.0)
+    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=10.0)
+
+    # 1. Clear observation (cloud = 15%)
+    clear_obs = [
+        {
+            "record_id": "S2-CLEAR",
+            "acquisition_timestamp": "2023-03-01T04:30:00Z",
+            "metadata": {
+                "cloud_cover_percentage": 15.0,
+                "lake_area_km2": 1.35,
+                "ndwi_mean": 0.45,
+                "mndwi_mean": 0.50,
+                "ndsi_mean": 0.30,
+            },
+        }
+    ]
+    # 2. Cloudy observation (cloud = 65%)
+    cloudy_obs = [
+        {
+            "record_id": "S2-CLOUDY",
+            "acquisition_timestamp": "2023-03-05T04:30:00Z",
+            "metadata": {
+                "cloud_cover_percentage": 65.0,
+                "lake_area_km2": 1.40,
+                "ndwi_mean": 0.48,
+                "mndwi_mean": 0.52,
+                "ndsi_mean": 0.32,
+            },
+        }
+    ]
+
+    panel = pipeline.extract_panel(
+        lake_id="SGL-001",
+        window_id="WIN-CLOUD-TEST",
+        start_date="2023-01-01",
+        static_topography=topo,
+        optical_observations=clear_obs + cloudy_obs,
+    )
+
+    # Day of clear observation: 2023-03-01 is day index 59
+    day_clear = 59
+    assert panel.dates[day_clear] == "2023-03-01"
+    assert panel.mask[day_clear, 0] is True or panel.mask[day_clear, 0] == 1
+    assert not np.isnan(panel.values[day_clear, 0])
+    assert panel.values[day_clear, 0] == 1.35
+
+    # Day of cloudy observation: 2023-03-05 is day index 63
+    day_cloudy = 63
+    assert panel.dates[day_cloudy] == "2023-03-05"
+    # Must be masked out due to cloud >= 30%
+    for ch_idx in range(4):
+        assert bool(panel.mask[day_cloudy, ch_idx]) is False
+        assert np.isnan(panel.values[day_cloudy, ch_idx])
+
+
+def test_feature_input_sensitivity():
+    """Verify changing input observation values alters feature panel values deterministically."""
+    pipeline = FeatureExtractionPipeline()
+    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=10.0)
+
+    obs_base = [
+        {
+            "record_id": "S2-01",
+            "acquisition_timestamp": "2023-02-01T04:30:00Z",
+            "metadata": {"lake_area_km2": 1.35, "ndwi_mean": 0.45, "mndwi_mean": 0.50, "ndsi_mean": 0.30},
+        }
+    ]
+    obs_mutated = [
+        {
+            "record_id": "S2-01",
+            "acquisition_timestamp": "2023-02-01T04:30:00Z",
+            "metadata": {"lake_area_km2": 1.48, "ndwi_mean": 0.52, "mndwi_mean": 0.58, "ndsi_mean": 0.36},
+        }
+    ]
+
+    panel_a = pipeline.extract_panel(
+        lake_id="SGL-001",
+        window_id="WIN-SENS-01",
+        start_date="2023-01-01",
+        static_topography=topo,
+        optical_observations=obs_base,
+    )
+    panel_b = pipeline.extract_panel(
+        lake_id="SGL-001",
+        window_id="WIN-SENS-01",
+        start_date="2023-01-01",
+        static_topography=topo,
+        optical_observations=obs_mutated,
+    )
+
+    day_idx = 31  # Feb 1 is day index 31
+    assert panel_a.values[day_idx, 0] == 1.35
+    assert panel_b.values[day_idx, 0] == 1.48
+    assert not np.allclose(panel_a.values[day_idx, :4], panel_b.values[day_idx, :4])
+
+
+def test_feature_extraction_runner_and_panel_archive(tmp_path):
+    """Verify run_feature_extraction produces conforming NPZ archive and summary JSON."""
+    from runners.run_extract_features import run_feature_extraction
+
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    manifest_path = repo_root / "data" / "split_manifest.json"
+    dossier_path = repo_root / "data" / "pilot_dossier.json"
+    registry_path = repo_root / "data" / "lake_registry.csv"
+
+    out_npz = tmp_path / "test_panels.npz"
+    out_summary = tmp_path / "test_summary.json"
+
+    res = run_feature_extraction(
+        split_manifest_path=manifest_path,
+        dossier_path=dossier_path,
+        lake_registry_path=registry_path,
+        output_panels_path=out_npz,
+        output_summary_path=out_summary,
+        cloud_threshold=30.0,
+    )
+
+    assert res["status"] == "SUCCESS"
+    assert res["total_windows"] == 14
+    assert res["eligible_windows"] == 12
+    assert res["num_channels"] == 11
+
+    assert out_npz.exists()
+    assert out_summary.exists()
+
+    # Load and inspect NPZ
+    data = np.load(out_npz)
+    assert "values" in data
+    assert "masks" in data
+    assert "channels" in data
+
+    values_3d = data["values"]
+    masks_3d = data["masks"]
+    channels = [str(c) for c in data["channels"]]
+
+    assert values_3d.shape == (14, 180, 11)
+    assert masks_3d.shape == (14, 180, 11)
+    assert masks_3d.dtype == bool
+    assert channels == list(FEATURE_CHANNELS)
+
+    # Strict mask-nan pairing across all 14 x 180 x 11 elements
+    nan_mask = np.isnan(values_3d)
+    assert np.array_equal(nan_mask, ~masks_3d)
+
+    # Per-window individual arrays exist and match slices
+    with open(manifest_path, "r", encoding="utf-8") as f:
+        manifest = json.load(f)
+    windows = (
+        manifest.get("train_windows", [])
+        + manifest.get("val_windows", [])
+        + manifest.get("test_windows", [])
+    )
+    for i, w in enumerate(windows):
+        wid = w["window_id"]
+        assert f"{wid}_values" in data
+        assert f"{wid}_masks" in data
+        assert f"{wid}_dates" in data
+        np.testing.assert_array_equal(data[f"{wid}_values"], values_3d[i])
+        np.testing.assert_array_equal(data[f"{wid}_masks"], masks_3d[i])
+
+    # Summary JSON validation
+    with open(out_summary, "r", encoding="utf-8") as f:
+        summary = json.load(f)
+
+    assert summary["summary_version"] == 1
+    assert summary["total_windows"] == 14
+    assert summary["eligible_windows"] == 12
+    assert summary["num_channels"] == 11
+    assert summary["channel_names"] == list(FEATURE_CHANNELS)
+    assert summary["provenance"]["cloud_cover_threshold_pct"] == 30.0
+
+    # Ensure zero domain violations across all channels
+    for ch_name, stats in summary["channels"].items():
+        assert stats["domain_violations"] == 0
+        assert stats["total_slots"] == 14 * 180
+
+
+def test_cli_runner_feature_extraction(tmp_path):
+    """Verify source/runners/run_extract_features.py executes cleanly as CLI."""
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    runner_script = repo_root / "source" / "runners" / "run_extract_features.py"
+
+    out_npz = tmp_path / "cli_panels.npz"
+    out_summary = tmp_path / "cli_summary.json"
+
+    cmd = [
+        sys.executable,
+        "-B",
+        str(runner_script),
+        "--manifest",
+        str(repo_root / "data" / "split_manifest.json"),
+        "--dossier",
+        str(repo_root / "data" / "pilot_dossier.json"),
+        "--registry",
+        str(repo_root / "data" / "lake_registry.csv"),
+        "--output-panels",
+        str(out_npz),
+        "--output-summary",
+        str(out_summary),
+        "--cloud-threshold",
+        "30.0",
+    ]
+
+    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
+    stdout_json = json.loads(res.stdout.strip())
+    assert stdout_json["status"] == "SUCCESS"
+    assert stdout_json["total_windows"] == 14
+    assert out_npz.exists()
+    assert out_summary.exists()
+
