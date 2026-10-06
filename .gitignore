@@ -116,3 +116,7 @@ data/derived/
 artifacts/
 *.npz
 *.npy
+data/checkpoints/
+*.pt
+*.pth
+*.ckpt

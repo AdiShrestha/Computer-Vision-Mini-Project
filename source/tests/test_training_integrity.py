@@ -7,7 +7,10 @@ in offline unit tests only. They do not represent real observations and must nev
 support scientific claims.
 """
 from __future__ import annotations
+import json
 from pathlib import Path
+import subprocess
+import sys
 import numpy as np
 import pytest
 import torch
@@ -300,3 +303,192 @@ def test_deterministic_training_under_seed(tmp_path: Path):
     val_loss1 = [h["validation_loss"] for h in sum1["history"]]
     val_loss2 = [h["validation_loss"] for h in sum2["history"]]
     assert np.allclose(val_loss1, val_loss2, atol=1e-7)
+
+
+def test_run_train_model_end_to_end(tmp_path: Path):
+    """Verify run_training produces conforming checkpoint, normalizer, and history artifacts."""
+    from runners.run_train_model import run_training
+
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    manifest_path = repo_root / "data" / "split_manifest.json"
+    panels_path = repo_root / "data" / "feature_panels.npz"
+    registry_path = repo_root / "data" / "lake_registry.csv"
+
+    out_ckpt = tmp_path / "checkpoints" / "test_model.pt"
+    out_norm = tmp_path / "test_normalizer.json"
+    out_hist = tmp_path / "test_history.json"
+
+    res = run_training(
+        manifest_path=manifest_path,
+        panels_path=panels_path,
+        lake_registry_path=registry_path,
+        output_checkpoint_path=out_ckpt,
+        output_normalizer_path=out_norm,
+        output_history_path=out_hist,
+        epochs=2,
+        min_epochs=2,
+        patience=2,
+        batch_size=8,
+        seed=123,
+        device="cpu",
+        dev_split=True,
+    )
+
+    assert res["status"] == "SUCCESS"
+    assert res["epochs_trained"] == 2
+    assert res["replay_verified"] is True
+    assert res["replay_max_diff"] <= 1e-5
+    assert out_ckpt.exists()
+    assert out_norm.exists()
+    assert out_hist.exists()
+
+    with open(out_hist, "r", encoding="utf-8") as f:
+        hist = json.load(f)
+    assert hist["status"] == "SUCCESS"
+    assert len(hist["history"]) == 2
+    assert hist["replay_verified"] is True
+    assert hist["normalizer_state_hash"] == res["normalizer_state_hash"]
+
+
+def test_checkpoint_bundle_clean_replay_verification(tmp_path: Path):
+    """Verify clean-process replay matches reconstructions within 1e-5 on genuine checkpoint."""
+    from runners.run_train_model import run_training
+
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    manifest_path = repo_root / "data" / "split_manifest.json"
+    panels_path = repo_root / "data" / "feature_panels.npz"
+    registry_path = repo_root / "data" / "lake_registry.csv"
+
+    out_ckpt = tmp_path / "replay_check.pt"
+    out_norm = tmp_path / "norm.json"
+    out_hist = tmp_path / "hist.json"
+
+    run_training(
+        manifest_path=manifest_path,
+        panels_path=panels_path,
+        lake_registry_path=registry_path,
+        output_checkpoint_path=out_ckpt,
+        output_normalizer_path=out_norm,
+        output_history_path=out_hist,
+        epochs=2,
+        min_epochs=2,
+        seed=42,
+        device="cpu",
+        dev_split=True,
+    )
+
+    bundle = CheckpointBundle.load(out_ckpt, device="cpu")
+    assert bundle.format_version == 4
+    assert "n_channels" in bundle.model_config
+    assert bundle.model_config["n_channels"] == NUM_CHANNELS
+
+    # Construct normalized test input from an eligible window with observations
+    npz_data = np.load(panels_path)
+    with open(manifest_path, "r", encoding="utf-8") as f:
+        manifest_data = json.load(f)
+    eligible_id = [w["window_id"] for w in manifest_data["test_windows"] if w.get("is_eligible", False)][0]
+    raw_vals = npz_data[f"{eligible_id}_values"][np.newaxis, ...]
+    raw_mask = npz_data[f"{eligible_id}_mask"][np.newaxis, ...]
+    normalizer = FittedNormalizer.from_dict(bundle.transform_state)
+    norm_vals, norm_masks = normalizer.transform(raw_vals, raw_mask)
+    vals = torch.from_numpy(norm_vals)
+    masks = torch.from_numpy(norm_masks)
+
+    in_file = tmp_path / "in.pt"
+    exp_file = tmp_path / "exp.pt"
+    torch.save((vals, masks), in_file)
+
+    model = TimeSeriesMAE(**bundle.model_config)
+    model.load_state_dict(bundle.model_state_dict)
+    expected_recon = compute_deterministic_reconstruction(model, vals, masks, device="cpu")
+    torch.save(expected_recon, exp_file)
+
+    ok, max_diff = verify_clean_process_replay(
+        checkpoint_path=out_ckpt,
+        input_tensor_path=in_file,
+        expected_output_path=exp_file,
+        tolerance=1e-5,
+    )
+    assert ok is True
+    assert max_diff <= 1e-5
+
+
+def test_cli_runner_training_subprocess(tmp_path: Path):
+    """Verify source/runners/run_train_model.py executes cleanly as CLI subprocess."""
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    runner_script = repo_root / "source" / "runners" / "run_train_model.py"
+
+    out_ckpt = tmp_path / "cli_ckpt.pt"
+    out_norm = tmp_path / "cli_norm.json"
+    out_hist = tmp_path / "cli_hist.json"
+
+    cmd = [
+        sys.executable,
+        "-B",
+        str(runner_script),
+        "--manifest",
+        str(repo_root / "data" / "split_manifest.json"),
+        "--panels",
+        str(repo_root / "data" / "feature_panels.npz"),
+        "--registry",
+        str(repo_root / "data" / "lake_registry.csv"),
+        "--output-checkpoint",
+        str(out_ckpt),
+        "--output-normalizer",
+        str(out_norm),
+        "--output-history",
+        str(out_hist),
+        "--epochs",
+        "2",
+        "--min-epochs",
+        "2",
+        "--batch-size",
+        "8",
+        "--seed",
+        "99",
+        "--dev-split",
+    ]
+
+    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
+    stdout_json = json.loads(res.stdout.strip())
+    assert stdout_json["status"] == "SUCCESS"
+    assert stdout_json["epochs_trained"] == 2
+    assert stdout_json["replay_verified"] is True
+    assert out_ckpt.exists()
+    assert out_norm.exists()
+    assert out_hist.exists()
+
+
+def test_normalizer_immutability_and_state_hash():
+    """Verify normalizer state serialization and roundtrip immutability."""
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    norm_path = repo_root / "data" / "fitted_normalizer.json"
+    assert norm_path.exists(), "data/fitted_normalizer.json must be materialized"
+
+    with open(norm_path, "r", encoding="utf-8") as f:
+        norm_json = f.read()
+
+    normalizer = FittedNormalizer.from_json(norm_json)
+    assert len(normalizer.mean) == NUM_CHANNELS
+    assert len(normalizer.scale) == NUM_CHANNELS
+    assert normalizer.channel_names == FEATURE_CHANNELS
+    assert all(s > 0 for s in normalizer.scale)
+
+    # Re-serialization matches state_hash exactly
+    reserialized = normalizer.to_json()
+    normalizer_reloaded = FittedNormalizer.from_json(reserialized)
+    assert normalizer_reloaded.state_hash == normalizer.state_hash
+
+    # Test transform & inverse transform consistency
+    dummy_vals = np.ones((10, NUM_CHANNELS), dtype=np.float64)
+    dummy_mask = np.ones((10, NUM_CHANNELS), dtype=np.bool_)
+    dummy_mask[5:, :] = False
+
+    z_norm, mask_out = normalizer.transform(dummy_vals, dummy_mask)
+    assert np.all(z_norm[5:] == 0.0)
+    assert np.all(np.isfinite(z_norm[:5]))
+
+    inverted = normalizer.inverse_transform(z_norm, mask_out)
+    assert np.all(np.isnan(inverted[5:]))
+    assert np.allclose(inverted[:5], dummy_vals[:5])
+

@@ -1,0 +1,78 @@
+{
+  "status": "SUCCESS",
+  "training_status": "BUDGET_EXHAUSTED",
+  "created_at": "2026-10-06T15:53:29.248618+00:00",
+  "seed": 42,
+  "device": "cpu",
+  "epochs_trained": 5,
+  "checkpoint_epoch": 5,
+  "best_validation_loss": 2.5154794546274037,
+  "elapsed_wall_seconds": 0.11968908400012879,
+  "replay_verified": true,
+  "replay_max_diff": 0.0,
+  "normalizer_state_hash": "20c7341cd30df5f727f26dc69d6a6f8339231a495624ccc2ff09050c7a332dec",
+  "stop_rule": {
+    "min_epochs": 2,
+    "max_epochs": 5,
+    "patience": 3,
+    "min_delta": 0.0001
+  },
+  "model_config": {
+    "n_channels": 11,
+    "max_time_steps": 180,
+    "d_model": 32,
+    "n_encoder_layers": 1,
+    "n_decoder_layers": 1,
+    "n_encoder_heads": 2,
+    "n_decoder_heads": 2,
+    "d_ff_encoder": 64,
+    "d_ff_decoder": 64,
+    "masking_ratio": 0.5,
+    "dropout": 0.0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5519075393676758,
+      "validation_loss": 4.3132728818315185,
+      "target_count": 304
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.2083487510681152,
+      "validation_loss": 3.369217540343962,
+      "target_count": 333
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.8170186281204224,
+      "validation_loss": 2.7191434143894937,
+      "target_count": 239
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.759878396987915,
+      "validation_loss": 2.560851912692661,
+      "target_count": 323
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.0634444952011108,
+      "validation_loss": 2.5154794546274037,
+      "target_count": 251
+    }
+  ],
+  "provenance": {
+    "manifest_path": "data/split_manifest.json",
+    "manifest_sha256": "bdfb3a179321a4dca6ad2ae9cf862be3b7df9b49b8fa0903182d5b6062b76601",
+    "panels_path": "data/feature_panels.npz",
+    "panels_sha256": "3d4d8833a9a902ac59eac2ae6c58772add43bfc7dc4d9e064910471d1cdedef2",
+    "registry_path": "data/lake_registry.csv",
+    "registry_sha256": "ec275066e320ce7f422a16aa597acc17282b74b3ecd6e2a16f6e66f74afeb927",
+    "checkpoint_path": "data/checkpoints/tmae_best_checkpoint.pt",
+    "checkpoint_sha256": "d07789e7ba23d11144db61f227cd481c9f599c159acf0e2c9adb9be775d6b30e",
+    "normalizer_path": "data/fitted_normalizer.json",
+    "normalizer_sha256": "82a307e4afd4d159f0a6d22ceac0860d1b189ea404f110b59544d1f72c20a168",
+    "zero_synthetic_data_declaration": true
+  }
+}
