@@ -144,6 +144,7 @@ class DecisionWindow:
     is_eligible: bool
     modalities_present: Tuple[str, ...]
     missingness_reason: Optional[str] = None
+    status: str = "ELIGIBLE"
     metadata: Dict[str, Any] = dataclasses.field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -155,10 +156,41 @@ class DecisionWindow:
             "context_end": self.context_end,
             "observation_ids": list(self.observation_ids),
             "is_eligible": self.is_eligible,
+            "status": self.status,
             "modalities_present": list(self.modalities_present),
             "missingness_reason": self.missingness_reason,
             "metadata": self.metadata,
         }
+
+
+def verify_retrospective_invariants(
+    window: DecisionWindow,
+    observations: Sequence[Mapping[str, Any]],
+) -> None:
+    """Strictly verify zero future data leakage and temporal support bounds for a window.
+
+    Raises:
+        ValueError if any observation violates retrospective availability (t_acq >= t_decision)
+        or is outside the declared context window.
+    """
+    t_decision = parse_utc_timestamp(window.decision_timestamp)
+    t_context_start = parse_utc_timestamp(window.context_start)
+    obs_by_id = {str(o.get("record_id")): o for o in observations}
+
+    for obs_id in window.observation_ids:
+        if obs_id in obs_by_id:
+            obs = obs_by_id[obs_id]
+            t_acq = parse_utc_timestamp(obs["acquisition_timestamp"])
+            if t_acq >= t_decision:
+                raise ValueError(
+                    f"Future observation leakage detected in window '{window.window_id}': "
+                    f"observation '{obs_id}' timestamp {obs['acquisition_timestamp']} >= decision {window.decision_timestamp}"
+                )
+            if t_acq < t_context_start:
+                raise ValueError(
+                    f"Temporal boundary violation in window '{window.window_id}': "
+                    f"observation '{obs_id}' timestamp {obs['acquisition_timestamp']} < context start {window.context_start}"
+                )
 
 
 class AvailabilityScheduler:
@@ -264,6 +296,13 @@ class AvailabilityScheduler:
             latest_obs_iso = max(obs_timestamps).isoformat() if obs_timestamps else context_start_iso
 
             win_id = f"WIN-{lake_id}-{current_decision.strftime('%Y%m%d')}"
+            obs_hashes = {
+                str(o["record_id"]): str(o["sha256"])
+                for o in eligible_obs
+                if "sha256" in o
+            }
+            win_status = "ELIGIBLE" if is_eligible else "NOT_ESTIMABLE"
+
             win = DecisionWindow(
                 window_id=win_id,
                 lake_id=lake_id,
@@ -274,11 +313,14 @@ class AvailabilityScheduler:
                 is_eligible=is_eligible,
                 modalities_present=modalities_present,
                 missingness_reason=missing_reason,
+                status=win_status,
                 metadata={
                     "total_observations": len(eligible_obs),
                     "modality_counts": modality_counts,
+                    "observation_hashes": obs_hashes,
                 },
             )
+            verify_retrospective_invariants(win, eligible_obs)
             windows.append(win)
             current_decision += datetime.timedelta(days=self.stride_days)
 
@@ -400,36 +442,66 @@ class SplitEngine:
         end_date: str,
         split_date: Optional[str] = None,
         test_cluster_ids: Optional[Sequence[str]] = None,
+        val_cluster_ids: Optional[Sequence[str]] = None,
         event_cutoffs: Optional[Mapping[str, str]] = None,
+        clusters: Optional[Mapping[str, Sequence[str]]] = None,
     ) -> SplitManifest:
         """Create a leakage-free spatiotemporal split manifest."""
-        clusters = cluster_lakes_by_distance(lakes, buffer_km=self.buffer_km)
         lake_coords = {
             str(l["lake_id"]): (float(l["centroid_lat"]), float(l["centroid_lon"]))
             for l in lakes
         }
         all_lake_ids = {str(l["lake_id"]) for l in lakes}
 
-        # Cluster partition
+        # Resolve cluster assignment
+        if clusters is not None:
+            resolved_clusters = {str(k): sorted([str(x) for x in v]) for k, v in clusters.items()}
+        elif all("cluster_id" in l and l["cluster_id"] for l in lakes):
+            c_dict: Dict[str, List[str]] = {}
+            for l in lakes:
+                cid = str(l["cluster_id"])
+                c_dict.setdefault(cid, []).append(str(l["lake_id"]))
+            resolved_clusters = {k: sorted(v) for k, v in sorted(c_dict.items())}
+        else:
+            resolved_clusters = cluster_lakes_by_distance(lakes, buffer_km=self.buffer_km)
+
+        # Validate that different clusters do not violate the buffer distance
+        cluster_names = sorted(resolved_clusters.keys())
+        for i in range(len(cluster_names)):
+            for j in range(i + 1, len(cluster_names)):
+                c_a = resolved_clusters[cluster_names[i]]
+                c_b = resolved_clusters[cluster_names[j]]
+                verify_spatial_disjointness(c_a, c_b, lake_coords, self.buffer_km)
+
+        # Cluster partition across test, validation, and training
         assigned_test_clusters = set(test_cluster_ids or [])
+        assigned_val_clusters = set(val_cluster_ids or [])
         test_lakes: Set[str] = set()
+        val_lakes: Set[str] = set()
         train_lakes: Set[str] = set()
 
-        for cname, c_lakes in clusters.items():
+        for cname, c_lakes in resolved_clusters.items():
             if cname in assigned_test_clusters:
                 test_lakes.update(c_lakes)
+            elif cname in assigned_val_clusters:
+                val_lakes.update(c_lakes)
             else:
                 train_lakes.update(c_lakes)
 
-        # If no explicit cluster partition, train on non-event or all according to split_date
-        if not test_lakes and split_date is None:
+        # If no explicit cluster partition and no split date, default to train
+        if not test_lakes and not val_lakes and split_date is None:
             train_lakes = set(all_lake_ids)
 
-        # Validate spatial disjointness if clusters are split
+        # Validate spatial disjointness between non-empty partitions
         if train_lakes and test_lakes:
             verify_spatial_disjointness(train_lakes, test_lakes, lake_coords, self.buffer_km)
+        if train_lakes and val_lakes:
+            verify_spatial_disjointness(train_lakes, val_lakes, lake_coords, self.buffer_km)
+        if val_lakes and test_lakes:
+            verify_spatial_disjointness(val_lakes, test_lakes, lake_coords, self.buffer_km)
 
         train_windows: List[DecisionWindow] = []
+        val_windows: List[DecisionWindow] = []
         test_windows: List[DecisionWindow] = []
         purged_windows: List[DecisionWindow] = []
 
@@ -448,8 +520,21 @@ class SplitEngine:
                 event_cutoff=cutoff,
             )
 
+            # Enrich window metadata with cluster ID
+            cluster_id_for_lake = None
+            for c_id, members in resolved_clusters.items():
+                if lid in members:
+                    cluster_id_for_lake = c_id
+                    break
+
+            if cluster_id_for_lake:
+                for w in lake_windows:
+                    w.metadata["cluster_id"] = cluster_id_for_lake
+
             if lid in test_lakes:
                 test_windows.extend(lake_windows)
+            elif lid in val_lakes:
+                val_windows.extend(lake_windows)
             elif split_date is not None:
                 # Temporal split within training cluster
                 pre, post, purged = self.purger.purge_split_boundary(
@@ -465,12 +550,12 @@ class SplitEngine:
             split_id=split_id,
             protocol="spatiotemporal_purged_cluster",
             created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            clusters=clusters,
+            clusters=resolved_clusters,
             train_lakes=tuple(sorted(train_lakes)),
-            val_lakes=(),
+            val_lakes=tuple(sorted(val_lakes)),
             test_lakes=tuple(sorted(test_lakes)),
             train_windows=tuple(train_windows),
-            val_windows=(),
+            val_windows=tuple(val_windows),
             test_windows=tuple(test_windows),
             purged_windows=tuple(purged_windows),
             metadata={

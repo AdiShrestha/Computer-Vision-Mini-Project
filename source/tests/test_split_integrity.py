@@ -296,3 +296,201 @@ def test_split_engine_end_to_end_manifest():
     serialized = manifest.to_json()
     loaded = json.loads(serialized)
     assert loaded["split_id"] == "SPLIT-PILOT-01"
+
+
+def test_verify_retrospective_invariants_rejects_future_data():
+    from sentinel_gl.splits import verify_retrospective_invariants
+
+    # Create a valid decision window
+    win = DecisionWindow(
+        window_id="WIN-TEST-01",
+        lake_id="LAKE-01",
+        decision_timestamp="2023-10-01T00:00:00Z",
+        context_start="2023-04-04T00:00:00Z",
+        context_end="2023-09-30T12:00:00Z",
+        observation_ids=("REC-01", "REC-02"),
+        is_eligible=True,
+        modalities_present=("optical", "sar"),
+    )
+
+    valid_obs = [
+        {"record_id": "REC-01", "acquisition_timestamp": "2023-09-01T00:00:00Z"},
+        {"record_id": "REC-02", "acquisition_timestamp": "2023-09-25T12:00:00Z"},
+    ]
+    # Should pass without error
+    verify_retrospective_invariants(win, valid_obs)
+
+    # Invariant 1 violation: future observation (t_acq >= t_decision)
+    future_obs = [
+        {"record_id": "REC-01", "acquisition_timestamp": "2023-09-01T00:00:00Z"},
+        {"record_id": "REC-02", "acquisition_timestamp": "2023-10-01T00:00:00Z"},  # Equal to decision second!
+    ]
+    with pytest.raises(ValueError, match="Future observation leakage detected"):
+        verify_retrospective_invariants(win, future_obs)
+
+    # Invariant 1 violation: observation prior to context start
+    too_old_obs = [
+        {"record_id": "REC-01", "acquisition_timestamp": "2023-01-01T00:00:00Z"},  # Before context_start
+        {"record_id": "REC-02", "acquisition_timestamp": "2023-09-25T12:00:00Z"},
+    ]
+    with pytest.raises(ValueError, match="Temporal boundary violation"):
+        verify_retrospective_invariants(win, too_old_obs)
+
+
+def test_deterministic_partitioning_future_append_invariance(tmp_path):
+    from runners.run_split_manifest import run_split_manifest
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parents[2]
+    dossier_path = repo_root / "data" / "pilot_dossier.json"
+    lake_reg_path = repo_root / "data" / "lake_registry.csv"
+    event_reg_path = repo_root / "data" / "event_registry.csv"
+
+    out_base = tmp_path / "manifest_base.json"
+    manifest_base = run_split_manifest(
+        dossier_path=dossier_path,
+        lake_registry_path=lake_reg_path,
+        event_registry_path=event_reg_path,
+        output_path=out_base,
+        split_id="SPLIT-APPEND-TEST",
+        stride_days=5,
+    )
+
+    # Construct an extended dossier with 10 future evaluation observations in late October 2023
+    with open(dossier_path, "r", encoding="utf-8") as f:
+        dossier_data = json.load(f)
+
+    extended_data = json.loads(json.dumps(dossier_data))
+    for i in range(1, 11):
+        extended_data["record_provenance"].append({
+            "record_id": f"FUTURE-OBS-{i:02d}",
+            "lake_id": "SGL-002",
+            "modality": "optical",
+            "provider_name": "Copernicus Data Space Ecosystem",
+            "product_identifier": f"S2_FUTURE_{i}.SAFE",
+            "acquisition_timestamp": f"2023-10-{20 + (i % 5):02d}T10:00:00Z",
+            "sha256": f"futurehash{i:058d}",
+            "storage_bytes": 1024,
+            "metadata": {},
+        })
+
+    extended_dossier_path = tmp_path / "pilot_dossier_extended.json"
+    with open(extended_dossier_path, "w", encoding="utf-8") as f:
+        json.dump(extended_data, f, indent=2)
+
+    out_extended = tmp_path / "manifest_extended.json"
+    manifest_extended = run_split_manifest(
+        dossier_path=extended_dossier_path,
+        lake_registry_path=lake_reg_path,
+        event_registry_path=event_reg_path,
+        output_path=out_extended,
+        split_id="SPLIT-APPEND-TEST",
+        stride_days=5,
+        start_date="2023-09-01T00:00:00Z",
+        end_date="2023-10-03T00:00:00Z",  # Identical schedule evaluation horizon
+    )
+
+    # Invariant: Earlier windows, IDs, and split assignments must remain 100% bit-for-bit identical
+    assert len(manifest_base.test_windows) == len(manifest_extended.test_windows)
+    for w_base, w_ext in zip(manifest_base.test_windows, manifest_extended.test_windows):
+        assert w_base.window_id == w_ext.window_id
+        assert w_base.lake_id == w_ext.lake_id
+        assert w_base.decision_timestamp == w_ext.decision_timestamp
+        assert w_base.is_eligible == w_ext.is_eligible
+        assert w_base.observation_ids == w_ext.observation_ids
+        assert w_base.metadata.get("observation_hashes") == w_ext.metadata.get("observation_hashes")
+
+
+def test_split_manifest_runner_on_authentic_pilot_dossier(tmp_path):
+    from runners.run_split_manifest import run_split_manifest
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parents[2]
+    dossier_path = repo_root / "data" / "pilot_dossier.json"
+    lake_reg_path = repo_root / "data" / "lake_registry.csv"
+    event_reg_path = repo_root / "data" / "event_registry.csv"
+    output_path = tmp_path / "split_manifest.json"
+
+    manifest = run_split_manifest(
+        dossier_path=dossier_path,
+        lake_registry_path=lake_reg_path,
+        event_registry_path=event_reg_path,
+        output_path=output_path,
+        split_id="SPLIT-PILOT-01",
+        stride_days=5,
+    )
+
+    # 1. Output file exists and valid
+    assert output_path.exists()
+    with open(output_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    assert data["split_id"] == "SPLIT-PILOT-01"
+    assert data["protocol"] == "spatiotemporal_purged_cluster"
+    assert "CLS-SIKKIM-01" in data["clusters"]
+    assert data["clusters"]["CLS-SIKKIM-01"] == ["SGL-001", "SGL-002"]
+
+    # 2. Both pilot lakes in test partition (evaluation roles)
+    assert set(data["test_lakes"]) == {"SGL-001", "SGL-002"}
+    assert len(data["test_windows"]) == 14  # 7 per lake with 5-day stride
+
+    # 3. Cryptographic provenance bindings
+    meta = data["metadata"]
+    assert "dossier_sha256" in meta and len(meta["dossier_sha256"]) == 64
+    assert "lake_registry_sha256" in meta and len(meta["lake_registry_sha256"]) == 64
+    assert meta["total_input_records"] == 123
+    assert meta["quarantined_records_count"] == 1
+    assert "ERA5-SGL-001-2023-10-03" in meta["quarantined_record_ids"]
+
+    # 4. Strict retrospective availability for all generated windows
+    for win_dict in data["test_windows"]:
+        dt_dec = parse_utc_timestamp(win_dict["decision_timestamp"])
+        dt_start = parse_utc_timestamp(win_dict["context_start"])
+        assert dt_start < dt_dec
+        # Check status and eligibility alignment
+        if win_dict["is_eligible"]:
+            assert win_dict["status"] == "ELIGIBLE"
+            assert win_dict["missingness_reason"] is None
+        else:
+            assert win_dict["status"] == "NOT_ESTIMABLE"
+            assert win_dict["missingness_reason"] is not None
+
+        # Check observation hashes bound to metadata
+        obs_hashes = win_dict["metadata"]["observation_hashes"]
+        assert len(obs_hashes) == len(win_dict["observation_ids"])
+
+
+def test_cli_runner_subprocess_execution(tmp_path):
+    from pathlib import Path
+    import subprocess
+    import sys
+
+    repo_root = Path(__file__).resolve().parents[2]
+    runner_script = repo_root / "source" / "runners" / "run_split_manifest.py"
+    output_path = tmp_path / "cli_manifest.json"
+
+    cmd = [
+        sys.executable,
+        "-B",
+        str(runner_script),
+        "--dossier", str(repo_root / "data" / "pilot_dossier.json"),
+        "--lake-registry", str(repo_root / "data" / "lake_registry.csv"),
+        "--event-registry", str(repo_root / "data" / "event_registry.csv"),
+        "--output", str(output_path),
+        "--split-id", "SPLIT-CLI-TEST",
+        "--stride-days", "7",
+    ]
+
+    env = dict(os.environ) if "os" in dir() else {}
+    import os
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(repo_root / "source")
+
+    proc = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    assert proc.returncode == 0, f"CLI runner failed: {proc.stderr}"
+
+    summary = json.loads(proc.stdout)
+    assert summary["status"] == "SUCCESS"
+    assert summary["split_id"] == "SPLIT-CLI-TEST"
+    assert output_path.exists()
+
