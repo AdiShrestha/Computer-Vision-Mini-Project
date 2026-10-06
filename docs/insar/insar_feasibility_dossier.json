@@ -1,0 +1,109 @@
+{
+  "dossier_title": "Sentinel-GL InSAR Feasibility & Decorrelation Dossier",
+  "version": 1,
+  "scope": "High Mountain Asia Glaciated Terrain & Moraine Dams",
+  "storage_budget_analysis": {
+    "available_local_storage_gb": 106.17077350616455,
+    "full_scene_archive_scenario": {
+      "is_feasible": false,
+      "lake_count": 8,
+      "n_scenes_per_lake": 30,
+      "burst_crop_mode": false,
+      "mode_description": "Full-scene Sentinel-1 SLC download (~4.2 GB zip per acquisition)",
+      "unit_bytes": 4200000000,
+      "total_required_bytes": 1008000000000,
+      "available_storage_bytes": 114000000000,
+      "exceeded_bytes": 894000000000,
+      "recommendation": "Full-scene SLC download requires 938.8 GB, exceeding local budget 106.2 GB by 832.6 GB. Provider-side burst cropping or GRD amplitude + spatial variance pipeline must be utilized instead."
+    },
+    "burst_cropped_scenario": {
+      "is_feasible": false,
+      "lake_count": 8,
+      "n_scenes_per_lake": 30,
+      "burst_crop_mode": true,
+      "mode_description": "Provider-side burst cropping / sub-setting (<= 1.0 GB per lake ROI)",
+      "unit_bytes": 1000000000,
+      "total_required_bytes": 240000000000,
+      "available_storage_bytes": 114000000000,
+      "exceeded_bytes": 126000000000,
+      "recommendation": "Full-scene SLC download requires 223.5 GB, exceeding local budget 106.2 GB by 117.3 GB. Provider-side burst cropping or GRD amplitude + spatial variance pipeline must be utilized instead."
+    }
+  },
+  "geometric_distortion_cases": {
+    "steep_headwall_layover": {
+      "slope_deg": 45.0,
+      "aspect_deg": 80.0,
+      "nominal_inc_angle_deg": 38.0,
+      "heading_deg": 348.0,
+      "local_incidence_deg": 7.12,
+      "distortion_class": "LAYOVER",
+      "is_distorted": true,
+      "explanation": "Terrain slope (45.0 deg) exceeds nominal incidence angle (38.0 deg) on radar-facing slope. Top of ridge returns signal before base, causing radar layover and phase inversion."
+    },
+    "backslope_radar_shadow": {
+      "slope_deg": 55.0,
+      "aspect_deg": 260.0,
+      "nominal_inc_angle_deg": 38.0,
+      "heading_deg": 348.0,
+      "local_incidence_deg": 92.98,
+      "distortion_class": "SHADOW",
+      "is_distorted": true,
+      "explanation": "Backslope facing away from radar beam (local incidence 93.0 deg >= 90 deg). Surface is obscured from radar line-of-sight, resulting in complete signal loss (radar shadow)."
+    },
+    "gentle_outwash_foreshortening": {
+      "slope_deg": 8.0,
+      "aspect_deg": 120.0,
+      "nominal_inc_angle_deg": 38.0,
+      "heading_deg": 348.0,
+      "local_incidence_deg": 32.43,
+      "distortion_class": "FORESHORTENING",
+      "is_distorted": false,
+      "explanation": "Terrain slope (8.0 deg) faces radar, compressing slant-range pixel resolution (foreshortening)."
+    }
+  },
+  "coherence_decay_cases": {
+    "winter_stable_12day": {
+      "b_temp_days": 12.0,
+      "b_perp_meters": 50.0,
+      "season": "dry_winter",
+      "tau_decorr_days": 45.0,
+      "gamma_geom": 0.99,
+      "gamma_thermal": 0.9693,
+      "gamma_temp": 0.7659,
+      "gamma_total": 0.735,
+      "coherence_threshold": 0.3,
+      "is_phase_unwrapping_viable": true,
+      "implication": "Coherence supports interferometric phase unwrapping."
+    },
+    "monsoon_moraine_12day": {
+      "b_temp_days": 12.0,
+      "b_perp_meters": 50.0,
+      "season": "monsoon",
+      "tau_decorr_days": 3.0,
+      "gamma_geom": 0.99,
+      "gamma_thermal": 0.9693,
+      "gamma_temp": 0.0183,
+      "gamma_total": 0.0176,
+      "coherence_threshold": 0.3,
+      "is_phase_unwrapping_viable": false,
+      "implication": "Severe decorrelation (gamma=0.0176 < 0.3). Phase noise precludes reliable interferometric deformation extraction; SAR GRD amplitude and spatial texture features must be prioritized."
+    },
+    "monsoon_moraine_6day": {
+      "b_temp_days": 6.0,
+      "b_perp_meters": 30.0,
+      "season": "monsoon",
+      "tau_decorr_days": 3.0,
+      "gamma_geom": 0.994,
+      "gamma_thermal": 0.9693,
+      "gamma_temp": 0.1353,
+      "gamma_total": 0.1304,
+      "coherence_threshold": 0.3,
+      "is_phase_unwrapping_viable": false,
+      "implication": "Severe decorrelation (gamma=0.1304 < 0.3). Phase noise precludes reliable interferometric deformation extraction; SAR GRD amplitude and spatial texture features must be prioritized."
+    }
+  },
+  "architectural_recommendation": {
+    "selected_modality": "SAR GRD Linear Power + Spatial Texture",
+    "justification": "Due to pervasive monsoon decorrelation (gamma < 0.25) and radar layover/shadow on moraine headwalls, multi-temporal InSAR phase unwrapping cannot provide continuous pre-event monitoring. Calibrated dual-pol GRD amplitude (VV, VH, cross-ratio) combined with spatial variance provides unbroken, physically robust observational coverage."
+  }
+}

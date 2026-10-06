@@ -1,0 +1,9 @@
+lake_id,rgi_id,glims_id,name,centroid_lat,centroid_lon,elevation_m,dam_type,area_km2_2020,basin,country,cluster_id,cohort_role
+SGL-001,RGI60-15.03976,G088204E27915N,South Lhonak,27.915,88.204,5200,moraine_dammed,1.35,Teesta,IND,CLS-SIKKIM-01,event
+SGL-002,RGI60-15.03852,G088752E27985N,Khangchung Tsho,27.985,88.752,5250,moraine_dammed,1.42,Teesta,IND,CLS-SIKKIM-01,control
+SGL-003,RGI60-14.02014,G074721E36355N,Shishper,36.355,74.721,2550,ice_dammed,0.35,Hunza,PAK,CLS-HUNZA-01,event
+SGL-004,RGI60-15.09452,G085334E28397N,Gongbatongsha,28.397,85.334,4450,moraine_dammed,0.18,Gyirong,CHN,CLS-GYIRONG-01,event
+SGL-005,RGI60-15.00000_NONE,G098705E31082N,Baige Landslide Lake,31.082,98.705,2880,landslide_dammed,2.1,Jinsha,CHN,CLS-BAIGE-01,event
+SGL-006,RGI60-14.02115,G074882E36467N,Passu Lake,36.467,74.882,2500,moraine_dammed,0.42,Hunza,PAK,CLS-HUNZA-01,control
+SGL-007,RGI60-15.09321,G085845E28256N,Galong Tsho,28.256,85.845,4600,moraine_dammed,0.65,Gyirong,CHN,CLS-GYIRONG-01,control
+SGL-008,RGI60-15.05112,G087091E27962N,Longbasaba Lake,27.962,87.091,5400,moraine_dammed,1.45,Pumqu,CHN,CLS-PUMQU-01,control

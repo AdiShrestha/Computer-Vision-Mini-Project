@@ -1,0 +1,5 @@
+event_id,lake_id,onset_earliest,onset_latest,onset_confidence,trigger_mechanism,volume_released_m3,evidence_tier,primary_reference
+EVT-001,SGL-001,2023-10-03T18:00:00Z,2023-10-03T23:30:00Z,high,ice_avalanche_wave_moraine_breach,45000000.0,Tier_1_Instrumented,doi:10.1126/science.ads2659; Taylor et al. (2023)
+EVT-002,SGL-003,2019-06-22T12:00:00Z,2019-06-23T06:00:00Z,high,surge_glacier_dam_subglacial_tunnel_collapse,5000000.0,Tier_1_Instrumented,doi:10.1016/j.geomorph.2021.107794; Bhardwaj et al. (2021)
+EVT-003,SGL-004,2020-06-25T15:00:00Z,2020-06-26T03:00:00Z,medium,intense_monsoon_rainfall_moraine_piping_breach,2500000.0,Tier_2_Field_Remote_Sensing,doi:10.1029/2021GL094394; Zheng et al. (2021)
+EVT-004,SGL-005,2018-10-10T18:00:00Z,2018-10-11T03:00:00Z,high,massive_rockslide_river_dam_overtopping_breach,320000000.0,Tier_1_Instrumented,doi:10.1007/s10346-019-01150-1; Fan et al. (2019)
