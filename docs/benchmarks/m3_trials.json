@@ -1,0 +1,334 @@
+{
+  "report_version": 1,
+  "device_profile": {
+    "os_platform": "darwin",
+    "arch": "arm64",
+    "cpu_count": 8,
+    "total_ram_bytes": 17179869184,
+    "chip_family": "Apple M3",
+    "pytorch_version": "2.12.1",
+    "mps_built": true,
+    "mps_available": true
+  },
+  "config": {
+    "n_trials": 5,
+    "warmup_trials": 2,
+    "batch_size": 16,
+    "seq_len": 180,
+    "n_channels": 11,
+    "d_model": 64
+  },
+  "trials": [
+    {
+      "trial_index": 1,
+      "device": "cpu",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.008068,
+      "cpu_time_seconds": 0.014004,
+      "peak_rss_bytes": 284721152,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 1,
+      "device": "cpu",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.009872,
+      "cpu_time_seconds": 0.015499,
+      "peak_rss_bytes": 295714816,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 2,
+      "device": "cpu",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.00833,
+      "cpu_time_seconds": 0.014158,
+      "peak_rss_bytes": 295763968,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 2,
+      "device": "cpu",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.009701,
+      "cpu_time_seconds": 0.014507,
+      "peak_rss_bytes": 304070656,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 3,
+      "device": "cpu",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.008723,
+      "cpu_time_seconds": 0.014587,
+      "peak_rss_bytes": 305397760,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 3,
+      "device": "cpu",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.035536,
+      "cpu_time_seconds": 0.01527,
+      "peak_rss_bytes": 305528832,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 4,
+      "device": "cpu",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.009508,
+      "cpu_time_seconds": 0.01574,
+      "peak_rss_bytes": 305545216,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 4,
+      "device": "cpu",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.007589,
+      "cpu_time_seconds": 0.013172,
+      "peak_rss_bytes": 305545216,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 5,
+      "device": "cpu",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.008577,
+      "cpu_time_seconds": 0.014616,
+      "peak_rss_bytes": 305545216,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 5,
+      "device": "cpu",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.036338,
+      "cpu_time_seconds": 0.023146,
+      "peak_rss_bytes": 316506112,
+      "mps_allocated_bytes": null
+    },
+    {
+      "trial_index": 1,
+      "device": "mps",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.010561,
+      "cpu_time_seconds": 0.002288,
+      "peak_rss_bytes": 387629056,
+      "mps_allocated_bytes": 1369856
+    },
+    {
+      "trial_index": 1,
+      "device": "mps",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.017269,
+      "cpu_time_seconds": 0.005281,
+      "peak_rss_bytes": 387645440,
+      "mps_allocated_bytes": 1496576
+    },
+    {
+      "trial_index": 2,
+      "device": "mps",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.009507,
+      "cpu_time_seconds": 0.001505,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1369856
+    },
+    {
+      "trial_index": 2,
+      "device": "mps",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.015422,
+      "cpu_time_seconds": 0.004089,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1496576
+    },
+    {
+      "trial_index": 3,
+      "device": "mps",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.010513,
+      "cpu_time_seconds": 0.002015,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1369856
+    },
+    {
+      "trial_index": 3,
+      "device": "mps",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.016012,
+      "cpu_time_seconds": 0.004577,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1496576
+    },
+    {
+      "trial_index": 4,
+      "device": "mps",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.009345,
+      "cpu_time_seconds": 0.001374,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1369856
+    },
+    {
+      "trial_index": 4,
+      "device": "mps",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.015461,
+      "cpu_time_seconds": 0.005384,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1496576
+    },
+    {
+      "trial_index": 5,
+      "device": "mps",
+      "workload": "forward_eval",
+      "wall_time_seconds": 0.009913,
+      "cpu_time_seconds": 0.002046,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1369856
+    },
+    {
+      "trial_index": 5,
+      "device": "mps",
+      "workload": "mae_reconstruction",
+      "wall_time_seconds": 0.01823,
+      "cpu_time_seconds": 0.007948,
+      "peak_rss_bytes": 387661824,
+      "mps_allocated_bytes": 1496576
+    }
+  ],
+  "summary": {
+    "cpu_forward_eval": {
+      "device": "cpu",
+      "workload": "forward_eval",
+      "count": 5,
+      "wall_time_seconds": {
+        "mean": 0.008641200000000002,
+        "median": 0.008577,
+        "std": 0.00048735178259651425,
+        "min": 0.008068,
+        "max": 0.009508
+      },
+      "cpu_time_seconds": {
+        "mean": 0.014621,
+        "median": 0.014587,
+        "std": 0.0006080131577523632,
+        "min": 0.014004,
+        "max": 0.01574
+      },
+      "peak_rss_bytes": {
+        "mean": 299394662.4,
+        "median": 305397760.0,
+        "std": 8248510.765625164,
+        "min": 284721152.0,
+        "max": 305545216.0
+      },
+      "mps_allocated_bytes": null
+    },
+    "cpu_mae_reconstruction": {
+      "device": "cpu",
+      "workload": "mae_reconstruction",
+      "count": 5,
+      "wall_time_seconds": {
+        "mean": 0.019807200000000004,
+        "median": 0.009872,
+        "std": 0.013196896504860526,
+        "min": 0.007589,
+        "max": 0.036338
+      },
+      "cpu_time_seconds": {
+        "mean": 0.0163188,
+        "median": 0.01527,
+        "std": 0.0035090649124802464,
+        "min": 0.013172,
+        "max": 0.023146
+      },
+      "peak_rss_bytes": {
+        "mean": 305473126.4,
+        "median": 305528832.0,
+        "std": 6617047.927281941,
+        "min": 295714816.0,
+        "max": 316506112.0
+      },
+      "mps_allocated_bytes": null
+    },
+    "mps_forward_eval": {
+      "device": "mps",
+      "workload": "forward_eval",
+      "count": 5,
+      "wall_time_seconds": {
+        "mean": 0.009967799999999999,
+        "median": 0.009913,
+        "std": 0.0005004695395326273,
+        "min": 0.009345,
+        "max": 0.010561
+      },
+      "cpu_time_seconds": {
+        "mean": 0.0018456,
+        "median": 0.002015,
+        "std": 0.00034727199714344953,
+        "min": 0.001374,
+        "max": 0.002288
+      },
+      "peak_rss_bytes": {
+        "mean": 387655270.4,
+        "median": 387661824.0,
+        "std": 13107.199999999999,
+        "min": 387629056.0,
+        "max": 387661824.0
+      },
+      "mps_allocated_bytes": {
+        "mean": 1369856.0,
+        "median": 1369856.0,
+        "std": 0.0,
+        "min": 1369856.0,
+        "max": 1369856.0
+      }
+    },
+    "mps_mae_reconstruction": {
+      "device": "mps",
+      "workload": "mae_reconstruction",
+      "count": 5,
+      "wall_time_seconds": {
+        "mean": 0.0164788,
+        "median": 0.016012,
+        "std": 0.0011010688261866282,
+        "min": 0.015422,
+        "max": 0.01823
+      },
+      "cpu_time_seconds": {
+        "mean": 0.0054558,
+        "median": 0.005281,
+        "std": 0.0013332068706693647,
+        "min": 0.004089,
+        "max": 0.007948
+      },
+      "peak_rss_bytes": {
+        "mean": 387658547.2,
+        "median": 387661824.0,
+        "std": 6553.599999999999,
+        "min": 387645440.0,
+        "max": 387661824.0
+      },
+      "mps_allocated_bytes": {
+        "mean": 1496576.0,
+        "median": 1496576.0,
+        "std": 0.0,
+        "min": 1496576.0,
+        "max": 1496576.0
+      }
+    }
+  },
+  "numerical_equivalence": {
+    "status": "PASS",
+    "max_absolute_difference": 2.6226043701171875e-06,
+    "diff_reconstruction": 2.6226043701171875e-06,
+    "diff_latent": 1.7881393432617188e-06,
+    "diff_embedding": 1.5497207641601562e-06,
+    "tolerance": 0.0001
+  },
+  "thermal_disclosure": "Apple Silicon M3 MacBook Air is a fanless, passively cooled architecture. Sustained CPU and GPU execution leads to passive thermal throttling and clock downscaling over extended run durations. Benchmark figures reflect burst execution under stable thermal conditions. Production deployments and long-running training loops must account for thermal headroom, bounded batch memory allocations (B <= 16), and explicit memory reclamation."
+}

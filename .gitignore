@@ -63,6 +63,8 @@
 !/components/
 !/packages/
 !/.github/
+!/tools/
+tools/verify.py
 # Local configuration, caches and build output
 **/.env
 **/.env.*
