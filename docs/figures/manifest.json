@@ -9,47 +9,52 @@
       "sha256": "407a479f2922d5d7db3ffa3463be04378e6a374ac9e5b5c9c8d15fb582d649ac",
       "size_bytes": 85382,
       "input_hashes": {
-        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+        "pilot_dossier.json": "4967b8dbb15980ff96fe3d02a2e2595f207e8d218136d7ff7f242de6e0129563"
       }
     },
     {
       "filename": "fig2_feature_panels.png",
       "description": "Multi-modal feature panel traces across 11 standardized channels distinguishing observed vs missing entries.",
       "generator": "plot_multimodal_feature_panels",
-      "sha256": "6393c4c6a5eb901e2fb057569c6c4fbe2f1f675ffe4f1f4e58de2aa89f69ff26",
-      "size_bytes": 532791,
+      "sha256": "54b51f34d664a9905a196553091e3daf26683505c25f71e96d236c82701ac8c0",
+      "size_bytes": 518901,
       "input_hashes": {
-        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+        "feature_panels.npz": "3d4d8833a9a902ac59eac2ae6c58772add43bfc7dc4d9e064910471d1cdedef2",
+        "lake_registry.csv": "ec275066e320ce7f422a16aa597acc17282b74b3ecd6e2a16f6e66f74afeb927"
       }
     },
     {
       "filename": "fig3_anomaly_lead_time.png",
       "description": "Anomaly score trajectories comparing Sentinel-GL against four baselines with bounded lead time (Delta t_lead).",
       "generator": "plot_anomaly_trajectories_and_lead_time",
-      "sha256": "9635853f1a87a6ccabbdd5088006bde6ba920ff4b099fa96b12ad8a968123234",
-      "size_bytes": 143326,
+      "sha256": "d5c088083fddf981710c9897f46f196a7152d61854346a78a91e7f857ad2899b",
+      "size_bytes": 104838,
       "input_hashes": {
-        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+        "prediction_ledger.csv": "ad43fb0939ec905415b1015cad8422a764ddae206f4c39015ef1a2fd210204ee",
+        "calibration_thresholds.json": "322b08797621b3a7bc22f0f536ec98b2add3f3d9d0ca62b3794f295e94ac9cc0",
+        "alert_episodes.json": "2c079626f01b8f73cf3b448e2861f65e4ff0f0dbde9d4d7948285d6b32151ce8"
       }
     },
     {
       "filename": "fig4_control_episodes.png",
       "description": "Negative-control alert episodes and follow-up exposure illustrating sustained detection, hysteresis, and single-episode collapse.",
       "generator": "plot_control_episodes_and_exposure",
-      "sha256": "8141e6adc67a16e0f96b1d1b3eb70d1ec00fbe221e0cba6f90d7262c485bf022",
-      "size_bytes": 110511,
+      "sha256": "f70ea1603963e8481ae0dcced1a1e3b7adc73c94672e2101fa184e9366414c7d",
+      "size_bytes": 97708,
       "input_hashes": {
-        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+        "prediction_ledger.csv": "ad43fb0939ec905415b1015cad8422a764ddae206f4c39015ef1a2fd210204ee",
+        "calibration_thresholds.json": "322b08797621b3a7bc22f0f536ec98b2add3f3d9d0ca62b3794f295e94ac9cc0",
+        "alert_episodes.json": "2c079626f01b8f73cf3b448e2861f65e4ff0f0dbde9d4d7948285d6b32151ce8"
       }
     },
     {
       "filename": "fig5_sensor_ablations.png",
       "description": "2^N sensor ablation lattice comparing reconstruction MSE and anomaly sensitivity across 7 configurations.",
       "generator": "plot_sensor_ablation_comparison",
-      "sha256": "65b56f35d5d095b88c50f339fc99a7dd6bd151ee493136c516cbf7095c6f2013",
-      "size_bytes": 55871,
+      "sha256": "60ab9b6791ca3e94cf2c2bf5a6aeef2a5cb54c34214d71c8f3d616e420cf0dba",
+      "size_bytes": 54607,
       "input_hashes": {
-        "pilot_dossier.json": "5780ec20eb095e4dc4fc71b0213d8d3dc4298d5277270c40f709e4843b2e2139"
+        "prediction_ledger.csv": "ad43fb0939ec905415b1015cad8422a764ddae206f4c39015ef1a2fd210204ee"
       }
     }
   ]

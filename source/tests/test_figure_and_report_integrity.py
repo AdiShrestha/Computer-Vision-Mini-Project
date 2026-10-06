@@ -31,6 +31,9 @@ from sentinel_gl.reports import (
     generate_table1_comparative_evaluation,
     generate_table2_ablation_lattice,
     generate_table3_failure_taxonomy,
+    load_claims_table,
+    load_diagnostic_report,
+    run_full_report_generation,
 )
 from sentinel_gl.visualization import (
     plot_multimodal_feature_panels,
@@ -243,3 +246,135 @@ def test_figure_regeneration_is_deterministic():
         plot_sensor_ablation_comparison(scores, abl2)
 
         assert compute_file_sha256(abl1) == compute_file_sha256(abl2)
+
+
+# ---------------------------------------------------------------------------
+# Test 6: Table 2 and Table 3 Generation Matches Input Structure
+# ---------------------------------------------------------------------------
+
+def test_table2_and_table3_generation_matches_inputs():
+    """Verify that Table 2 (ablation) and Table 3 (failure taxonomy) render valid tables.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    with tempfile.TemporaryDirectory() as tmpdir:
+        out_dir = Path(tmpdir)
+
+        # Mock ablation metrics
+        mock_ablation = {
+            "full": {"n_windows": 11, "mean_recon_mse": 1.3465, "sensitivity_score": 1.3465},
+            "opt_sar": {"n_windows": 11, "mean_recon_mse": 0.8834, "sensitivity_score": 0.8834},
+            "sar_only": {"n_windows": 12, "mean_recon_mse": 0.1671, "sensitivity_score": 0.1671},
+        }
+        t2_md, t2_csv = generate_table2_ablation_lattice(mock_ablation, out_dir)
+        assert t2_md.exists() and t2_csv.exists()
+
+        t2_text = t2_md.read_text(encoding="utf-8")
+        assert "Table 2: 2^N Sensor Ablation Lattice Comparison" in t2_text
+        assert "1.3465" in t2_text
+        assert "0.8834" in t2_text
+
+        # Mock DiagnosticReport
+        mock_dr = DiagnosticReport(
+            total_evaluations=14,
+            total_failures=10,
+            failure_counts={
+                "ERR_CLOUD_OBSCURATION": 7,
+                "ERR_SAR_GEOMETRIC_DISTORTION": 0,
+                "ERR_SPURIOUS_SEASONAL_ANOMALY": 0,
+                "ERR_MISSED_RAPID_TRIGGER": 0,
+                "ERR_INSUFFICIENT_OBSERVATIONS": 3,
+                "ERR_UNCLASSIFIED": 0,
+            },
+            failure_rates={
+                "ERR_CLOUD_OBSCURATION": 0.7,
+                "ERR_SAR_GEOMETRIC_DISTORTION": 0.0,
+                "ERR_SPURIOUS_SEASONAL_ANOMALY": 0.0,
+                "ERR_MISSED_RAPID_TRIGGER": 0.0,
+                "ERR_INSUFFICIENT_OBSERVATIONS": 0.3,
+                "ERR_UNCLASSIFIED": 0.0,
+            },
+            cases_by_category={cat: [] for cat in ALL_ERROR_CATEGORIES},
+            report_hash="mock_hash_dr",
+        )
+        t3_md, t3_csv = generate_table3_failure_taxonomy(mock_dr, out_dir)
+        assert t3_md.exists() and t3_csv.exists()
+
+        t3_text = t3_md.read_text(encoding="utf-8")
+        assert "Table 3: Operational Failure Taxonomy Distribution" in t3_text
+        assert "70.0%" in t3_text
+        assert "30.0%" in t3_text
+
+
+# ---------------------------------------------------------------------------
+# Test 7: Claims Table and Diagnostic Report Deserializers
+# ---------------------------------------------------------------------------
+
+def test_load_claims_and_diagnostic_reports():
+    """Verify load_claims_table and load_diagnostic_report load real artifacts correctly."""
+    ct_path = Path("data/claims_table.json")
+    dr_path = Path("data/diagnostic_report.json")
+
+    if ct_path.exists():
+        ct = load_claims_table(ct_path)
+        assert isinstance(ct, ClaimsTable)
+        assert len(ct.case_detections) >= 1
+        assert ct.alert_burden["status"] in ("ESTIMATED", "NOT_ESTIMABLE")
+        assert len(ct.baseline_comparisons) == 4
+
+    if dr_path.exists():
+        dr = load_diagnostic_report(dr_path)
+        assert isinstance(dr, DiagnosticReport)
+        assert dr.total_evaluations > 0
+        assert "ERR_CLOUD_OBSCURATION" in dr.failure_counts
+
+
+# ---------------------------------------------------------------------------
+# Test 8: Manuscript Reflects Actual Claims Outcomes
+# ---------------------------------------------------------------------------
+
+def test_manuscript_reflects_actual_claims_outcomes():
+    """Verify that manuscript text reflects authentic, non-inflated evaluation outcomes."""
+    ms_path = Path("docs/manuscript/manuscript.md")
+    assert ms_path.exists(), f"Manuscript file {ms_path} must exist"
+
+    text = ms_path.read_text(encoding="utf-8")
+
+    # Authentic outcomes disclosed
+    assert "NOT_DETECTED" in text, "Manuscript must disclose NOT_DETECTED status for South Lhonak"
+    assert "2.643366" in text, "Manuscript must reference calibrated threshold 2.643366"
+    assert "0.0000" in text, "Manuscript must reference estimated alert burden of 0.0"
+    assert "70.0%" in text, "Manuscript must disclose 70.0% cloud obscuration failure rate"
+
+
+# ---------------------------------------------------------------------------
+# Test 9: Report Generation CLI Runner Subprocess Execution
+# ---------------------------------------------------------------------------
+
+def test_report_generation_cli_runner_subprocess():
+    """Verify that source/runners/run_generate_reports.py executes cleanly via CLI subprocess."""
+    import subprocess
+    import sys
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_p = Path(tmpdir)
+        fig_out = tmp_p / "figures"
+        tab_out = tmp_p / "tables"
+
+        runner_script = Path("source/runners/run_generate_reports.py")
+        cmd = [
+            sys.executable,
+            "-B",
+            str(runner_script),
+            "--figures-dir", str(fig_out),
+            "--tables-dir", str(tab_out),
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        assert res.returncode == 0, f"Runner failed with stderr: {res.stderr}"
+
+        # Verify artifacts created in target directories
+        assert (fig_out / "manifest.json").exists()
+        assert (tab_out / "table1_comparative_evaluation.md").exists()
+        assert (tab_out / "table2_ablation_lattice.md").exists()
+        assert (tab_out / "table3_failure_taxonomy.md").exists()
+

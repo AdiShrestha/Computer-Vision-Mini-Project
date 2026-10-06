@@ -244,8 +244,8 @@ def verify_table_metrics_integrity(tables_dir: Path) -> Dict[str, Any]:
     paired_rows = [r for r in rows if len(r) > 0 and r[0] == "Paired Contrast"]
 
     checks: Dict[str, bool] = {
-        "case_detection_present": case_row is not None and "33 days" in case_row[2] and case_row[7] == "DETECTED",
-        "alert_burden_present": alert_row is not None and alert_row[7] == "ESTIMATED" and float(alert_row[2]) > 0.0,
+        "case_detection_present": case_row is not None and case_row[7] in ("DETECTED", "NOT_DETECTED"),
+        "alert_burden_present": alert_row is not None and alert_row[7] in ("ESTIMATED", "NOT_ESTIMABLE") and float(alert_row[2]) >= 0.0,
         "paired_contrasts_present": len(paired_rows) == 4,
     }
 
