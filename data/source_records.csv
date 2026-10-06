@@ -1,0 +1,13 @@
+record_id,origin,sensor,notes
+rec_01,fixture,sentinel-2,Synthetic optical surface reflectance fixture for training lake 1
+rec_02,fixture,sentinel-1,Synthetic SAR GRD dual-pol backscatter fixture for training lake 2
+rec_03,fixture,era5,Synthetic atmospheric reanalysis fixture for training lake 3
+rec_04,fixture,sentinel-1,Synthetic SAR texture and cross-ratio fixture for training lake 4
+rec_05,fixture,sentinel-2,Synthetic optical surface reflectance fixture for validation nominal lake
+rec_06,fixture,sentinel-1,Synthetic SAR GRD elevated backscatter fixture for validation event lake
+rec_07,fixture,era5,Synthetic atmospheric reanalysis fixture for validation nominal lake
+rec_08,fixture,sentinel-2,Synthetic optical precursory expansion fixture for validation event lake
+rec_09,fixture,sentinel-2,Synthetic optical surface reflectance fixture for test nominal lake
+rec_10,fixture,sentinel-1,Synthetic SAR GRD anomalous backscatter fixture for test event lake
+rec_11,fixture,era5,Synthetic atmospheric reanalysis fixture for test nominal lake
+rec_12,fixture,sentinel-1,Synthetic multi-modal feature anomaly fixture for test event lake

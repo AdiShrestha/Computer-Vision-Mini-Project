@@ -1,0 +1,13 @@
+sample_id,label,group_id,split,source_ids
+s0,0,grp_train_01,train,rec_01
+s1,0,grp_train_02,train,rec_02
+s2,0,grp_train_03,train,rec_03
+s3,0,grp_train_04,train,rec_04
+s4,0,grp_val_01,validation,rec_05
+s5,1,grp_val_02,validation,rec_06
+s6,0,grp_val_03,validation,rec_07
+s7,1,grp_val_04,validation,rec_08
+s8,0,grp_test_01,test,rec_09
+s9,1,grp_test_02,test,rec_10
+s10,0,grp_test_03,test,rec_11
+s11,1,grp_test_04,test,rec_12

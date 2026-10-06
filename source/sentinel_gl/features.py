@@ -505,3 +505,20 @@ class FeatureExtractionPipeline:
             provenance_hashes=input_hashes,
         )
         return panel
+
+
+# Backward compatibility aliases and mask wrapper
+MultimodalPanel = MultiModalPanel
+
+
+class ObservedMask:
+    """Boolean observation mask wrapper of shape (T=180, C=11)."""
+
+    def __init__(self, mask: np.ndarray | None = None):
+        if mask is not None:
+            self.mask = np.asarray(mask, dtype=bool)
+        else:
+            self.mask = np.zeros((WINDOW_DAYS, NUM_CHANNELS), dtype=bool)
+
+    def __array__(self, dtype=None):
+        return self.mask.astype(dtype) if dtype else self.mask
