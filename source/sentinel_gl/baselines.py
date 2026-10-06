@@ -147,12 +147,15 @@ class ClimatologyBaseline:
         sig_window = self.doy_scales[doys, :] # (T, C)
 
         valid_entries = mask & np.isfinite(values)
-        total_obs = np.sum(valid_entries)
+        total_obs = int(np.sum(valid_entries))
         if total_obs == 0:
             return 0.0
 
-        diff = np.abs(values - mu_window) / (sig_window + eps)
-        score = float(np.sum(valid_entries * diff) / (total_obs + eps))
+        v = values[valid_entries]
+        mu = mu_window[valid_entries]
+        sig = sig_window[valid_entries]
+        diff = np.abs(v - mu) / (sig + eps)
+        score = float(np.sum(diff) / (total_obs + eps))
         return score
 
     def predict_panel(self, panel: MultiModalPanel) -> float:
@@ -318,16 +321,23 @@ class WeatherOnlyBaseline:
         w_values = values[:, WEATHER_CHANNEL_INDICES]
         w_mask = mask[:, WEATHER_CHANNEL_INDICES] & np.isfinite(w_values)
 
-        total_obs = np.sum(w_mask)
+        total_obs = int(np.sum(w_mask))
         if total_obs == 0:
             return 0.0
 
         means_arr = np.array(self.weather_means, dtype=np.float64)
         scales_arr = np.array(self.weather_scales, dtype=np.float64)
 
-        diff = (w_values - means_arr) / (scales_arr + eps)
+        means_grid = np.broadcast_to(means_arr, w_values.shape)
+        scales_grid = np.broadcast_to(scales_arr, w_values.shape)
+
+        v = w_values[w_mask]
+        mu = means_grid[w_mask]
+        sig = scales_grid[w_mask]
+
+        diff = (v - mu) / (sig + eps)
         sq_dist = diff ** 2
-        score = float(np.sqrt(np.sum(w_mask * sq_dist) / (total_obs + eps)))
+        score = float(np.sqrt(np.sum(sq_dist) / (total_obs + eps)))
         return score
 
     def predict_panel(self, panel: MultiModalPanel) -> float:
@@ -387,7 +397,8 @@ class RobustPCABaseline:
         # 2. Impute and flatten training panels to shape (N, 1980)
         imputed_windows = []
         for p in valid_panels:
-            imputed = np.where(p.mask, p.values, ch_means_arr)
+            valid_m = p.mask & np.isfinite(p.values)
+            imputed = np.where(valid_m, p.values, ch_means_arr)
             imputed_windows.append(imputed.reshape(-1))
 
         x_train = np.stack(imputed_windows, axis=0)  # (N, 1980)
@@ -433,7 +444,8 @@ class RobustPCABaseline:
     ) -> float:
         """Reconstruct window and return normalized mean squared reconstruction error over observed entries."""
         ch_means_arr = np.array(self.channel_means, dtype=np.float64)
-        x_imputed = np.where(mask, values, ch_means_arr).reshape(-1)
+        valid_m = mask & np.isfinite(values)
+        x_imputed = np.where(valid_m, values, ch_means_arr).reshape(-1)
 
         x_diff = x_imputed - self.mean_window
         if self.components.shape[0] > 0:
@@ -446,12 +458,14 @@ class RobustPCABaseline:
 
         recon_2d = recon.reshape(WINDOW_DAYS, NUM_CHANNELS)
         valid_entries = mask & np.isfinite(values)
-        total_obs = np.sum(valid_entries)
+        total_obs = int(np.sum(valid_entries))
         if total_obs == 0:
             return 0.0
 
-        squared_error = (values - recon_2d) ** 2
-        score = float(np.sum(valid_entries * squared_error) / (total_obs + eps))
+        v = values[valid_entries]
+        recon_valid = recon_2d[valid_entries]
+        squared_error = (v - recon_valid) ** 2
+        score = float(np.sum(squared_error) / (total_obs + eps))
         return score
 
     def predict_panel(self, panel: MultiModalPanel) -> float:

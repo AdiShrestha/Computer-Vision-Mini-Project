@@ -1,0 +1,35 @@
+{
+  "threshold": 2.643365621566773,
+  "sustained_q": 2,
+  "hysteresis_r": 2,
+  "refractory_days": 60,
+  "max_gap_days": 45,
+  "stride_days": 5,
+  "episodes_by_lake": {
+    "SGL-001": [],
+    "SGL-002": []
+  },
+  "exposures_lake_years": {
+    "SGL-001": 0.08213552361396304,
+    "SGL-002": 0.06844626967830253
+  },
+  "alert_burden": {
+    "lambda_alert": 0.0,
+    "status": "ESTIMATED",
+    "reason": null,
+    "n_episodes": 0,
+    "total_lake_years": 0.06844626967830253
+  },
+  "lead_time_results": [
+    {
+      "event_id": "EVT-001",
+      "lake_id": "SGL-001",
+      "status": "NOT_DETECTED",
+      "lead_time_days": null,
+      "onset_date": "2023-10-03",
+      "declaration_date": null,
+      "warning_horizon_days": 180
+    }
+  ],
+  "created_at": "2026-10-06T16:32:54.725905+00:00"
+}

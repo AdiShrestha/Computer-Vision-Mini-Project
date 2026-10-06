@@ -1,0 +1,77 @@
+{
+  "target_false_alert_fraction": 0.05,
+  "target_percentile": 0.95,
+  "calibrated_threshold": 2.643365621566773,
+  "calibration_lake_ids": [
+    "SGL-002"
+  ],
+  "evaluation_lake_ids": [
+    "SGL-001"
+  ],
+  "n_calibration_windows": 5,
+  "false_alert_calibration": {
+    "threshold": 2.643365621566773,
+    "observed_false_alert_fraction": 0.0,
+    "target": 0.05,
+    "percentile": 0.95,
+    "n_calibration": 5,
+    "n_windows": 5,
+    "calibration_ids": [
+      "SGL-002-0",
+      "SGL-002-1",
+      "SGL-002-2",
+      "SGL-002-3",
+      "SGL-002-4"
+    ],
+    "calibration_lake_ids": [
+      "SGL-002-0",
+      "SGL-002-3",
+      "SGL-002-2",
+      "SGL-002-1",
+      "SGL-002-4"
+    ],
+    "comparator": ">=",
+    "state_hash": "67cb61625001d23edaff21d82d9115c825b0b8c4d8bb6993233c9385b1847b8d",
+    "scope": "empirical calibration WINDOW fraction only; not episodes per lake-year or a population guarantee"
+  },
+  "thresholds_by_percentile": {
+    "0.90": {
+      "threshold": 2.6398184299468994,
+      "percentile": 0.9,
+      "calibration_lake_ids": [
+        "SGL-002"
+      ],
+      "n_windows": 5,
+      "state_hash": "b4e8c4bc45d1fcb0c9831d078ccd6e945764caffe2dc586c7c5b106aa2c57540"
+    },
+    "0.95": {
+      "threshold": 2.641592025756836,
+      "percentile": 0.95,
+      "calibration_lake_ids": [
+        "SGL-002"
+      ],
+      "n_windows": 5,
+      "state_hash": "2b933e1570c0826409cb5318295463ab7f1c98688f9d59c6cd55c1a10d5c66c6"
+    },
+    "0.98": {
+      "threshold": 2.642656183242798,
+      "percentile": 0.98,
+      "calibration_lake_ids": [
+        "SGL-002"
+      ],
+      "n_windows": 5,
+      "state_hash": "dd4d97b5f8fe2c1a083b2fdcc76f80506ada7bdeb17a07573e18c638d8f2a614"
+    },
+    "0.99": {
+      "threshold": 2.643010902404785,
+      "percentile": 0.99,
+      "calibration_lake_ids": [
+        "SGL-002"
+      ],
+      "n_windows": 5,
+      "state_hash": "38fae4fc5b113501bf148501f413e1e053998041bcbe2b560f751300dd10431f"
+    }
+  },
+  "state_hash": "67cb61625001d23edaff21d82d9115c825b0b8c4d8bb6993233c9385b1847b8d",
+  "created_at": "2026-10-06T16:32:54.725361+00:00"
+}

@@ -8,6 +8,13 @@ represent real physical observations and must never support scientific claims.
 """
 from __future__ import annotations
 from datetime import date, timedelta
+import csv
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
 import numpy as np
 import pytest
 
@@ -321,9 +328,10 @@ def test_sensor_ablation_intervention_identity():
 
     FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
     """
-    panel = _make_test_panel("SGL-MOCK-001", "W01")
-    vals = panel.values
-    mask = panel.mask
+    panel = _make_test_panel("SGL-MOCK-001", "W01", base_val=1.0)
+    eval_panel = _make_test_panel("SGL-MOCK-001", "W02", base_val=5.0)
+    vals = eval_panel.values
+    mask = eval_panel.mask
 
     # Expected channel assignments
     # optical: 0, 1, 2, 3
@@ -403,3 +411,171 @@ def test_paired_difference_support_alignment():
 
     with pytest.raises(ValueError, match="support mismatch"):
         compute_paired_score_differences(model_preds, mismatched_base_preds)
+
+
+# ---------------------------------------------------------------------------
+# Test 7: Prediction Record Sample ID Determinism
+# ---------------------------------------------------------------------------
+
+def test_prediction_record_sample_id_determinism():
+    """Verify deterministic SHA-256 sample_id generation for closed-window records.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    rec1 = make_prediction_record(
+        lake_id="SGL-001",
+        decision_date="2023-09-06",
+        window_start="2023-03-10",
+        window_end="2023-09-05",
+        model_id="tmae",
+        ablation_id="full",
+        score=0.531365,
+        eligible=True,
+    )
+    expected_id = hashlib.sha256("SGL-001|2023-09-06|tmae|full".encode("utf-8")).hexdigest()
+    assert rec1.sample_id == expected_id
+    assert len(rec1.sample_id) == 64
+
+    # Any change to key identity changes the hash
+    rec2 = make_prediction_record(
+        lake_id="SGL-001",
+        decision_date="2023-09-06",
+        window_start="2023-03-10",
+        window_end="2023-09-05",
+        model_id="tmae",
+        ablation_id="opt_sar",
+        score=0.531365,
+        eligible=True,
+    )
+    assert rec2.sample_id != rec1.sample_id
+
+
+# ---------------------------------------------------------------------------
+# Test 8: End-to-End Prediction Runner Execution
+# ---------------------------------------------------------------------------
+
+def test_run_predictions_end_to_end(tmp_path: Path):
+    """Verify run_predictions execution, ledger formatting, calibration, and episodes.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    from runners.run_predictions import run_predictions
+
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    manifest_path = repo_root / "data" / "split_manifest.json"
+    panels_path = repo_root / "data" / "feature_panels.npz"
+    normalizer_path = repo_root / "data" / "fitted_normalizer.json"
+    checkpoint_path = repo_root / "data" / "checkpoints" / "tmae_best_checkpoint.pt"
+    lake_registry_path = repo_root / "data" / "lake_registry.csv"
+    event_registry_path = repo_root / "data" / "event_registry.csv"
+
+    out_ledger = tmp_path / "ledger.csv"
+    out_cal = tmp_path / "calibration.json"
+    out_ep = tmp_path / "episodes.json"
+    out_paired = tmp_path / "paired.json"
+
+    res = run_predictions(
+        manifest_path=manifest_path,
+        panels_path=panels_path,
+        normalizer_path=normalizer_path,
+        checkpoint_path=checkpoint_path,
+        lake_registry_path=lake_registry_path,
+        event_registry_path=event_registry_path,
+        output_ledger_path=out_ledger,
+        output_calibration_path=out_cal,
+        output_episodes_path=out_ep,
+        output_paired_path=out_paired,
+        calibration_target=0.05,
+        device="cpu",
+    )
+
+    assert res["status"] == "COMPLETED"
+    assert res["n_ledger_records"] == 490  # 14 windows * 7 ablations * 5 models
+    assert res["n_paired_comparisons"] > 0
+    assert res["primary_threshold"] > 0.0
+
+    # 1. Verify ledger CSV schema and contents
+    assert out_ledger.exists()
+    with open(out_ledger, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+        assert len(rows) == 490
+        for r in rows:
+            assert len(r["sample_id"]) == 64
+            assert r["status"] in ("ELIGIBLE", "NOT_ESTIMABLE")
+            assert r["eligible"] in ("true", "false")
+            assert np.isfinite(float(r["score"]))
+
+    # 2. Verify calibration JSON
+    assert out_cal.exists()
+    with open(out_cal, "r", encoding="utf-8") as f:
+        cal_data = json.load(f)
+        assert cal_data["target_false_alert_fraction"] == 0.05
+        assert "0.95" in cal_data["thresholds_by_percentile"]
+        assert len(cal_data["state_hash"]) == 64
+
+    # 3. Verify alert episodes JSON
+    assert out_ep.exists()
+    with open(out_ep, "r", encoding="utf-8") as f:
+        ep_data = json.load(f)
+        assert ep_data["alert_burden"]["status"] == "ESTIMATED"
+        assert ep_data["lead_time_results"][0]["status"] == "NOT_DETECTED"
+        assert ep_data["lead_time_results"][0]["lead_time_days"] is None
+
+    # 4. Verify paired score differences JSON
+    assert out_paired.exists()
+    with open(out_paired, "r", encoding="utf-8") as f:
+        paired_data = json.load(f)
+        assert paired_data["summary"]["model_id"] == "tmae"
+        assert len(paired_data["paired_differences"]) == 4
+
+
+# ---------------------------------------------------------------------------
+# Test 9: CLI Runner Subprocess Invocation
+# ---------------------------------------------------------------------------
+
+def test_run_predictions_cli_subprocess(tmp_path: Path):
+    """Verify source/runners/run_predictions.py executes cleanly via CLI subprocess.
+
+    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    """
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    runner_script = repo_root / "source" / "runners" / "run_predictions.py"
+
+    out_ledger = tmp_path / "cli_ledger.csv"
+    out_cal = tmp_path / "cli_calibration.json"
+    out_ep = tmp_path / "cli_episodes.json"
+    out_paired = tmp_path / "cli_paired.json"
+
+    cmd = [
+        sys.executable,
+        "-B",
+        str(runner_script),
+        "--manifest", str(repo_root / "data" / "split_manifest.json"),
+        "--panels", str(repo_root / "data" / "feature_panels.npz"),
+        "--normalizer", str(repo_root / "data" / "fitted_normalizer.json"),
+        "--checkpoint", str(repo_root / "data" / "checkpoints" / "tmae_best_checkpoint.pt"),
+        "--lake-registry", str(repo_root / "data" / "lake_registry.csv"),
+        "--event-registry", str(repo_root / "data" / "event_registry.csv"),
+        "--output-ledger", str(out_ledger),
+        "--output-calibration", str(out_cal),
+        "--output-episodes", str(out_ep),
+        "--output-paired", str(out_paired),
+        "--device", "cpu",
+    ]
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        check=False,
+        env={**os.environ, "PYTHONPATH": str(repo_root / "source")},
+    )
+
+    assert result.returncode == 0, f"CLI runner failed with error:\nSTDOUT: {result.stdout}\nSTDERR: {result.stderr}"
+    assert "Sentinel-GL Predictions, Baselines, and Alert Episodes Completed" in result.stdout
+    assert out_ledger.exists()
+    assert out_cal.exists()
+    assert out_ep.exists()
+    assert out_paired.exists()
+

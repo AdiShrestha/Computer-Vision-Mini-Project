@@ -1,0 +1,5025 @@
+{
+  "summary": {
+    "model_id": "tmae",
+    "baselines": [
+      "climatology",
+      "area_trend",
+      "weather_only",
+      "rpca"
+    ],
+    "total_paired_windows": 250
+  },
+  "paired_differences": {
+    "climatology": [
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.8751881718635559,
+        "baseline_score": 0.5003700959826193,
+        "delta_s": 0.37481807588093663
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.531365156173706,
+        "baseline_score": 0.26073870420506073,
+        "delta_s": 0.2706264519686453
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.6429896950721741,
+        "baseline_score": 0.35143042701250915,
+        "delta_s": 0.2915592680596649
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.19431491196155548,
+        "baseline_score": 0.07216854492970004,
+        "delta_s": 0.12214636703185544
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.2167406529188156,
+        "baseline_score": 0.036084272690376715,
+        "delta_s": 0.18065638022843888
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.6425437927246094,
+        "baseline_score": 0.32632832422362895,
+        "delta_s": 0.3162154685009804
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.22850170731544495,
+        "baseline_score": 0.0,
+        "delta_s": 0.22850170731544495
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.4827462434768677,
+        "baseline_score": 0.45888466587213206,
+        "delta_s": 0.023861577604735618
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.34721070528030396,
+        "baseline_score": 0.27390926375068086,
+        "delta_s": 0.07330144152962309
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.3933958411216736,
+        "baseline_score": 0.32154565734289403,
+        "delta_s": 0.07185018377877955
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.23191528022289276,
+        "baseline_score": 0.06403501509198516,
+        "delta_s": 0.1678802651309076
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.1960332840681076,
+        "baseline_score": 0.04269001015026096,
+        "delta_s": 0.15334327391784663
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.39619180560112,
+        "baseline_score": 0.36227736804801813,
+        "delta_s": 0.03391443755310186
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.09940250217914581,
+        "baseline_score": 0.0,
+        "delta_s": 0.09940250217914581
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.6628745198249817,
+        "baseline_score": 0.30592311092133595,
+        "delta_s": 0.35695140890364574
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.4521217942237854,
+        "baseline_score": 0.1826061759465071,
+        "delta_s": 0.2695156182772783
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.5138338804244995,
+        "baseline_score": 0.21436377171726545,
+        "delta_s": 0.29947010870723406
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.2375662922859192,
+        "baseline_score": 0.04269001015026096,
+        "delta_s": 0.19487628213565822
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.21303817629814148,
+        "baseline_score": 0.028460006806368426,
+        "delta_s": 0.18457816949177305
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.5396078824996948,
+        "baseline_score": 0.24151824557720358,
+        "delta_s": 0.29808963692249124
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.16498751938343048,
+        "baseline_score": 0.0,
+        "delta_s": 0.16498751938343048
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.717465341091156,
+        "baseline_score": 0.22944233340173664,
+        "delta_s": 0.48802300768941936
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.47287943959236145,
+        "baseline_score": 0.13695463208952893,
+        "delta_s": 0.3359248075028325
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.5371513366699219,
+        "baseline_score": 0.16077282894877507,
+        "delta_s": 0.3763785077211468
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.2120867520570755,
+        "baseline_score": 0.032017507784825164,
+        "delta_s": 0.18006924427225035
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.20299701392650604,
+        "baseline_score": 0.021345005212117824,
+        "delta_s": 0.18165200871438822
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.5843014121055603,
+        "baseline_score": 0.18113868432808639,
+        "delta_s": 0.4031627277774739
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.2083171159029007,
+        "baseline_score": 0.0,
+        "delta_s": 0.2083171159029007
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.030615210533142,
+        "baseline_score": 0.18355386678257396,
+        "delta_s": 0.8470613437505681
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.6353675723075867,
+        "baseline_score": 0.10956370569191273,
+        "delta_s": 0.5258038666156739
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.7296969294548035,
+        "baseline_score": 0.12861826318698055,
+        "delta_s": 0.6010786662678229
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.22371435165405273,
+        "baseline_score": 0.025614006243868885,
+        "delta_s": 0.19810034541018384
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.19989681243896484,
+        "baseline_score": 0.01707600417680926,
+        "delta_s": 0.18282080826215558
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.8282777667045593,
+        "baseline_score": 0.14491094750060357,
+        "delta_s": 0.6833668192039557
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.17519110441207886,
+        "baseline_score": 0.0,
+        "delta_s": 0.17519110441207886
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.9205434918403625,
+        "baseline_score": 0.15296155568613642,
+        "delta_s": 0.7675819361542261
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.5810296535491943,
+        "baseline_score": 0.09130308808786593,
+        "delta_s": 0.4897265654613284
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.6684470772743225,
+        "baseline_score": 0.10718188600468406,
+        "delta_s": 0.5612651912696385
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.2523156404495239,
+        "baseline_score": 0.021345005212117824,
+        "delta_s": 0.2309706352374061
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.20634619891643524,
+        "baseline_score": 0.014230003484627165,
+        "delta_s": 0.19211619543180808
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.7377128005027771,
+        "baseline_score": 0.12075912293835545,
+        "delta_s": 0.6169536775644217
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.12302392721176147,
+        "baseline_score": 0.0,
+        "delta_s": 0.12302392721176147
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.1370246410369873,
+        "baseline_score": 1.5011102879478575,
+        "delta_s": 0.6359143530891298
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.4698423147201538,
+        "baseline_score": 0.9789849726708867,
+        "delta_s": 0.4908573420492671
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.22850170731544495,
+        "baseline_score": 0.0,
+        "delta_s": 0.22850170731544495
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.090989351272583,
+        "baseline_score": 1.7940532317101408,
+        "delta_s": 0.29693611956244226
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.8856631517410278,
+        "baseline_score": 1.1557940302907248,
+        "delta_s": 0.729869121450303
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.4421544075012207,
+        "baseline_score": 1.5207816178430915,
+        "delta_s": 0.9213727896581292
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.9450058937072754,
+        "baseline_score": 0.4960130562255983,
+        "delta_s": 3.448992837481677
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.6233303546905518,
+        "baseline_score": 0.19840522397827845,
+        "delta_s": 1.4249251307122732
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.5221837759017944,
+        "baseline_score": 1.2814665952991164,
+        "delta_s": 0.240717180602678
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.09012051671743393,
+        "baseline_score": 0.0,
+        "delta_s": 0.09012051671743393
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.6144587993621826,
+        "baseline_score": 1.7974273971800463,
+        "delta_s": 0.8170314021821363
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.2478697299957275,
+        "baseline_score": 1.2172771657555808,
+        "delta_s": 1.0305925642401468
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.8294801712036133,
+        "baseline_score": 1.5589690011576878,
+        "delta_s": 1.2705111700459255
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.8456318378448486,
+        "baseline_score": 0.6647500085471059,
+        "delta_s": 3.1808818292977428
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.767012357711792,
+        "baseline_score": 0.2848928621625352,
+        "delta_s": 1.4821194955492567
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.9683043956756592,
+        "baseline_score": 1.325971031479471,
+        "delta_s": 0.6423333641961881
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.17333249747753143,
+        "baseline_score": 0.0,
+        "delta_s": 0.17333249747753143
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.923272132873535,
+        "baseline_score": 672918.3243868904,
+        "delta_s": -672915.4011147575
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.379767656326294,
+        "baseline_score": 410751.0746487601,
+        "delta_s": -410748.69488110376
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.047879457473755,
+        "baseline_score": 540461.9401566437,
+        "delta_s": -540458.8922771863
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.7493889331817627,
+        "baseline_score": 43750.498191925195,
+        "delta_s": -43746.74880299201
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.6548669338226318,
+        "baseline_score": 17500.199342395827,
+        "delta_s": -17498.544475462004
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.1432347297668457,
+        "baseline_score": 480655.9462195199,
+        "delta_s": -480653.8029847901
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.1977604478597641,
+        "baseline_score": 0.0,
+        "delta_s": 0.1977604478597641
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.3303322792053223,
+        "baseline_score": 538334.968188404,
+        "delta_s": -538331.6378561248
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.6433656215667725,
+        "baseline_score": 333944.1838935846,
+        "delta_s": -333941.540527963
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.3367514610290527,
+        "baseline_score": 432369.83799019305,
+        "delta_s": -432366.501238732
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.704235553741455,
+        "baseline_score": 35000.59904207313,
+        "delta_s": -34996.89480651939
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.6914767026901245,
+        "baseline_score": 14583.58297673259,
+        "delta_s": -14581.8915000299
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.4824037551879883,
+        "baseline_score": 391991.48183266656,
+        "delta_s": -391988.99942891137
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.17746050655841827,
+        "baseline_score": 0.0,
+        "delta_s": 0.17746050655841827
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.2391741275787354,
+        "baseline_score": 448612.68353661924,
+        "delta_s": -448609.44436249166
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.63449764251709,
+        "baseline_score": 281336.69539904466,
+        "delta_s": -281334.06090140215
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.2834792137145996,
+        "baseline_score": 360308.399301433,
+        "delta_s": -360305.1158222193
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 3.7781753540039062,
+        "baseline_score": 29167.332930019118,
+        "delta_s": -29163.554754665114
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 1.745928168296814,
+        "baseline_score": 12500.285571199352,
+        "delta_s": -12498.539643031056
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 2.4506194591522217,
+        "baseline_score": 330943.78303330025,
+        "delta_s": -330941.3324138411
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "climatology",
+        "model_score": 0.1386057287454605,
+        "baseline_score": 0.0,
+        "delta_s": 0.1386057287454605
+      }
+    ],
+    "area_trend": [
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.531365156173706,
+        "baseline_score": 0.0,
+        "delta_s": 0.531365156173706
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.6429896950721741,
+        "baseline_score": 0.0,
+        "delta_s": 0.6429896950721741
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.19431491196155548,
+        "baseline_score": 0.0,
+        "delta_s": 0.19431491196155548
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.2167406529188156,
+        "baseline_score": 0.0,
+        "delta_s": 0.2167406529188156
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.34721070528030396,
+        "baseline_score": 0.0,
+        "delta_s": 0.34721070528030396
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.3933958411216736,
+        "baseline_score": 0.0,
+        "delta_s": 0.3933958411216736
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.23191528022289276,
+        "baseline_score": 0.0,
+        "delta_s": 0.23191528022289276
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.1960332840681076,
+        "baseline_score": 0.0,
+        "delta_s": 0.1960332840681076
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.4521217942237854,
+        "baseline_score": 0.0,
+        "delta_s": 0.4521217942237854
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.5138338804244995,
+        "baseline_score": 0.0,
+        "delta_s": 0.5138338804244995
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.2375662922859192,
+        "baseline_score": 0.0,
+        "delta_s": 0.2375662922859192
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.21303817629814148,
+        "baseline_score": 0.0,
+        "delta_s": 0.21303817629814148
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.47287943959236145,
+        "baseline_score": 0.0,
+        "delta_s": 0.47287943959236145
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.5371513366699219,
+        "baseline_score": 0.0,
+        "delta_s": 0.5371513366699219
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.2120867520570755,
+        "baseline_score": 0.0,
+        "delta_s": 0.2120867520570755
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.20299701392650604,
+        "baseline_score": 0.0,
+        "delta_s": 0.20299701392650604
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.6353675723075867,
+        "baseline_score": 0.0,
+        "delta_s": 0.6353675723075867
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.7296969294548035,
+        "baseline_score": 0.0,
+        "delta_s": 0.7296969294548035
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.22371435165405273,
+        "baseline_score": 0.0,
+        "delta_s": 0.22371435165405273
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.19989681243896484,
+        "baseline_score": 0.0,
+        "delta_s": 0.19989681243896484
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.5810296535491943,
+        "baseline_score": 0.0,
+        "delta_s": 0.5810296535491943
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.6684470772743225,
+        "baseline_score": 0.0,
+        "delta_s": 0.6684470772743225
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.2523156404495239,
+        "baseline_score": 0.0,
+        "delta_s": 0.2523156404495239
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 0.20634619891643524,
+        "baseline_score": 0.0,
+        "delta_s": 0.20634619891643524
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 1.8856631517410278,
+        "baseline_score": 0.0,
+        "delta_s": 1.8856631517410278
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 2.4421544075012207,
+        "baseline_score": 0.0,
+        "delta_s": 2.4421544075012207
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.9450058937072754,
+        "baseline_score": 0.0,
+        "delta_s": 3.9450058937072754
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 1.6233303546905518,
+        "baseline_score": 0.0,
+        "delta_s": 1.6233303546905518
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 2.2478697299957275,
+        "baseline_score": 0.0,
+        "delta_s": 2.2478697299957275
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 2.8294801712036133,
+        "baseline_score": 0.0,
+        "delta_s": 2.8294801712036133
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.8456318378448486,
+        "baseline_score": 0.0,
+        "delta_s": 3.8456318378448486
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 1.767012357711792,
+        "baseline_score": 0.0,
+        "delta_s": 1.767012357711792
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 2.379767656326294,
+        "baseline_score": 0.0,
+        "delta_s": 2.379767656326294
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.047879457473755,
+        "baseline_score": 0.0,
+        "delta_s": 3.047879457473755
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.7493889331817627,
+        "baseline_score": 0.0,
+        "delta_s": 3.7493889331817627
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 1.6548669338226318,
+        "baseline_score": 0.0,
+        "delta_s": 1.6548669338226318
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 2.6433656215667725,
+        "baseline_score": 0.0,
+        "delta_s": 2.6433656215667725
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.3367514610290527,
+        "baseline_score": 0.0,
+        "delta_s": 3.3367514610290527
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.704235553741455,
+        "baseline_score": 0.0,
+        "delta_s": 3.704235553741455
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 1.6914767026901245,
+        "baseline_score": 0.0,
+        "delta_s": 1.6914767026901245
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 2.63449764251709,
+        "baseline_score": 0.0,
+        "delta_s": 2.63449764251709
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.2834792137145996,
+        "baseline_score": 0.0,
+        "delta_s": 3.2834792137145996
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 3.7781753540039062,
+        "baseline_score": 0.0,
+        "delta_s": 3.7781753540039062
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "area_trend",
+        "model_score": 1.745928168296814,
+        "baseline_score": 0.0,
+        "delta_s": 1.745928168296814
+      }
+    ],
+    "weather_only": [
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.8751881718635559,
+        "baseline_score": 0.8770943390375449,
+        "delta_s": -0.0019061671739889485
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.531365156173706,
+        "baseline_score": 0.8770943390375449,
+        "delta_s": -0.3457291828638388
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.6429896950721741,
+        "baseline_score": 0.8770943390375449,
+        "delta_s": -0.23410464396537078
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.6425437927246094,
+        "baseline_score": 0.8770943390375449,
+        "delta_s": -0.23455054631293548
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.4827462434768677,
+        "baseline_score": 0.678223299769329,
+        "delta_s": -0.19547705629246137
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.34721070528030396,
+        "baseline_score": 0.678223299769329,
+        "delta_s": -0.3310125944890251
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.3933958411216736,
+        "baseline_score": 0.678223299769329,
+        "delta_s": -0.28482745864765546
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.39619180560112,
+        "baseline_score": 0.678223299769329,
+        "delta_s": -0.28203149416820905
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.6628745198249817,
+        "baseline_score": 0.787421069829154,
+        "delta_s": -0.12454655000417236
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.4521217942237854,
+        "baseline_score": 0.787421069829154,
+        "delta_s": -0.33529927560536865
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.5138338804244995,
+        "baseline_score": 0.787421069829154,
+        "delta_s": -0.27358718940465454
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.5396078824996948,
+        "baseline_score": 0.787421069829154,
+        "delta_s": -0.24781318732945923
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.717465341091156,
+        "baseline_score": 0.8288115719588444,
+        "delta_s": -0.11134623086768836
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.47287943959236145,
+        "baseline_score": 0.8288115719588444,
+        "delta_s": -0.3559321323664829
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.5371513366699219,
+        "baseline_score": 0.8288115719588444,
+        "delta_s": -0.2916602352889225
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.5843014121055603,
+        "baseline_score": 0.8288115719588444,
+        "delta_s": -0.24451015985328406
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 1.030615210533142,
+        "baseline_score": 1.0253356756121264,
+        "delta_s": 0.005279534921015738
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.6353675723075867,
+        "baseline_score": 1.0253356756121264,
+        "delta_s": -0.3899681033045397
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.7296969294548035,
+        "baseline_score": 1.0253356756121264,
+        "delta_s": -0.2956387461573229
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.8282777667045593,
+        "baseline_score": 1.0253356756121264,
+        "delta_s": -0.19705790890756703
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.9205434918403625,
+        "baseline_score": 0.9895645025900718,
+        "delta_s": -0.06902101074970923
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.5810296535491943,
+        "baseline_score": 0.9895645025900718,
+        "delta_s": -0.40853484904087745
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.6684470772743225,
+        "baseline_score": 0.9895645025900718,
+        "delta_s": -0.32111742531574927
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 0.7377128005027771,
+        "baseline_score": 0.9895645025900718,
+        "delta_s": -0.2518517020872947
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.1370246410369873,
+        "baseline_score": 1.4857671350379882,
+        "delta_s": 0.6512575059989991
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 1.4698423147201538,
+        "baseline_score": 1.4857671350379882,
+        "delta_s": -0.015924820317834376
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.090989351272583,
+        "baseline_score": 1.4770610971219598,
+        "delta_s": 0.6139282541506232
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 1.8856631517410278,
+        "baseline_score": 1.4770610971219598,
+        "delta_s": 0.40860205461906807
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.4421544075012207,
+        "baseline_score": 1.4770610971219598,
+        "delta_s": 0.9650933103792609
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 1.5221837759017944,
+        "baseline_score": 1.4770610971219598,
+        "delta_s": 0.04512267877983467
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.6144587993621826,
+        "baseline_score": 1.6329744611429418,
+        "delta_s": 0.9814843382192409
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.2478697299957275,
+        "baseline_score": 1.6329744611429418,
+        "delta_s": 0.6148952688527858
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.8294801712036133,
+        "baseline_score": 1.6329744611429418,
+        "delta_s": 1.1965057100606715
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 1.9683043956756592,
+        "baseline_score": 1.6329744611429418,
+        "delta_s": 0.3353299345327174
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.923272132873535,
+        "baseline_score": 1.746018463884241,
+        "delta_s": 1.177253668989294
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.379767656326294,
+        "baseline_score": 1.746018463884241,
+        "delta_s": 0.6337491924420529
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 3.047879457473755,
+        "baseline_score": 1.746018463884241,
+        "delta_s": 1.3018609935895138
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.1432347297668457,
+        "baseline_score": 1.746018463884241,
+        "delta_s": 0.3972162658826046
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 3.3303322792053223,
+        "baseline_score": 1.8985095001128631,
+        "delta_s": 1.4318227790924591
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.6433656215667725,
+        "baseline_score": 1.8985095001128631,
+        "delta_s": 0.7448561214539093
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 3.3367514610290527,
+        "baseline_score": 1.8985095001128631,
+        "delta_s": 1.4382419609161896
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.4824037551879883,
+        "baseline_score": 1.8985095001128631,
+        "delta_s": 0.5838942550751252
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 3.2391741275787354,
+        "baseline_score": 1.902097240142164,
+        "delta_s": 1.3370768874365713
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.63449764251709,
+        "baseline_score": 1.902097240142164,
+        "delta_s": 0.7324004023749258
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 3.2834792137145996,
+        "baseline_score": 1.902097240142164,
+        "delta_s": 1.3813819735724355
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "weather_only",
+        "model_score": 2.4506194591522217,
+        "baseline_score": 1.902097240142164,
+        "delta_s": 0.5485222190100576
+      }
+    ],
+    "rpca": [
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.8751881718635559,
+        "baseline_score": 3.5479301599955676e-09,
+        "delta_s": 0.8751881683156257
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.531365156173706,
+        "baseline_score": 1.127476661870706e-31,
+        "delta_s": 0.531365156173706
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.6429896950721741,
+        "baseline_score": 1.5196424555989265e-31,
+        "delta_s": 0.6429896950721741
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.19431491196155548,
+        "baseline_score": 0.0008630513598249506,
+        "delta_s": 0.19345186060173053
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.2167406529188156,
+        "baseline_score": 0.00043152568260951073,
+        "delta_s": 0.2163091272362061
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.6425437927246094,
+        "baseline_score": 2.3138675010147728e-09,
+        "delta_s": 0.6425437904107418
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.22850170731544495,
+        "baseline_score": 0.0,
+        "delta_s": 0.22850170731544495
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.4827462434768677,
+        "baseline_score": 1.0220757289052843e-08,
+        "delta_s": 0.4827462332561104
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.34721070528030396,
+        "baseline_score": 1.8065650829329448e-30,
+        "delta_s": 0.34721070528030396
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.3933958411216736,
+        "baseline_score": 2.120750314064359e-30,
+        "delta_s": 0.3933958411216736
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.23191528022289276,
+        "baseline_score": 0.000759165673061062,
+        "delta_s": 0.2311561145498317
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.1960332840681076,
+        "baseline_score": 0.0005061104497617714,
+        "delta_s": 0.19552717361834585
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.39619180560112,
+        "baseline_score": 8.06901891807261e-09,
+        "delta_s": 0.3961917975321011
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.09940250217914581,
+        "baseline_score": 0.0,
+        "delta_s": 0.09940250217914581
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.6628745198249817,
+        "baseline_score": 3.084168452918296e-08,
+        "delta_s": 0.6628744889832971
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.4521217942237854,
+        "baseline_score": 4.740640886887198e-31,
+        "delta_s": 0.4521217942237854
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.5138338804244995,
+        "baseline_score": 5.565100170368364e-31,
+        "delta_s": 0.5138338804244995
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.2375662922859192,
+        "baseline_score": 0.0006709785790189132,
+        "delta_s": 0.23689531370690028
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.21303817629814148,
+        "baseline_score": 0.0004473190533005519,
+        "delta_s": 0.21259085724484092
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.5396078824996948,
+        "baseline_score": 2.434869832390406e-08,
+        "delta_s": 0.5396078581509965
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.16498751938343048,
+        "baseline_score": 0.0,
+        "delta_s": 0.16498751938343048
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.717465341091156,
+        "baseline_score": 5.319891212847146e-08,
+        "delta_s": 0.7174652878922438
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.47287943959236145,
+        "baseline_score": 2.220827098272989e-31,
+        "delta_s": 0.47287943959236145
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.5371513366699219,
+        "baseline_score": 2.6070578975528235e-31,
+        "delta_s": 0.5371513366699219
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.2120867520570755,
+        "baseline_score": 0.0005908560209736494,
+        "delta_s": 0.21149589603610186
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.20299701392650604,
+        "baseline_score": 0.00039390401439274973,
+        "delta_s": 0.2026031099121133
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.5843014121055603,
+        "baseline_score": 4.199914116879296e-08,
+        "delta_s": 0.5843013701064191
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.2083171159029007,
+        "baseline_score": 0.0,
+        "delta_s": 0.2083171159029007
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.030615210533142,
+        "baseline_score": 6.122383250751866e-08,
+        "delta_s": 1.0306151493093096
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.6353675723075867,
+        "baseline_score": 5.022866529324569e-31,
+        "delta_s": 0.6353675723075867
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.7296969294548035,
+        "baseline_score": 5.8964085336648925e-31,
+        "delta_s": 0.7296969294548035
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.22371435165405273,
+        "baseline_score": 0.0005076530615164078,
+        "delta_s": 0.22320669859253633
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.19989681243896484,
+        "baseline_score": 0.00033843537462630133,
+        "delta_s": 0.19955837706433854
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.8282777667045593,
+        "baseline_score": 4.833460462476655e-08,
+        "delta_s": 0.8282777183699547
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.17519110441207886,
+        "baseline_score": 0.0,
+        "delta_s": 0.17519110441207886
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.9205434918403625,
+        "baseline_score": 6.213307278807481e-08,
+        "delta_s": 0.9205434297072898
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.5810296535491943,
+        "baseline_score": 7.637190670258217e-31,
+        "delta_s": 0.5810296535491943
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.6684470772743225,
+        "baseline_score": 8.965397742384134e-31,
+        "delta_s": 0.6684470772743225
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.2523156404495239,
+        "baseline_score": 0.0004326550991847755,
+        "delta_s": 0.25188298535033915
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.20634619891643524,
+        "baseline_score": 0.00028843673299015364,
+        "delta_s": 0.2060577621834451
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.7377128005027771,
+        "baseline_score": 4.905242589679647e-08,
+        "delta_s": 0.7377127514503512
+      },
+      {
+        "lake_id": "SGL-001",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.12302392721176147,
+        "baseline_score": 0.0,
+        "delta_s": 0.12302392721176147
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.1370246410369873,
+        "baseline_score": 1.6121356934782238e-07,
+        "delta_s": 2.137024479823418
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.4698423147201538,
+        "baseline_score": 1.0513928460107668e-07,
+        "delta_s": 1.4698422095808692
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-06",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.22850170731544495,
+        "baseline_score": 0.0,
+        "delta_s": 0.22850170731544495
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.090989351272583,
+        "baseline_score": 3.97213647318785e-07,
+        "delta_s": 2.0909889540589357
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.8856631517410278,
+        "baseline_score": 2.4672318096222486e-31,
+        "delta_s": 1.8856631517410278
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.4421544075012207,
+        "baseline_score": 3.2463576421894696e-31,
+        "delta_s": 2.4421544075012207
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.9450058937072754,
+        "baseline_score": 0.00016297561303036062,
+        "delta_s": 3.944842918094245
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.6233303546905518,
+        "baseline_score": 6.519024570107108e-05,
+        "delta_s": 1.6232651644448506
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.5221837759017944,
+        "baseline_score": 2.8372403406934555e-07,
+        "delta_s": 1.5221834921777604
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-11",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.09012051671743393,
+        "baseline_score": 0.0,
+        "delta_s": 0.09012051671743393
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.6144587993621826,
+        "baseline_score": 1.0221571461256618,
+        "delta_s": 1.5923016532365208
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.2478697299957275,
+        "baseline_score": 0.6299974965561393,
+        "delta_s": 1.6178722334395883
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.8294801712036133,
+        "baseline_score": 0.8068388987879653,
+        "delta_s": 2.022641272415648
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.8456318378448486,
+        "baseline_score": 0.00020450566064271152,
+        "delta_s": 3.845427332184206
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.767012357711792,
+        "baseline_score": 8.764528354994914e-05,
+        "delta_s": 1.7669247124282421
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.9683043956756592,
+        "baseline_score": 0.754050354138778,
+        "delta_s": 1.2142540415368812
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-16",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.17333249747753143,
+        "baseline_score": 0.0,
+        "delta_s": 0.17333249747753143
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.923272132873535,
+        "baseline_score": 1.149693821586648,
+        "delta_s": 1.7735783112868873
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.379767656326294,
+        "baseline_score": 0.689982304338618,
+        "delta_s": 1.689785351987676
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.047879457473755,
+        "baseline_score": 0.9078714527904329,
+        "delta_s": 2.140008004683322
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.7493889331817627,
+        "baseline_score": 0.0002632946747029931,
+        "delta_s": 3.7491256385070595
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.6548669338226318,
+        "baseline_score": 0.00010531787027613926,
+        "delta_s": 1.6547616159523557
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.1432347297668457,
+        "baseline_score": 0.8212098729529439,
+        "delta_s": 1.322024856813902
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-21",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.1977604478597641,
+        "baseline_score": 0.0,
+        "delta_s": 0.1977604478597641
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.3303322792053223,
+        "baseline_score": 1.3302783484533873,
+        "delta_s": 2.000053930751935
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.6433656215667725,
+        "baseline_score": 0.8118081191104523,
+        "delta_s": 1.8315575024563202
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.3367514610290527,
+        "baseline_score": 1.0510778802806173,
+        "delta_s": 2.285673580748435
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.704235553741455,
+        "baseline_score": 0.00032425200085037747,
+        "delta_s": 3.7039113017406047
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.6914767026901245,
+        "baseline_score": 0.0001351050007483802,
+        "delta_s": 1.6913415976893762
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.4824037551879883,
+        "baseline_score": 0.9686492832055045,
+        "delta_s": 1.5137544719824838
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-09-26",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.17746050655841827,
+        "baseline_score": 0.0,
+        "delta_s": 0.17746050655841827
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "era5_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.2391741275787354,
+        "baseline_score": 1.470166072051554,
+        "delta_s": 1.7690080555271814
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "full",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.63449764251709,
+        "baseline_score": 0.9070484364408155,
+        "delta_s": 1.7274492060762743
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.2834792137145996,
+        "baseline_score": 1.1616585236394568,
+        "delta_s": 2.121820690075143
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 3.7781753540039062,
+        "baseline_score": 0.00040013138523456275,
+        "delta_s": 3.7777752226186716
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "opt_sar",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 1.745928168296814,
+        "baseline_score": 0.0001714848797945385,
+        "delta_s": 1.7457566834170195
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_era5",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 2.4506194591522217,
+        "baseline_score": 1.0845487419934559,
+        "delta_s": 1.3660707171587658
+      },
+      {
+        "lake_id": "SGL-002",
+        "decision_date": "2023-10-01",
+        "ablation_id": "sar_only",
+        "model_id": "tmae",
+        "baseline_id": "rpca",
+        "model_score": 0.1386057287454605,
+        "baseline_score": 0.0,
+        "delta_s": 0.1386057287454605
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.8751881718635559,
+      "baseline_score": 0.5003700959826193,
+      "delta_s": 0.37481807588093663
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.531365156173706,
+      "baseline_score": 0.26073870420506073,
+      "delta_s": 0.2706264519686453
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.6429896950721741,
+      "baseline_score": 0.35143042701250915,
+      "delta_s": 0.2915592680596649
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.19431491196155548,
+      "baseline_score": 0.07216854492970004,
+      "delta_s": 0.12214636703185544
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.2167406529188156,
+      "baseline_score": 0.036084272690376715,
+      "delta_s": 0.18065638022843888
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.6425437927246094,
+      "baseline_score": 0.32632832422362895,
+      "delta_s": 0.3162154685009804
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.22850170731544495,
+      "baseline_score": 0.0,
+      "delta_s": 0.22850170731544495
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.4827462434768677,
+      "baseline_score": 0.45888466587213206,
+      "delta_s": 0.023861577604735618
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.34721070528030396,
+      "baseline_score": 0.27390926375068086,
+      "delta_s": 0.07330144152962309
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.3933958411216736,
+      "baseline_score": 0.32154565734289403,
+      "delta_s": 0.07185018377877955
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.23191528022289276,
+      "baseline_score": 0.06403501509198516,
+      "delta_s": 0.1678802651309076
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.1960332840681076,
+      "baseline_score": 0.04269001015026096,
+      "delta_s": 0.15334327391784663
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.39619180560112,
+      "baseline_score": 0.36227736804801813,
+      "delta_s": 0.03391443755310186
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.09940250217914581,
+      "baseline_score": 0.0,
+      "delta_s": 0.09940250217914581
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.6628745198249817,
+      "baseline_score": 0.30592311092133595,
+      "delta_s": 0.35695140890364574
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.4521217942237854,
+      "baseline_score": 0.1826061759465071,
+      "delta_s": 0.2695156182772783
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.5138338804244995,
+      "baseline_score": 0.21436377171726545,
+      "delta_s": 0.29947010870723406
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.2375662922859192,
+      "baseline_score": 0.04269001015026096,
+      "delta_s": 0.19487628213565822
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.21303817629814148,
+      "baseline_score": 0.028460006806368426,
+      "delta_s": 0.18457816949177305
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.5396078824996948,
+      "baseline_score": 0.24151824557720358,
+      "delta_s": 0.29808963692249124
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.16498751938343048,
+      "baseline_score": 0.0,
+      "delta_s": 0.16498751938343048
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.717465341091156,
+      "baseline_score": 0.22944233340173664,
+      "delta_s": 0.48802300768941936
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.47287943959236145,
+      "baseline_score": 0.13695463208952893,
+      "delta_s": 0.3359248075028325
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.5371513366699219,
+      "baseline_score": 0.16077282894877507,
+      "delta_s": 0.3763785077211468
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.2120867520570755,
+      "baseline_score": 0.032017507784825164,
+      "delta_s": 0.18006924427225035
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.20299701392650604,
+      "baseline_score": 0.021345005212117824,
+      "delta_s": 0.18165200871438822
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.5843014121055603,
+      "baseline_score": 0.18113868432808639,
+      "delta_s": 0.4031627277774739
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.2083171159029007,
+      "baseline_score": 0.0,
+      "delta_s": 0.2083171159029007
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.030615210533142,
+      "baseline_score": 0.18355386678257396,
+      "delta_s": 0.8470613437505681
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.6353675723075867,
+      "baseline_score": 0.10956370569191273,
+      "delta_s": 0.5258038666156739
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.7296969294548035,
+      "baseline_score": 0.12861826318698055,
+      "delta_s": 0.6010786662678229
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.22371435165405273,
+      "baseline_score": 0.025614006243868885,
+      "delta_s": 0.19810034541018384
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.19989681243896484,
+      "baseline_score": 0.01707600417680926,
+      "delta_s": 0.18282080826215558
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.8282777667045593,
+      "baseline_score": 0.14491094750060357,
+      "delta_s": 0.6833668192039557
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.17519110441207886,
+      "baseline_score": 0.0,
+      "delta_s": 0.17519110441207886
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.9205434918403625,
+      "baseline_score": 0.15296155568613642,
+      "delta_s": 0.7675819361542261
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.5810296535491943,
+      "baseline_score": 0.09130308808786593,
+      "delta_s": 0.4897265654613284
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.6684470772743225,
+      "baseline_score": 0.10718188600468406,
+      "delta_s": 0.5612651912696385
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.2523156404495239,
+      "baseline_score": 0.021345005212117824,
+      "delta_s": 0.2309706352374061
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.20634619891643524,
+      "baseline_score": 0.014230003484627165,
+      "delta_s": 0.19211619543180808
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.7377128005027771,
+      "baseline_score": 0.12075912293835545,
+      "delta_s": 0.6169536775644217
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.12302392721176147,
+      "baseline_score": 0.0,
+      "delta_s": 0.12302392721176147
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.1370246410369873,
+      "baseline_score": 1.5011102879478575,
+      "delta_s": 0.6359143530891298
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.4698423147201538,
+      "baseline_score": 0.9789849726708867,
+      "delta_s": 0.4908573420492671
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.22850170731544495,
+      "baseline_score": 0.0,
+      "delta_s": 0.22850170731544495
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.090989351272583,
+      "baseline_score": 1.7940532317101408,
+      "delta_s": 0.29693611956244226
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.8856631517410278,
+      "baseline_score": 1.1557940302907248,
+      "delta_s": 0.729869121450303
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.4421544075012207,
+      "baseline_score": 1.5207816178430915,
+      "delta_s": 0.9213727896581292
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.9450058937072754,
+      "baseline_score": 0.4960130562255983,
+      "delta_s": 3.448992837481677
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.6233303546905518,
+      "baseline_score": 0.19840522397827845,
+      "delta_s": 1.4249251307122732
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.5221837759017944,
+      "baseline_score": 1.2814665952991164,
+      "delta_s": 0.240717180602678
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.09012051671743393,
+      "baseline_score": 0.0,
+      "delta_s": 0.09012051671743393
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.6144587993621826,
+      "baseline_score": 1.7974273971800463,
+      "delta_s": 0.8170314021821363
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.2478697299957275,
+      "baseline_score": 1.2172771657555808,
+      "delta_s": 1.0305925642401468
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.8294801712036133,
+      "baseline_score": 1.5589690011576878,
+      "delta_s": 1.2705111700459255
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.8456318378448486,
+      "baseline_score": 0.6647500085471059,
+      "delta_s": 3.1808818292977428
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.767012357711792,
+      "baseline_score": 0.2848928621625352,
+      "delta_s": 1.4821194955492567
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.9683043956756592,
+      "baseline_score": 1.325971031479471,
+      "delta_s": 0.6423333641961881
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.17333249747753143,
+      "baseline_score": 0.0,
+      "delta_s": 0.17333249747753143
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.923272132873535,
+      "baseline_score": 672918.3243868904,
+      "delta_s": -672915.4011147575
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.379767656326294,
+      "baseline_score": 410751.0746487601,
+      "delta_s": -410748.69488110376
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.047879457473755,
+      "baseline_score": 540461.9401566437,
+      "delta_s": -540458.8922771863
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.7493889331817627,
+      "baseline_score": 43750.498191925195,
+      "delta_s": -43746.74880299201
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.6548669338226318,
+      "baseline_score": 17500.199342395827,
+      "delta_s": -17498.544475462004
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.1432347297668457,
+      "baseline_score": 480655.9462195199,
+      "delta_s": -480653.8029847901
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.1977604478597641,
+      "baseline_score": 0.0,
+      "delta_s": 0.1977604478597641
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.3303322792053223,
+      "baseline_score": 538334.968188404,
+      "delta_s": -538331.6378561248
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.6433656215667725,
+      "baseline_score": 333944.1838935846,
+      "delta_s": -333941.540527963
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.3367514610290527,
+      "baseline_score": 432369.83799019305,
+      "delta_s": -432366.501238732
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.704235553741455,
+      "baseline_score": 35000.59904207313,
+      "delta_s": -34996.89480651939
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.6914767026901245,
+      "baseline_score": 14583.58297673259,
+      "delta_s": -14581.8915000299
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.4824037551879883,
+      "baseline_score": 391991.48183266656,
+      "delta_s": -391988.99942891137
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.17746050655841827,
+      "baseline_score": 0.0,
+      "delta_s": 0.17746050655841827
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.2391741275787354,
+      "baseline_score": 448612.68353661924,
+      "delta_s": -448609.44436249166
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.63449764251709,
+      "baseline_score": 281336.69539904466,
+      "delta_s": -281334.06090140215
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.2834792137145996,
+      "baseline_score": 360308.399301433,
+      "delta_s": -360305.1158222193
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 3.7781753540039062,
+      "baseline_score": 29167.332930019118,
+      "delta_s": -29163.554754665114
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 1.745928168296814,
+      "baseline_score": 12500.285571199352,
+      "delta_s": -12498.539643031056
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 2.4506194591522217,
+      "baseline_score": 330943.78303330025,
+      "delta_s": -330941.3324138411
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "climatology",
+      "model_score": 0.1386057287454605,
+      "baseline_score": 0.0,
+      "delta_s": 0.1386057287454605
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.531365156173706,
+      "baseline_score": 0.0,
+      "delta_s": 0.531365156173706
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.6429896950721741,
+      "baseline_score": 0.0,
+      "delta_s": 0.6429896950721741
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.19431491196155548,
+      "baseline_score": 0.0,
+      "delta_s": 0.19431491196155548
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.2167406529188156,
+      "baseline_score": 0.0,
+      "delta_s": 0.2167406529188156
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.34721070528030396,
+      "baseline_score": 0.0,
+      "delta_s": 0.34721070528030396
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.3933958411216736,
+      "baseline_score": 0.0,
+      "delta_s": 0.3933958411216736
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.23191528022289276,
+      "baseline_score": 0.0,
+      "delta_s": 0.23191528022289276
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.1960332840681076,
+      "baseline_score": 0.0,
+      "delta_s": 0.1960332840681076
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.4521217942237854,
+      "baseline_score": 0.0,
+      "delta_s": 0.4521217942237854
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.5138338804244995,
+      "baseline_score": 0.0,
+      "delta_s": 0.5138338804244995
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.2375662922859192,
+      "baseline_score": 0.0,
+      "delta_s": 0.2375662922859192
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.21303817629814148,
+      "baseline_score": 0.0,
+      "delta_s": 0.21303817629814148
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.47287943959236145,
+      "baseline_score": 0.0,
+      "delta_s": 0.47287943959236145
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.5371513366699219,
+      "baseline_score": 0.0,
+      "delta_s": 0.5371513366699219
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.2120867520570755,
+      "baseline_score": 0.0,
+      "delta_s": 0.2120867520570755
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.20299701392650604,
+      "baseline_score": 0.0,
+      "delta_s": 0.20299701392650604
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.6353675723075867,
+      "baseline_score": 0.0,
+      "delta_s": 0.6353675723075867
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.7296969294548035,
+      "baseline_score": 0.0,
+      "delta_s": 0.7296969294548035
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.22371435165405273,
+      "baseline_score": 0.0,
+      "delta_s": 0.22371435165405273
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.19989681243896484,
+      "baseline_score": 0.0,
+      "delta_s": 0.19989681243896484
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.5810296535491943,
+      "baseline_score": 0.0,
+      "delta_s": 0.5810296535491943
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.6684470772743225,
+      "baseline_score": 0.0,
+      "delta_s": 0.6684470772743225
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.2523156404495239,
+      "baseline_score": 0.0,
+      "delta_s": 0.2523156404495239
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 0.20634619891643524,
+      "baseline_score": 0.0,
+      "delta_s": 0.20634619891643524
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 1.8856631517410278,
+      "baseline_score": 0.0,
+      "delta_s": 1.8856631517410278
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 2.4421544075012207,
+      "baseline_score": 0.0,
+      "delta_s": 2.4421544075012207
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.9450058937072754,
+      "baseline_score": 0.0,
+      "delta_s": 3.9450058937072754
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 1.6233303546905518,
+      "baseline_score": 0.0,
+      "delta_s": 1.6233303546905518
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 2.2478697299957275,
+      "baseline_score": 0.0,
+      "delta_s": 2.2478697299957275
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 2.8294801712036133,
+      "baseline_score": 0.0,
+      "delta_s": 2.8294801712036133
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.8456318378448486,
+      "baseline_score": 0.0,
+      "delta_s": 3.8456318378448486
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 1.767012357711792,
+      "baseline_score": 0.0,
+      "delta_s": 1.767012357711792
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 2.379767656326294,
+      "baseline_score": 0.0,
+      "delta_s": 2.379767656326294
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.047879457473755,
+      "baseline_score": 0.0,
+      "delta_s": 3.047879457473755
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.7493889331817627,
+      "baseline_score": 0.0,
+      "delta_s": 3.7493889331817627
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 1.6548669338226318,
+      "baseline_score": 0.0,
+      "delta_s": 1.6548669338226318
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 2.6433656215667725,
+      "baseline_score": 0.0,
+      "delta_s": 2.6433656215667725
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.3367514610290527,
+      "baseline_score": 0.0,
+      "delta_s": 3.3367514610290527
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.704235553741455,
+      "baseline_score": 0.0,
+      "delta_s": 3.704235553741455
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 1.6914767026901245,
+      "baseline_score": 0.0,
+      "delta_s": 1.6914767026901245
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 2.63449764251709,
+      "baseline_score": 0.0,
+      "delta_s": 2.63449764251709
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.2834792137145996,
+      "baseline_score": 0.0,
+      "delta_s": 3.2834792137145996
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 3.7781753540039062,
+      "baseline_score": 0.0,
+      "delta_s": 3.7781753540039062
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "area_trend",
+      "model_score": 1.745928168296814,
+      "baseline_score": 0.0,
+      "delta_s": 1.745928168296814
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.8751881718635559,
+      "baseline_score": 0.8770943390375449,
+      "delta_s": -0.0019061671739889485
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.531365156173706,
+      "baseline_score": 0.8770943390375449,
+      "delta_s": -0.3457291828638388
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.6429896950721741,
+      "baseline_score": 0.8770943390375449,
+      "delta_s": -0.23410464396537078
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.6425437927246094,
+      "baseline_score": 0.8770943390375449,
+      "delta_s": -0.23455054631293548
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.4827462434768677,
+      "baseline_score": 0.678223299769329,
+      "delta_s": -0.19547705629246137
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.34721070528030396,
+      "baseline_score": 0.678223299769329,
+      "delta_s": -0.3310125944890251
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.3933958411216736,
+      "baseline_score": 0.678223299769329,
+      "delta_s": -0.28482745864765546
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.39619180560112,
+      "baseline_score": 0.678223299769329,
+      "delta_s": -0.28203149416820905
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.6628745198249817,
+      "baseline_score": 0.787421069829154,
+      "delta_s": -0.12454655000417236
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.4521217942237854,
+      "baseline_score": 0.787421069829154,
+      "delta_s": -0.33529927560536865
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.5138338804244995,
+      "baseline_score": 0.787421069829154,
+      "delta_s": -0.27358718940465454
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.5396078824996948,
+      "baseline_score": 0.787421069829154,
+      "delta_s": -0.24781318732945923
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.717465341091156,
+      "baseline_score": 0.8288115719588444,
+      "delta_s": -0.11134623086768836
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.47287943959236145,
+      "baseline_score": 0.8288115719588444,
+      "delta_s": -0.3559321323664829
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.5371513366699219,
+      "baseline_score": 0.8288115719588444,
+      "delta_s": -0.2916602352889225
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.5843014121055603,
+      "baseline_score": 0.8288115719588444,
+      "delta_s": -0.24451015985328406
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 1.030615210533142,
+      "baseline_score": 1.0253356756121264,
+      "delta_s": 0.005279534921015738
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.6353675723075867,
+      "baseline_score": 1.0253356756121264,
+      "delta_s": -0.3899681033045397
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.7296969294548035,
+      "baseline_score": 1.0253356756121264,
+      "delta_s": -0.2956387461573229
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.8282777667045593,
+      "baseline_score": 1.0253356756121264,
+      "delta_s": -0.19705790890756703
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.9205434918403625,
+      "baseline_score": 0.9895645025900718,
+      "delta_s": -0.06902101074970923
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.5810296535491943,
+      "baseline_score": 0.9895645025900718,
+      "delta_s": -0.40853484904087745
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.6684470772743225,
+      "baseline_score": 0.9895645025900718,
+      "delta_s": -0.32111742531574927
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 0.7377128005027771,
+      "baseline_score": 0.9895645025900718,
+      "delta_s": -0.2518517020872947
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.1370246410369873,
+      "baseline_score": 1.4857671350379882,
+      "delta_s": 0.6512575059989991
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 1.4698423147201538,
+      "baseline_score": 1.4857671350379882,
+      "delta_s": -0.015924820317834376
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.090989351272583,
+      "baseline_score": 1.4770610971219598,
+      "delta_s": 0.6139282541506232
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 1.8856631517410278,
+      "baseline_score": 1.4770610971219598,
+      "delta_s": 0.40860205461906807
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.4421544075012207,
+      "baseline_score": 1.4770610971219598,
+      "delta_s": 0.9650933103792609
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 1.5221837759017944,
+      "baseline_score": 1.4770610971219598,
+      "delta_s": 0.04512267877983467
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.6144587993621826,
+      "baseline_score": 1.6329744611429418,
+      "delta_s": 0.9814843382192409
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.2478697299957275,
+      "baseline_score": 1.6329744611429418,
+      "delta_s": 0.6148952688527858
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.8294801712036133,
+      "baseline_score": 1.6329744611429418,
+      "delta_s": 1.1965057100606715
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 1.9683043956756592,
+      "baseline_score": 1.6329744611429418,
+      "delta_s": 0.3353299345327174
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.923272132873535,
+      "baseline_score": 1.746018463884241,
+      "delta_s": 1.177253668989294
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.379767656326294,
+      "baseline_score": 1.746018463884241,
+      "delta_s": 0.6337491924420529
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 3.047879457473755,
+      "baseline_score": 1.746018463884241,
+      "delta_s": 1.3018609935895138
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.1432347297668457,
+      "baseline_score": 1.746018463884241,
+      "delta_s": 0.3972162658826046
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 3.3303322792053223,
+      "baseline_score": 1.8985095001128631,
+      "delta_s": 1.4318227790924591
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.6433656215667725,
+      "baseline_score": 1.8985095001128631,
+      "delta_s": 0.7448561214539093
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 3.3367514610290527,
+      "baseline_score": 1.8985095001128631,
+      "delta_s": 1.4382419609161896
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.4824037551879883,
+      "baseline_score": 1.8985095001128631,
+      "delta_s": 0.5838942550751252
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 3.2391741275787354,
+      "baseline_score": 1.902097240142164,
+      "delta_s": 1.3370768874365713
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.63449764251709,
+      "baseline_score": 1.902097240142164,
+      "delta_s": 0.7324004023749258
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 3.2834792137145996,
+      "baseline_score": 1.902097240142164,
+      "delta_s": 1.3813819735724355
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "weather_only",
+      "model_score": 2.4506194591522217,
+      "baseline_score": 1.902097240142164,
+      "delta_s": 0.5485222190100576
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.8751881718635559,
+      "baseline_score": 3.5479301599955676e-09,
+      "delta_s": 0.8751881683156257
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.531365156173706,
+      "baseline_score": 1.127476661870706e-31,
+      "delta_s": 0.531365156173706
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.6429896950721741,
+      "baseline_score": 1.5196424555989265e-31,
+      "delta_s": 0.6429896950721741
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.19431491196155548,
+      "baseline_score": 0.0008630513598249506,
+      "delta_s": 0.19345186060173053
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.2167406529188156,
+      "baseline_score": 0.00043152568260951073,
+      "delta_s": 0.2163091272362061
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.6425437927246094,
+      "baseline_score": 2.3138675010147728e-09,
+      "delta_s": 0.6425437904107418
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.22850170731544495,
+      "baseline_score": 0.0,
+      "delta_s": 0.22850170731544495
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.4827462434768677,
+      "baseline_score": 1.0220757289052843e-08,
+      "delta_s": 0.4827462332561104
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.34721070528030396,
+      "baseline_score": 1.8065650829329448e-30,
+      "delta_s": 0.34721070528030396
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.3933958411216736,
+      "baseline_score": 2.120750314064359e-30,
+      "delta_s": 0.3933958411216736
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.23191528022289276,
+      "baseline_score": 0.000759165673061062,
+      "delta_s": 0.2311561145498317
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.1960332840681076,
+      "baseline_score": 0.0005061104497617714,
+      "delta_s": 0.19552717361834585
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.39619180560112,
+      "baseline_score": 8.06901891807261e-09,
+      "delta_s": 0.3961917975321011
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.09940250217914581,
+      "baseline_score": 0.0,
+      "delta_s": 0.09940250217914581
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.6628745198249817,
+      "baseline_score": 3.084168452918296e-08,
+      "delta_s": 0.6628744889832971
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.4521217942237854,
+      "baseline_score": 4.740640886887198e-31,
+      "delta_s": 0.4521217942237854
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.5138338804244995,
+      "baseline_score": 5.565100170368364e-31,
+      "delta_s": 0.5138338804244995
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.2375662922859192,
+      "baseline_score": 0.0006709785790189132,
+      "delta_s": 0.23689531370690028
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.21303817629814148,
+      "baseline_score": 0.0004473190533005519,
+      "delta_s": 0.21259085724484092
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.5396078824996948,
+      "baseline_score": 2.434869832390406e-08,
+      "delta_s": 0.5396078581509965
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.16498751938343048,
+      "baseline_score": 0.0,
+      "delta_s": 0.16498751938343048
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.717465341091156,
+      "baseline_score": 5.319891212847146e-08,
+      "delta_s": 0.7174652878922438
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.47287943959236145,
+      "baseline_score": 2.220827098272989e-31,
+      "delta_s": 0.47287943959236145
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.5371513366699219,
+      "baseline_score": 2.6070578975528235e-31,
+      "delta_s": 0.5371513366699219
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.2120867520570755,
+      "baseline_score": 0.0005908560209736494,
+      "delta_s": 0.21149589603610186
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.20299701392650604,
+      "baseline_score": 0.00039390401439274973,
+      "delta_s": 0.2026031099121133
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.5843014121055603,
+      "baseline_score": 4.199914116879296e-08,
+      "delta_s": 0.5843013701064191
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.2083171159029007,
+      "baseline_score": 0.0,
+      "delta_s": 0.2083171159029007
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.030615210533142,
+      "baseline_score": 6.122383250751866e-08,
+      "delta_s": 1.0306151493093096
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.6353675723075867,
+      "baseline_score": 5.022866529324569e-31,
+      "delta_s": 0.6353675723075867
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.7296969294548035,
+      "baseline_score": 5.8964085336648925e-31,
+      "delta_s": 0.7296969294548035
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.22371435165405273,
+      "baseline_score": 0.0005076530615164078,
+      "delta_s": 0.22320669859253633
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.19989681243896484,
+      "baseline_score": 0.00033843537462630133,
+      "delta_s": 0.19955837706433854
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.8282777667045593,
+      "baseline_score": 4.833460462476655e-08,
+      "delta_s": 0.8282777183699547
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.17519110441207886,
+      "baseline_score": 0.0,
+      "delta_s": 0.17519110441207886
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.9205434918403625,
+      "baseline_score": 6.213307278807481e-08,
+      "delta_s": 0.9205434297072898
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.5810296535491943,
+      "baseline_score": 7.637190670258217e-31,
+      "delta_s": 0.5810296535491943
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.6684470772743225,
+      "baseline_score": 8.965397742384134e-31,
+      "delta_s": 0.6684470772743225
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.2523156404495239,
+      "baseline_score": 0.0004326550991847755,
+      "delta_s": 0.25188298535033915
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.20634619891643524,
+      "baseline_score": 0.00028843673299015364,
+      "delta_s": 0.2060577621834451
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.7377128005027771,
+      "baseline_score": 4.905242589679647e-08,
+      "delta_s": 0.7377127514503512
+    },
+    {
+      "lake_id": "SGL-001",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.12302392721176147,
+      "baseline_score": 0.0,
+      "delta_s": 0.12302392721176147
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.1370246410369873,
+      "baseline_score": 1.6121356934782238e-07,
+      "delta_s": 2.137024479823418
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.4698423147201538,
+      "baseline_score": 1.0513928460107668e-07,
+      "delta_s": 1.4698422095808692
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-06",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.22850170731544495,
+      "baseline_score": 0.0,
+      "delta_s": 0.22850170731544495
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.090989351272583,
+      "baseline_score": 3.97213647318785e-07,
+      "delta_s": 2.0909889540589357
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.8856631517410278,
+      "baseline_score": 2.4672318096222486e-31,
+      "delta_s": 1.8856631517410278
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.4421544075012207,
+      "baseline_score": 3.2463576421894696e-31,
+      "delta_s": 2.4421544075012207
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.9450058937072754,
+      "baseline_score": 0.00016297561303036062,
+      "delta_s": 3.944842918094245
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.6233303546905518,
+      "baseline_score": 6.519024570107108e-05,
+      "delta_s": 1.6232651644448506
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.5221837759017944,
+      "baseline_score": 2.8372403406934555e-07,
+      "delta_s": 1.5221834921777604
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-11",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.09012051671743393,
+      "baseline_score": 0.0,
+      "delta_s": 0.09012051671743393
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.6144587993621826,
+      "baseline_score": 1.0221571461256618,
+      "delta_s": 1.5923016532365208
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.2478697299957275,
+      "baseline_score": 0.6299974965561393,
+      "delta_s": 1.6178722334395883
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.8294801712036133,
+      "baseline_score": 0.8068388987879653,
+      "delta_s": 2.022641272415648
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.8456318378448486,
+      "baseline_score": 0.00020450566064271152,
+      "delta_s": 3.845427332184206
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.767012357711792,
+      "baseline_score": 8.764528354994914e-05,
+      "delta_s": 1.7669247124282421
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.9683043956756592,
+      "baseline_score": 0.754050354138778,
+      "delta_s": 1.2142540415368812
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-16",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.17333249747753143,
+      "baseline_score": 0.0,
+      "delta_s": 0.17333249747753143
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.923272132873535,
+      "baseline_score": 1.149693821586648,
+      "delta_s": 1.7735783112868873
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.379767656326294,
+      "baseline_score": 0.689982304338618,
+      "delta_s": 1.689785351987676
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.047879457473755,
+      "baseline_score": 0.9078714527904329,
+      "delta_s": 2.140008004683322
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.7493889331817627,
+      "baseline_score": 0.0002632946747029931,
+      "delta_s": 3.7491256385070595
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.6548669338226318,
+      "baseline_score": 0.00010531787027613926,
+      "delta_s": 1.6547616159523557
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.1432347297668457,
+      "baseline_score": 0.8212098729529439,
+      "delta_s": 1.322024856813902
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-21",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.1977604478597641,
+      "baseline_score": 0.0,
+      "delta_s": 0.1977604478597641
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.3303322792053223,
+      "baseline_score": 1.3302783484533873,
+      "delta_s": 2.000053930751935
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.6433656215667725,
+      "baseline_score": 0.8118081191104523,
+      "delta_s": 1.8315575024563202
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.3367514610290527,
+      "baseline_score": 1.0510778802806173,
+      "delta_s": 2.285673580748435
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.704235553741455,
+      "baseline_score": 0.00032425200085037747,
+      "delta_s": 3.7039113017406047
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.6914767026901245,
+      "baseline_score": 0.0001351050007483802,
+      "delta_s": 1.6913415976893762
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.4824037551879883,
+      "baseline_score": 0.9686492832055045,
+      "delta_s": 1.5137544719824838
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-09-26",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.17746050655841827,
+      "baseline_score": 0.0,
+      "delta_s": 0.17746050655841827
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "era5_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.2391741275787354,
+      "baseline_score": 1.470166072051554,
+      "delta_s": 1.7690080555271814
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "full",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.63449764251709,
+      "baseline_score": 0.9070484364408155,
+      "delta_s": 1.7274492060762743
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.2834792137145996,
+      "baseline_score": 1.1616585236394568,
+      "delta_s": 2.121820690075143
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 3.7781753540039062,
+      "baseline_score": 0.00040013138523456275,
+      "delta_s": 3.7777752226186716
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "opt_sar",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 1.745928168296814,
+      "baseline_score": 0.0001714848797945385,
+      "delta_s": 1.7457566834170195
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_era5",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 2.4506194591522217,
+      "baseline_score": 1.0845487419934559,
+      "delta_s": 1.3660707171587658
+    },
+    {
+      "lake_id": "SGL-002",
+      "decision_date": "2023-10-01",
+      "ablation_id": "sar_only",
+      "model_id": "tmae",
+      "baseline_id": "rpca",
+      "model_score": 0.1386057287454605,
+      "baseline_score": 0.0,
+      "delta_s": 0.1386057287454605
+    }
+  ],
+  "created_at": "2026-10-06T16:32:54.726369+00:00"
+}

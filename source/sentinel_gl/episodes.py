@@ -87,7 +87,7 @@ class AlertEpisodeEngine:
         # Sort chronologically by date
         sorted_decisions = sorted(
             [d for d in decisions if d[2]],  # Filter only eligible decisions
-            key=lambda x: date.fromisoformat(x[0])
+            key=lambda x: date.fromisoformat(x[0].split("T")[0])
         )
 
         if not sorted_decisions:
@@ -107,7 +107,7 @@ class AlertEpisodeEngine:
         qualifying_count = 0
 
         for d_str, score, _ in sorted_decisions:
-            d_curr = date.fromisoformat(d_str)
+            d_curr = date.fromisoformat(d_str.split("T")[0])
 
             # Check for excessive gap between decisions
             if last_decision_date is not None:
