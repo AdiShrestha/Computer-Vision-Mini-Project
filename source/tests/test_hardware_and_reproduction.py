@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 import platform
 import resource
+import subprocess
+import sys
 import tempfile
 import pytest
 import torch
@@ -254,3 +256,36 @@ def test_memory_bounded_execution():
     rss_bytes = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     rss_gb = rss_bytes / (1024 ** 3)
     assert rss_gb < 2.0, f"Peak RSS {rss_gb:.3f} GB exceeds bounded budget 2.0 GB"
+
+
+# ---------------------------------------------------------------------------
+# Test 6: Hardware Benchmark CLI Runner Subprocess
+# ---------------------------------------------------------------------------
+
+def test_hardware_benchmark_cli_runner_subprocess():
+    """Verify that source/runners/run_hardware_benchmarks.py executes as CLI subprocess."""
+    # FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    repo_root = Path(__file__).resolve().parents[2]
+    runner_path = repo_root / "source/runners/run_hardware_benchmarks.py"
+    assert runner_path.is_file(), f"Runner script not found: {runner_path}"
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_out = Path(tmpdir) / "subprocess_trials.json"
+        cmd = [
+            sys.executable,
+            "-B",
+            str(runner_path),
+            "--trials", "1",
+            "--warmup", "0",
+            "--batch-size", "2",
+            "--output", str(tmp_out),
+            "--tolerance", "1e-4",
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True, cwd=str(repo_root))
+        assert res.returncode == 0, f"CLI runner failed with returncode {res.returncode}:\n{res.stderr}\n{res.stdout}"
+        assert tmp_out.is_file(), "Target output file was not produced"
+        data = json.loads(tmp_out.read_text())
+        assert "device_profile" in data
+        assert "trials" in data
+        assert "summary" in data
+        assert "thermal_disclosure" in data

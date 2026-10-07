@@ -124,6 +124,7 @@ def run_hardware_trials(
     seq_len: int = 180,
     n_channels: int = 11,
     d_model: int = 64,
+    tolerance: float = 1e-4,
 ) -> Dict[str, Any]:
     """Execute synchronized hardware trials on CPU and MPS with numerical verification.
 
@@ -285,7 +286,6 @@ def run_hardware_trials(
         diff_latent = float((latent_cpu - latent_mps.cpu()).abs().max().item())
         diff_emb = float((emb_cpu - emb_mps.cpu()).abs().max().item())
         max_abs_diff = max(diff_recon, diff_latent, diff_emb)
-        tolerance = 1e-4
         eq_status = "PASS" if max_abs_diff <= tolerance else "FAIL"
 
         numerical_eq = {
@@ -300,7 +300,7 @@ def run_hardware_trials(
         numerical_eq = {
             "status": "CPU_ONLY",
             "max_absolute_difference": 0.0,
-            "tolerance": 1e-4,
+            "tolerance": tolerance,
             "note": "MPS backend unavailable; evaluated on CPU reference only",
         }
 
