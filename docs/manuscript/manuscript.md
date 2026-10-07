@@ -8,7 +8,7 @@
 
 > [!IMPORTANT]
 > **Scientific Integrity & Simulation Provenance Notice:**  
-> This manuscript specifies the complete mathematical and software architecture of the Sentinel-GL pipeline. All architectural contracts, statistical formulations, and release verification gates are fully implemented and verified via automated engineering test suites (141 core tests, 474 factory tests). However, per the project research charter and `project/READINESS.json`, observational acquisition from live provider APIs remains pending (`observational_experiments: NOT_EXECUTED`).  
+> This manuscript specifies the complete mathematical and software architecture of the Sentinel-GL pipeline. All architectural contracts, statistical formulations, and release verification gates are fully implemented and verified via automated engineering test suites (143 core tests, 474 factory tests). However, per the project research charter and `project/READINESS.json`, observational acquisition from live provider APIs remains pending (`observational_experiments: NOT_EXECUTED`).  
 > 
 > The comparative evaluation results in Section 5 (e.g., prospective case detection status on South Lhonak, alert burden estimates on Khangchung Tsho, and baseline paired contrasts) and the sensor ablation scores in Section 6 are evaluated on **deterministic computational verification fixtures** designed to demonstrate pipeline execution end-to-end. They illustrate the behavior of the retrospective decision scheduler, alert episode engine, and Holm-Bonferroni hypothesis tests under controlled contracts, and **must not be interpreted as empirical observational measurements from live satellite rasters**.  
 > 
