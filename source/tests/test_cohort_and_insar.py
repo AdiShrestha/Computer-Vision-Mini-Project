@@ -10,6 +10,9 @@ and must never support scientific claims.
 from __future__ import annotations
 import math
 from pathlib import Path
+import subprocess
+import sys
+import tempfile
 import pytest
 
 from sentinel_gl.cohort import (
@@ -209,3 +212,36 @@ def test_statistical_power_calculation_amendment():
 
     # Confirms minimum floor of N >= 30 independent events
     assert n_required >= 30.0, f"Sample size floor {n_required:.1f} should be >= 30"
+
+
+# ---------------------------------------------------------------------------
+# Test 7: Cohort and InSAR CLI Runner Subprocess Execution
+# ---------------------------------------------------------------------------
+
+def test_cohort_and_insar_cli_subprocess():
+    """Verify that source/runners/run_cohort_and_insar.py executes as CLI subprocess."""
+    # FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
+    repo_root = Path(__file__).resolve().parents[2]
+    runner_path = repo_root / "source/runners/run_cohort_and_insar.py"
+    assert runner_path.is_file(), f"Runner script not found: {runner_path}"
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_data = Path(tmpdir) / "data"
+        tmp_insar = Path(tmpdir) / "docs/insar"
+
+        cmd = [
+            sys.executable,
+            "-B",
+            str(runner_path),
+            "--all",
+            "--data-dir", str(tmp_data),
+            "--output-insar", str(tmp_insar),
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True, cwd=str(repo_root))
+        assert res.returncode == 0, f"CLI runner failed with code {res.returncode}:\n{res.stderr}\n{res.stdout}"
+
+        # Verify exported files
+        assert (tmp_data / "lake_registry_expanded.csv").is_file()
+        assert (tmp_data / "event_registry_expanded.csv").is_file()
+        assert (tmp_insar / "insar_feasibility_dossier.json").is_file()
+        assert (tmp_insar / "insar_feasibility_report.md").is_file()
