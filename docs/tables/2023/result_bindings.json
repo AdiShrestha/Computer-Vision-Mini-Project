@@ -1,0 +1,187 @@
+{
+  "parameter_count": 1062919,
+  "fit_observations": 43,
+  "pre_post_descriptive": [
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "tmae_score_a",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": 0.04771593974860135,
+      "post_median": 0.044232454647119154,
+      "september_median": 0.010741048793529709
+    },
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "tmae_score_b",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": 1.0085654744127002,
+      "post_median": 3.1893917315672997,
+      "september_median": 4.479713532687654
+    },
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "tmae_score_c",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": -0.3061614150127838,
+      "post_median": 0.2853483097197955,
+      "september_median": 0.5999622117966545
+    },
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "isolation_forest",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": 0.4277361902079096,
+      "post_median": 0.4889829325585632,
+      "september_median": 0.39831848813601
+    },
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "psd_rbf_one_class_svm",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": -0.18975510009758012,
+      "post_median": 0.03936056441042424,
+      "september_median": -0.26751738477153864
+    },
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "inexact_alm_rpca",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": 0.05148248717733006,
+      "post_median": 0.03682010924153954,
+      "september_median": 0.01303936728632236
+    },
+    {
+      "site_id": "PILOT-SOUTH-LHONAK",
+      "method": "cusum",
+      "pre_n": 21,
+      "post_n": 3,
+      "pre_median": 0.0,
+      "post_median": 0.21711531063973033,
+      "september_median": 0.0
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "tmae_score_a",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": 0.03586706326178336,
+      "post_median": 0.02437128753540794,
+      "september_median": 0.004835353786822669
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "tmae_score_b",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": 1.3871072348045546,
+      "post_median": 2.9591359384079325,
+      "september_median": 2.9419651772644793
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "tmae_score_c",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": -0.32165804057514613,
+      "post_median": 0.04544016435706713,
+      "september_median": 0.24377668064071625
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "isolation_forest",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": 0.41889715310237413,
+      "post_median": 0.4476239262831161,
+      "september_median": 0.42914808415171724
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "psd_rbf_one_class_svm",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": -0.18965331783849515,
+      "post_median": -0.03957707727208215,
+      "september_median": -0.19436808923484172
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "inexact_alm_rpca",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": 0.04270402110485257,
+      "post_median": 0.032353839093790984,
+      "september_median": 0.06653486085483656
+    },
+    {
+      "site_id": "PILOT-KHANGCHUNG-TSHO",
+      "method": "cusum",
+      "pre_n": 19,
+      "post_n": 4,
+      "pre_median": 0.0,
+      "post_median": 0.0,
+      "september_median": 0.0
+    }
+  ],
+  "score_rows": 950,
+  "score_nulls": {
+    "tmae_score_a": 5,
+    "tmae_score_b": 15,
+    "tmae_score_c": 15,
+    "isolation_forest": 1,
+    "psd_rbf_one_class_svm": 1,
+    "inexact_alm_rpca": 1,
+    "cusum": 3
+  },
+  "rpca": {
+    "SENTINEL_1_IW_GRD": {
+      "algorithm": "COMPLETE_DATA_FIXED_PENALTY_ADMM_RPCA_V2",
+      "dual_residual": 0.0,
+      "iterations": 1,
+      "kkt_residuals": {
+        "nuclear_dual_feasibility_violation": 2.4424906541753444e-15,
+        "nuclear_dual_spectral_norm": 1.0000000000000024,
+        "nuclear_subgradient_left_orthogonality_residual": 2.855296226249721e-15,
+        "nuclear_subgradient_remainder_spectral_norm": 7.762802561932782e-08,
+        "nuclear_subgradient_remainder_violation": 0.0,
+        "nuclear_subgradient_right_orthogonality_residual": 2.927315638455136e-15,
+        "primal_feasibility_relative_residual": 1.2938004270052483e-08,
+        "sparse_dual_feasibility_violation": 0.0,
+        "sparse_dual_infinity_norm": 0.5339250621101899,
+        "sparse_subgradient_nonzero_residual": 0.0,
+        "sparse_subgradient_zero_violation": 0.0
+      },
+      "primal_residual": 1.2938004270052483e-08,
+      "rank": 1,
+      "status": "CONVERGED"
+    },
+    "SENTINEL_2_OPTICAL": {
+      "algorithm": "COMPLETE_DATA_FIXED_PENALTY_ADMM_RPCA_V2",
+      "dual_residual": 1.4946771664784218e-06,
+      "iterations": 413,
+      "kkt_residuals": {
+        "nuclear_dual_feasibility_violation": 3.6736661517267066e-06,
+        "nuclear_dual_spectral_norm": 1.0000036736661517,
+        "nuclear_subgradient_left_orthogonality_residual": 6.320156051415309e-06,
+        "nuclear_subgradient_remainder_spectral_norm": 0.7688210148931364,
+        "nuclear_subgradient_remainder_violation": 0.0,
+        "nuclear_subgradient_right_orthogonality_residual": 6.951931323567157e-06,
+        "primal_feasibility_relative_residual": 9.945009365958904e-06,
+        "sparse_dual_feasibility_violation": 1.1102230246251565e-16,
+        "sparse_dual_infinity_norm": 0.15811388300841908,
+        "sparse_subgradient_nonzero_residual": 1.942890293094024e-16,
+        "sparse_subgradient_zero_violation": 0.0
+      },
+      "primal_residual": 9.945009365958904e-06,
+      "rank": 3,
+      "status": "CONVERGED"
+    }
+  },
+  "scope": "DESCRIPTIVE_TWO_ROI_RETROSPECTIVE_DEVELOPMENT_ANALYSIS; no warning-performance inference"
+}

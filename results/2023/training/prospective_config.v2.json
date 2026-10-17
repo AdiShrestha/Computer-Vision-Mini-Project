@@ -1,0 +1,33 @@
+{
+  "d_model": 128,
+  "decoder_ff": 256,
+  "decoder_layers": 2,
+  "domain_protocol_sha256": "1ca2e24f220f2413084ee6ea569e1707032a982e350023af718ade65efc8cdde",
+  "dropout": 0.0,
+  "earliest_checkpoint_epoch": 12,
+  "encoder_ff": 512,
+  "encoder_layers": 4,
+  "fit_transform_sha256": "78e5bfae134fb0eb166246219dca0d73206b477e84e288bb7182e390dfe605ea",
+  "gradient_clip": 1.0,
+  "learning_rate": 0.0003,
+  "max_epochs": 80,
+  "minimum_epochs": 12,
+  "n_heads": 4,
+  "optimizer": "AdamW",
+  "patience": 12,
+  "seed_set": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "selection": "minimum finite parity-1 masked MSE on the same pre-breach scenes",
+  "source_manifest_sha256": "791f83182fb0c1916ec6bc16e7e5a578fa91a9fe507fc7bea8961b2155a6c65b",
+  "spatial_support": "16-pixel checkerboard parity-0 fit; parity-1 same-scene development monitor",
+  "stopping": "eligible development nonimprovements only after minimum epoch; no convergence guarantee",
+  "target": "mean of valid source pixels per channel and quadrant; four target-quadrant folds",
+  "tolerance": 0.0001,
+  "warmup_epochs": 2,
+  "weight_decay": 0.0001
+}

@@ -1,0 +1,45 @@
+{
+  "status": "VERBATIM_RECORDED_ANALYSIS_OUTPUTS",
+  "outputs": [
+    {
+      "path": "results/2023/training/training_report.v2.json",
+      "sha256": "73a317aaa708576211053e506a75a2c4dc3908594eb120a6adf25702c2af9309"
+    },
+    {
+      "path": "results/2023/training/prospective_config.v2.json",
+      "sha256": "93bcefa063aa73ff9153d32e13b8d8ab19e7076ef881da13f6ce3e76e55d4d5a"
+    },
+    {
+      "path": "results/2023/training/fit_transform.v2.json",
+      "sha256": "7deea8cb6ebafaeb42d57ac270b38aed74a8a0ab8382f367f3bbe8a21e5eba22"
+    },
+    {
+      "path": "results/2023/training/seed_0/fit_monitor_history.v2.json",
+      "sha256": "e3e5d3c63c00f9ba03579ba63dcbce903420b93fcdd1a953d682eb69d4242e3b"
+    },
+    {
+      "path": "results/2023/training/seed_1/fit_monitor_history.v2.json",
+      "sha256": "f9c160ba98d75a84a4d8fbfcd2cfbb2ea886cfbb8808ff0cf150771aa8807776"
+    },
+    {
+      "path": "results/2023/training/seed_2/fit_monitor_history.v2.json",
+      "sha256": "f69c531d2132897f8433cf71cb18629622b21d2bd9c3448ad4fe5a4d8ba80d5e"
+    },
+    {
+      "path": "results/2023/training/seed_3/fit_monitor_history.v2.json",
+      "sha256": "6f2e9a20abcd550a02f8584e27a9caf2296220a572895fb5b922f05313818e44"
+    },
+    {
+      "path": "results/2023/training/seed_4/fit_monitor_history.v2.json",
+      "sha256": "7d48f3d7072c142807a32d9ced77b4d37c1b240f6a59a24c1a7a14d82136fe86"
+    },
+    {
+      "path": "results/2023/inference/analysis_summary.v2.json",
+      "sha256": "a86d4ab1392e21e9276f62d0635f14ebe213b6bd64529b1a4b605458b8a75fbf"
+    },
+    {
+      "path": "results/2023/inference/scores.v2.jsonl",
+      "sha256": "4910950edaecba24868e44f4a469a808f9a6959749dfce16e39c5116cf449f11"
+    }
+  ]
+}

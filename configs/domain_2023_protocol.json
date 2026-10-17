@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "canonical_workflow": "DOMAIN_NATIVE_SOURCE_BOUND",
+  "executable": true,
+  "network_allowed_hosts": [
+    "catalogue.dataspace.copernicus.eu",
+    "download.dataspace.copernicus.eu",
+    "earth-search.aws.element84.com",
+    "e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com"
+  ],
+  "start": "2023-01-01T00:00:00Z",
+  "end": "2023-11-15T23:59:59Z",
+  "fit_end_exclusive": "2023-10-02T18:30:00Z",
+  "pre_event_cutoff": "2023-10-02T18:30:00Z",
+  "post_event_start": "2023-10-04T00:00:00Z",
+  "optical_target_per_site": 24,
+  "max_new_sar_products": 4,
+  "transfer_cap_new_bytes": 8262017611,
+  "max_temporary_product_disk_bytes": 4300000000,
+  "scoring_context": "CAUSAL_ACQUISITION_PREFIX",
+  "fit_parity": 0,
+  "monitor_parity": 1,
+  "reconstruction_folds": 4,
+  "fusion_alpha": 0.5,
+  "seed_ids": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "pre_event_trajectory_interpretation": "RETROSPECTIVE_DEVELOPMENT_EXPOSED; fitted parameters use entire declared pre-breach period; per-query reconstruction context remains causal",
+  "protocol_id": "SENTINEL_GL_RETROSPECTIVE_2023_V2"
+}

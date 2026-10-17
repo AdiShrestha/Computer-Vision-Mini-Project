@@ -1,0 +1,18 @@
+{
+  "python": "CPython 3.12.8",
+  "command": "PYTHONPATH=source python3 -B -m pytest -q",
+  "scope": "Complete selected public source/test distribution",
+  "passed": 67,
+  "failed": 0,
+  "skipped": 0,
+  "elapsed_seconds": 5.32,
+  "scientific_training_rerun": false,
+  "empirical_outputs_recomputed": false,
+  "limits": [
+    "Constructed offline tests are engineering evidence, not model-performance measurements.",
+    "Original 450-pass/1-skip full working-source execution is a separate historical record; it was not rerun for this packaging task.",
+    "Exact raw inputs, ROI arrays, checkpoints and attention tensors are not distributed; independent empirical replay requires them."
+  ],
+  "manuscript_artifacts": "Two PDFs and three Word drafts copied unchanged; PDF/OOXML text, metadata and rendered pages inspected.",
+  "source_packaging": "Scientific configurations made public; existing baseline/checkpoint/hash numerical definitions extracted verbatim; imports adjusted."
+}
