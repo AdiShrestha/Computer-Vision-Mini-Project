@@ -1,4 +1,15 @@
-"""Leakage-controlled descriptive baselines for the amended SR-1 execution."""
+"""Leakage-controlled descriptive comparators for the SR-1 analysis.
+
+All fitted state uses complete five-channel zone 0/1 patch vectors from FIT
+scenes only. Comparators: seasonal residual (median distance to the five
+closest same-patch FIT vectors within +/-45 days), temporal persistence
+(distance to the previous complete vector at the same patch), Isolation
+Forest (100 trees, contamination 0.05, <= 4,000 evenly spaced FIT vectors),
+one-class SVM (RBF, gamma="scale", nu = 0.05), a missingness-only score (the
+fraction of zone 0/1 patches without a complete observation) and a fixed-rule
+Page CUSUM on Score C. Full-rank robust PCA on five channels is not used: its
+residual is zero by construction (amendment PLOS-001).
+"""
 from __future__ import annotations
 
 import math
@@ -28,47 +39,6 @@ def _fit_population(records: list[dict], fit_ids: set[str]):
     return population
 
 
-def _soft_threshold(x: np.ndarray, tau: float) -> np.ndarray:
-    return np.sign(x)*np.maximum(np.abs(x)-tau,0.0)
-
-
-def _svd_threshold(x: np.ndarray, tau: float):
-    u,s,vt=np.linalg.svd(x,full_matrices=False)
-    keep=s>tau
-    return (u[:,keep]*s[keep])@vt[keep] if np.any(keep) else np.zeros_like(x),s
-
-
-def _rpca_low_rank_basis(matrix: np.ndarray, tolerance=1e-7, max_iterations=1000):
-    d=np.asarray(matrix,dtype=np.float64)
-    if d.ndim!=2 or min(d.shape)<2 or not np.isfinite(d).all():
-        return None,{'status':'NOT_ESTIMABLE_MALFORMED_OR_SMALL_FIT_MATRIX','iterations':0,'relative_residual':None}
-    norm2=float(np.linalg.norm(d,2));normf=float(np.linalg.norm(d,'fro'))
-    if not math.isfinite(norm2) or norm2<=np.finfo(float).eps or normf<=np.finfo(float).eps:
-        return None,{'status':'NOT_ESTIMABLE_DEGENERATE_FIT_MATRIX','iterations':0,'relative_residual':None}
-    lam=1.0/math.sqrt(max(d.shape));mu=1.25/norm2;mu_max=mu*1e7;rho=1.5
-    y=d/max(float(np.linalg.norm(d,2)),float(np.max(np.abs(d)))/lam)
-    low=np.zeros_like(d);sparse=np.zeros_like(d);residual=math.inf
-    for iteration in range(1,max_iterations+1):
-        low,_=_svd_threshold(d-sparse+y/mu,1/mu)
-        sparse=_soft_threshold(d-low+y/mu,lam/mu)
-        error=d-low-sparse
-        residual=float(np.linalg.norm(error,'fro')/normf)
-        y=y+mu*error;mu=min(mu*rho,mu_max)
-        if residual<tolerance:break
-    if residual>=tolerance:
-        return None,{'status':'NOT_ESTIMABLE_RPCA_DID_NOT_CONVERGE','iterations':iteration,'relative_residual':residual,
-                     'lambda':lam,'tolerance':tolerance,'max_iterations':max_iterations}
-    _,singular,vt=np.linalg.svd(low,full_matrices=False)
-    threshold=max(low.shape)*np.finfo(float).eps*(singular[0] if singular.size else 0.0)
-    rank=int(np.sum(singular>threshold))
-    if rank<1:
-        return None,{'status':'NOT_ESTIMABLE_ZERO_RANK_LOW_COMPONENT','iterations':iteration,'relative_residual':residual,
-                     'rank':rank,'lambda':lam}
-    return vt[:rank],{'status':'FIT_ONLY_RPCA_SUBSPACE_ESTIMATED','iterations':iteration,
-                       'relative_residual':residual,'rank':rank,'lambda':lam,
-                       'tolerance':tolerance,'max_iterations':max_iterations}
-
-
 def fit_descriptive_baselines(records: list[dict], fit_observation_ids: list[str], *, random_state=0):
     by_id={r.get('observation_id'):r for r in records}
     fit_ids=set(fit_observation_ids)
@@ -86,7 +56,7 @@ def fit_descriptive_baselines(records: list[dict], fit_observation_ids: list[str
     result={'fit_observation_ids':sorted(fit_ids),'fit_token_count':int(len(x)),
             'detector_fit_token_count':int(len(train)),'detector_token_cap':cap,
             'detector_token_selection':'deterministic evenly spaced indices over FIT site/chronology/patch order',
-            'isolation_forest':None,'one_class_svm':None,'rpca_basis':None,'rpca':None}
+            'isolation_forest':None,'one_class_svm':None}
     if len(train)<10:
         result['isolation_forest_status']='NOT_ESTIMABLE_LT_10_COMPLETE_FIT_TARGET_TOKENS'
         result['one_class_svm_status']='NOT_ESTIMABLE_LT_10_COMPLETE_FIT_TARGET_TOKENS'
@@ -97,26 +67,26 @@ def fit_descriptive_baselines(records: list[dict], fit_observation_ids: list[str
         svm=OneClassSVM(kernel='rbf',gamma='scale',nu=0.05)
         svm.fit(train);result['one_class_svm']=svm
         result['one_class_svm_status']='FIT_ONLY_COMPLETE_ZONE_0_1_TOKENS'
-    if len(x)<10:
-        result['rpca_status']={'status':'NOT_ESTIMABLE_LT_10_COMPLETE_FIT_TARGET_TOKENS','iterations':0}
-    else:
-        basis,status=_rpca_low_rank_basis(x)
-        result['rpca_basis']=basis;result['rpca_status']=status
     result['status']='BASELINE_FITS_COMPLETED_WITH_EXPLICIT_STATUS'
     return result
 
 
-def score_descriptive_baselines(records: list[dict], fit_observation_ids: list[str], fitted: dict):
+def score_descriptive_baselines(records: list[dict], fit_observation_ids: list[str], fitted: dict, score_ids=None):
     fit_ids=set(fit_observation_ids)
     fit_rows=[r for r in records if r.get('observation_id') in fit_ids]
     fit_doy={r['observation_id']:r['dt'].timetuple().tm_yday for r in fit_rows}
     ordered=sorted(records,key=lambda r:(r['site_id'],r['acquired_at']))
     latest={}; output=[]
     iso,svm=fitted.get('isolation_forest'),fitted.get('one_class_svm')
-    basis=fitted.get('rpca_basis')
     for row in ordered:
         patches=np.flatnonzero(np.isin(row['zones'],[0,1]))
-        season,persistence,rpca_scores=[],[],[]
+        if score_ids is not None and row['observation_id'] not in score_ids:
+            # Only the persistence state is needed from rows that are not scored.
+            for patch in patches:
+                vector=_observed_vector(row,int(patch))
+                if vector is not None:latest[(row['site_id'],int(patch))]=vector.copy()
+            continue
+        season,persistence=[],[]
         target_vectors=[]
         doy=row['dt'].timetuple().tm_yday
         for patch in patches:
@@ -134,7 +104,6 @@ def score_descriptive_baselines(records: list[dict], fit_observation_ids: list[s
             if len(refs)>=5:season.append(float(np.median(np.sort(refs)[:5])))
             previous=latest.get((row['site_id'],int(patch)))
             if previous is not None:persistence.append(float(np.linalg.norm(vector-previous)))
-            if basis is not None:rpca_scores.append(float(np.linalg.norm(vector-(vector@basis.T)@basis)))
         if target_vectors and iso is not None:
             iso_scores=(-iso.decision_function(np.stack(target_vectors).astype(np.float32))).tolist()
         else:iso_scores=[]
@@ -155,9 +124,9 @@ def score_descriptive_baselines(records: list[dict], fit_observation_ids: list[s
             'isolation_forest_status':fitted['isolation_forest_status'] if iso is not None else fitted['isolation_forest_status'],
             'one_class_svm_score':mean_or_none(svm_scores),
             'one_class_svm_status':fitted['one_class_svm_status'] if svm is not None else fitted['one_class_svm_status'],
-            'rpca_score':mean_or_none(rpca_scores),
-            'rpca_status':fitted['rpca_status']['status'] if isinstance(fitted['rpca_status'],dict) else fitted['rpca_status'],
-            'supported_target_patch_count':len(patches)})
+            'missingness_only_score':(1.0-len(target_vectors)/len(patches)) if len(patches) else None,
+            'zone01_patch_count':int(len(patches)),
+            'complete_zone01_patch_count':int(len(target_vectors))})
     return output
 
 

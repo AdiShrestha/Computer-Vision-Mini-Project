@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "amendment_id": "SR1_AMENDMENT_PLOS_001",
+  "date_utc": "2026-11-17",
+  "parent_protocol": {
+    "path": "docs/protocol/SR1_PROTOCOL_V4_PARENT.json",
+    "sha256": "a9309940075434fe9f2093e7bd48d437067ad3e928e3d72e6e00eb7067fca125"
+  },
+  "status": "EXPLORATORY_NOT_CONFIRMATORY",
+  "development_exposure": "2023 observations, earlier scores of the same two lakes and an external review of the earlier results were all inspected before this amendment. Every result produced under it is exploratory and retrospective. It cannot be described as a prospective or confirmatory test.",
+  "reason": "The submission-readiness review of 2026-11-17 found that the trainer used for every earlier checkpoint hid all observed patches of every training scene (the sampled mask indexed only the batch and time axes), that validation loss was an unweighted mean of block means, that Score A used a random half of each scene, that Score B was computed on unobserved (all-zero) latent vectors, that the robust-PCA comparator was zero by construction, that the South Lhonak window truncated the lake and that the analysis zones had no independent geometry. These defects are corrected here before any re-run. No result of the corrected pipeline existed when this file was frozen.",
+  "unchanged_from_parent": [
+    "two sites; FIT/VAL/EVENT_UNCERTAIN/EVAL split by acquisition time",
+    "the same 141 score-blind selected Sentinel-2 Collection-1 L2A scenes (no scene added, dropped or re-selected)",
+    "160 x 160 pixels at 20 m in EPSG:32645; 10 x 10 patches of 16 x 16 pixels; clear SCL 4/5/6; >= 25% clear support",
+    "native signed reflectance, patch-mean NDWI/MNDWI with |denominator| >= 0.002",
+    "FIT-only median and 1.4826 x MAD feature scaling",
+    "model architecture (d_model 64, 4 heads, 2 spatial + 1 causal temporal encoder layers, 1 spatial decoder layer, 207,685 trainable parameters), AdamW lr 3e-4 weight decay 1e-4, cosine annealing to 1e-5, EMA 0.995, gradient clip 1.0, at most 150 epochs, stop after 20 epochs without VAL improvement, context of at most 8 scenes, one block per optimizer step",
+    "Score B rank-8 PCA, k = 5, +/-45 day circular window; Score C weights 0.5/0.5",
+    "seasonal-residual, temporal-persistence, Isolation Forest and one-class SVM comparator definitions",
+    "Page CUSUM on Score C with kappa = 0.5, h = 4, no resets, as an exploratory fixed rule"
+  ],
+  "changes": {
+    "C1_window": "South Lhonak window re-centred on the centroid of the Hi-MAG 2017 outline GL088195E27912N (Chen et al. 2021; Zenodo 4275164; CC BY 4.0), snapped to the 20 m grid; the same 48 2018-2022 Earth Search items re-read by HTTP range requests and the same 24 retained 2023 scenes re-cropped from their 499 x 499 parents. Khangchung Tsho keeps its window, which already contains the whole Hi-MAG 2017 outline GL088815E27990N. Implemented by source/runners/run_sr1_recentre_south_lhonak.py into attempt_007.",
+    "C2_zones": "Zone 0 = pixels whose centre lies inside the Hi-MAG 2017 outline; zone 1 = other pixels within 500 m of zone 0; zone 2 = the rest. Patch labels as before (zone 0 if >= 15% of pixels are zone 0, else zone 1 if >= 30% are zone 1, else zone 2). The earlier spectral FIT-frequency rule is evaluated only as an agreement check (IoU against the inventory lake mask).",
+    "C3_training_mask": "In every scene of a training block with n >= 2 observed patches, round(0.5 n) observed patches (at least 1, at most n - 1) are hidden, drawn uniformly without replacement; scenes with fewer than 2 observed patches contribute no targets. Unobserved patches are never targets.",
+    "C4_validation_metric": "Checkpoint selection uses the target-weighted VAL MSE: the sum of squared errors over all VAL target entries divided by their number. Validation still hides every other observed patch of each scene. Target and block counts are recorded per fit.",
+    "C5_seeds_and_budget": "Primary configuration: 10 seeds (0-9). Capacity cells d = 32 and d = 128 and the seven non-primary 2 x 2 x 2 factorial cells (channels 3/5, inventory/constant zones, context 1/8): 5 seeds each. Every primary fit that stops on the 150-epoch cap is refit with a 450-epoch budget (extended-budget check); the 150-epoch fit remains the primary result and the comparison is reported.",
+    "C6_comparable_validation_reference": "For each channel set, the per-patch seasonal FIT mean is evaluated on exactly the VAL target entries used by the trainer; cell VAL MSEs are reported beside it.",
+    "C7_scoring_cross_mask": "The 100 patches are split into two fixed checkerboard folds ((row + column) mod 2). For each target scene, each fold's observed patches are hidden in turn with the other fold and up to seven earlier scenes visible. Every observed target patch is hidden exactly once; folds are identical for all seeds.",
+    "C8_score_b_support": "Score B uses only patches observed in the query scene and FIT references observed at the same patch; PCA is fitted on latent vectors of observed FIT patches only. Without an eligible patch the score is null with status NOT_ESTIMABLE_NO_OBSERVED_ZONE_0_1_PATCH or NOT_ESTIMABLE_LT_K_OBSERVED_FIT_NEIGHBOURS.",
+    "C9_score_c_standardisation": "Score C moments (median and 1.4826 x MAD of ln A and of B) are fitted on the FIT scenes of each site separately (per-site, not pooled), so a between-site offset is not accumulated by the CUSUM.",
+    "C10_reference_predictors": "Reconstruction error of the model is compared on identical hidden entries with five parameter-free predictors built from FIT scenes of the same site (query excluded): FIT median (0 in standardized units), per-patch FIT mean, per-patch seasonal FIT mean (+/-45 days; falls back to the per-patch mean, then to the calendar mean, with counts recorded), the seasonal mean plus the per-channel mean offset of the target scene's other (visible) fold, and a calendar-only site mean (+/-45 days, no patch identity).",
+    "C11_context_ablation": "The same hidden entries are also reconstructed by the same checkpoints with (i) every visible input value set to 0 and (ii) every observed patch of every context scene hidden.",
+    "C12_comparators": "Full-rank robust PCA is removed (its residual is zero by construction on five channels). A missingness-only score (fraction of zone 0/1 patches lacking a complete five-channel observation) is added. The post hoc rank-2 SVD residual is not used.",
+    "C13_positive_control": "Constructed drainage perturbation on every VAL and EVAL scene: the clear pixels of the easternmost fraction f in {0.10, 0.25, 0.50, 1.00} of the inventory lake (zone 0) pixels are replaced by the scene's median clear zone 2 reflectance per band (SCL set to 5). Each perturbed scene is scored by the frozen checkpoints, PCA, Score C moments and comparators in its real context. Detection threshold per method and site: the 95th percentile of scene-level (seed-median) values over that site's FIT scenes (5th percentile for candidate water area, where a decrease is the expected response). Reported: detection rates for clean and perturbed versions and the paired change. All perturbed arrays carry origin constructed_positive_control.",
+    "C14_uncertainty": "Differences in pooled MSE between the model and each reference or ablation, per split, get 95% percentile intervals from a moving-block bootstrap over chronologically ordered scenes, resampled within each site (block length in scenes = ceil(30 days / median revisit gap within the subset), 4,000 draws, seed 0). Model errors are averaged over the 10 primary seeds per entry before bootstrapping. Fewer than 3 scenes: no interval. Seed SDs are sample SDs (ddof = 1). No interval is computed for EVAL-versus-autumn score contrasts (3 and 4 EVAL scenes).",
+    "C15_reporting": "Every pre-registered score, comparator, reference predictor, ablation, CUSUM alarm declaration (by site, split, number of seeds and first date), status count and the positive control are reported, whatever their direction."
+  },
+  "pre_declared_interpretation_rules": {
+    "R1_context_use": "The model is said to use its visible spatial/temporal context only if, on VAL, its pooled MSE is lower than both ablations and the 95% bootstrap interval of each difference excludes zero. Otherwise the paper must not describe the model as exploiting context, and the title must not claim masked-autoencoder anomaly detection.",
+    "R2_reference_comparison": "If the model's VAL or EVAL pooled MSE is not lower than the per-patch seasonal mean plus visible offset (interval excluding zero), the paper reports that a parameter-free seasonal reference reconstructs at least as well, in the abstract.",
+    "R3_positive_control": "A method is said to register the simulated drainage at fraction f only if its perturbed-version detection rate exceeds its clean-version rate on the same scenes. Detection rates are descriptive (24 dependent scenes, two lakes).",
+    "R4_estimands": "E1, E2, E3 and E5 remain NOT_ESTIMABLE unless their parent-protocol conditions are met (they are not: no independent event bracket review, no verified control lakes or exposure, no rolling-origin models, no calibrated common operating point). E4 is descriptive and conditional on the inventory geometry."
+  },
+  "analysis_outputs": "data/derived/sr1_multiyear/attempt_007/plos_001/"
+}

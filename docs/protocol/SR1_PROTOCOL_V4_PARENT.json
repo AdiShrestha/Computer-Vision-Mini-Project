@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "protocol_id": "SR1_TRUE_IMPLEMENTATION_EXPLORATORY_AMENDMENT_20261026_V4",
+  "status": "FROZEN_FOR_NEW_EXECUTION_EXPLORATORY_NOT_CONFIRMATORY",
+  "supersedes_for_new_run": "project/sr1_protocol_true_v3.json",
+  "prior_protocol_disposition": "The prior SR-1 execution is retained as a failed diagnostic epoch; its 160x160 results are not admitted because of fit leakage, timestamp and formula mismatches.",
+  "development_exposure": "2023 observations and prior results were previously inspected. This amended analysis is exploratory and cannot be described as prospectively confirmatory.",
+  "scope": {
+    "sites": [
+      {
+        "id": "PILOT-SOUTH-LHONAK",
+        "latitude": 27.915,
+        "longitude": 88.204,
+        "role": "event case; independent timing verification remains required"
+      },
+      {
+        "id": "PILOT-KHANGCHUNG-TSHO",
+        "latitude": 27.988333,
+        "longitude": 88.815,
+        "role": "development comparator; no-event history not independently ascertained"
+      }
+    ],
+    "time_window": [
+      "2018-01-01T00:00:00Z",
+      "2023-11-16T00:00:00Z"
+    ],
+    "roi": {
+      "shape": [
+        160,
+        160
+      ],
+      "pixel_size_m": 20,
+      "crs": "EPSG:32645",
+      "coordinate_snapped": true,
+      "coordinate_snap_rule": "nearest 20 m projected pixel center, ties round toward positive axis"
+    },
+    "patches": {
+      "shape": [
+        10,
+        10
+      ],
+      "pixel_size": [
+        16,
+        16
+      ],
+      "minimum_clear_fraction": 0.25,
+      "clear_scl": [
+        4,
+        5,
+        6
+      ]
+    },
+    "provider_selection": "For each 2018-2022 site-year, select the lowest cloud-cover provider item in each of 12 equal-duration bins among full-ROI-coverage products; UTC then item ID breaks ties. No outcome or score is used. Retain all source-manifest 2023 optical scenes."
+  },
+  "radiometry": {
+    "input": "float64 reflectance after native quantification and explicit native BOA offset tag",
+    "reflectance_clamping": false,
+    "indices": {
+      "NDWI": "(mean(B03)-mean(B08))/(mean(B03)+mean(B08))",
+      "MNDWI": "(mean(B03)-mean(B11))/(mean(B03)+mean(B11))",
+      "aggregation_order": "first average valid reflectance within each 16x16 patch, then calculate index",
+      "denominator_guard_abs_lt": 0.002,
+      "undefined_status": "UNDEFINED_INDEX_DENOMINATOR"
+    },
+    "scaler": "per-channel median and 1.4826*MAD fitted on the explicit FIT observation IDs only; degenerate MAD is an error, not a substituted scale"
+  },
+  "splits": {
+    "FIT": "2018-2021 and 2023-01-01 through 2023-06-30 UTC",
+    "VAL": "2022 and 2023-07-01 through 2023-09-30 UTC before event onset bracket",
+    "EVENT_UNCERTAIN": "2023-10-02T18:30:00Z through 2023-10-04T18:30:00Z; excluded from scored evaluation",
+    "EVAL": "2023-10-04T18:30:00Z onward",
+    "firewall": "Scaler, PCA, Score-B bank, Score-C robust standardizers, and optimizer inputs must use FIT IDs only. VAL selects checkpoint. EVAL never alters fitted state. Every ID is joined to exact manifest time and receipt before role assignment."
+  },
+  "model": {
+    "family": "masked autoencoder with factorized spatial then causal per-patch temporal attention",
+    "d_model": 64,
+    "heads": 4,
+    "encoder_layers_total": 3,
+    "decoder_layers": 1,
+    "expected_trainable_parameters": 207685,
+    "optimizer": "AdamW",
+    "schedule": "cosine annealing",
+    "ema_decay": 0.995,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "checkpoint_rule": "minimum supported VAL masked-MSE; no minimum epoch floor or score-direction gate",
+    "context_scenes_max": 8
+  },
+  "scores_and_baselines": {
+    "Score_A": "Per-scene mean masked squared error on FIT-robust-standardized patch features, reported in raw MSE and natural-log MSE forms when positive; Score-C uses the natural log of positive raw Score-A.",
+    "Score_B": "PCA latent distance to same patch location in FIT records within plus/minus 45 calendar days; PCA and bank fit on FIT only; no self-reference in descriptive FIT calibration",
+    "Score_C": "equal-weight sum of FIT-only robust standardized ln(Score_A) and Score_B",
+    "area_baseline": "candidate spectral area from pixel NDWI>0 AND MNDWI>0 in Zones 0/1, with clear support; explicitly not a validated physical shoreline",
+    "additional_baselines": {
+      "seasonal_climatology_residual": "For each target patch, median Euclidean distance over at least five complete FIT patch vectors at the same location within circular +/-45 day-of-year; no fallback to all seasons.",
+      "spatial_persistence": "For each patch, Euclidean error against the most recent prior complete observation at that same site/location; causal update after each scene.",
+      "isolation_forest": "FIT-only complete Zone 0/1 patch vectors; deterministic evenly spaced cap of 4000 tokens; 100 trees, contamination 0.05, per-seed random_state=0.",
+      "one_class_svm": "Same FIT-only complete Zone 0/1 token population and deterministic cap; RBF, gamma=scale, nu=0.05.",
+      "rpca": "Inexact augmented-Lagrangian principal component pursuit on the same complete FIT Zone 0/1 token matrix; lambda=1/sqrt(max(n,p)), tolerance 1e-7, maximum 1000 iterations; score distance to converged low-rank subspace, otherwise null/status.",
+      "page_cusum": "Descriptive causal CUSUM over Score C by site, kappa=0.5, h=4.0, no resets; records actual threshold crossings as exploratory alarm declarations only. No operational calibration or availability inference."
+    },
+    "unimplemented_or_unsupported_methods": "Must be null/status-coded; no fallback values or synthetic measurements."
+  },
+  "estimands": {
+    "E1": "Detection timing only if event bracket, decision availability, fitted threshold and actual alarm declaration are all supported; otherwise null with reason.",
+    "E2": "Uneventful episodes per verified eligible lake-year; null without independently ascertained controls and measured exposure.",
+    "E3": "Out-of-sample seasonal percentile only if comparator scores are produced by an independent rolling-origin model that did not fit or validate on that year; otherwise null.",
+    "E4": "Within-scene Zone 0+1 versus Zone 2 contrast with patch support counts; interpretation remains conditional on unvalidated spectral zones.",
+    "E5": "Remains null until fair baseline thresholds and complete matched availability are independently calibrated; descriptive baseline scores alone do not identify incremental warning value."
+  },
+  "acceptance": {
+    "integrity_only": true,
+    "no_score_direction_or_significance_gate": true,
+    "failed_attempts_preserved": true,
+    "evidence_required": [
+      "manifest and source hash replay",
+      "independent split audit",
+      "prediction arithmetic replay",
+      "actual execution logs",
+      "per-row status and missingness"
+    ],
+    "submission_or_research_ready": false
+  },
+  "amendment_reason": "Before empirical scoring, specified leakage-controlled descriptive baseline algorithms, missing-support statuses, and an explicitly exploratory Page-CUSUM accumulator/threshold. No baseline algorithm or alarm result had been examined."
+}

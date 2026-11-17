@@ -1,13 +1,22 @@
-"""Milestone SR-1 Lean Transformer Masked Autoencoder (T-MAE).
+"""SR-1 factorized temporal masked autoencoder (T-MAE) and its trainer.
 
-Features:
-- Right-sized architecture: d_model=64, 4 heads, 3 encoder / 1 decoder layers (~160k parameters).
-- Dependency-safe all-channel patch masking.
-- Causal temporal attention (never attends to future dates).
-- Geomorphic zone, spatial patch position, and cyclical temporal embeddings.
-- CosineAnnealingLR schedule with EMA.
-- Location-matched latent nearest-neighbor distance (Score B).
-- Log-robust Score C fusion with median/MAD standardization.
+Architecture (defaults): d_model=64, 4 heads, two spatial encoder layers, one
+causal temporal encoder layer per patch location, one spatial decoder layer;
+207,685 trainable parameters with five input channels.
+
+Training masks a random 50% of the observed patches *in every scene* of a
+chronological block and always leaves at least one observed patch visible
+per scene (``sample_training_mask``). Validation masks every other observed
+patch of each scene and the selection metric is the target-weighted mean
+squared error (sum of squared errors over all VAL target entries divided by
+their number). AdamW, cosine annealing and an exponential moving average of
+the weights are used; the checkpoint is the EMA state at the epoch with the
+lowest validation loss.
+
+The trainer used for the retained pre-November checkpoints indexed only the
+batch and time axes of the sampled mask and therefore hid every observed patch
+of every scene; that version is archived outside the release tree and is
+documented in docs/protocol/PRE_FIX_REGRESSION_RUN.txt.
 """
 from __future__ import annotations
 
@@ -18,7 +27,6 @@ from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 import torch
 import torch.nn as nn
-from sklearn.decomposition import PCA
 
 
 class EMA:
@@ -201,130 +209,42 @@ class SR1TransformerMAE(nn.Module):
         return recon, temporal
 
 
-def train_sr1_model(
-    model: SR1TransformerMAE,
-    train_tokens: List[Dict[str, Any]],  # List of tokenized pre-cutoff scenes
-    val_tokens: List[Dict[str, Any]],    # Chronological holdout validation scenes
-    max_epochs: int = 150,
-    lr: float = 3e-4,
-    min_lr: float = 1e-5,
-    weight_decay: float = 1e-4,
-    device: str = "cpu",
-    seed: int = 0,
-) -> Dict[str, Any]:
-    torch.manual_seed(seed)
-    np.random.seed(seed)
-    
-    model.to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max_epochs, eta_min=min_lr)
-    ema = EMA(model, decay=0.995)
-    
-    train_losses = []
-    val_losses = []
-    best_val_loss = float("inf")
-    best_state = None
-    best_epoch = 0
-    
-    for epoch in range(1, max_epochs + 1):
-        model.train()
-        epoch_loss = 0.0
-        n_batches = 0
-        
-        # Shuffle training scenes
-        indices = np.random.permutation(len(train_tokens))
-        for idx in indices:
-            scene = train_tokens[idx]
-            x_raw = torch.tensor(scene["std_features"], dtype=torch.float32, device=device).unsqueeze(0)
-            obs = torch.tensor(scene["observed"], dtype=torch.bool, device=device).unsqueeze(0)
-            zones = torch.tensor(scene["zones"], dtype=torch.long, device=device).unsqueeze(0)
-            t_feat = torch.tensor(scene["time_feats"], dtype=torch.float32, device=device).unsqueeze(0)
-            mod_id = 1 if scene.get("site_id", "") == "PILOT-KHANGCHUNG-TSHO" else 0
-            
-            n_obs = obs.sum().item()
-            if n_obs < 10:
+def sample_training_mask(observed: torch.Tensor, ratio: float = 0.5) -> torch.Tensor:
+    """Sample a per-scene MAE target mask for a ``(B, T, N)`` observation mask.
+
+    In every scene with at least two observed patches, ``round(ratio * n_obs)``
+    observed patches (at least one, at most ``n_obs - 1``) are drawn uniformly
+    without replacement from the global torch RNG. Scenes with fewer than two
+    observed patches contribute no targets, so every scene keeps visible
+    observed context. Unobserved patches are never targets.
+    """
+    if observed.ndim != 3 or observed.dtype != torch.bool:
+        raise ValueError("observed must be a boolean (B, T, N) tensor")
+    if not 0.0 < ratio < 1.0:
+        raise ValueError("mask ratio must lie strictly between 0 and 1")
+    masked = torch.zeros_like(observed)
+    batch, steps, _ = observed.shape
+    for b in range(batch):
+        for t in range(steps):
+            candidates = torch.nonzero(observed[b, t], as_tuple=False).flatten()
+            n_obs = int(candidates.numel())
+            if n_obs < 2:
                 continue
-                
-            # Random masking of 50% of observed patches
-            obs_indices = torch.where(obs[0])[0]
-            n_mask = max(1, int(len(obs_indices) * 0.50))
-            perm = torch.randperm(len(obs_indices))
-            mask_idx = obs_indices[perm[:n_mask]]
-            
-            masked = torch.zeros_like(obs)
-            masked[0, mask_idx] = True
-            
-            optimizer.zero_grad()
-            recon, _ = model(x_raw, obs, masked, zones, t_feat, modality_id=mod_id)
-            
-            # Loss strictly on masked positions of observed tokens
-            target = x_raw[masked]
-            pred = recon[masked]
-            loss = nn.functional.mse_loss(pred, target)
-            
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            optimizer.step()
-            ema.update(model)
-            
-            epoch_loss += loss.item()
-            n_batches += 1
-            
-        scheduler.step()
-        avg_train = epoch_loss / max(1, n_batches)
-        train_losses.append(avg_train)
-        
-        # Evaluate on chronological validation set using EMA weights
-        saved_weights = copy.deepcopy(model.state_dict())
-        ema.apply_to(model)
-        model.eval()
-        v_loss = 0.0
-        v_batches = 0
-        with torch.no_grad():
-            for scene in val_tokens:
-                x_raw = torch.tensor(scene["std_features"], dtype=torch.float32, device=device).unsqueeze(0)
-                obs = torch.tensor(scene["observed"], dtype=torch.bool, device=device).unsqueeze(0)
-                zones = torch.tensor(scene["zones"], dtype=torch.long, device=device).unsqueeze(0)
-                t_feat = torch.tensor(scene["time_feats"], dtype=torch.float32, device=device).unsqueeze(0)
-                mod_id = 1 if scene.get("site_id", "") == "PILOT-KHANGCHUNG-TSHO" else 0
-                
-                obs_indices = torch.where(obs[0])[0]
-                if len(obs_indices) < 5:
-                    continue
-                # Deterministic mask (even indices)
-                masked = torch.zeros_like(obs)
-                masked[0, obs_indices[::2]] = True
-                
-                recon, _ = model(x_raw, obs, masked, zones, t_feat, modality_id=mod_id)
-                v_l = nn.functional.mse_loss(recon[masked], x_raw[masked])
-                v_loss += v_l.item()
-                v_batches += 1
-                
-        avg_val = v_loss / max(1, v_batches)
-        val_losses.append(avg_val)
-        
-        if avg_val < best_val_loss and epoch >= 20:
-            best_val_loss = avg_val
-            best_epoch = epoch
-            best_state = copy.deepcopy(model.state_dict())
-            
-        # Restore training weights for next epoch
-        model.load_state_dict(saved_weights)
-            
-    # Apply EMA or best checkpoint
-    if best_state is not None:
-        model.load_state_dict(best_state)
-    else:
-        ema.apply_to(model)
-        
-    return {
-        "best_epoch": best_epoch,
-        "best_val_loss": best_val_loss,
-        "final_train_loss": train_losses[-1],
-        "final_val_loss": val_losses[-1],
-        "train_loss_history": train_losses,
-        "val_loss_history": val_losses,
-    }
+            n_mask = min(n_obs - 1, max(1, int(round(ratio * n_obs))))
+            chosen = candidates[torch.randperm(n_obs, device=observed.device)[:n_mask]]
+            masked[b, t, chosen] = True
+    return masked
+
+
+def validation_mask(observed: torch.Tensor) -> torch.Tensor:
+    """Deterministic VAL mask: every other observed patch (index order) per scene."""
+    masked = torch.zeros_like(observed)
+    for b in range(observed.shape[0]):
+        for t in range(observed.shape[1]):
+            valid_patch = torch.nonzero(observed[b, t], as_tuple=False).flatten()
+            if valid_patch.numel():
+                masked[b, t, valid_patch[::2]] = True
+    return masked
 
 
 def train_factorized_sr1_model(
@@ -341,10 +261,12 @@ def train_factorized_sr1_model(
     seed: int = 0,
     max_context_scenes: int = 8,
     plateau_patience: int = 20,
+    mask_ratio: float = 0.5,
 ) -> Dict[str, Any]:
     """Train factorized spatial/temporal T-MAE with disjoint FIT and VAL IDs.
 
-    Each optimizer example is a chronological block of at most eight scenes;
+    Each optimizer example is a chronological block of at most
+    ``max_context_scenes`` scenes; one block per optimizer step (no batching);
     temporal attention is causal and operates independently for each patch
     location. The validation observations are never included in optimizer
     batches or fitted preprocessing, and select the minimum masked validation
@@ -427,13 +349,7 @@ def train_factorized_sr1_model(
         for block_index in order:
             block = train_blocks[int(block_index)]
             x, observed, channel_valid, zones, times = tensors(block)
-            candidate = torch.nonzero(observed, as_tuple=False)
-            if candidate.shape[0] < 2:
-                continue
-            n_mask = max(1, int(candidate.shape[0] * 0.5))
-            selected = candidate[torch.randperm(candidate.shape[0], device=device)[:n_mask]]
-            masked = torch.zeros_like(observed)
-            masked[selected[:, 0], selected[:, 1]] = True
+            masked = sample_training_mask(observed, mask_ratio)
             target_mask = masked.unsqueeze(-1) & channel_valid
             if not target_mask.any():
                 continue
@@ -458,15 +374,12 @@ def train_factorized_sr1_model(
         original_state = copy.deepcopy(model.state_dict())
         ema.apply_to(model)
         model.eval()
-        val_total, val_batches = 0.0, 0
+        val_sse, val_entries, val_batches = 0.0, 0, 0
+        block_entries: List[int] = []
         with torch.no_grad():
             for block in val_blocks:
                 x, observed, channel_valid, zones, times = tensors(block)
-                masked = torch.zeros_like(observed)
-                for t in range(observed.shape[1]):
-                    valid_patch = torch.nonzero(observed[0, t], as_tuple=False).flatten()
-                    if valid_patch.numel():
-                        masked[0, t, valid_patch[::2]] = True
+                masked = validation_mask(observed)
                 target_mask = masked.unsqueeze(-1) & channel_valid
                 if not target_mask.any():
                     block_ids = [str(row["observation_id"]) for row in block]
@@ -475,18 +388,23 @@ def train_factorized_sr1_model(
                     continue
                 prediction, _ = model(x, observed, masked, zones, times,
                                       modality_id=0)
-                loss = (prediction[target_mask] - x[target_mask]).square().mean()
-                if not torch.isfinite(loss):
+                sse = (prediction[target_mask] - x[target_mask]).double().square().sum()
+                if not torch.isfinite(sse):
                     block_ids = [str(row["observation_id"]) for row in block]
                     raise FloatingPointError(
                         "non-finite VAL masked loss; refusing to omit a validation block "
                         f"from checkpoint selection (observation_ids={block_ids})"
                     )
-                val_total += float(loss.cpu())
+                n_entries = int(target_mask.sum())
+                val_sse += float(sse.cpu())
+                val_entries += n_entries
+                block_entries.append(n_entries)
                 val_batches += 1
         if not val_batches:
             raise ValueError("VAL split has no supported masked targets; checkpoint is unestimable")
-        mean_val = val_total / val_batches
+        # Target-weighted: every VAL target entry has equal weight, so a block
+        # holding one sparse scene cannot dominate checkpoint selection.
+        mean_val = val_sse / val_entries
         val_losses.append(mean_val)
         if mean_val < best_val_loss:
             best_val_loss, best_epoch = mean_val, epoch
@@ -500,7 +418,7 @@ def train_factorized_sr1_model(
         raise ValueError("no finite validation-selected checkpoint was produced")
     model.load_state_dict(best_state)
     return {
-        "status": "COMPLETED_BUDGET_WITH_VALIDATION_SELECTED_CHECKPOINT",
+        "status": "COMPLETED_WITH_VALIDATION_SELECTED_CHECKPOINT",
         "best_epoch": best_epoch, "best_val_loss": best_val_loss,
         "final_train_loss": train_losses[-1], "final_val_loss": val_losses[-1],
         "train_loss_history": train_losses, "val_loss_history": val_losses,
@@ -512,5 +430,11 @@ def train_factorized_sr1_model(
         "validation_block_count": len(val_blocks),
         "validation_blocks_scored": val_batches,
         "validation_blocks_without_targets": val_blocks_without_targets,
+        "validation_target_entries": val_entries,
+        "validation_target_entries_by_block": block_entries,
+        "validation_loss_definition": "sum of squared errors over all VAL target entries / number of entries",
+        "train_mask_ratio": mask_ratio,
+        "train_mask_rule": "per scene: round(ratio*n_observed) observed patches, >=1 and <=n_observed-1; scenes with <2 observed patches give no targets",
+        "train_block_count": len(train_blocks),
         "device": device, "seed": seed, "parameter_count": model.count_parameters(),
     }

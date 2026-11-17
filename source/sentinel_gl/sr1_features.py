@@ -1,35 +1,32 @@
-"""Milestone SR-1 Feature Extraction, Lake-Focused ROIs, Guarded Indices & Robust Scaling.
+"""SR-1 patch features: guarded water indices, patch tokens, FIT-only scaling.
 
-Governed by plan.md Milestone SR-1 and project/contracts/SR02_registry_and_rois.md.
-Eliminates:
-- 98.53% index variance explosion via denominator guard delta and non-negative reflectance floor.
-- Spatial dilution via 160x160 lake-focused window and 16x16 patch tokenization.
-- Monsoon cloud aliasing via >=25% valid support patch gating.
-- Out-of-distribution drift via cyclical DOY features (no monotonic time).
+* Reflectance is native signed bottom-of-atmosphere reflectance; valid
+  negative values are kept (no reflectance floor).
+* B03/B08/B11 are averaged over the clear pixels (SCL 4, 5, 6) of each
+  16 x 16 pixel patch; a patch is observed only with >= 25% clear support.
+* NDWI and MNDWI are computed from the patch-mean reflectances. A denominator
+  whose absolute value is below delta = 0.002 is undefined and the channel is
+  missing with reason ``UNDEFINED_INDEX_DENOMINATOR``.
+* Patch zone labels: 0 if >= 15% of the patch's pixels are in zone 0 (lake),
+  else 1 if >= 30% are in zone 1 (500 m buffer), else 2 (background).
+* Robust scaling uses the median and 1.4826 x MAD of FIT observations only.
+* Time features are cyclic day of year and the capped revisit gap.
 """
 from __future__ import annotations
 
-import json
 import math
-from datetime import datetime, timezone
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 
 CHANNELS_OPTICAL = ["B03", "B08", "B11", "NDWI", "MNDWI"]
-CHANNELS_SAR = ["SIGMA0_VV_DB", "SIGMA0_VH_DB"]
-
-# Cutoff: 2 October 2023, 18:30:00 UTC (Sikkim 3 October 00:00 IST)
-PRE_BREACH_CUTOFF_UTC = "2023-10-02T18:30:00Z"
-EVENT_WINDOW_END_UTC = "2023-10-04T18:30:00Z"
-
 DELTA_DENOMINATOR = 0.002
-REFLECTANCE_FLOOR = 0.001
-
-
-def parse_utc(dt_str: str) -> datetime:
-    return datetime.fromisoformat(dt_str.replace("Z", "+00:00")).astimezone(timezone.utc)
+PATCH_SIZE = 16
+MIN_PATCH_SUPPORT = 0.25
+ZONE0_PATCH_FRACTION = 0.15
+ZONE1_PATCH_FRACTION = 0.30
+CLEAR_SCL_CLASSES = (4, 5, 6)
 
 
 def compute_guarded_indices(
@@ -37,14 +34,11 @@ def compute_guarded_indices(
     b08: np.ndarray,
     b11: np.ndarray,
     delta: float = DELTA_DENOMINATOR,
-    floor: float = REFLECTANCE_FLOOR,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray]:
     """Compute guarded NDWI/MNDWI from caller-supplied reflectance means.
 
-    Valid negative reflectances are preserved. The legacy ``floor`` argument is
-    accepted for source compatibility but intentionally has no effect; clipping
-    is available only as an explicitly named sensitivity analysis. A denominator
-    with absolute value below ``delta`` is undefined and returns NaN.
+    Valid negative reflectances are preserved. A denominator with absolute
+    value below ``delta`` is undefined and returns NaN.
     """
     if not math.isfinite(float(delta)) or delta <= 0:
         raise ValueError("delta must be finite and positive")
@@ -67,8 +61,8 @@ def tokenize_reflectance_patches(
     scl: np.ndarray,
     zone_map: np.ndarray,
     *,
-    patch_size: int = 16,
-    min_support: float = 0.25,
+    patch_size: int = PATCH_SIZE,
+    min_support: float = MIN_PATCH_SUPPORT,
     delta: float = DELTA_DENOMINATOR,
 ) -> Dict[str, Any]:
     """Aggregate source reflectance first, then derive patch-mean indices.
@@ -97,7 +91,7 @@ def tokenize_reflectance_patches(
     valid_counts = np.zeros(count, dtype=np.int32)
     patch_zones = np.full(count, 2, dtype=np.int8)
     coords = []
-    clear = np.isin(classes, [4, 5, 6]) & mask.all(axis=0) & np.isfinite(values).all(axis=0)
+    clear = np.isin(classes, CLEAR_SCL_CLASSES) & mask.all(axis=0) & np.isfinite(values).all(axis=0)
     index = 0
     for pr in range(nrows):
         for pc in range(ncols):
@@ -110,7 +104,7 @@ def tokenize_reflectance_patches(
             zone_patch = zones[rs, cs]
             water_fraction = float(np.mean(zone_patch == 0))
             moraine_fraction = float(np.mean(zone_patch == 1))
-            patch_zones[index] = 0 if water_fraction >= 0.15 else (1 if moraine_fraction >= 0.30 else 2)
+            patch_zones[index] = 0 if water_fraction >= ZONE0_PATCH_FRACTION else (1 if moraine_fraction >= ZONE1_PATCH_FRACTION else 2)
             if n_valid < math.ceil(min_support * patch_size * patch_size):
                 index += 1
                 continue
@@ -147,7 +141,7 @@ def candidate_water_area_baseline(
     zones = np.asarray(zone_map)
     if values.ndim != 3 or values.shape[0] != 3 or classes.shape != values.shape[1:] or zones.shape != classes.shape:
         raise ValueError("baseline inputs must share B03/B08/B11 and spatial dimensions")
-    supported = mask & np.isin(classes, [4, 5, 6]) & np.isfinite(values).all(axis=0)
+    supported = mask & np.isin(classes, CLEAR_SCL_CLASSES) & np.isfinite(values).all(axis=0)
     ndwi, mndwi = compute_guarded_indices(values[0], values[1], values[2], delta=delta)
     defined = supported & np.isfinite(ndwi) & np.isfinite(mndwi)
     candidate = defined & np.isin(zones, [0, 1]) & (ndwi > 0) & (mndwi > 0)
@@ -216,222 +210,11 @@ def apply_robust_scaler(features: np.ndarray, observed: np.ndarray, scaler: Dict
     return transformed
 
 
-def compute_water_area_km2(
-    values_5ch: np.ndarray,
-    scl: np.ndarray,
-    zone_map: Optional[np.ndarray] = None,
-    mndwi_thresh: float = 0.05,
-    b08_thresh: float = 0.16,
-    pixel_area_m2: float = 400.0,
-) -> Dict[str, float]:
-    """Extract physical liquid water surface area within the core lake basin (Zone 0)."""
-    valid_qa = np.isin(scl, [4, 5, 6]) & np.isfinite(values_5ch[0])
-    clear_pixels = int(valid_qa.sum())
-    clear_fraction = float(clear_pixels / (values_5ch.shape[1] * values_5ch.shape[2]))
-
-    core_mask = (zone_map == 0) if zone_map is not None else np.ones_like(scl, dtype=bool)
-    core_liquid_qa = float((valid_qa & core_mask).sum() / max(1, core_mask.sum()))
-
-    # Require scene clear_fraction >= 0.45 and non-frozen lake support (core_liquid_qa >= 0.25)
-    if clear_fraction < 0.45 or core_liquid_qa < 0.25:
-        return {
-            "water_pixel_count": 0,
-            "water_area_km2": float("nan"),
-            "clear_pixel_count": clear_pixels,
-            "clear_fraction": clear_fraction,
-        }
-
-    # Count liquid water pixels strictly inside Zone 0 (no artificial division by drained area)
-    spectral_water = (
-        core_mask
-        & valid_qa
-        & (
-            (scl == 6)
-            | (
-                (values_5ch[4] > mndwi_thresh)
-                & (values_5ch[3] > 0.0)
-                & (values_5ch[1] < b08_thresh)
-                & (values_5ch[0] > 0.02)
-            )
-        )
-    )
-    pixel_count = int(spectral_water.sum())
-    area_km2 = float(pixel_count * pixel_area_m2 / 1e6)
-
-    return {
-        "water_pixel_count": pixel_count,
-        "water_area_km2": area_km2,
-        "clear_pixel_count": clear_pixels,
-        "clear_fraction": clear_fraction,
-    }
-
-
-def tokenize_scene_patches(
-    values_ch: np.ndarray,  # shape (C, 160, 160)
-    valid_mask: np.ndarray,  # shape (C, 160, 160)
-    scl: np.ndarray,  # shape (160, 160)
-    zone_map: np.ndarray,  # shape (160, 160) - 0: water, 1: moraine, 2: background
-    patch_size: int = 16,
-    min_support: float = 0.25,
-) -> Dict[str, Any]:
-    """Partition 160x160 scene into 10x10 patches (100 tokens)."""
-    H, W = values_ch.shape[1], values_ch.shape[2]
-    n_pr = H // patch_size  # 10
-    n_pc = W // patch_size  # 10
-    num_patches = n_pr * n_pc  # 100
-    C = values_ch.shape[0]
-    
-    patch_features = np.zeros((num_patches, C), dtype=np.float32)
-    patch_observed = np.zeros(num_patches, dtype=bool)
-    patch_valid_counts = np.zeros(num_patches, dtype=np.int32)
-    patch_snow_fractions = np.zeros(num_patches, dtype=np.float32)
-    patch_zones = np.zeros(num_patches, dtype=np.int32)
-    patch_coords = []
-
-    # Scene-wide clear fraction and measured bare-moraine (Zone 1, SCL 5) reference for dewatered lake bed
-    all_clear = np.isin(scl, [4, 5, 6]) & valid_mask.all(axis=0)
-    scene_clear_frac = float(all_clear.sum() / (H * W))
-    moraine_bare = (zone_map == 1) & (scl == 5) & valid_mask.all(axis=0)
-    if not moraine_bare.any():
-        moraine_bare = (zone_map >= 1) & all_clear
-    sediment_ref = np.array(
-        [values_ch[ch][moraine_bare].mean() if moraine_bare.any() else 0.0 for ch in range(C)],
-        dtype=np.float32,
-    )
-    
-    idx = 0
-    for pr in range(n_pr):
-        for pc in range(n_pc):
-            r_start, r_end = pr * patch_size, (pr + 1) * patch_size
-            c_start, c_end = pc * patch_size, (pc + 1) * patch_size
-            
-            p_scl = scl[r_start:r_end, c_start:c_end]
-            p_zone = zone_map[r_start:r_end, c_start:c_end]
-            p_val = values_ch[:, r_start:r_end, c_start:c_end]
-            p_mask = valid_mask[:, r_start:r_end, c_start:c_end]
-            
-            clear_px = np.isin(p_scl, [4, 5, 6]) & p_mask.all(axis=0)
-            n_clear = int(clear_px.sum())
-            total_px = patch_size * patch_size
-            clear_frac = n_clear / total_px
-            
-            snow_px = (p_scl == 11)
-            snow_frac = float(snow_px.sum() / total_px)
-            
-            water_frac = (p_zone == 0).mean()
-            moraine_frac = (p_zone == 1).mean()
-            if water_frac >= 0.15:
-                dom_zone = 0
-            elif moraine_frac >= 0.30:
-                dom_zone = 1
-            else:
-                dom_zone = 2
-                
-            patch_zones[idx] = dom_zone
-            patch_valid_counts[idx] = n_clear
-            patch_snow_fractions[idx] = snow_frac
-            patch_coords.append((pr, pc))
-            
-            if dom_zone == 0 and scene_clear_frac >= 0.45:
-                core_px = (p_zone == 0)
-                cld_free = ~np.isin(p_scl, [0, 1, 2, 3, 7, 8, 9, 10]) & p_mask.all(axis=0)
-                n_core_obs = int((core_px & cld_free).sum())
-                n_core_water = int((core_px & (p_scl == 6) & p_mask.all(axis=0)).sum())
-                n_core_ice = int((core_px & (p_scl == 11) & p_mask.all(axis=0)).sum())
-                
-                # Check if patch is seasonally snow/ice covered (winter freeze)
-                if n_core_obs > 0 and (n_core_ice / n_core_obs) >= 0.25:
-                    valid_surf = np.isin(p_scl, [4, 5, 6, 11]) & p_mask.all(axis=0)
-                    if valid_surf.any():
-                        patch_observed[idx] = True
-                        for ch in range(C):
-                            patch_features[idx, ch] = float(p_val[ch][valid_surf].mean())
-                    else:
-                        patch_observed[idx] = False
-                        patch_features[idx, :] = np.nan
-                elif n_core_obs > 0:
-                    # Non-frozen lake: water retention is fraction of cloud-free core pixels that remain water
-                    w_retention = float(n_core_water / n_core_obs)
-                    patch_observed[idx] = True
-                    for ch in range(C):
-                        w_mean = float(p_val[ch][clear_px].mean()) if n_clear > 0 else float(sediment_ref[ch])
-                        patch_features[idx, ch] = w_retention * w_mean + (1.0 - w_retention) * float(sediment_ref[ch])
-                elif clear_frac >= min_support and n_clear > 0:
-                    patch_observed[idx] = True
-                    for ch in range(C):
-                        patch_features[idx, ch] = p_val[ch][clear_px].mean()
-                else:
-                    patch_observed[idx] = False
-                    patch_features[idx, :] = np.nan
-            elif clear_frac >= min_support and n_clear > 0:
-                patch_observed[idx] = True
-                for ch in range(C):
-                    patch_features[idx, ch] = p_val[ch][clear_px].mean()
-            else:
-                patch_observed[idx] = False
-                patch_features[idx, :] = np.nan
-                
-            idx += 1
-            
-    return {
-        "features": patch_features,
-        "observed": patch_observed,
-        "valid_counts": patch_valid_counts,
-        "snow_fractions": patch_snow_fractions,
-        "zones": patch_zones,
-        "coords": patch_coords,
-        "supported_patch_count": int(patch_observed.sum()),
-    }
-
-
-def fit_robust_scaler_legacy_pre_cutoff(
-    all_pre_patch_features: np.ndarray,  # shape (N_tokens, C)
-    all_pre_observed: np.ndarray,        # shape (N_tokens,)
-) -> Dict[str, Any]:
-    """Fit robust median and MAD strictly on pre-cutoff observed tokens.
-    
-    standardized = (x - median) / (1.4826 * MAD)
-    Zero singularity risk; outliers cannot inflate the scale.
-    """
-    valid_tokens = all_pre_patch_features[all_pre_observed]
-    C = valid_tokens.shape[1]
-    
-    medians = np.zeros(C, dtype=np.float32)
-    mads = np.zeros(C, dtype=np.float32)
-    iqrs = np.zeros(C, dtype=np.float32)
-    
-    for ch in range(C):
-        col = valid_tokens[:, ch]
-        col_finite = col[np.isfinite(col)]
-        if len(col_finite) == 0:
-            medians[ch] = 0.0
-            mads[ch] = 1.0
-            iqrs[ch] = 1.0
-            continue
-        med = float(np.median(col_finite))
-        mad = float(np.median(np.abs(col_finite - med)))
-        q25 = float(np.percentile(col_finite, 25))
-        q75 = float(np.percentile(col_finite, 75))
-        
-        medians[ch] = med
-        # Guard against zero MAD
-        scale = max(1.4826 * mad, 1e-4)
-        mads[ch] = scale
-        iqrs[ch] = max(q75 - q25, 1e-4)
-        
-    return {
-        "medians": medians.tolist(),
-        "mads": mads.tolist(),
-        "iqrs": iqrs.tolist(),
-        "sample_tokens_fitted": int(len(valid_tokens)),
-    }
-
-
 def temporal_features(
     dt: datetime,
     prev_dt: Optional[datetime] = None,
 ) -> np.ndarray:
-    """Cyclical day-of-year and delta-t (NO monotonic elapsed time)."""
+    """Cyclic day of year and revisit gap min(dt/30 days, 5); no monotonic time."""
     doy = dt.timetuple().tm_yday
     rad = 2.0 * math.pi * (doy - 1) / 365.25
     sin_doy = math.sin(rad)

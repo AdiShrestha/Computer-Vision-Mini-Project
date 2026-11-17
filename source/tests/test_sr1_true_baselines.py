@@ -37,12 +37,14 @@ def test_baseline_models_have_explicit_fit_ids_and_no_fallback_rows():
     assert fitted['fit_token_count']==14*100
     predictions=score_descriptive_baselines(rows,fit_ids,fitted)
     val=next(r for r in predictions if r['role']=='VAL')
-    assert val['supported_target_patch_count']==100
+    assert val['zone01_patch_count']==100
+    assert val['complete_zone01_patch_count']==100
+    assert val['missingness_only_score']==0.0
     assert val['seasonal_status']=='ESTIMATED'
     assert val['spatial_persistence_residual'] is not None
     assert val['isolation_forest_score'] is not None
     assert val['one_class_svm_score'] is not None
-    assert val['rpca_status'] in {'FIT_ONLY_RPCA_SUBSPACE_ESTIMATED','NOT_ESTIMABLE_RPCA_DID_NOT_CONVERGE'}
+    assert 'rpca_score' not in val  # removed by amendment PLOS-001 (zero by construction)
 
 
 def test_page_cusum_records_actual_exploratory_crossing():

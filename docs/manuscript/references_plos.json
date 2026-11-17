@@ -1,0 +1,304 @@
+{
+  "checked_utc": "2026-11-17T10:11:19+00:00",
+  "style": "Vancouver (PLOS)",
+  "references": {
+    "shugar2020": {
+      "kind": "doi",
+      "identifier": "10.1038/s41558-020-0855-4",
+      "source_url": "https://api.crossref.org/works/10.1038/s41558-020-0855-4",
+      "retrieved_title": "Rapid worldwide growth of glacial lakes since 1990",
+      "response_sha256": "0a278e722e16acef6dabf5ca19b5bc6a834dbd9f063c06ee2f8e7ea71f6a59fd",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Shugar DH, Burr A, Haritashya UK, Kargel JS, Watson CS, Kennedy MC, et al. Rapid worldwide growth of glacial lakes since 1990. Nat. Clim. Chang. 2020;10(10):939-945. doi:10.1038/s41558-020-0855-4"
+    },
+    "zheng2021": {
+      "kind": "doi",
+      "identifier": "10.1038/s41558-021-01028-3",
+      "source_url": "https://api.crossref.org/works/10.1038/s41558-021-01028-3",
+      "retrieved_title": "Increasing risk of glacial lake outburst floods from future Third Pole deglaciation",
+      "response_sha256": "3b7ab1050f7d06b5a931a56dfe1e951012126f7df123f6ed7460d448ee30b79b",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Zheng G, Allen SK, Bao A, Ballesteros-Cánovas JA, Huss M, Zhang G, et al. Increasing risk of glacial lake outburst floods from future Third Pole deglaciation. Nat. Clim. Chang. 2021;11(5):411-417. doi:10.1038/s41558-021-01028-3"
+    },
+    "taylor2023": {
+      "kind": "doi",
+      "identifier": "10.1038/s41467-023-36033-x",
+      "source_url": "https://api.crossref.org/works/10.1038/s41467-023-36033-x",
+      "retrieved_title": "Glacial lake outburst floods threaten millions globally",
+      "response_sha256": "f32c670130e2b79cdd3b8593bf580b66c2ae5146d6f9ebf25d97da4b00ec332c",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Taylor C, Robinson TR, Dunning S, Rachel Carr J, Westoby M. Glacial lake outburst floods threaten millions globally. Nat Commun. 2023;14(1):487. doi:10.1038/s41467-023-36033-x"
+    },
+    "sattar2025": {
+      "kind": "doi",
+      "identifier": "10.1126/science.ads2659",
+      "source_url": "https://api.crossref.org/works/10.1126/science.ads2659",
+      "retrieved_title": "The Sikkim flood of October 2023: Drivers, causes, and impacts of a multihazard cascade",
+      "response_sha256": "545a8ead4bac6b9af8513763738df5ceda3a3a6a3750f2d989a30be468a4d1bf",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Sattar A, Cook KL, Rai SK, Berthier E, Allen S, Rinzin S, et al. The Sikkim flood of October 2023: Drivers, causes, and impacts of a multihazard cascade. Science. 2025;387(6740):eads2659. doi:10.1126/science.ads2659"
+    },
+    "veh2018": {
+      "kind": "doi",
+      "identifier": "10.1016/j.rse.2017.12.025",
+      "source_url": "https://api.crossref.org/works/10.1016/j.rse.2017.12.025",
+      "retrieved_title": "Detecting Himalayan glacial lake outburst floods from Landsat time series",
+      "response_sha256": "1436c71342ae8d0f1dbafef4cc568cb926e5463d58bf186173814108b7a899a5",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Veh G, Korup O, Roessner S, Walz A. Detecting Himalayan glacial lake outburst floods from Landsat time series. Remote Sensing of Environment. 2018;207:84-97. doi:10.1016/j.rse.2017.12.025"
+    },
+    "yu2024": {
+      "kind": "doi",
+      "identifier": "10.3390/rs16132307",
+      "source_url": "https://api.crossref.org/works/10.3390/rs16132307",
+      "retrieved_title": "Retrospective Analysis of Glacial Lake Outburst Flood (GLOF) Using AI Earth InSAR and Optical Images: A Case Study of South Lhonak Lake, Sikkim",
+      "response_sha256": "3407e251085d8ddb2ee1fbccf2df50a2c1f368f3605ac8542c7e2dce9aecd42f",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Yu Y, Li B, Li Y, Jiang W. Retrospective Analysis of Glacial Lake Outburst Flood (GLOF) Using AI Earth InSAR and Optical Images: A Case Study of South Lhonak Lake, Sikkim. Remote Sensing. 2024;16(13):2307. doi:10.3390/rs16132307"
+    },
+    "chen2021": {
+      "kind": "doi",
+      "identifier": "10.5194/essd-13-741-2021",
+      "source_url": "https://api.crossref.org/works/10.5194/essd-13-741-2021",
+      "retrieved_title": "Annual 30 m dataset for glacial lakes in High Mountain Asia from 2008 to 2017",
+      "response_sha256": "70ca88f0cfb46c5e21dea85c35902ebc000c27de1d407564804a97e3838143e1",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Chen F, Zhang M, Guo H, Allen S, Kargel JS, Haritashya UK, et al. Annual 30 m dataset for glacial lakes in High Mountain Asia from 2008 to 2017. Earth Syst. Sci. Data. 2021;13(2):741-766. doi:10.5194/essd-13-741-2021"
+    },
+    "chen2020data": {
+      "kind": "datacite",
+      "identifier": "10.5281/zenodo.4275164",
+      "source_url": "https://api.datacite.org/dois/10.5281/zenodo.4275164",
+      "retrieved_title": "Annual 30-meter Dataset for Glacial Lakes in High Mountain Asia from 2008 to 2017",
+      "response_sha256": "7d9aa2f8223a626675167cc8d555b332561b1af190c9511058c93e1359f0cdf8",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Chen F, Zhang M, Guo H, Allen S, Kargel JS, Haritashya UK, et al. Annual 30-meter Dataset for Glacial Lakes in High Mountain Asia from 2008 to 2017 [Dataset]. Zenodo; 2020. doi:10.5281/zenodo.4275164"
+    },
+    "drusch2012": {
+      "kind": "doi",
+      "identifier": "10.1016/j.rse.2011.11.026",
+      "source_url": "https://api.crossref.org/works/10.1016/j.rse.2011.11.026",
+      "retrieved_title": "Sentinel-2: ESA's Optical High-Resolution Mission for GMES Operational Services",
+      "response_sha256": "73035129b1fa2131e0fb9add0de0655c68a8416f1f3627d3aa5a54e43d1fc2c9",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Drusch M, Del Bello U, Carlier S, Colin O, Fernandez V, Gascon F, et al. Sentinel-2: ESA's Optical High-Resolution Mission for GMES Operational Services. Remote Sensing of Environment. 2012;120:25-36. doi:10.1016/j.rse.2011.11.026"
+    },
+    "mcfeeters1996": {
+      "kind": "doi",
+      "identifier": "10.1080/01431169608948714",
+      "source_url": "https://api.crossref.org/works/10.1080/01431169608948714",
+      "retrieved_title": "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features",
+      "response_sha256": "fe190eb96e7354887efd947369fa34936af2673de58b2940c813d7331f76435d",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "McFEETERS SK. The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. International Journal of Remote Sensing. 1996;17(7):1425-1432. doi:10.1080/01431169608948714"
+    },
+    "xu2006": {
+      "kind": "doi",
+      "identifier": "10.1080/01431160600589179",
+      "source_url": "https://api.crossref.org/works/10.1080/01431160600589179",
+      "retrieved_title": "Modification of normalised difference water index (NDWI) to enhance open water features in remotely sensed imagery",
+      "response_sha256": "6768246ce4ccc15e3e30b0d2008876b3345db348f6f8ee3e2beadf7ee145c193",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Xu H. Modification of normalised difference water index (NDWI) to enhance open water features in remotely sensed imagery. International Journal of Remote Sensing. 2006;27(14):3025-3033. doi:10.1080/01431160600589179"
+    },
+    "vaswani2017": {
+      "kind": "arxiv",
+      "identifier": "1706.03762",
+      "source_url": "https://export.arxiv.org/api/query?id_list=1706.03762",
+      "retrieved_title": "Attention Is All You Need",
+      "response_sha256": "b7c11198a8225512d2381d568bbc0885828c08e2c54288426544870688fb05e4",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Vaswani A, Shazeer N, Parmar N, Uszkoreit J, Jones L, Gomez AN, et al. Attention Is All You Need. arXiv:1706.03762 [Preprint]. 2017."
+    },
+    "he2022": {
+      "kind": "doi",
+      "identifier": "10.1109/CVPR52688.2022.01553",
+      "source_url": "https://api.crossref.org/works/10.1109/CVPR52688.2022.01553",
+      "retrieved_title": "Masked Autoencoders Are Scalable Vision Learners",
+      "response_sha256": "606674f3bbfc29318ccc5fc845a4fd47fbe6ee548dcb392c8257b478665295e7",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "He K, Chen X, Xie S, Li Y, Dollar P, Girshick R. Masked Autoencoders Are Scalable Vision Learners. In: 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). 2022. p. 15979-15988. doi:10.1109/cvpr52688.2022.01553"
+    },
+    "zerveas2021": {
+      "kind": "doi",
+      "identifier": "10.1145/3447548.3467401",
+      "source_url": "https://api.crossref.org/works/10.1145/3447548.3467401",
+      "retrieved_title": "A Transformer-based Framework for Multivariate Time Series Representation Learning",
+      "response_sha256": "06a947bf1ec962f9c183c6dad95e7ebbc52b6c4aea8d600a28c662a0382c99e6",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Zerveas G, Jayaraman S, Patel D, Bhamidipaty A, Eickhoff C. A Transformer-based Framework for Multivariate Time Series Representation Learning. In: Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery & Data Mining. 2021. p. 2114-2124. doi:10.1145/3447548.3467401"
+    },
+    "cong2022": {
+      "kind": "arxiv",
+      "identifier": "2207.08051",
+      "source_url": "https://export.arxiv.org/api/query?id_list=2207.08051",
+      "retrieved_title": "SatMAE: Pre-training Transformers for Temporal and Multi-Spectral Satellite Imagery",
+      "response_sha256": "757bb30e6335ba742845a290a27c53e4e6abaf8dd158d7b0e7b20930e4020d17",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Cong Y, Khanna S, Meng C, Liu P, Rozi E, He Y, et al. SatMAE: Pre-training Transformers for Temporal and Multi-Spectral Satellite Imagery. arXiv:2207.08051 [Preprint]. 2022."
+    },
+    "tseng2023": {
+      "kind": "arxiv",
+      "identifier": "2304.14065",
+      "source_url": "https://export.arxiv.org/api/query?id_list=2304.14065",
+      "retrieved_title": "Lightweight, Pre-trained Transformers for Remote Sensing Timeseries",
+      "response_sha256": "907d08aaa61acb13b57c5d3d9567d06acfda17aa212b5a0c6e063aa642c33ade",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Tseng G, Cartuyvels R, Zvonkov I, Purohit M, Rolnick D, Kerner H. Lightweight, Pre-trained Transformers for Remote Sensing Timeseries. arXiv:2304.14065 [Preprint]. 2023."
+    },
+    "szwarcman2024": {
+      "kind": "arxiv",
+      "identifier": "2412.02732",
+      "source_url": "https://export.arxiv.org/api/query?id_list=2412.02732",
+      "retrieved_title": "Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications",
+      "response_sha256": "b1566b79fa5835755e8cc5b749e173eebfe6e45515dabb3e0771731ccbffdb55",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Szwarcman D, Roy S, Fraccaro P, Gíslason ÞE, Blumenstiel B, Ghosal R, et al. Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications. arXiv:2412.02732 [Preprint]. 2024."
+    },
+    "loshchilov2019": {
+      "kind": "arxiv",
+      "identifier": "1711.05101",
+      "source_url": "https://export.arxiv.org/api/query?id_list=1711.05101",
+      "retrieved_title": "Decoupled Weight Decay Regularization",
+      "response_sha256": "ef2e8501fac9be997043ddfd30c0a5e030f40a72296c32d8197522d6993d2307",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Loshchilov I, Hutter F. Decoupled Weight Decay Regularization. arXiv:1711.05101 [Preprint]. 2017."
+    },
+    "verbesselt2010": {
+      "kind": "doi",
+      "identifier": "10.1016/j.rse.2009.08.014",
+      "source_url": "https://api.crossref.org/works/10.1016/j.rse.2009.08.014",
+      "retrieved_title": "Detecting trend and seasonal changes in satellite image time series",
+      "response_sha256": "5c3a264757b7663ea3b862662bac93b0dc4b8d1947b3fe9829194dc516cb2d02",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Verbesselt J, Hyndman R, Newnham G, Culvenor D. Detecting trend and seasonal changes in satellite image time series. Remote Sensing of Environment. 2010;114(1):106-115. doi:10.1016/j.rse.2009.08.014"
+    },
+    "zhu2014": {
+      "kind": "doi",
+      "identifier": "10.1016/j.rse.2014.01.011",
+      "source_url": "https://api.crossref.org/works/10.1016/j.rse.2014.01.011",
+      "retrieved_title": "Continuous change detection and classification of land cover using all available Landsat data",
+      "response_sha256": "143b5ea07d9e6cdd5be69ccc0a676ad5d040e3eb153cd66a9e17a9625b73798c",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Zhu Z, Woodcock CE. Continuous change detection and classification of land cover using all available Landsat data. Remote Sensing of Environment. 2014;144:152-171. doi:10.1016/j.rse.2014.01.011"
+    },
+    "kennedy2010": {
+      "kind": "doi",
+      "identifier": "10.1016/j.rse.2010.07.008",
+      "source_url": "https://api.crossref.org/works/10.1016/j.rse.2010.07.008",
+      "retrieved_title": "Detecting trends in forest disturbance and recovery using yearly Landsat time series: 1. LandTrendr — Temporal segmentation algorithms",
+      "response_sha256": "25a48213799cec4b7b25d6ae2d3ebb72b436ca6e2ada9f6b7c18702ad99edab0",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Kennedy RE, Yang Z, Cohen WB. Detecting trends in forest disturbance and recovery using yearly Landsat time series: 1. LandTrendr — Temporal segmentation algorithms. Remote Sensing of Environment. 2010;114(12):2897-2910. doi:10.1016/j.rse.2010.07.008"
+    },
+    "liu2008": {
+      "kind": "doi",
+      "identifier": "10.1109/ICDM.2008.17",
+      "source_url": "https://api.crossref.org/works/10.1109/ICDM.2008.17",
+      "retrieved_title": "Isolation Forest",
+      "response_sha256": "56d5ee7ffc4175d390eeb88d45cc34112e5761165a8f70b3d6a223281a061d4f",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Liu FT, Ting KM, Zhou ZH. Isolation Forest. In: 2008 Eighth IEEE International Conference on Data Mining. 2008. p. 413-422. doi:10.1109/icdm.2008.17"
+    },
+    "scholkopf2001": {
+      "kind": "doi",
+      "identifier": "10.1162/089976601750264965",
+      "source_url": "https://api.crossref.org/works/10.1162/089976601750264965",
+      "retrieved_title": "Estimating the Support of a High-Dimensional Distribution",
+      "response_sha256": "e6055bf9b477f48ede1d4b8d96bcf347a3856cc23ee3bd826b87811959c6841f",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Schölkopf B, Platt JC, Shawe-Taylor J, Smola AJ, Williamson RC. Estimating the Support of a High-Dimensional Distribution. Neural Computation. 2001;13(7):1443-1471. doi:10.1162/089976601750264965"
+    },
+    "page1954": {
+      "kind": "doi",
+      "identifier": "10.1093/biomet/41.1-2.100",
+      "source_url": "https://api.crossref.org/works/10.1093/biomet/41.1-2.100",
+      "retrieved_title": "Continuous inspection schemes",
+      "response_sha256": "5fb62440aa407c245389e0486da20e6194abbe18dc6ffd18c84b834bc1fae823",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Page ES. Continuous inspection schemes. Biometrika. 1954;41(1-2):100-115. doi:10.1093/biomet/41.1-2.100"
+    },
+    "candes2011": {
+      "kind": "doi",
+      "identifier": "10.1145/1970392.1970395",
+      "source_url": "https://api.crossref.org/works/10.1145/1970392.1970395",
+      "retrieved_title": "Robust principal component analysis?",
+      "response_sha256": "7718b5210d06273c32c296f43683b43616e7bfd937cb56ae3a8d9e233cb5f90c",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Candès EJ, Li X, Ma Y, Wright J. Robust principal component analysis?. J. ACM. 2011;58(3):1-37. doi:10.1145/1970392.1970395"
+    },
+    "wu2021": {
+      "kind": "doi",
+      "identifier": "10.1109/TKDE.2021.3112126",
+      "source_url": "https://api.crossref.org/works/10.1109/TKDE.2021.3112126",
+      "retrieved_title": "Current Time Series Anomaly Detection Benchmarks are Flawed and are Creating the Illusion of Progress",
+      "response_sha256": "0464813509c400bfbe279edc107cc7bf4f11eae9c8bae89033e1b097a5d38a30",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Wu R, Keogh E. Current Time Series Anomaly Detection Benchmarks are Flawed and are Creating the Illusion of Progress. IEEE Trans. Knowl. Data Eng. 2021 (early access). doi:10.1109/tkde.2021.3112126"
+    },
+    "tatbul2018": {
+      "kind": "arxiv",
+      "identifier": "1803.03639",
+      "source_url": "https://export.arxiv.org/api/query?id_list=1803.03639",
+      "retrieved_title": "Precision and Recall for Time Series",
+      "response_sha256": "d8f7df86881651ce3de8518b0258e28b0672321fb89d8404905ee71d98b6d655",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Tatbul N, Lee TJ, Zdonik S, Alam M, Gottschlich J. Precision and Recall for Time Series. arXiv:1803.03639 [Preprint]. 2018."
+    },
+    "kunsch1989": {
+      "kind": "doi",
+      "identifier": "10.1214/aos/1176347265",
+      "source_url": "https://api.crossref.org/works/10.1214/aos/1176347265",
+      "retrieved_title": "The Jackknife and the Bootstrap for General Stationary Observations",
+      "response_sha256": "ee2204395da3fc975c16cc6b7b1fab66ceb22ebc5c527cbe5ef20fc441dd775e",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Kunsch HR. The Jackknife and the Bootstrap for General Stationary Observations. Ann. Statist. 1989;17(3):1217-1241. doi:10.1214/aos/1176347265"
+    },
+    "paszke2019": {
+      "kind": "arxiv",
+      "identifier": "1912.01703",
+      "source_url": "https://export.arxiv.org/api/query?id_list=1912.01703",
+      "retrieved_title": "PyTorch: An Imperative Style, High-Performance Deep Learning Library",
+      "response_sha256": "fe7784487c4f6573769838334f7dd47f149b90fa4b510083c51add459aa4942a",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Paszke A, Gross S, Massa F, Lerer A, Bradbury J, Chanan G, et al. PyTorch: An Imperative Style, High-Performance Deep Learning Library. arXiv:1912.01703 [Preprint]. 2019."
+    },
+    "sarfraz2024": {
+      "kind": "web",
+      "identifier": "https://proceedings.mlr.press/v235/sarfraz24a.html",
+      "source_url": "https://proceedings.mlr.press/v235/sarfraz24a.html",
+      "retrieved_title": "Position: Quo Vadis, Unsupervised Time Series Anomaly Detection?",
+      "response_sha256": "bfa0c6f14120108dfcbd556e046833acfc428e74a5365f0eef0e3d72e0f63958",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Sarfraz MS, Chen MY, Layer L, Peng K, Koulakis M. Position: Quo vadis, unsupervised time series anomaly detection? In: Proceedings of the 41st International Conference on Machine Learning. PMLR; 2024. p. 43461–43476. Available from: https://proceedings.mlr.press/v235/sarfraz24a.html"
+    },
+    "pedregosa2011": {
+      "kind": "web",
+      "identifier": "https://jmlr.org/papers/v12/pedregosa11a.html",
+      "source_url": "https://jmlr.org/papers/v12/pedregosa11a.html",
+      "retrieved_title": "Scikit-learn: Machine Learning in Python",
+      "response_sha256": "e39640aef7993fd6bbee627b71aa74d6e5e6c52c6d74777e00574833c38d5e51",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, et al. Scikit-learn: machine learning in Python. J Mach Learn Res. 2011;12:2825–2830. Available from: https://jmlr.org/papers/v12/pedregosa11a.html"
+    },
+    "earthsearch": {
+      "kind": "web",
+      "identifier": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a",
+      "source_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a",
+      "retrieved_title": "(non-HTML document)",
+      "response_sha256": "e4c1e0e6400683f377c9d44ff373a45867e74495570f6b008ea7d241a026ab10",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "Element 84. Earth Search STAC API: Sentinel-2 Collection 1 Level-2A (sentinel-2-c1-l2a) [Internet]. Registry of Open Data on AWS. Available from: https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a"
+    },
+    "copernicus_notice": {
+      "kind": "web",
+      "identifier": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "source_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "retrieved_title": "(non-HTML document)",
+      "response_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+      "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
+      "vancouver": "European Commission. Legal notice on the use of Copernicus Sentinel data and service information [Internet]. Available from: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice"
+    }
+  },
+  "failures": []
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_CORRECTED_REEXECUTION",
+  "frozen_utc": "2026-11-17T10:12:28+00:00",
+  "amendment": "docs/protocol/SR1_AMENDMENT_PLOS_001.json",
+  "amendment_sha256": "874388c5269db160f8bc2b57ec75299aab264c88e48cd7be9c9becac6dd46360",
+  "parent_protocol_sha256": "a9309940075434fe9f2093e7bd48d437067ad3e928e3d72e6e00eb7067fca125",
+  "corpus_manifest": "data/derived/sr1_multiyear/attempt_007/observations.sr1.json",
+  "corpus_manifest_sha256": "59bb19057644e3bc04c29f8c1f8f83c8a47253797d24b503c7595d97383f97e2",
+  "zones_report": "data/derived/sr1_multiyear/attempt_007/plos_001/zones/zones_report.json",
+  "zones_report_sha256": "2316f6c1f7cfa7eabe5fce9294983a24673350d3ee19045cdc54b7df8c0c0ac2",
+  "code_sha256": {
+    "source/sentinel_gl/sr1_model.py": "eb7270d9dc4029eac709199113fa157bc8753452ea2db419976e7d85370176b4",
+    "source/sentinel_gl/sr1_features.py": "0c1de57dae72b6ba62189e103004095c07b688988c98da9a1ed7e82f49a42912",
+    "source/sentinel_gl/sr1_scoring.py": "235df1d3605b604ce64a4f93ba1669ab00180f558519d9d7bcc958ed04c31a71",
+    "source/sentinel_gl/sr1_baselines_true.py": "b260dda25f1397dcea7d4cefe89418889ced79d8d2f793cbe7486f9d0dab15f1",
+    "source/sentinel_gl/sr1_positive_control.py": "2527a03711af44fa7051e2787541ee6a83f590c4b322ec71be61af78927a25ab",
+    "source/sentinel_gl/sr1_stats.py": "a30279350da7296cf8add4179ba52c5ea9421ec812037ee2c567469468767879",
+    "source/sentinel_gl/sr1_corpus.py": "3a9842e00b679c3bea9ef51e032a2fd8902c029f8d4dae01fa6d44f7b483766f",
+    "source/sentinel_gl/sr1_geometry.py": "8ac7fabb2bb82dc09591ebb941433fb9085d4dd33be00f0ffc50d2773cf0e12e",
+    "source/runners/run_sr1_plos_analysis.py": "509113452adfad1ec75c206271d9bb0bd2e6c8b6ad5226a3584b3a8b84eb729f",
+    "source/runners/run_sr1_recentre_south_lhonak.py": "d23fc081fb673cc272866105207c2ab6afab52b5e8c6a7219eaf26d231e4b417",
+    "tools/build_sr1_plos_packet.py": "38e02acee1c611239b85fe8992bacf63f012b178054b9b6d10c6ed38aaff74cf",
+    "tools/replay_sr1_plos.py": "f991810b8211a5511d14b8dfa547a4d8c4ad760f23fe34c19dd0d30190c293c0"
+  },
+  "pre_freeze_runs_disclosed": [
+    "Unit and regression tests on constructed inputs (26 passed at freeze).",
+    "One end-to-end smoke run of the train and score stages on the earlier attempt_006 corpus with 2-epoch primary fits (seeds 0-1), one 2-epoch factorial fit and the automatic 450-epoch extended-budget refits of the two 2-epoch primaries, to find software errors. Only status counts, row counts and the printed per-fit VAL losses were displayed; no score, reference comparison or positive-control value was inspected. The smoke outputs were deleted and are not evidence.",
+    "The South Lhonak re-acquisition (attempt_007) and the inventory zone stage, both score blind."
+  ],
+  "not_yet_existing_at_freeze": [
+    "any training, scoring, reference comparison, ablation, positive-control or bootstrap output of plos_001"
+  ]
+}
