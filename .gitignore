@@ -120,3 +120,7 @@ data/checkpoints/
 *.pt
 *.pth
 *.ckpt
+
+# Rendered figures are rebuilt by `make figures` and shipped with the submission and the data deposit.
+docs/figures/plos/*.png
+docs/figures/plos/*.tif

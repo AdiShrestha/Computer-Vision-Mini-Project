@@ -1,0 +1,66 @@
+{
+  "inputs": {
+    "docs/results/sr1_plos_packet.json": "236d279ce18fa0e7437f261a547e33e77567e4f180d1e4901fb1e4f7fb4262aa",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/scores/predictions.json": "660ddb70813925f2a890c487d82878840a7da6db8b9de3d6c9e071732f68dc2b",
+    "data/derived/sr1_multiyear/attempt_007/observations.sr1.json": "59bb19057644e3bc04c29f8c1f8f83c8a47253797d24b503c7595d97383f97e2",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/zones/zones_report.json": "2316f6c1f7cfa7eabe5fce9294983a24673350d3ee19045cdc54b7df8c0c0ac2"
+  },
+  "tool_sha256": "d8e37737da7aef1d8d6b6c6e66a54b0d01710d7292c7835fcd3ea9fb67fe1f60",
+  "figures": {
+    "Fig1": {
+      "tif": "docs/figures/plos/Fig1.tif",
+      "tif_sha256": "8e42abc9dfce5f2718d66e7abfcf0ffaab834c0a61aea159deb5c76ae13a4787",
+      "png": "docs/figures/plos/Fig1.png",
+      "png_sha256": "ed3cb2d6ddd0b856bf932e520fbf64520dd5249ed89b092fedd2230311406808",
+      "pixels": [
+        2220,
+        1800
+      ],
+      "dpi": 300
+    },
+    "Fig2": {
+      "tif": "docs/figures/plos/Fig2.tif",
+      "tif_sha256": "33a96c02ccf0d30d1a5e9c8894e9891267de6231fcb89f12797a04a5bf72da30",
+      "png": "docs/figures/plos/Fig2.png",
+      "png_sha256": "96b552e2c88aab82ddad375a3dbfd655b25b376cd57c97625a86e7aa85187277",
+      "pixels": [
+        2220,
+        960
+      ],
+      "dpi": 300
+    },
+    "Fig3": {
+      "tif": "docs/figures/plos/Fig3.tif",
+      "tif_sha256": "0c44bed91050e96fa155ef837c1f0de20fb471f1214ffb49099f4c05b6b8ed03",
+      "png": "docs/figures/plos/Fig3.png",
+      "png_sha256": "5e0fc0c85320ef58b3d76b49b770d194bf546b853bbbd4f699b43ce1c2638d40",
+      "pixels": [
+        2220,
+        1020
+      ],
+      "dpi": 300
+    },
+    "Fig4": {
+      "tif": "docs/figures/plos/Fig4.tif",
+      "tif_sha256": "c0b4b67f75ee3f37294c06178e5c0bfb6be9e4f92834d5ec00ebb80fbe3d8709",
+      "png": "docs/figures/plos/Fig4.png",
+      "png_sha256": "2fdbe3c3e4cf120efdc1c1599163d6a1fcb14ac77c5d9c49f954fdcc90bda672",
+      "pixels": [
+        2220,
+        2160
+      ],
+      "dpi": 300
+    },
+    "Fig5": {
+      "tif": "docs/figures/plos/Fig5.tif",
+      "tif_sha256": "1136025b353594cecd9074504dffe9242617857958f5779e0d422acbad16048f",
+      "png": "docs/figures/plos/Fig5.png",
+      "png_sha256": "d44af7a2c103b0fa58487efdd3d216bd1adaa4423c20953503a845f83d7df5dc",
+      "pixels": [
+        2220,
+        1680
+      ],
+      "dpi": 300
+    }
+  }
+}

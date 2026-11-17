@@ -101,6 +101,8 @@ def vancouver_authors(names: list[tuple[str, str]]) -> str:
 def from_crossref(msg: dict) -> tuple[str, str]:
     names = [(a.get("family", a.get("name", "")), a.get("given", "")) for a in msg.get("author", [])]
     names = [(f.title() if f.isupper() else f, g) for f, g in names]
+    # Spelling fixes where the Crossref record differs from the printed article (checked against the article PDFs' bylines).
+    names = [({"McFEETERS": "McFeeters", "Kunsch": "Künsch"}.get(f, f), g) for f, g in names]
     if not names and msg.get("publisher"):
         names = [(msg["publisher"], "")]
     title = html.unescape(re.sub(r"<[^>]+>", "", (msg.get("title") or [""])[0])).strip().rstrip(".")
@@ -119,7 +121,7 @@ def from_crossref(msg: dict) -> tuple[str, str]:
         entry += (f";{vol}" if vol else "") + (f"({issue})" if issue else "") + (f":{page}" if page else "")
         entry += f". doi:{msg['DOI']}"
         entry = entry.replace(":1-1.", " (early access).")
-    return title, re.sub(r"\s+", " ", entry.replace("..", "."))
+    return title, re.sub(r"\s+", " ", entry.replace("..", ".").replace("?.", "?"))
 
 
 def from_arxiv(xml: bytes, ident: str) -> tuple[str, str]:

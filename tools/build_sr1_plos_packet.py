@@ -261,7 +261,7 @@ def main() -> int:
         for oid, vals in grouped.items():
             scene_vals[oid][field] = float(np.median(vals))
     groups = {"FIT_VAL": lambda r: r["role"] in ("FIT", "VAL"), "AUTUMN_FIT_2018_2021": autumn_fit,
-              "EVAL": lambda r: r["role"] == "EVAL"}
+              "VAL": lambda r: r["role"] == "VAL", "EVAL": lambda r: r["role"] == "EVAL"}
     table = []
     for field, label in SCORE_FIELDS:
         row = {"field": field, "label": label}
@@ -289,6 +289,14 @@ def main() -> int:
             comps.append({"site": site, "field": field, "fit_autumn_median": float(np.median(fv)) if fv else None,
                           "eval_median": float(np.median(ev)) if ev else None, "n_fit": len(fv), "n_eval": len(ev)})
     packet["scores"]["autumn_comparisons"] = comps
+    packet["scores"]["autumn_comparisons_eval_higher"] = {
+        site: sum(c["eval_median"] > c["fit_autumn_median"] for c in comps if c["site"] == site and c["field"] != "water_candidate_area_km2")
+        for site in SITES}
+    packet["scores"]["scene_score_a_max"] = {
+        f"{site}|{role}": max((scene_vals[r["observation_id"]].get("score_a_zone0_1") for r in s0
+                               if r["site_id"] == site and r["role"] == role
+                               and scene_vals[r["observation_id"]].get("score_a_zone0_1") is not None), default=None)
+        for site in SITES for role in ROLES}
     packet["scores"]["score_c_moments"] = {str(s["seed"]): s["score_c_moments"] for s in score_report["seeds"]}
     packet["scores"]["pca_explained_variance_ratio_sum"] = {
         str(s["seed"]): float(sum(s["pca"]["explained_variance_ratio"])) for s in score_report["seeds"]}
@@ -383,7 +391,7 @@ def main() -> int:
                           "amendment_sha256": freeze["amendment_sha256"], "frozen_utc": freeze["frozen_utc"]}
     PACKET.parent.mkdir(parents=True, exist_ok=True)
     PACKET.write_text(json.dumps(packet, indent=2, allow_nan=False) + "\n")
-    print(json.dumps({"packet": PACKET.relative_to(ROOT).as_posix(), "sha256": sha(PACKET),
+    print(json.dumps({"packet": str(PACKET), "sha256": sha(PACKET),
                       "R1": recon_out["rule_R1_model_uses_context"], "R2": recon_out["rule_R2_model_beats_seasonal_plus_offset"]}, indent=2))
     return 0
 

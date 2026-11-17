@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-11-17T10:11:19+00:00",
+  "checked_utc": "2026-11-17T10:58:47+00:00",
   "style": "Vancouver (PLOS)",
   "references": {
     "shugar2020": {
@@ -90,7 +90,7 @@
       "retrieved_title": "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features",
       "response_sha256": "fe190eb96e7354887efd947369fa34936af2673de58b2940c813d7331f76435d",
       "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
-      "vancouver": "McFEETERS SK. The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. International Journal of Remote Sensing. 1996;17(7):1425-1432. doi:10.1080/01431169608948714"
+      "vancouver": "McFeeters SK. The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. International Journal of Remote Sensing. 1996;17(7):1425-1432. doi:10.1080/01431169608948714"
     },
     "xu2006": {
       "kind": "doi",
@@ -225,7 +225,7 @@
       "retrieved_title": "Robust principal component analysis?",
       "response_sha256": "7718b5210d06273c32c296f43683b43616e7bfd937cb56ae3a8d9e233cb5f90c",
       "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
-      "vancouver": "Candès EJ, Li X, Ma Y, Wright J. Robust principal component analysis?. J. ACM. 2011;58(3):1-37. doi:10.1145/1970392.1970395"
+      "vancouver": "Candès EJ, Li X, Ma Y, Wright J. Robust principal component analysis? J. ACM. 2011;58(3):1-37. doi:10.1145/1970392.1970395"
     },
     "wu2021": {
       "kind": "doi",
@@ -252,7 +252,7 @@
       "retrieved_title": "The Jackknife and the Bootstrap for General Stationary Observations",
       "response_sha256": "ee2204395da3fc975c16cc6b7b1fab66ceb22ebc5c527cbe5ef20fc441dd775e",
       "status": "PRIMARY_RECORD_RETRIEVED_TITLE_MATCHED",
-      "vancouver": "Kunsch HR. The Jackknife and the Bootstrap for General Stationary Observations. Ann. Statist. 1989;17(3):1217-1241. doi:10.1214/aos/1176347265"
+      "vancouver": "Künsch HR. The Jackknife and the Bootstrap for General Stationary Observations. Ann. Statist. 1989;17(3):1217-1241. doi:10.1214/aos/1176347265"
     },
     "paszke2019": {
       "kind": "arxiv",

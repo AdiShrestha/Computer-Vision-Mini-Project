@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it and the accompanying article."
+title: "Sentinel-GL: source-bound Sentinel-2 patch time series and a masked spatiotemporal transformer for two Sikkim glacial lakes"
+version: 1.0.0
+license: MIT
+authors:
+  - family-names: Shrestha
+    given-names: Aditya
+    affiliation: "Department of Computer Science and Engineering, School of Engineering, Kathmandu University, Dhulikhel, Nepal"
+repository-code: "https://github.com/AdiShrestha/Computer-Vision-Mini-Project"
+keywords:
+  - glacial lakes
+  - Sentinel-2
+  - glacial lake outburst flood
+  - masked autoencoder
+  - time series

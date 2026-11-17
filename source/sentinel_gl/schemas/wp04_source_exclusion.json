@@ -1,9 +1,0 @@
-{
-  "type": "object",
-  "properties": {
-    "source_id": {"type": "string", "minLength": 1},
-    "reason": {"type": "string", "enum": ["PRODUCT_GENERATED_AFTER_DECISION", "HISTORICAL_AVAILABILITY_UNVERIFIED", "NO_RECEIVED_MEASUREMENT_BYTES"]}
-  },
-  "required": ["source_id", "reason"],
-  "additionalProperties": false
-}

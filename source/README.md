@@ -1,13 +1,13 @@
-# Sentinel-GL research code
+# Source
 
-The canonical 2023 pipeline uses `ingestion/expansion2023.py`, `panel_v2.py`, `training_v2.py`, and `inference_v2.py`, with the acquisition and analysis runners in `source/runners/`. It consumes hash-bound provider ROIs, uses explicit missingness, fits transforms on declared pre-breach parity-0 support, and scores parity-1 development trajectories with causal acquisition contexts. Post-breach observations do not fit model or reference states.
+* `sentinel_gl/sr1_corpus.py` — verifies and loads every scene (array, receipt, STAC item or 2023 parent record, native metadata) by SHA-256; refuses non-observational inputs.
+* `sentinel_gl/sr1_features.py` — guarded NDWI/MNDWI from patch-mean reflectance, 16 × 16 patch tokens, FIT-only robust scaling, time features.
+* `sentinel_gl/sr1_geometry.py` — Hi-MAG 2017 outlines, inventory-centred windows, zone rasters.
+* `sentinel_gl/sr1_model.py` — factorised spatial / causal temporal masked transformer and its trainer (per-scene 50% mask with visible context; target-weighted validation).
+* `sentinel_gl/sr1_scoring.py` — checkerboard cross-mask, Scores A/B/C, reference predictors, context ablations.
+* `sentinel_gl/sr1_baselines_true.py` — seasonal residual, temporal persistence, Isolation Forest, one-class SVM, missingness-only score, Page CUSUM.
+* `sentinel_gl/sr1_positive_control.py` — constructed drainage perturbation (origin `constructed_positive_control`).
+* `sentinel_gl/sr1_stats.py` — stratified moving-block bootstrap.
+* `sentinel_gl/ingestion/`, `admission.py`, `integrity.py` — HTTP range reads, transfer ledger and receipt helpers used by the acquisition runners.
 
-The model uses four quadrant masking folds, optical index dependency closure, explicit time and modality identities, five deterministic training seeds, and development-based checkpoint selection. Sensor-stratified simple baselines and fitted latent/fused scores are reported with real support counts and unavailable-value reasons. Signed BOA reflectance can produce indices outside [-1,1]; those values are neither clamped nor silently replaced.
-
-Use the pinned local Python 3.12 runtime and `PYTHONPATH=source`. Run `source/tests/` in a disposable copy because retained artifact-writing tests modify their local output trees. Tests exercise code contracts; they do not establish independent event labels or operational warning performance.
-
-Earlier versioned diagnostic modules and fixture runners remain available for their recorded historical scopes. Their old outputs are not silently imported into the expanded observations or final comparisons. A source NPZ hash establishes byte identity; independent QA, semantic replay, fitting provenance, and the actual study design determine what those bytes can support.
-
-The study uses two query ROIs, not an independent regional cohort. Same-scene checkerboard monitoring is spatial development evidence. All fitted pre-period states are development-exposed relative to early pre-period queries. SAR is ellipsoid-geolocated without DEM terrain correction, and the retained 2023 dataset has only one SAR date. Missing weather/DEM and unverified historical operational availability remain explicit limits.
-
-The requirements lock records the installed environment; a clean cross-platform installation is not asserted. The root license remains unchanged.
+Tests in `tests/` use constructed inputs only and need no data (`make test`).

@@ -1,0 +1,3141 @@
+{
+  "schema_version": 1,
+  "status": "RESULT_PACKET_EXPLORATORY_RETROSPECTIVE",
+  "generated_utc": "2026-11-17T10:59:37+00:00",
+  "inputs": {
+    "data/derived/sr1_multiyear/attempt_007/observations.sr1.json": "59bb19057644e3bc04c29f8c1f8f83c8a47253797d24b503c7595d97383f97e2",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/zones/zones_report.json": "2316f6c1f7cfa7eabe5fce9294983a24673350d3ee19045cdc54b7df8c0c0ac2",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/training/run_manifest.json": "f5ea874c39b78bd171c008f1b64adc99d255a7053df60b89d69b313cd3b6e1de",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/scores/predictions.json": "660ddb70813925f2a890c487d82878840a7da6db8b9de3d6c9e071732f68dc2b",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/scores/reconstruction.json": "9bf01534c7f2321f883fb852c4037daa61bbc72e86e749df41caf442771dd34a",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/scores/positive_control.json": "08f3231a7cc7664ff0a9f31a83618c997e09fca6d1839ccf81a49d3f57eb3ef2",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/scores/score_report.json": "4af5d78197adfce521c0731dc4490c5c43ae1c35dc4a2c2dd239c4742d9c74d9",
+    "data/derived/sr1_multiyear/attempt_007/plos_001/scores/replay_report.json": "1f6b1871169db0ae862b064ef4848bd2665d3e710a4e1804ad2ba21a6e409b43",
+    "docs/protocol/SR1_AMENDMENT_PLOS_001.json": "874388c5269db160f8bc2b57ec75299aab264c88e48cd7be9c9becac6dd46360",
+    "docs/protocol/SR1_AMENDMENT_PLOS_001.freeze.json": "a8493be6237b9b09995af02b3ce2004a3e051ec05da8ddc309bae0361e6f3daf"
+  },
+  "corpus": {
+    "scenes_total": 141,
+    "by_site_role": {
+      "PILOT-SOUTH-LHONAK": {
+        "FIT": 60,
+        "VAL": 9,
+        "EVAL": 3
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "FIT": 57,
+        "VAL": 8,
+        "EVAL": 4
+      }
+    },
+    "by_site_year": {
+      "PILOT-SOUTH-LHONAK": {
+        "2018": 11,
+        "2019": 11,
+        "2020": 12,
+        "2021": 12,
+        "2022": 2,
+        "2023": 24
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "2018": 8,
+        "2019": 11,
+        "2020": 12,
+        "2021": 12,
+        "2022": 2,
+        "2023": 24
+      }
+    },
+    "processing_baselines": {
+      "05.00": 89,
+      "05.09": 50,
+      "05.10": 2
+    },
+    "providers": {
+      "Earth Search C1 L2A": 93,
+      "retained verified 2023 C1 ROI": 48
+    },
+    "relative_orbits": {
+      "PILOT-SOUTH-LHONAK": {
+        "033": 39,
+        "076": 33
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "033": 69
+      }
+    },
+    "zero_observed_patch_scenes": {
+      "PILOT-SOUTH-LHONAK": {
+        "FIT": 5,
+        "VAL": 1
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "FIT": 5,
+        "VAL": 3
+      }
+    },
+    "clear_fraction_median": {
+      "PILOT-SOUTH-LHONAK": {
+        "FIT": 0.47482421875,
+        "VAL": 0.66328125,
+        "EVAL": 0.8685546875
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "FIT": 0.3818359375,
+        "VAL": 0.28705078125,
+        "EVAL": 0.66111328125
+      }
+    },
+    "observed_patches_quartiles": {
+      "min": 0,
+      "q1": 25.0,
+      "median": 61.0,
+      "q3": 80.0,
+      "max": 98
+    },
+    "months_2022": {
+      "PILOT-SOUTH-LHONAK": [
+        "2022-03-18",
+        "2022-12-08"
+      ],
+      "PILOT-KHANGCHUNG-TSHO": [
+        "2022-03-20",
+        "2022-12-25"
+      ]
+    },
+    "shared_acquisition_dates": 22,
+    "catalogue_inventory": [
+      {
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "year": 2018,
+        "eligible": 50,
+        "selected": [
+          "S2A_T45RXL_20180110T044352_L2A",
+          "S2B_T45RXL_20180217T044839_L2A",
+          "S2A_T45RXL_20180304T045452_L2A",
+          "S2B_T45RXL_20180408T045420_L2A",
+          "S2B_T45RXL_20180505T044053_L2A",
+          "S2A_T45RXL_20180622T045245_L2A",
+          "S2A_T45RXL_20180719T044118_L2A",
+          "S2A_T45RXL_20180818T044301_L2A",
+          "S2B_T45RXL_20180925T045829_L2A",
+          "S2A_T45RXL_20181030T045213_L2A",
+          "S2B_T45RXL_20181204T045148_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "year": 2019,
+        "eligible": 118,
+        "selected": [
+          "S2A_T45RXL_20190105T044654_L2A",
+          "S2A_T45RXL_20190329T045455_L2A",
+          "S2A_T45RXL_20190425T044822_L2A",
+          "S2A_T45RXL_20190518T045535_L2A",
+          "S2A_T45RXL_20190604T043703_L2A",
+          "S2A_T45RXL_20190717T045537_L2A",
+          "S2B_T45RXL_20190828T044335_L2A",
+          "S2A_T45RXL_20190902T045004_L2A",
+          "S2A_T45RXL_20191015T045321_L2A",
+          "S2A_T45RXL_20191114T045457_L2A",
+          "S2B_T45RXL_20191219T045214_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "year": 2020,
+        "eligible": 144,
+        "selected": [
+          "S2B_T45RXL_20200125T044114_L2A",
+          "S2A_T45RXL_20200212T045216_L2A",
+          "S2A_T45RXL_20200330T043657_L2A",
+          "S2B_T45RXL_20200404T044512_L2A",
+          "S2A_T45RXL_20200509T044259_L2A",
+          "S2A_T45RXL_20200608T044347_L2A",
+          "S2A_T45RXL_20200708T044259_L2A",
+          "S2A_T45RXL_20200807T044344_L2A",
+          "S2A_T45RXL_20200929T045454_L2A",
+          "S2B_T45RXL_20201031T044329_L2A",
+          "S2A_T45RXL_20201115T044045_L2A",
+          "S2B_T45RXL_20201220T044209_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "year": 2021,
+        "eligible": 147,
+        "selected": [
+          "S2B_T45RXL_20210102T045723_L2A",
+          "S2B_T45RXL_20210208T044440_L2A",
+          "S2B_T45RXL_20210303T045958_L2A",
+          "S2A_T45RXL_20210414T044440_L2A",
+          "S2B_T45RXL_20210522T045901_L2A",
+          "S2A_T45RXL_20210603T044352_L2A",
+          "S2A_T45RXL_20210723T044449_L2A",
+          "S2B_T45RXL_20210810T044939_L2A",
+          "S2B_T45RXL_20210919T045550_L2A",
+          "S2B_T45RXL_20211029T045138_L2A",
+          "S2B_T45RXL_20211118T045056_L2A",
+          "S2B_T45RXL_20211205T044907_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "year": 2022,
+        "eligible": 11,
+        "selected": [
+          "S2B_T45RXL_20220318T045313_L2A",
+          "S2A_T45RXL_20221208T045203_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "year": 2018,
+        "eligible": 21,
+        "selected": [
+          "S2A_T45RXM_20180110T044352_L2A",
+          "S2A_T45RXM_20180209T043929_L2A",
+          "S2B_T45RXM_20180505T044053_L2A",
+          "S2A_T45RXM_20180619T044011_L2A",
+          "S2B_T45RXM_20180704T044723_L2A",
+          "S2A_T45RXM_20180808T044449_L2A",
+          "S2A_T45RXM_20180927T044358_L2A",
+          "S2B_T45RXM_20181022T044457_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "year": 2019,
+        "eligible": 57,
+        "selected": [
+          "S2A_T45RXM_20190105T044654_L2A",
+          "S2B_T45RXM_20190331T044412_L2A",
+          "S2A_T45RXM_20190405T044935_L2A",
+          "S2B_T45RXM_20190510T044954_L2A",
+          "S2A_T45RXM_20190614T044330_L2A",
+          "S2B_T45RXM_20190719T044722_L2A",
+          "S2B_T45RXM_20190828T044335_L2A",
+          "S2A_T45RXM_20190902T045004_L2A",
+          "S2A_T45RXM_20191022T044805_L2A",
+          "S2A_T45RXM_20191201T044641_L2A",
+          "S2B_T45RXM_20191206T044140_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "year": 2020,
+        "eligible": 71,
+        "selected": [
+          "S2A_T45RXM_20200120T044520_L2A",
+          "S2A_T45RXM_20200229T043718_L2A",
+          "S2A_T45RXM_20200310T044243_L2A",
+          "S2B_T45RXM_20200404T044512_L2A",
+          "S2A_T45RXM_20200509T044259_L2A",
+          "S2B_T45RXM_20200613T044720_L2A",
+          "S2A_T45RXM_20200708T044259_L2A",
+          "S2A_T45RXM_20200827T044502_L2A",
+          "S2B_T45RXM_20201001T044721_L2A",
+          "S2B_T45RXM_20201031T044329_L2A",
+          "S2A_T45RXM_20201115T044045_L2A",
+          "S2B_T45RXM_20201210T044200_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "year": 2021,
+        "eligible": 73,
+        "selected": [
+          "S2B_T45RXM_20210109T044908_L2A",
+          "S2A_T45RXM_20210223T044723_L2A",
+          "S2B_T45RXM_20210310T045010_L2A",
+          "S2A_T45RXM_20210424T044442_L2A",
+          "S2A_T45RXM_20210524T044446_L2A",
+          "S2A_T45RXM_20210603T044352_L2A",
+          "S2A_T45RXM_20210723T044449_L2A",
+          "S2A_T45RXM_20210802T044355_L2A",
+          "S2A_T45RXM_20210921T044448_L2A",
+          "S2A_T45RXM_20211031T044826_L2A",
+          "S2B_T45RXM_20211105T044505_L2A",
+          "S2B_T45RXM_20211205T044907_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      },
+      {
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "year": 2022,
+        "eligible": 6,
+        "selected": [
+          "S2A_T45RXM_20220320T044449_L2A",
+          "S2A_T45RXM_20221225T044211_L2A"
+        ],
+        "selection": "equal-duration temporal bins; lowest provider cloud cover then UTC/id",
+        "bins": 12
+      }
+    ],
+    "selection_rules": {
+      "pre_2023": "12 equal-duration bins per site-year; lowest STAC eo:cloud_cover; full ROI coverage; score blind",
+      "2023": "all retained source-manifest S2 observations; no re-download"
+    },
+    "date_window": [
+      "2018-01-01T00:00:00Z",
+      "2023-11-16T00:00:00Z"
+    ],
+    "zero_observed_patch_scenes_total": 14,
+    "scenes_without_observed_zone01_patch": 14
+  },
+  "geometry": {
+    "source": "https://doi.org/10.5281/zenodo.4275164",
+    "layer": "Hi_MAG_database_2017",
+    "sites": {
+      "PILOT-SOUTH-LHONAK": {
+        "hi_mag_id": "GL088195E27912N",
+        "hi_mag_area_km2": 1.2589078585183642,
+        "hi_mag_elevation_m": 5201,
+        "hi_mag_type": "proglacial lake",
+        "outline_fraction_inside_new_window": 1.0,
+        "outline_fraction_inside_previous_window": 0.8923638809749173,
+        "window_shift_east_m": -840.0,
+        "window_shift_north_m": -260.0,
+        "rasterized_lake_area_km2": 1.2604,
+        "buffer_pixels": 8495,
+        "zone_pixel_counts": {
+          "0": 3151,
+          "1": 8495,
+          "2": 13954
+        },
+        "spectral_vs_inventory": {
+          "intersection_pixels": 2853,
+          "union_pixels": 3680,
+          "iou": 0.7752717391304348,
+          "a_pixels": 3382,
+          "b_pixels": 3151,
+          "a_only_pixels": 529,
+          "b_only_pixels": 298
+        }
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "hi_mag_id": "GL088815E27990N",
+        "hi_mag_area_km2": 1.7533722325279941,
+        "hi_mag_elevation_m": 5303,
+        "hi_mag_type": "proglacial lake",
+        "outline_fraction_inside_new_window": 0.9999999999999998,
+        "outline_fraction_inside_previous_window": 0.9999999999999998,
+        "window_shift_east_m": 0.0,
+        "window_shift_north_m": 0.0,
+        "rasterized_lake_area_km2": 1.7552,
+        "buffer_pixels": 10526,
+        "zone_pixel_counts": {
+          "0": 4388,
+          "1": 10526,
+          "2": 10686
+        },
+        "spectral_vs_inventory": {
+          "intersection_pixels": 3946,
+          "union_pixels": 4804,
+          "iou": 0.821398834304746,
+          "a_pixels": 4362,
+          "b_pixels": 4388,
+          "a_only_pixels": 416,
+          "b_only_pixels": 442
+        }
+      }
+    },
+    "patch_zone_counts": {
+      "PILOT-SOUTH-LHONAK": {
+        "0": 16,
+        "1": 35,
+        "2": 49
+      },
+      "PILOT-KHANGCHUNG-TSHO": {
+        "0": 27,
+        "1": 37,
+        "2": 36
+      }
+    }
+  },
+  "training": {
+    "cells": [
+      {
+        "family": "capacity",
+        "cell": "width_128",
+        "channels": 5,
+        "zones": true,
+        "context": 8,
+        "width": 128,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.31582422317141734,
+        "sample_sd_val_mse": 0.015388074599635208,
+        "min_val_mse": 0.3027861620428536,
+        "max_val_mse": 0.33748247502739487,
+        "stopping": {
+          "VALIDATION_PLATEAU": 3,
+          "MAX_EPOCH_BUDGET_REACHED": 2
+        },
+        "best_epochs": [
+          93,
+          131,
+          122,
+          140,
+          91
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 545413,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      },
+      {
+        "family": "capacity",
+        "cell": "width_32",
+        "channels": 5,
+        "zones": true,
+        "context": 8,
+        "width": 32,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.5954831305432682,
+        "sample_sd_val_mse": 0.051388394210802144,
+        "min_val_mse": 0.5131637761408292,
+        "max_val_mse": 0.6486570510191046,
+        "stopping": {
+          "MAX_EPOCH_BUDGET_REACHED": 5
+        },
+        "best_epochs": [
+          150,
+          150,
+          150,
+          148,
+          150
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 87973,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      },
+      {
+        "family": "extended_budget",
+        "cell": "channels_5_zones_inventory_context_8",
+        "channels": 5,
+        "zones": true,
+        "context": 8,
+        "width": 64,
+        "max_epochs": 450,
+        "seeds": 7,
+        "completed": 7,
+        "failed": 0,
+        "mean_val_mse": 0.3194318393721231,
+        "sample_sd_val_mse": 0.046244453626810504,
+        "min_val_mse": 0.2750442244962883,
+        "max_val_mse": 0.4044043681090712,
+        "stopping": {
+          "VALIDATION_PLATEAU": 7
+        },
+        "best_epochs": [
+          162,
+          186,
+          151,
+          105,
+          197,
+          212,
+          174
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 207685,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_3_zones_constant_context_1",
+        "channels": 3,
+        "zones": false,
+        "context": 1,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.2973259476285618,
+        "sample_sd_val_mse": 0.03908559916230961,
+        "min_val_mse": 0.2476663174634077,
+        "max_val_mse": 0.33410594939820754,
+        "stopping": {
+          "VALIDATION_PLATEAU": 5
+        },
+        "best_epochs": [
+          84,
+          94,
+          66,
+          48,
+          59
+        ],
+        "validation_blocks_per_fit": [
+          17
+        ],
+        "validation_blocks_scored_per_fit": [
+          13
+        ],
+        "validation_target_entries_per_fit": [
+          1356
+        ],
+        "parameter_count": 207427,
+        "validation_reference_mse": {
+          "fit_median": 1.7590025953818553,
+          "patch_mean": 0.7662072976650256,
+          "patch_seasonal_mean": 0.5534041273812089,
+          "n_entries": 1356
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_3_zones_constant_context_8",
+        "channels": 3,
+        "zones": false,
+        "context": 8,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.4045178238365034,
+        "sample_sd_val_mse": 0.04251861700185347,
+        "min_val_mse": 0.33796115320232667,
+        "max_val_mse": 0.43576072955318385,
+        "stopping": {
+          "MAX_EPOCH_BUDGET_REACHED": 4,
+          "VALIDATION_PLATEAU": 1
+        },
+        "best_epochs": [
+          146,
+          143,
+          104,
+          133,
+          150
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          1356
+        ],
+        "parameter_count": 207427,
+        "validation_reference_mse": {
+          "fit_median": 1.7590025953818553,
+          "patch_mean": 0.7662072976650256,
+          "patch_seasonal_mean": 0.5534041273812089,
+          "n_entries": 1356
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_3_zones_inventory_context_1",
+        "channels": 3,
+        "zones": true,
+        "context": 1,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.263132129452905,
+        "sample_sd_val_mse": 0.02132045806473474,
+        "min_val_mse": 0.2403480384750616,
+        "max_val_mse": 0.28617265198601743,
+        "stopping": {
+          "VALIDATION_PLATEAU": 5
+        },
+        "best_epochs": [
+          81,
+          33,
+          85,
+          78,
+          69
+        ],
+        "validation_blocks_per_fit": [
+          17
+        ],
+        "validation_blocks_scored_per_fit": [
+          13
+        ],
+        "validation_target_entries_per_fit": [
+          1356
+        ],
+        "parameter_count": 207427,
+        "validation_reference_mse": {
+          "fit_median": 1.7590025953818553,
+          "patch_mean": 0.7662072976650256,
+          "patch_seasonal_mean": 0.5534041273812089,
+          "n_entries": 1356
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_3_zones_inventory_context_8",
+        "channels": 3,
+        "zones": true,
+        "context": 8,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.3134744360767391,
+        "sample_sd_val_mse": 0.027882677734765993,
+        "min_val_mse": 0.2785491061948054,
+        "max_val_mse": 0.35243546153907357,
+        "stopping": {
+          "MAX_EPOCH_BUDGET_REACHED": 4,
+          "VALIDATION_PLATEAU": 1
+        },
+        "best_epochs": [
+          132,
+          150,
+          150,
+          136,
+          107
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          1356
+        ],
+        "parameter_count": 207427,
+        "validation_reference_mse": {
+          "fit_median": 1.7590025953818553,
+          "patch_mean": 0.7662072976650256,
+          "patch_seasonal_mean": 0.5534041273812089,
+          "n_entries": 1356
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_5_zones_constant_context_1",
+        "channels": 5,
+        "zones": false,
+        "context": 1,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.2975944206195614,
+        "sample_sd_val_mse": 0.053842068062953725,
+        "min_val_mse": 0.2617399886860819,
+        "max_val_mse": 0.3901414943710776,
+        "stopping": {
+          "VALIDATION_PLATEAU": 5
+        },
+        "best_epochs": [
+          88,
+          99,
+          95,
+          79,
+          43
+        ],
+        "validation_blocks_per_fit": [
+          17
+        ],
+        "validation_blocks_scored_per_fit": [
+          13
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 207685,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_5_zones_constant_context_8",
+        "channels": 5,
+        "zones": false,
+        "context": 8,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.527528651914847,
+        "sample_sd_val_mse": 0.07422140455785324,
+        "min_val_mse": 0.45324976837178715,
+        "max_val_mse": 0.6244989631076843,
+        "stopping": {
+          "MAX_EPOCH_BUDGET_REACHED": 5
+        },
+        "best_epochs": [
+          150,
+          140,
+          149,
+          141,
+          136
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 207685,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      },
+      {
+        "family": "factorial",
+        "cell": "channels_5_zones_inventory_context_1",
+        "channels": 5,
+        "zones": true,
+        "context": 1,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 5,
+        "completed": 5,
+        "failed": 0,
+        "mean_val_mse": 0.2589508473223769,
+        "sample_sd_val_mse": 0.017363806703947403,
+        "min_val_mse": 0.24476336223880676,
+        "max_val_mse": 0.28892384793946474,
+        "stopping": {
+          "VALIDATION_PLATEAU": 5
+        },
+        "best_epochs": [
+          84,
+          41,
+          87,
+          79,
+          45
+        ],
+        "validation_blocks_per_fit": [
+          17
+        ],
+        "validation_blocks_scored_per_fit": [
+          13
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 207685,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      },
+      {
+        "family": "primary",
+        "cell": "channels_5_zones_inventory_context_8",
+        "channels": 5,
+        "zones": true,
+        "context": 8,
+        "width": 64,
+        "max_epochs": 150,
+        "seeds": 10,
+        "completed": 10,
+        "failed": 0,
+        "mean_val_mse": 0.3661585680671703,
+        "sample_sd_val_mse": 0.040084150941272226,
+        "min_val_mse": 0.3290273488615828,
+        "max_val_mse": 0.44476074764639073,
+        "stopping": {
+          "VALIDATION_PLATEAU": 3,
+          "MAX_EPOCH_BUDGET_REACHED": 7
+        },
+        "best_epochs": [
+          107,
+          140,
+          142,
+          140,
+          150,
+          145,
+          147,
+          117,
+          123,
+          150
+        ],
+        "validation_blocks_per_fit": [
+          3
+        ],
+        "validation_blocks_scored_per_fit": [
+          3
+        ],
+        "validation_target_entries_per_fit": [
+          2260
+        ],
+        "parameter_count": 207685,
+        "validation_reference_mse": {
+          "fit_median": 4.275957106446246,
+          "patch_mean": 0.7445608170020436,
+          "patch_seasonal_mean": 0.5578793027240777,
+          "n_entries": 2260
+        }
+      }
+    ],
+    "fits_total": 62,
+    "fits_completed": 62,
+    "primary_by_seed": [
+      {
+        "seed": 0,
+        "best_val_mse": 0.3430698598069801,
+        "best_epoch": 107,
+        "epochs_completed": 127,
+        "stopping_status": "VALIDATION_PLATEAU",
+        "extended_budget": null
+      },
+      {
+        "seed": 1,
+        "best_val_mse": 0.33286203798962943,
+        "best_epoch": 140,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.3075264119838905,
+          "best_epoch": 162,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      },
+      {
+        "seed": 2,
+        "best_val_mse": 0.3290273488615828,
+        "best_epoch": 142,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.2750442244962883,
+          "best_epoch": 186,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      },
+      {
+        "seed": 3,
+        "best_val_mse": 0.3345602128977409,
+        "best_epoch": 140,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.293587003406102,
+          "best_epoch": 151,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      },
+      {
+        "seed": 4,
+        "best_val_mse": 0.4152541245161456,
+        "best_epoch": 150,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.4044043681090712,
+          "best_epoch": 105,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      },
+      {
+        "seed": 5,
+        "best_val_mse": 0.3489972694469129,
+        "best_epoch": 145,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.298813278004323,
+          "best_epoch": 197,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      },
+      {
+        "seed": 6,
+        "best_val_mse": 0.44476074764639073,
+        "best_epoch": 147,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.3618480575841725,
+          "best_epoch": 212,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      },
+      {
+        "seed": 7,
+        "best_val_mse": 0.37961070639986294,
+        "best_epoch": 117,
+        "epochs_completed": 137,
+        "stopping_status": "VALIDATION_PLATEAU",
+        "extended_budget": null
+      },
+      {
+        "seed": 8,
+        "best_val_mse": 0.392960406588283,
+        "best_epoch": 123,
+        "epochs_completed": 143,
+        "stopping_status": "VALIDATION_PLATEAU",
+        "extended_budget": null
+      },
+      {
+        "seed": 9,
+        "best_val_mse": 0.340482966518174,
+        "best_epoch": 150,
+        "epochs_completed": 150,
+        "stopping_status": "MAX_EPOCH_BUDGET_REACHED",
+        "extended_budget": {
+          "best_val_mse": 0.29479953202101383,
+          "best_epoch": 174,
+          "stopping_status": "VALIDATION_PLATEAU"
+        }
+      }
+    ],
+    "cpu_seconds_total": 7416.111,
+    "fit_ids": 117,
+    "val_ids": 17,
+    "validation_reference_mse_by_channels": {
+      "5": {
+        "fit_median": 4.275957106446246,
+        "patch_mean": 0.7445608170020436,
+        "patch_seasonal_mean": 0.5578793027240777,
+        "n_entries": 2260
+      },
+      "3": {
+        "fit_median": 1.7590025953818553,
+        "patch_mean": 0.7662072976650256,
+        "patch_seasonal_mean": 0.5534041273812089,
+        "n_entries": 1356
+      }
+    },
+    "workers": 4,
+    "torch_threads_per_worker": 2,
+    "fits_at_epoch_cap": 27
+  },
+  "reconstruction": {
+    "predictors": [
+      "fit_median",
+      "patch_mean",
+      "patch_seasonal_mean",
+      "patch_seasonal_mean_plus_visible_offset",
+      "calendar_site_mean"
+    ],
+    "ablations": [
+      "model",
+      "model_visible_inputs_zeroed",
+      "model_all_context_hidden"
+    ],
+    "by_role": {
+      "FIT": {
+        "scenes": 107,
+        "entries": 30155,
+        "pooled_mse": {
+          "fit_median": 3.8575456901210643,
+          "patch_mean": 0.5410390261308748,
+          "patch_seasonal_mean": 0.41010686902179233,
+          "patch_seasonal_mean_plus_visible_offset": 0.28127079146391837,
+          "calendar_site_mean": 3.3647894168223984,
+          "model": 0.17362077893824762,
+          "model_visible_inputs_zeroed": 0.7404381084374821,
+          "model_all_context_hidden": 0.677863533693802,
+          "model__seed_min": 0.1550095517430663,
+          "model__seed_max": 0.192788057035698,
+          "model_visible_inputs_zeroed__seed_min": 0.4824632221883967,
+          "model_visible_inputs_zeroed__seed_max": 0.9394853235754613,
+          "model_all_context_hidden__seed_min": 0.5255942828567993,
+          "model_all_context_hidden__seed_max": 0.8687831948427341
+        },
+        "by_site": {
+          "PILOT-SOUTH-LHONAK": {
+            "scenes": 55,
+            "entries": 16920,
+            "pooled_mse": {
+              "fit_median": 3.5640818322804657,
+              "patch_mean": 0.5747112194507386,
+              "patch_seasonal_mean": 0.4686615367472982,
+              "patch_seasonal_mean_plus_visible_offset": 0.3110187126607373,
+              "calendar_site_mean": 3.2250940459197355,
+              "model": 0.17864943817018022,
+              "model_visible_inputs_zeroed": 0.6911910002005209,
+              "model_all_context_hidden": 0.6621005705809921
+            }
+          },
+          "PILOT-KHANGCHUNG-TSHO": {
+            "scenes": 52,
+            "entries": 13235,
+            "pooled_mse": {
+              "fit_median": 4.2327182231518865,
+              "patch_mean": 0.4979915375799044,
+              "patch_seasonal_mean": 0.33524891829148945,
+              "patch_seasonal_mean_plus_visible_offset": 0.2432402038817367,
+              "calendar_site_mean": 3.5433799476628267,
+              "model": 0.16719199811434887,
+              "model_visible_inputs_zeroed": 0.8033970106943302,
+              "model_all_context_hidden": 0.6980153535554374
+            }
+          }
+        }
+      },
+      "VAL": {
+        "scenes": 13,
+        "entries": 4485,
+        "pooled_mse": {
+          "fit_median": 4.377444327272189,
+          "patch_mean": 0.7439848938000341,
+          "patch_seasonal_mean": 0.598175441904368,
+          "patch_seasonal_mean_plus_visible_offset": 0.49808578199946274,
+          "calendar_site_mean": 3.9224513184755563,
+          "model": 0.3321499999519634,
+          "model_visible_inputs_zeroed": 1.11411656475599,
+          "model_all_context_hidden": 1.062984205917492,
+          "model__seed_min": 0.3033543600748693,
+          "model__seed_max": 0.35082375327624055,
+          "model_visible_inputs_zeroed__seed_min": 0.8605504708018429,
+          "model_visible_inputs_zeroed__seed_max": 1.2595857960847907,
+          "model_all_context_hidden__seed_min": 0.9100782479037324,
+          "model_all_context_hidden__seed_max": 1.1978228738803338
+        },
+        "by_site": {
+          "PILOT-SOUTH-LHONAK": {
+            "scenes": 8,
+            "entries": 2900,
+            "pooled_mse": {
+              "fit_median": 4.568229816602009,
+              "patch_mean": 0.9147804563286241,
+              "patch_seasonal_mean": 0.7584227829880565,
+              "patch_seasonal_mean_plus_visible_offset": 0.6642164556841115,
+              "calendar_site_mean": 4.138800697828782,
+              "model": 0.40878989661080706,
+              "model_visible_inputs_zeroed": 1.201565317152241,
+              "model_all_context_hidden": 1.1755485462844384
+            }
+          },
+          "PILOT-KHANGCHUNG-TSHO": {
+            "scenes": 5,
+            "entries": 1585,
+            "pooled_mse": {
+              "fit_median": 4.028373084965261,
+              "patch_mean": 0.4314882809716992,
+              "patch_seasonal_mean": 0.3049784140540861,
+              "patch_seasonal_mean_plus_visible_offset": 0.19412429702439568,
+              "calendar_site_mean": 3.5266070281762794,
+              "model": 0.19192558335218646,
+              "model_visible_inputs_zeroed": 0.9541156928637966,
+              "model_all_context_hidden": 0.8570305232271807
+            }
+          }
+        }
+      },
+      "EVAL": {
+        "scenes": 7,
+        "entries": 2845,
+        "pooled_mse": {
+          "fit_median": 4.32215116666246,
+          "patch_mean": 0.4870998619077702,
+          "patch_seasonal_mean": 0.5058916205394023,
+          "patch_seasonal_mean_plus_visible_offset": 0.39909864868741474,
+          "calendar_site_mean": 3.8472176148103427,
+          "model": 0.3306654214344729,
+          "model_visible_inputs_zeroed": 0.7595510640252722,
+          "model_all_context_hidden": 0.7285231459390034,
+          "model__seed_min": 0.3071264044088327,
+          "model__seed_max": 0.3735528389965539,
+          "model_visible_inputs_zeroed__seed_min": 0.5502031466716084,
+          "model_visible_inputs_zeroed__seed_max": 1.0919181839589998,
+          "model_all_context_hidden__seed_min": 0.558031916691017,
+          "model_all_context_hidden__seed_max": 1.0456932899605358
+        },
+        "by_site": {
+          "PILOT-SOUTH-LHONAK": {
+            "scenes": 3,
+            "entries": 1390,
+            "pooled_mse": {
+              "fit_median": 3.264983621103342,
+              "patch_mean": 0.5544330534162281,
+              "patch_seasonal_mean": 0.6615750781734602,
+              "patch_seasonal_mean_plus_visible_offset": 0.5347815391165406,
+              "calendar_site_mean": 3.186356342751353,
+              "model": 0.4648997367368998,
+              "model_visible_inputs_zeroed": 0.6853030940413667,
+              "model_all_context_hidden": 0.7314930780340905
+            }
+          },
+          "PILOT-KHANGCHUNG-TSHO": {
+            "scenes": 4,
+            "entries": 1455,
+            "pooled_mse": {
+              "fit_median": 5.332091296096943,
+              "patch_mean": 0.4227746823910992,
+              "patch_seasonal_mean": 0.35716309400239865,
+              "patch_seasonal_mean_plus_visible_offset": 0.269477193225913,
+              "calendar_site_mean": 4.478555874715495,
+              "model": 0.20242782812150156,
+              "model_visible_inputs_zeroed": 0.8304821143879034,
+              "model_all_context_hidden": 0.7256858912227345
+            }
+          }
+        }
+      }
+    },
+    "differences": {
+      "FIT": {
+        "fit_median": {
+          "estimate": -3.683924911182817,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -4.214568069224702,
+          "upper": -3.147998209586682,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_mean": {
+          "estimate": -0.3674182471926273,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.4423352578475476,
+          "upper": -0.30623765922892526,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_seasonal_mean": {
+          "estimate": -0.23648609008354474,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.3158914831586405,
+          "upper": -0.17217812956752016,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_seasonal_mean_plus_visible_offset": {
+          "estimate": -0.10765001252567075,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.15656292351066795,
+          "upper": -0.06947904421627167,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "calendar_site_mean": {
+          "estimate": -3.191168637884151,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -3.5819006248962473,
+          "upper": -2.7735042286196987,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "model_visible_inputs_zeroed": {
+          "estimate": -0.5668173294992346,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.6639646162368756,
+          "upper": -0.4798714441652749,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "model_all_context_hidden": {
+          "estimate": -0.5042427547555545,
+          "n_scenes": 107,
+          "n_entries": 30155,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 1,
+            "PILOT-KHANGCHUNG-TSHO": 2
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.5900573719716514,
+          "upper": -0.4266866913525991,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        }
+      },
+      "VAL": {
+        "fit_median": {
+          "estimate": -4.045294327320224,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -4.925073316048164,
+          "upper": -3.1944519604930313,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_mean": {
+          "estimate": -0.4118348938480707,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.8668992428218035,
+          "upper": -0.12775350325430218,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_seasonal_mean": {
+          "estimate": -0.2660254419524046,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.6716188131666406,
+          "upper": -0.013814073171406576,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 0.98625
+        },
+        "patch_seasonal_mean_plus_visible_offset": {
+          "estimate": -0.16593578204749931,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.47913539016092727,
+          "upper": 0.022214008121451058,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 0.88675
+        },
+        "calendar_site_mean": {
+          "estimate": -3.590301318523593,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -4.4148175181358,
+          "upper": -2.799051622421697,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "model_visible_inputs_zeroed": {
+          "estimate": -0.7819665648040267,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -1.2600287506988352,
+          "upper": -0.44553974282647135,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "model_all_context_hidden": {
+          "estimate": -0.7308342059655288,
+          "n_scenes": 13,
+          "n_entries": 4485,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 1
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -1.2066310705728651,
+          "upper": -0.40699401508691135,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        }
+      },
+      "EVAL": {
+        "fit_median": {
+          "estimate": -3.991485745227987,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -4.25372690320572,
+          "upper": -3.5809326051466983,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_mean": {
+          "estimate": -0.1564344404732973,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.24094225412361794,
+          "upper": -0.04972744086120721,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_seasonal_mean": {
+          "estimate": -0.17522619910492943,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.21639022506568117,
+          "upper": -0.12611954324738903,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "patch_seasonal_mean_plus_visible_offset": {
+          "estimate": -0.0684332272529418,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.09925883572789222,
+          "upper": -0.024494376269689845,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "calendar_site_mean": {
+          "estimate": -3.5165521933758694,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -3.6929228478926763,
+          "upper": -3.2533316245572816,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "model_visible_inputs_zeroed": {
+          "estimate": -0.42888564259079937,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.4665075393513868,
+          "upper": -0.32256349804890644,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        },
+        "model_all_context_hidden": {
+          "estimate": -0.39785772450453044,
+          "n_scenes": 7,
+          "n_entries": 2845,
+          "block_lengths": {
+            "PILOT-SOUTH-LHONAK": 2,
+            "PILOT-KHANGCHUNG-TSHO": 3
+          },
+          "block_days": 30.0,
+          "n_boot": 4000,
+          "seed": 0,
+          "alpha": 0.05,
+          "method": "stratified moving-block bootstrap over scenes; percentile interval",
+          "lower": -0.4442710388362179,
+          "upper": -0.28513976128552626,
+          "status": "ESTIMATED",
+          "fraction_draws_a_lower": 1.0
+        }
+      }
+    },
+    "rule_R1_model_uses_context": true,
+    "rule_R2_model_beats_seasonal_plus_offset": {
+      "VAL": false,
+      "EVAL": true
+    }
+  },
+  "scores": {
+    "table": [
+      {
+        "field": "score_a_zone0_1",
+        "label": "Score A, zone 0+1 (MSE)",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 63,
+          "median": 0.19947468511257616,
+          "q1": 0.11832578349611722,
+          "q3": 0.31637917543608285
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 0.2301874460896206,
+          "q1": 0.15760089724680665,
+          "q3": 0.31793271787145755
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": 0.29956626292417443,
+          "q1": 0.2025010683323603,
+          "q3": 0.461541884658799
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 0.7554275466767513,
+          "q1": 0.7550701941781741,
+          "q3": 0.9040872293655852
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 57,
+          "median": 0.1387716131167115,
+          "q1": 0.1012213839802601,
+          "q3": 0.26855277723310644
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 0.25921396022214,
+          "q1": 0.10939363717539266,
+          "q3": 0.3310642305863774
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": 0.18634412366035646,
+          "q1": 0.08286539753908453,
+          "q3": 0.21358563693260527
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 0.22793075667367182,
+          "q1": 0.18104648573455745,
+          "q3": 0.2767936729785758
+        }
+      },
+      {
+        "field": "score_b_zone0_1",
+        "label": "Score B (latent distance)",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 63,
+          "median": 1.875778431111045,
+          "q1": 1.4389071008529146,
+          "q3": 2.636185540356108
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.273080965017857,
+          "q1": 1.2122002184821818,
+          "q3": 2.011804520373671
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": 2.095419617660106,
+          "q1": 1.955922908795204,
+          "q3": 3.1975534494181255
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 1.733494288250085,
+          "q1": 1.5987380840708028,
+          "q3": 1.8600687018661817
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 56,
+          "median": 1.6571468493134307,
+          "q1": 1.2739779833212053,
+          "q3": 2.026007090973777
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.6491507077625465,
+          "q1": 1.2176208368493788,
+          "q3": 1.9987885768624079
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": 1.660695429040735,
+          "q1": 1.5908646534698376,
+          "q3": 1.7844956421558913
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 1.7099678767796442,
+          "q1": 1.5178794748655462,
+          "q3": 1.8634949052418652
+        }
+      },
+      {
+        "field": "score_c",
+        "label": "Score C (robust z)",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 63,
+          "median": 0.14890529362909427,
+          "q1": -0.5220545317492342,
+          "q3": 0.9278124498840501
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": -0.2345966287807181,
+          "q1": -0.5523849794601242,
+          "q3": 0.7506284270269682
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": 0.5404506723537497,
+          "q1": 0.3107965043193729,
+          "q3": 1.387161949993887
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 0.9499490090862717,
+          "q1": 0.8598525204682766,
+          "q3": 1.1029909245453027
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 56,
+          "median": -0.140150163391007,
+          "q1": -0.5176007555438529,
+          "q3": 0.8346804456357434
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 0.7977783671077905,
+          "q1": -0.5784753125730546,
+          "q3": 0.9497525336697622
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": 0.27556626343460033,
+          "q1": -0.512619840467172,
+          "q3": 0.43552364500510754
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 0.31692910776950806,
+          "q1": -0.0324218658892623,
+          "q3": 0.6517802856341129
+        }
+      },
+      {
+        "field": "score_a_zone_contrast",
+        "label": "Score A contrast, zone 0+1 minus zone 2",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 60,
+          "median": 0.044750969615396666,
+          "q1": -0.019854645932508887,
+          "q3": 0.15984344827439165
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 6,
+          "median": 0.0626113882215563,
+          "q1": -0.07481690904936629,
+          "q3": 0.11749734884827816
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": 0.18417870463329705,
+          "q1": 0.06504684392801291,
+          "q3": 0.33166796712506896
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 0.6801983429085914,
+          "q1": 0.6799391160815813,
+          "q3": 0.8338348439303357
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 53,
+          "median": 0.024049009448043453,
+          "q1": -0.044500350759054445,
+          "q3": 0.08711533353422618
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 5,
+          "median": 0.01684920376356712,
+          "q1": 0.011620816745870531,
+          "q3": 0.1261260945238939
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": 0.018375277444380528,
+          "q1": -0.02155114620876169,
+          "q3": 0.07056864557909012
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 0.09442518367124902,
+          "q1": 0.034250866394238536,
+          "q3": 0.17354773585755723
+        }
+      },
+      {
+        "field": "water_candidate_area_km2",
+        "label": "Candidate water area (km\u00b2)",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 69,
+          "median": 0.1916,
+          "q1": 0.0072,
+          "q3": 1.2632
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.3852,
+          "q1": 0.7852,
+          "q3": 1.459
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 9,
+          "median": 1.1788,
+          "q1": 0.024,
+          "q3": 1.5224
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 1.256,
+          "q1": 0.9863999999999999,
+          "q3": 1.4172
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 65,
+          "median": 0.3756,
+          "q1": 0.0204,
+          "q3": 1.7788
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.7344,
+          "q1": 1.7071999999999998,
+          "q3": 1.8826
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 8,
+          "median": 0.30260000000000004,
+          "q1": 0.0,
+          "q3": 1.8205
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 1.9308,
+          "q1": 1.8999,
+          "q3": 1.9443
+        }
+      },
+      {
+        "field": "baselines.seasonal_climatology_residual",
+        "label": "Seasonal residual",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 63,
+          "median": 0.881432881820315,
+          "q1": 0.6779273302614333,
+          "q3": 1.3630841899610107
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 0.7756429663177397,
+          "q1": 0.6964415067858158,
+          "q3": 1.3733529571994119
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": 0.9310250089155612,
+          "q1": 0.8495690167398693,
+          "q3": 1.1645118965971584
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 1.4015595252727184,
+          "q1": 1.375402284054931,
+          "q3": 1.6023804923818905
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 56,
+          "median": 0.8664950533166403,
+          "q1": 0.6352410258534557,
+          "q3": 1.1937543568402342
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.0235458731978389,
+          "q1": 0.641264848563654,
+          "q3": 1.3307307961487544
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": 0.7013794908880898,
+          "q1": 0.6099322289773127,
+          "q3": 0.7164788375716737
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 0.7792929291343385,
+          "q1": 0.7167696172955643,
+          "q3": 0.8899798170492577
+        }
+      },
+      {
+        "field": "baselines.spatial_persistence_residual",
+        "label": "Temporal persistence residual",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 62,
+          "median": 1.6589109834954892,
+          "q1": 1.170461040488525,
+          "q3": 2.242673668649968
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.694728054132337,
+          "q1": 1.1182615751824967,
+          "q3": 2.004534851816694
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": 1.5983880384646776,
+          "q1": 1.2640412863248507,
+          "q3": 2.7247285837934423
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 1.6785306900773698,
+          "q1": 1.3442493692338875,
+          "q3": 1.9347954962739242
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 55,
+          "median": 1.4276915855624408,
+          "q1": 0.9651439580846035,
+          "q3": 1.9118814811717284
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.4178618919721502,
+          "q1": 1.1043887582781395,
+          "q3": 1.9057369032929783
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": 2.3774036530143023,
+          "q1": 1.7690389139633942,
+          "q3": 2.4096595971348522
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 1.0808044232980172,
+          "q1": 0.9105766844806765,
+          "q3": 1.2042076021802237
+        }
+      },
+      {
+        "field": "baselines.isolation_forest_score",
+        "label": "Isolation Forest score",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 63,
+          "median": -0.10482504245959127,
+          "q1": -0.12355003986678445,
+          "q3": -0.09133659774004195
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": -0.09044575790644767,
+          "q1": -0.0997534052764936,
+          "q3": -0.08923796543446565
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": -0.09424349838257881,
+          "q1": -0.11238146320214679,
+          "q3": -0.0931231523406516
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": -0.10229578609527604,
+          "q1": -0.10377378977812679,
+          "q3": -0.09807101241436952
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 57,
+          "median": -0.11848113749350228,
+          "q1": -0.1395653567593219,
+          "q3": -0.10711108640108588
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": -0.11609369160502213,
+          "q1": -0.12942869064550616,
+          "q3": -0.09869038728728383
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": -0.11663253444005377,
+          "q1": -0.12044296882842853,
+          "q3": -0.11506993746070468
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": -0.11714702486457317,
+          "q1": -0.11855121212104364,
+          "q3": -0.1126445774320898
+        }
+      },
+      {
+        "field": "baselines.one_class_svm_score",
+        "label": "One-class SVM score",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 63,
+          "median": -4.527967837852694,
+          "q1": -5.0975233958560136,
+          "q3": -3.935324201316922
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": -3.74115158115723,
+          "q1": -4.464566764695766,
+          "q3": -2.634304548674547
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 8,
+          "median": -4.05750658871364,
+          "q1": -4.781489172597765,
+          "q3": -4.000513287318026
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": -4.508956842351327,
+          "q1": -4.724314977303323,
+          "q3": -3.5911861323648147
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 57,
+          "median": -4.885308920415108,
+          "q1": -5.666145729404111,
+          "q3": -4.487543787223998
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": -4.487543787223998,
+          "q1": -4.7700030886518014,
+          "q3": -3.4624917592620545
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 5,
+          "median": -4.770235775540745,
+          "q1": -5.020292974951848,
+          "q3": -4.675458432464733
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": -4.3592888800506335,
+          "q1": -4.5082001309796365,
+          "q3": -4.182006184088331
+        }
+      },
+      {
+        "field": "baselines.missingness_only_score",
+        "label": "Missingness-only score",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 69,
+          "median": 0.3529411764705882,
+          "q1": 0.13725490196078427,
+          "q3": 0.7058823529411764
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 0.3529411764705882,
+          "q1": 0.02941176470588236,
+          "q3": 0.5588235294117647
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 9,
+          "median": 0.13725490196078427,
+          "q1": 0.039215686274509776,
+          "q3": 0.3529411764705882
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 0.039215686274509776,
+          "q1": 0.039215686274509776,
+          "q3": 0.12745098039215685
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 65,
+          "median": 0.484375,
+          "q1": 0.125,
+          "q3": 0.796875
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 0.296875,
+          "q1": 0.0859375,
+          "q3": 0.453125
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 8,
+          "median": 0.578125,
+          "q1": 0.109375,
+          "q3": 1.0
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 0.140625,
+          "q1": 0.10546875,
+          "q3": 0.171875
+        }
+      },
+      {
+        "field": "page_cusum.statistic",
+        "label": "CUSUM statistic on Score C",
+        "PILOT-SOUTH-LHONAK|FIT_VAL": {
+          "n": 69,
+          "median": 0.7326430655013105,
+          "q1": 0.0,
+          "q3": 3.079218878301151
+        },
+        "PILOT-SOUTH-LHONAK|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 2.286222421571032,
+          "q1": 0.0,
+          "q3": 3.211696385074228
+        },
+        "PILOT-SOUTH-LHONAK|VAL": {
+          "n": 9,
+          "median": 6.106589998743076,
+          "q1": 4.713688357699504,
+          "q3": 6.3462401119075444
+        },
+        "PILOT-SOUTH-LHONAK|EVAL": {
+          "n": 3,
+          "median": 7.471174388593349,
+          "q1": 7.196297440196552,
+          "q3": 7.614000388214936
+        },
+        "PILOT-KHANGCHUNG-TSHO|FIT_VAL": {
+          "n": 65,
+          "median": 1.020263029303844,
+          "q1": 0.0,
+          "q3": 2.2065818574527203
+        },
+        "PILOT-KHANGCHUNG-TSHO|AUTUMN_FIT_2018_2021": {
+          "n": 7,
+          "median": 1.6345708192641029,
+          "q1": 0.8357071986318935,
+          "q3": 3.109921825540214
+        },
+        "PILOT-KHANGCHUNG-TSHO|VAL": {
+          "n": 8,
+          "median": 3.503730128340515,
+          "q1": 2.2316808971107727,
+          "q3": 3.5959511618782156
+        },
+        "PILOT-KHANGCHUNG-TSHO|EVAL": {
+          "n": 4,
+          "median": 1.2319787057652556,
+          "q1": 0.8878515410881536,
+          "q3": 1.6492381490074957
+        }
+      }
+    ],
+    "groups": [
+      "FIT_VAL",
+      "AUTUMN_FIT_2018_2021",
+      "VAL",
+      "EVAL"
+    ],
+    "status_counts": {
+      "score_a": {
+        "ESTIMATED": 1270,
+        "NOT_ESTIMABLE_NO_OBSERVED_ZONE_0_1_PATCH": 140
+      },
+      "score_b": {
+        "ESTIMATED": 1260,
+        "NOT_ESTIMABLE_NO_OBSERVED_ZONE_0_1_PATCH": 140,
+        "NOT_ESTIMABLE_LT_K_OBSERVED_FIT_NEIGHBOURS": 10
+      },
+      "score_c": {
+        "ESTIMATED": 1260,
+        "NOT_ESTIMABLE_MISSING_A_OR_B": 150
+      },
+      "seasonal_residual": {
+        "ESTIMATED": 126,
+        "NOT_ESTIMABLE_LT_5_FIT_MATCHES_PER_PATCH": 15
+      },
+      "persistence": {
+        "NOT_ESTIMABLE_NO_PRIOR_COMPLETE_PATCH": 17,
+        "ESTIMATED": 124
+      }
+    },
+    "seed_scene_rows": 1410,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "eval_scenes": [
+      {
+        "observation_id": "PILOT-KHANGCHUNG-TSHO__PILOT-KHANGCHUNG-TSHO__S2B_T45RXM_20231006T044257_L2A",
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "date": "2023-10-06",
+        "score_a_zone0_1": 0.3808378044929148,
+        "score_b_zone0_1": 1.9271373015971818,
+        "score_c": 1.0784199682906332,
+        "score_a_zone_contrast": 0.2363856730593896,
+        "water_candidate_area_km2": 1.9236,
+        "baselines.seasonal_climatology_residual": 1.1209830511613672,
+        "baselines.spatial_persistence_residual": 1.262410915903161,
+        "baselines.isolation_forest_score": -0.10328602397194502,
+        "baselines.one_class_svm_score": -3.881070146437442,
+        "baselines.missingness_only_score": 0.171875,
+        "page_cusum.statistic": 1.8860702466210149
+      },
+      {
+        "observation_id": "PILOT-KHANGCHUNG-TSHO__PILOT-KHANGCHUNG-TSHO__S2B_T45RXM_20231016T044452_L2A",
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "date": "2023-10-16",
+        "score_a_zone0_1": 0.24211229580712945,
+        "score_b_zone0_1": 1.3385529581545983,
+        "score_c": 0.12429115745707667,
+        "score_a_zone_contrast": 0.15260175679027976,
+        "water_candidate_area_km2": 1.8288,
+        "baselines.seasonal_climatology_residual": 0.7456071192567891,
+        "baselines.spatial_persistence_residual": 1.1848064976059112,
+        "baselines.isolation_forest_score": -0.11852995447700827,
+        "baselines.one_class_svm_score": -4.43625956346264,
+        "baselines.missingness_only_score": 0.171875,
+        "page_cusum.statistic": 1.5702941164696558
+      },
+      {
+        "observation_id": "PILOT-KHANGCHUNG-TSHO__PILOT-KHANGCHUNG-TSHO__S2B_T45RXM_20231026T044734_L2A",
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "date": "2023-10-26",
+        "score_a_zone0_1": 0.08293829031758726,
+        "score_b_zone0_1": 1.5776549804358622,
+        "score_c": -0.5025609359282792,
+        "score_a_zone_contrast": 0.028257633920299327,
+        "water_candidate_area_km2": 1.9632,
+        "baselines.seasonal_climatology_residual": 0.63025711141189,
+        "baselines.spatial_persistence_residual": 0.7118996909523364,
+        "baselines.isolation_forest_score": -0.11861498505314975,
+        "baselines.one_class_svm_score": -4.282318196638627,
+        "baselines.missingness_only_score": 0.109375,
+        "page_cusum.statistic": 0.8704162791700483
+      },
+      {
+        "observation_id": "PILOT-KHANGCHUNG-TSHO__PILOT-KHANGCHUNG-TSHO__S2B_T45RXM_20231115T044246_L2A",
+        "site_id": "PILOT-KHANGCHUNG-TSHO",
+        "date": "2023-11-15",
+        "score_a_zone0_1": 0.2137492175402142,
+        "score_b_zone0_1": 1.8422807731234263,
+        "score_c": 0.5095670580819395,
+        "score_a_zone_contrast": 0.03624861055221827,
+        "water_candidate_area_km2": 1.938,
+        "baselines.seasonal_climatology_residual": 0.8129787390118878,
+        "baselines.spatial_persistence_residual": 0.9768023489901232,
+        "baselines.isolation_forest_score": -0.11576409525213806,
+        "baselines.one_class_svm_score": -4.724021833530626,
+        "baselines.missingness_only_score": 0.09375,
+        "page_cusum.statistic": 0.8936632950608554
+      },
+      {
+        "observation_id": "PILOT-SOUTH-LHONAK__PILOT-SOUTH-LHONAK__S2B_T45RXL_20231009T045202_L2A",
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "date": "2023-10-09",
+        "score_a_zone0_1": 1.052746912054419,
+        "score_b_zone0_1": 1.9866431154822781,
+        "score_c": 1.2560328400043337,
+        "score_a_zone_contrast": 0.98747134495208,
+        "water_candidate_area_km2": 0.7168,
+        "baselines.seasonal_climatology_residual": 1.8032014594910628,
+        "baselines.spatial_persistence_residual": 2.1910603024704787,
+        "baselines.isolation_forest_score": -0.09384623873346301,
+        "baselines.one_class_svm_score": -2.6734154223783024,
+        "baselines.missingness_only_score": 0.21568627450980393,
+        "page_cusum.statistic": 6.921420491799754
+      },
+      {
+        "observation_id": "PILOT-SOUTH-LHONAK__PILOT-SOUTH-LHONAK__S2B_T45RXL_20231026T044734_L2A",
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "date": "2023-10-26",
+        "score_a_zone0_1": 0.7554275466767513,
+        "score_b_zone0_1": 1.733494288250085,
+        "score_c": 0.9499490090862717,
+        "score_a_zone_contrast": 0.6796798892545711,
+        "water_candidate_area_km2": 1.256,
+        "baselines.seasonal_climatology_residual": 1.4015595252727184,
+        "baselines.spatial_persistence_residual": 1.6785306900773698,
+        "baselines.isolation_forest_score": -0.10525179346097756,
+        "baselines.one_class_svm_score": -4.93967311225532,
+        "baselines.missingness_only_score": 0.039215686274509776,
+        "page_cusum.statistic": 7.471174388593349
+      },
+      {
+        "observation_id": "PILOT-SOUTH-LHONAK__PILOT-SOUTH-LHONAK__S2A_T45RXL_20231113T045034_L2A",
+        "site_id": "PILOT-SOUTH-LHONAK",
+        "date": "2023-11-13",
+        "score_a_zone0_1": 0.7547128416795968,
+        "score_b_zone0_1": 1.4639818798915205,
+        "score_c": 0.7697560318502816,
+        "score_a_zone_contrast": 0.6801983429085914,
+        "water_candidate_area_km2": 1.5784,
+        "baselines.seasonal_climatology_residual": 1.3492450428371434,
+        "baselines.spatial_persistence_residual": 1.009968048390405,
+        "baselines.isolation_forest_score": -0.10229578609527604,
+        "baselines.one_class_svm_score": -4.508956842351327,
+        "baselines.missingness_only_score": 0.039215686274509776,
+        "page_cusum.statistic": 7.756826387836522
+      }
+    ],
+    "autumn_comparisons": [
+      {
+        "site": "PILOT-SOUTH-LHONAK",
+        "field": "score_a_zone0_1",
+        "fit_autumn_median": 0.2301874460896206,
+        "eval_median": 0.7554275466767513,
+        "n_fit": 7,
+        "n_eval": 3
+      },
+      {
+        "site": "PILOT-SOUTH-LHONAK",
+        "field": "score_b_zone0_1",
+        "fit_autumn_median": 1.273080965017857,
+        "eval_median": 1.733494288250085,
+        "n_fit": 7,
+        "n_eval": 3
+      },
+      {
+        "site": "PILOT-SOUTH-LHONAK",
+        "field": "score_c",
+        "fit_autumn_median": -0.2345966287807181,
+        "eval_median": 0.9499490090862717,
+        "n_fit": 7,
+        "n_eval": 3
+      },
+      {
+        "site": "PILOT-SOUTH-LHONAK",
+        "field": "water_candidate_area_km2",
+        "fit_autumn_median": 1.3852,
+        "eval_median": 1.256,
+        "n_fit": 7,
+        "n_eval": 3
+      },
+      {
+        "site": "PILOT-KHANGCHUNG-TSHO",
+        "field": "score_a_zone0_1",
+        "fit_autumn_median": 0.25921396022214,
+        "eval_median": 0.22793075667367182,
+        "n_fit": 7,
+        "n_eval": 4
+      },
+      {
+        "site": "PILOT-KHANGCHUNG-TSHO",
+        "field": "score_b_zone0_1",
+        "fit_autumn_median": 1.6491507077625465,
+        "eval_median": 1.7099678767796442,
+        "n_fit": 7,
+        "n_eval": 4
+      },
+      {
+        "site": "PILOT-KHANGCHUNG-TSHO",
+        "field": "score_c",
+        "fit_autumn_median": 0.7977783671077905,
+        "eval_median": 0.31692910776950806,
+        "n_fit": 7,
+        "n_eval": 4
+      },
+      {
+        "site": "PILOT-KHANGCHUNG-TSHO",
+        "field": "water_candidate_area_km2",
+        "fit_autumn_median": 1.7344,
+        "eval_median": 1.9308,
+        "n_fit": 7,
+        "n_eval": 4
+      }
+    ],
+    "autumn_comparisons_eval_higher": {
+      "PILOT-SOUTH-LHONAK": 3,
+      "PILOT-KHANGCHUNG-TSHO": 1
+    },
+    "scene_score_a_max": {
+      "PILOT-SOUTH-LHONAK|FIT": 2.5421577272835574,
+      "PILOT-SOUTH-LHONAK|VAL": 2.560229919723985,
+      "PILOT-SOUTH-LHONAK|EVAL": 1.052746912054419,
+      "PILOT-KHANGCHUNG-TSHO|FIT": 15.87392030842436,
+      "PILOT-KHANGCHUNG-TSHO|VAL": 0.832581570094729,
+      "PILOT-KHANGCHUNG-TSHO|EVAL": 0.3808378044929148
+    },
+    "score_c_moments": {
+      "0": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9554827217231596,
+            "ln_a_scale": 0.7739138888212326,
+            "b_median": 1.6693305632745894,
+            "b_scale": 0.5195077925593798,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.6745009288738735,
+            "ln_a_scale": 0.8201668171380044,
+            "b_median": 1.8719974696623205,
+            "b_scale": 0.7523517619032286,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "1": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9781069486774614,
+            "ln_a_scale": 0.6520747587360654,
+            "b_median": 1.657402716589862,
+            "b_scale": 0.6532306266211153,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7949466487664587,
+            "ln_a_scale": 0.7299943839721584,
+            "b_median": 1.626910941583936,
+            "b_scale": 0.5792091939050553,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "2": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9786492416515926,
+            "ln_a_scale": 0.6781814651328814,
+            "b_median": 1.6757472391203367,
+            "b_scale": 0.5550694143304028,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.6878570506226331,
+            "ln_a_scale": 0.8686616760348129,
+            "b_median": 1.8237012663076981,
+            "b_scale": 0.7600835621349737,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "3": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9417692461491747,
+            "ln_a_scale": 0.7457203582231327,
+            "b_median": 1.6795734963797564,
+            "b_scale": 0.5129637032944778,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7265337121852284,
+            "ln_a_scale": 0.8330297639600254,
+            "b_median": 1.9138755290829206,
+            "b_scale": 0.7972969627016321,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "4": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -2.0307991108474726,
+            "ln_a_scale": 0.7239515936935286,
+            "b_median": 1.6105794563795888,
+            "b_scale": 0.6258204214705422,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7510593330501503,
+            "ln_a_scale": 0.7506829826099675,
+            "b_median": 1.8260972336966428,
+            "b_scale": 0.6967288596539669,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "5": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9960244683878492,
+            "ln_a_scale": 0.5970023283188698,
+            "b_median": 1.6281965013355737,
+            "b_scale": 0.5985054048638725,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7515626897344692,
+            "ln_a_scale": 0.7253036616103666,
+            "b_median": 1.943858797562276,
+            "b_scale": 0.8584333528973485,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "6": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9895045625758905,
+            "ln_a_scale": 0.5437655618773933,
+            "b_median": 1.5463605637069837,
+            "b_scale": 0.4757990626950894,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7056862238203396,
+            "ln_a_scale": 0.6994513748521693,
+            "b_median": 1.692261468024372,
+            "b_scale": 0.6706213973193269,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "7": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.9970540374384402,
+            "ln_a_scale": 0.692436278721476,
+            "b_median": 1.4985381689700403,
+            "b_scale": 0.48585373278946875,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7534242398382742,
+            "ln_a_scale": 0.7860969881217147,
+            "b_median": 1.7011469336418832,
+            "b_scale": 0.6216143656619506,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "8": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.8983976286913453,
+            "ln_a_scale": 0.7281584828401166,
+            "b_median": 1.9157039444783042,
+            "b_scale": 0.5351312712404982,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.6414948104742095,
+            "ln_a_scale": 0.7302323946764498,
+            "b_median": 2.0041209887939737,
+            "b_scale": 0.8746400191408895,
+            "n_fit_scenes": 55
+          }
+        }
+      },
+      "9": {
+        "PILOT-KHANGCHUNG-TSHO": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -2.1024661125131767,
+            "ln_a_scale": 0.5243992184758144,
+            "b_median": 1.6058586813577151,
+            "b_scale": 0.7151179140950993,
+            "n_fit_scenes": 51
+          }
+        },
+        "PILOT-SOUTH-LHONAK": {
+          "status": "ESTIMATED_FIT_ONLY_PER_SITE",
+          "moments": {
+            "ln_a_median": -1.7976316386975393,
+            "ln_a_scale": 0.8140128577894779,
+            "b_median": 1.733967832952761,
+            "b_scale": 0.7334106469030679,
+            "n_fit_scenes": 55
+          }
+        }
+      }
+    },
+    "pca_explained_variance_ratio_sum": {
+      "0": 0.7485719982862827,
+      "1": 0.7300368348580166,
+      "2": 0.7868480758929274,
+      "3": 0.7481611530249567,
+      "4": 0.7312000178608499,
+      "5": 0.7470577174370132,
+      "6": 0.7535984664782914,
+      "7": 0.7294016042550072,
+      "8": 0.7781263432006665,
+      "9": 0.7301279455503068
+    }
+  },
+  "cusum": {
+    "kappa": 0.5,
+    "h": 4.0,
+    "majority_seeds": 6,
+    "alarms": {
+      "PILOT-SOUTH-LHONAK|FIT": {
+        "scenes": 60,
+        "scenes_any_seed": 20,
+        "scenes_majority": 1,
+        "first_any_seed": "2019-08-28",
+        "first_majority": "2023-04-17",
+        "seed_scene_alarms": 35
+      },
+      "PILOT-SOUTH-LHONAK|VAL": {
+        "scenes": 9,
+        "scenes_any_seed": 9,
+        "scenes_majority": 7,
+        "first_any_seed": "2022-03-18",
+        "first_majority": "2023-07-06",
+        "seed_scene_alarms": 70
+      },
+      "PILOT-SOUTH-LHONAK|EVAL": {
+        "scenes": 3,
+        "scenes_any_seed": 3,
+        "scenes_majority": 3,
+        "first_any_seed": "2023-10-09",
+        "first_majority": "2023-10-09",
+        "seed_scene_alarms": 30
+      },
+      "PILOT-KHANGCHUNG-TSHO|FIT": {
+        "scenes": 57,
+        "scenes_any_seed": 11,
+        "scenes_majority": 1,
+        "first_any_seed": "2020-06-13",
+        "first_majority": "2021-12-05",
+        "seed_scene_alarms": 39
+      },
+      "PILOT-KHANGCHUNG-TSHO|VAL": {
+        "scenes": 8,
+        "scenes_any_seed": 5,
+        "scenes_majority": 0,
+        "first_any_seed": "2022-03-20",
+        "first_majority": null,
+        "seed_scene_alarms": 12
+      },
+      "PILOT-KHANGCHUNG-TSHO|EVAL": {
+        "scenes": 4,
+        "scenes_any_seed": 0,
+        "scenes_majority": 0,
+        "first_any_seed": null,
+        "first_majority": null,
+        "seed_scene_alarms": 0
+      }
+    }
+  },
+  "positive_control": {
+    "fractions": [
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "fit_thresholds": {
+      "PILOT-SOUTH-LHONAK|score_a_zone0_1": 0.5580508659631479,
+      "PILOT-SOUTH-LHONAK|score_b_zone0_1": 3.91570126611103,
+      "PILOT-SOUTH-LHONAK|score_c": 1.9753927469694126,
+      "PILOT-SOUTH-LHONAK|water_candidate_area_km2": 0.0,
+      "PILOT-SOUTH-LHONAK|seasonal_climatology_residual": 2.3197804398600463,
+      "PILOT-SOUTH-LHONAK|spatial_persistence_residual": 3.090389955939725,
+      "PILOT-SOUTH-LHONAK|isolation_forest_score": -0.0690629929855532,
+      "PILOT-SOUTH-LHONAK|one_class_svm_score": -1.3096466797307407,
+      "PILOT-SOUTH-LHONAK|missingness_only_score": 1.0,
+      "PILOT-KHANGCHUNG-TSHO|score_a_zone0_1": 0.5495824080985475,
+      "PILOT-KHANGCHUNG-TSHO|score_b_zone0_1": 3.0258595824024974,
+      "PILOT-KHANGCHUNG-TSHO|score_c": 1.829703798357959,
+      "PILOT-KHANGCHUNG-TSHO|water_candidate_area_km2": 0.0,
+      "PILOT-KHANGCHUNG-TSHO|seasonal_climatology_residual": 2.0255250605327912,
+      "PILOT-KHANGCHUNG-TSHO|spatial_persistence_residual": 3.0857613408700377,
+      "PILOT-KHANGCHUNG-TSHO|isolation_forest_score": -0.035517248998207684,
+      "PILOT-KHANGCHUNG-TSHO|one_class_svm_score": -1.6872624678395842,
+      "PILOT-KHANGCHUNG-TSHO|missingness_only_score": 1.0
+    },
+    "status_counts": {
+      "0.1|NOT_APPLICABLE_NO_CLEAR_BACKGROUND": 30,
+      "0.1|NOT_APPLICABLE_NO_CLEAR_LAKE_PIXEL_IN_SELECTION": 50,
+      "0.1|SCORED": 160,
+      "0.25|NOT_APPLICABLE_NO_CLEAR_BACKGROUND": 30,
+      "0.25|NOT_APPLICABLE_NO_CLEAR_LAKE_PIXEL_IN_SELECTION": 40,
+      "0.25|SCORED": 170,
+      "0.5|NOT_APPLICABLE_NO_CLEAR_BACKGROUND": 30,
+      "0.5|NOT_APPLICABLE_NO_CLEAR_LAKE_PIXEL_IN_SELECTION": 30,
+      "0.5|SCORED": 180,
+      "1.0|NOT_APPLICABLE_NO_CLEAR_BACKGROUND": 30,
+      "1.0|NOT_APPLICABLE_NO_CLEAR_LAKE_PIXEL_IN_SELECTION": 30,
+      "1.0|SCORED": 180
+    },
+    "methods": {
+      "score_a_zone0_1": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.25,
+            "perturbed_detection_rate": 0.9375,
+            "median_paired_change": 0.46172685189768004,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": true
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.23529411764705882,
+            "perturbed_detection_rate": 0.9411764705882353,
+            "median_paired_change": 1.498643078149457,
+            "fraction_changed_in_expected_direction": 0.9411764705882353,
+            "registers": true
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.2777777777777778,
+            "perturbed_detection_rate": 0.9444444444444444,
+            "median_paired_change": 3.5007677567296898,
+            "fraction_changed_in_expected_direction": 0.8888888888888888,
+            "registers": true
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.2777777777777778,
+            "perturbed_detection_rate": 0.9444444444444444,
+            "median_paired_change": 5.315262643001024,
+            "fraction_changed_in_expected_direction": 0.9444444444444444,
+            "registers": true
+          }
+        }
+      },
+      "score_b_zone0_1": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.06571244951980582,
+            "fraction_changed_in_expected_direction": 0.9375,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.1794813758745777,
+            "fraction_changed_in_expected_direction": 0.8823529411764706,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.05555555555555555,
+            "median_paired_change": 0.4178891801240472,
+            "fraction_changed_in_expected_direction": 0.8888888888888888,
+            "registers": false
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.3888888888888889,
+            "median_paired_change": 1.0160505173749095,
+            "fraction_changed_in_expected_direction": 0.9444444444444444,
+            "registers": true
+          }
+        }
+      },
+      "score_c": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0625,
+            "perturbed_detection_rate": 0.0625,
+            "median_paired_change": 0.6489126298576569,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.058823529411764705,
+            "perturbed_detection_rate": 0.5294117647058824,
+            "median_paired_change": 1.2116337154123138,
+            "fraction_changed_in_expected_direction": 0.9411764705882353,
+            "registers": true
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.1111111111111111,
+            "perturbed_detection_rate": 0.9444444444444444,
+            "median_paired_change": 1.826578884911432,
+            "fraction_changed_in_expected_direction": 0.8888888888888888,
+            "registers": true
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.1111111111111111,
+            "perturbed_detection_rate": 0.9444444444444444,
+            "median_paired_change": 2.4965855784967843,
+            "fraction_changed_in_expected_direction": 0.9444444444444444,
+            "registers": true
+          }
+        }
+      },
+      "water_candidate_area_km2": {
+        "direction": -1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.1260000000000001,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.3124000000000001,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.6002000000000001,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": false
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -1.1362,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": false
+          }
+        }
+      },
+      "seasonal_climatology_residual": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.2389312900642439,
+            "fraction_changed_in_expected_direction": 0.9375,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.6938869528225566,
+            "fraction_changed_in_expected_direction": 0.8823529411764706,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.7777777777777778,
+            "median_paired_change": 1.4363368085779,
+            "fraction_changed_in_expected_direction": 0.8333333333333334,
+            "registers": true
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.8333333333333334,
+            "median_paired_change": 2.9372921086534545,
+            "fraction_changed_in_expected_direction": 0.8888888888888888,
+            "registers": true
+          }
+        }
+      },
+      "spatial_persistence_residual": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.125,
+            "perturbed_detection_rate": 0.125,
+            "median_paired_change": 0.1775153984902974,
+            "fraction_changed_in_expected_direction": 0.875,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.11764705882352941,
+            "perturbed_detection_rate": 0.11764705882352941,
+            "median_paired_change": 0.5506308145887686,
+            "fraction_changed_in_expected_direction": 0.8823529411764706,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.16666666666666666,
+            "perturbed_detection_rate": 0.3888888888888889,
+            "median_paired_change": 1.2334187387950553,
+            "fraction_changed_in_expected_direction": 0.9444444444444444,
+            "registers": true
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.16666666666666666,
+            "perturbed_detection_rate": 0.9444444444444444,
+            "median_paired_change": 2.6206604032908,
+            "fraction_changed_in_expected_direction": 1.0,
+            "registers": true
+          }
+        }
+      },
+      "isolation_forest_score": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0625,
+            "perturbed_detection_rate": 0.0625,
+            "median_paired_change": -0.0027515762492593687,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.058823529411764705,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.007030744504036179,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.01621647951694951,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.028741713799312806,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          }
+        }
+      },
+      "one_class_svm_score": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0625,
+            "perturbed_detection_rate": 0.0625,
+            "median_paired_change": -0.06752418124731951,
+            "fraction_changed_in_expected_direction": 0.1875,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.058823529411764705,
+            "perturbed_detection_rate": 0.058823529411764705,
+            "median_paired_change": -0.1528317135027395,
+            "fraction_changed_in_expected_direction": 0.17647058823529413,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.05555555555555555,
+            "median_paired_change": -0.5874245333106294,
+            "fraction_changed_in_expected_direction": 0.1111111111111111,
+            "registers": false
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.05555555555555555,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": -0.9798044655239662,
+            "fraction_changed_in_expected_direction": 0.05555555555555555,
+            "registers": false
+          }
+        }
+      },
+      "missingness_only_score": {
+        "direction": 1,
+        "by_fraction": {
+          "0.1": {
+            "scenes": 16,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.0,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          },
+          "0.25": {
+            "scenes": 17,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.0,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          },
+          "0.5": {
+            "scenes": 18,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.0,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          },
+          "1.0": {
+            "scenes": 18,
+            "clean_detection_rate": 0.0,
+            "perturbed_detection_rate": 0.0,
+            "median_paired_change": 0.0,
+            "fraction_changed_in_expected_direction": 0.0,
+            "registers": false
+          }
+        }
+      }
+    }
+  },
+  "estimands": {
+    "E1": {
+      "name": "Event-onset detection timing",
+      "status": "NOT_ESTIMABLE",
+      "reason": "No independent review of the event bracket, no delivery-availability record and no calibrated alarm operating point."
+    },
+    "E2": {
+      "name": "False-alert burden per event-free lake-year",
+      "status": "NOT_ESTIMABLE",
+      "reason": "No independently verified event-free control lake-years or measured exposure."
+    },
+    "E3": {
+      "name": "Out-of-sample seasonal percentile of post-event scores",
+      "status": "NOT_ESTIMABLE",
+      "reason": "No rolling-origin models: every checkpoint was fitted on 2018-2021 and early-2023 scenes."
+    },
+    "E4": {
+      "name": "Within-scene zone 0+1 versus zone 2 contrast",
+      "status": "DESCRIPTIVE_CONDITIONAL",
+      "reason": "Zones follow the 2017 Hi-MAG outline, not a 2018-2023 shoreline; patches are dependent."
+    },
+    "E5": {
+      "name": "Incremental warning value at a common operating point",
+      "status": "NOT_ESTIMABLE",
+      "reason": "No common calibrated operating point and no verified controls."
+    }
+  },
+  "software": {
+    "python": "3.12.8",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "packages": {
+      "torch": "2.12.1",
+      "numpy": "2.5.0",
+      "scipy": "1.18.0",
+      "scikit-learn": "1.9.0",
+      "rasterio": "1.5.1",
+      "pyproj": "3.7.2",
+      "shapely": "2.1.2",
+      "pyshp": "3.1.6",
+      "python-docx": "1.2.0",
+      "matplotlib": "3.11.0"
+    }
+  },
+  "replay": {
+    "tool": "tools/replay_sr1_plos.py",
+    "tool_sha256": "f991810b8211a5511d14b8dfa547a4d8c4ad760f23fe34c19dd0d30190c293c0",
+    "seeds": [
+      {
+        "seed": 0,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 1,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 2,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 3,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 4,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 5,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 6,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 7,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 8,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      },
+      {
+        "seed": 9,
+        "scenes": 141,
+        "max_abs_prediction_difference": 0.0,
+        "max_abs_score_a_difference": 0.0,
+        "status": "PASS"
+      }
+    ],
+    "status": "PASS"
+  },
+  "protocol": {
+    "amendment": "docs/protocol/SR1_AMENDMENT_PLOS_001.json",
+    "amendment_sha256": "874388c5269db160f8bc2b57ec75299aab264c88e48cd7be9c9becac6dd46360",
+    "frozen_utc": "2026-11-17T10:12:28+00:00"
+  }
+}
