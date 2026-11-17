@@ -395,11 +395,16 @@ class Builder:
                f"scikit-learn {self.fx(self.packet['software']['packages']['scikit-learn'], 'packet software')}, rasterio {self.fx(self.packet['software']['packages']['rasterio'], 'packet software')} "
                f"and matplotlib {self.fx(self.packet['software']['packages']['matplotlib'], 'packet software')}, with a hash-pinned dependency lock.")
         self.H("Use of AI tools", 2)
-        self.P("AI coding and writing assistants were used: OpenAI Codex and Google Antigravity agents for earlier pipeline stages and "
-               "drafts, and Anthropic Claude (Claude Opus 5.5 in Claude Code) for code review, the corrections and re-analysis described "
-               "above, figure code and drafting of this manuscript. No AI tool produced observations, labels or result values; all values "
-               "come from executed code on the retained data and are checked by the automated verification described above. The author "
-               "reviewed the code and text and is responsible for the content.")
+        self.P("The author conceived the study and its research questions, chose the study lakes and data sources, and designed "
+               "the approach: source-bound acquisition of Sentinel-2 windows, missingness-aware masked spatiotemporal modelling, the "
+               "time-based fitting, validation and post-event splits, and comparison with simple references. The author also "
+               "commissioned the code reviews and the pre-submission review that identified the defects corrected here, approved the "
+               "corrections, and interpreted the results. AI assistants were used extensively to carry out this work: OpenAI Codex and "
+               "Google Antigravity agents to implement and run earlier pipeline stages and drafts, and Anthropic Claude (Claude Opus "
+               "5.5 in Claude Code) to review code, implement the corrections and the re-analysis, produce the figures, check the "
+               "references and draft and edit this manuscript under the author's direction. No AI tool produced observations, labels "
+               "or result values; all values come from executed code on the retained data and are checked by the automated "
+               "verification described above. The author reviewed the code and text and takes full responsibility for the content.")
 
         # ------------------------------------------------ results
         self.H("Results")
@@ -753,21 +758,22 @@ def write_cover_letter():
         "five quantities we set out to estimate are reported as not estimable, with reasons. We believe this negative and "
         "bounded result is useful to the growing literature applying learned models to glacial-lake hazards, and that PLOS ONE's "
         "focus on rigour rather than perceived impact makes it the right venue.",
-        "Related material and history (author to keep exactly one of the two sentences in brackets): An earlier version of this "
-        "analysis was prepared for the ICT-CEEL 2027 conference [and was not submitted / and was submitted and has been "
-        "withdrawn]. That version contained a training defect, corrected here, and none of its results are used. An earlier, "
-        "superseded snapshot of the code was public in the author's GitHub repository; the repository now carries the release "
-        "described in the manuscript.",
+        "This analysis was originally planned for the ICT-CEEL 2027 conference, but it was not submitted there or to any "
+        "other venue. An earlier version of the analysis contained a training defect, corrected here, and none of its results "
+        "are used. An earlier, superseded snapshot of the code was public in the author's GitHub repository; the repository now "
+        "carries the release described in the manuscript.",
         "All data, code, model checkpoints and score tables are openly available (see the Data Availability Statement). The "
         "analysis protocol amendment was frozen, with code digests, before the models were trained, and every number in the "
         "manuscript is regenerated and checked from the retained prediction rows by a verification script. AI tools used in "
-        "the work are disclosed in the Methods.",
-        "The manuscript has not been published and is not under consideration elsewhere. There are no competing interests.",
+        "the work, and the author's own contribution, are described in the Methods.",
+        "The manuscript has not been published and is not under consideration elsewhere. The work received no specific "
+        "funding, and the author has no competing interests. As an author based at a Nepali institution without external "
+        "funding for this study, I am requesting publication-fee assistance under PLOS's Research4Life Group A policy.",
         "Thank you for your consideration.",
         "Sincerely,",
         "Aditya Shrestha",
         "Department of Computer Science and Engineering, School of Engineering, Kathmandu University, Dhulikhel, Nepal",
-        "as03233622@student.ku.edu.np",
+        "as03233622@student.ku.edu.np · ORCID 0009-0009-2913-4823",
     ]
     for text in paras:
         doc.add_paragraph(text)

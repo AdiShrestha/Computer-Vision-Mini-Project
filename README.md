@@ -31,6 +31,10 @@ With the data deposit unzipped at the repository root, `make all-from-deposit` r
 
 Earlier versions of this repository held a fixture-based prototype, a 2023-only analysis and an ICT-CEEL 2027 draft. A 2026-11-17 review found that the trainer behind those drafts hid every observed patch of every training scene, among other defects; amendment PLOS-001 (`docs/protocol/`) corrects them, and none of the earlier results is used. The earlier material remains in git history.
 
+## Archives
+
+Data deposit: doi:DATA_DOI_PENDING. Code archive: doi:CODE_DOI_PENDING.
+
 ## Licence
 
 Code: MIT (`LICENSE`). Documentation, protocol, results and figures: CC BY 4.0. Contains modified Copernicus Sentinel data [2018–2023]. See `docs/LICENSE_NOTICE.md`.

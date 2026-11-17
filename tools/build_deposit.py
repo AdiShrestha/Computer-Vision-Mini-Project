@@ -102,7 +102,7 @@ Licence: CC BY 4.0. {NOTICE}
     subprocess.run(["git", "archive", "--format=zip", "--prefix=sentinel-gl/", "-o", str(code_zip), "HEAD"],
                    cwd=ROOT, check=True)
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
-    creators = [{"name": "Shrestha, Aditya",
+    creators = [{"name": "Shrestha, Aditya", "orcid": "0009-0009-2913-4823",
                  "affiliation": "Department of Computer Science and Engineering, School of Engineering, Kathmandu University"}]
     (REL / "zenodo_data_metadata.json").write_text(json.dumps({"metadata": {
         "upload_type": "dataset", "title": "Sentinel-GL data deposit: Sentinel-2 ROI time series, zones, checkpoints and scores for South Lhonak and Khangchung Tsho (2018-2023)",

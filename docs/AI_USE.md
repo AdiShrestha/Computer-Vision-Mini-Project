@@ -1,6 +1,12 @@
 # Use of AI tools
 
-PLOS ONE asks authors to disclose AI tools used to generate or revise content or analysis code. This file records what the repository itself documents. The author must confirm it before submission (see `submission/plos_one/OWNER_CHECKLIST.md`).
+PLOS ONE asks authors to disclose AI tools used to generate or revise content or analysis code. AI assistance was extensive; this file states what the author did and what the tools did.
+
+## Author's contribution
+
+Aditya Shrestha conceived the study and its research questions, chose the study lakes and data sources, and designed the approach: source-bound acquisition of Sentinel-2 windows with receipts, missingness-aware masked spatiotemporal modelling, the time-based fitting/validation/post-event splits, and comparison with simple references. He commissioned the code reviews and the pre-submission review that identified the defects corrected in amendment PLOS-001, approved the corrections, interpreted the results and is responsible for the content.
+
+## Tools
 
 | Tool | Where it was used (as recorded in the project) |
 |---|---|

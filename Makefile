@@ -3,7 +3,7 @@
 PY ?= python3
 export PYTHONPATH := source
 
-.PHONY: help install test acquire zones train score replay packet figures references manuscript verify deposit all-from-deposit
+.PHONY: help install test dois acquire zones train score replay packet figures references manuscript verify deposit all-from-deposit
 
 help:
 	@echo "install            create the hash-locked environment (python -m pip install --require-hashes -r requirements.lock)"
@@ -12,6 +12,7 @@ help:
 	@echo "zones|train|score  analysis stages under amendment PLOS-001 (need the corpus from the data deposit)"
 	@echo "replay             independent replay of predictions and Score A from saved checkpoints"
 	@echo "packet figures manuscript verify   result packet -> figures -> DOCX -> data-driven verification"
+	@echo "dois DATA_DOI=.. CODE_DOI=..   insert the reserved Zenodo DOIs into the release documents"
 	@echo "all-from-deposit   replay packet figures manuscript verify (uses the deposited checkpoints and scores)"
 
 install:
@@ -52,5 +53,8 @@ verify:
 
 deposit:
 	$(PY) -B tools/build_deposit.py
+
+dois:
+	$(PY) -B tools/set_dois.py $(DATA_DOI) $(CODE_DOI)
 
 all-from-deposit: replay packet figures manuscript verify
