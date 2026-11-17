@@ -1,8 +1,7 @@
-"""Regional cohort expansion, spatial clustering, and lake eligibility auditing engine.
+"""Unverified historical candidate declarations and numerical clustering controls.
 
-Curates verified High Mountain Asia candidate glacial lakes and historical GLOF events
-from the Sentinel observation era (2016-2024), enforces spatial clustering with >= 50 km
-buffer to prevent hydrological split leakage, and audits catalogue selection bias.
+Candidate values have no admitted source evidence. Distance clustering alone
+does not establish hydrological, scene, reanalysis or temporal independence.
 """
 from __future__ import annotations
 import argparse
@@ -27,8 +26,8 @@ def haversine_distance_km(lat1: float, lon1: float, lat2: float, lon2: float) ->
     return EARTH_RADIUS_KM * c
 
 
-def get_expanded_lake_registry() -> List[Dict[str, Any]]:
-    """Curate verified candidate glacial lakes across High Mountain Asia.
+def get_expanded_lake_registry(*, include_unverified=False) -> List[Dict[str, Any]]:
+    """Inspect unverified historical candidate declarations; never admitted measurements.
 
     Includes 4 historical event lakes (2016-2024) and 4 matched negative-control lakes:
       - SGL-001 (South Lhonak, IND): Event case, Sikkim / Teesta basin.
@@ -40,7 +39,10 @@ def get_expanded_lake_registry() -> List[Dict[str, Any]]:
       - SGL-007 (Galong Tsho, CHN): Matched control, Central Himalaya / Gyirong basin.
       - SGL-008 (Longbasaba Lake, CHN): Matched control, Central Himalaya / Pumqu basin.
     """
-    return [
+    if not include_unverified:
+        from .admission import blocked
+        blocked("unverified lake registry")
+    candidates = [
         {
             "lake_id": "SGL-001",
             "rgi_id": "RGI60-15.03976",
@@ -162,11 +164,15 @@ def get_expanded_lake_registry() -> List[Dict[str, Any]]:
             "cohort_role": "control",
         },
     ]
+    return [{**r, 'origin': 'unverified', 'status': 'UNVERIFIED', 'research_admissible': False} for r in candidates]
 
 
-def get_expanded_event_registry() -> List[Dict[str, Any]]:
-    """Curate verified historical GLOF and rapid drainage events in Sentinel era (2016-2024)."""
-    return [
+def get_expanded_event_registry(*, include_unverified=False) -> List[Dict[str, Any]]:
+    """Inspect unverified event declarations, including a separate landslide candidate."""
+    if not include_unverified:
+        from .admission import blocked
+        blocked("unverified event registry")
+    candidates = [
         {
             "event_id": "EVT-001",
             "lake_id": "SGL-001",
@@ -212,34 +218,15 @@ def get_expanded_event_registry() -> List[Dict[str, Any]]:
             "primary_reference": "doi:10.1007/s10346-019-01150-1; Fan et al. (2019)",
         },
     ]
+    return [{**r, 'origin': 'unverified', 'status': 'UNVERIFIED', 'research_admissible': False,
+             'primary_reference_status': 'UNVERIFIED', 'declared_evidence_tier': r['evidence_tier'],
+             'evidence_tier': None, 'declared_onset_confidence': r['onset_confidence'],
+             'onset_confidence': None} for r in candidates]
 
 
-def export_expanded_registries(
-    lake_path: Path,
-    event_path: Path,
-) -> Tuple[Path, Path]:
-    """Export expanded candidate lake and event registries to CSV."""
-    lake_path.parent.mkdir(parents=True, exist_ok=True)
-    event_path.parent.mkdir(parents=True, exist_ok=True)
-
-    lakes = get_expanded_lake_registry()
-    events = get_expanded_event_registry()
-
-    # Write lakes CSV
-    lake_fieldnames = list(lakes[0].keys())
-    with open(lake_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=lake_fieldnames)
-        writer.writeheader()
-        writer.writerows(lakes)
-
-    # Write events CSV
-    event_fieldnames = list(events[0].keys())
-    with open(event_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=event_fieldnames)
-        writer.writeheader()
-        writer.writerows(events)
-
-    return lake_path, event_path
+def export_expanded_registries(*args, **kwargs):
+    from .admission import blocked
+    blocked("unverified cohort or empirical InSAR report")
 
 
 def cluster_lakes_spatially(
@@ -383,6 +370,8 @@ def audit_cohort_integrity(
     status = "PASS" if not errors else "FAIL"
     return {
         "status": status,
+        "scope": "declared candidate consistency only; no authenticity or independence finding",
+        "research_admissible": False,
         "errors": errors,
         "inter_cluster_violations": inter_cluster_violations,
         "split_leakage_detected": split_leakage_detected,
@@ -390,46 +379,9 @@ def audit_cohort_integrity(
     }
 
 
-def main() -> int:
-    """CLI entrypoint for exporting expanded registries and auditing cohort integrity."""
-    parser = argparse.ArgumentParser(description="Sentinel-GL Regional Cohort Expansion.")
-    parser.add_argument("--export", action="store_true", help="Export expanded CSV registries to data/")
-    parser.add_argument("--data-dir", type=str, default="data", help="Directory for data registries")
-    args = parser.parse_args()
-
-    data_dir = Path(args.data_dir)
-    lake_path = data_dir / "lake_registry_expanded.csv"
-    event_path = data_dir / "event_registry_expanded.csv"
-
-    if args.export:
-        export_expanded_registries(lake_path, event_path)
-        print(f"Exported expanded lake registry to: {lake_path}")
-        print(f"Exported expanded event registry to: {event_path}")
-
-    lakes = get_expanded_lake_registry()
-    events = get_expanded_event_registry()
-
-    # Sample split allocation for audit demonstration
-    sample_splits = {
-        "training": ["SGL-003", "SGL-006"],             # Hunza cluster
-        "calibration": ["SGL-004", "SGL-007"],          # Gyirong cluster
-        "evaluation": ["SGL-001", "SGL-002", "SGL-008"] # Sikkim and Pumqu clusters
-    }
-
-    audit_res = audit_cohort_integrity(lakes, events, splits=sample_splits)
-    print("=" * 60)
-    print("Sentinel-GL Cohort Expansion & Spatial Integrity Audit")
-    print("=" * 60)
-    print(f"Cohort Status:                {audit_res['status']}")
-    print(f"Total Lakes:                  {audit_res['selection_bias']['n_lakes']} (4 Events, 4 Controls)")
-    print(f"Total Events:                 {audit_res['selection_bias']['n_events']}")
-    print(f"Countries:                    {', '.join(audit_res['selection_bias']['countries'])}")
-    print(f"Basins:                       {', '.join(audit_res['selection_bias']['basins'])}")
-    print(f"Spatial Cluster Violations:   {len(audit_res['inter_cluster_violations'])}")
-    print(f"Split Leakage Detected:       {audit_res['split_leakage_detected']}")
-    print("=" * 60)
-
-    return 0 if audit_res["status"] == "PASS" else 1
+def main(*args, **kwargs):
+    from .admission import blocked
+    blocked("unverified cohort or empirical InSAR report")
 
 
 if __name__ == "__main__":

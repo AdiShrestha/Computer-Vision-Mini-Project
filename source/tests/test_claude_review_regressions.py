@@ -99,18 +99,17 @@ def test_release_batch_selects_one_fresh_context_not_multiple_crossings():
         schedule_as_of(late_windows()[::-1], ['2023-01-20'])
 
 
-def test_capacity_alias_preserves_architecture_and_rejects_ambiguous_config():
+def test_model_capacity_is_explicit_and_rejects_legacy_alias():
     config = small_model().configuration
     model = TimeSeriesMAE(**config)
-    assert model.max_time_steps == 6 and model.n_windows == 6
+    assert model.max_time_steps == 6
     assert 'n_windows' not in model.configuration
     alias = dict(config)
     alias['n_windows'] = alias.pop('max_time_steps')
-    with pytest.warns(DeprecationWarning):
-        old = TimeSeriesMAE(**alias)
-    assert old.configuration == config and old.count_parameters() == model.count_parameters()
-    with pytest.raises(ValueError):
-        TimeSeriesMAE(n_windows=6, max_time_steps=6)
+    with pytest.raises(TypeError):
+        TimeSeriesMAE(**alias)
+    with pytest.raises(TypeError):
+        TimeSeriesMAE(n_channels=2, n_windows=6, max_time_steps=6)
     x = torch.zeros(1, 7, 2)
     with pytest.raises(ValueError):
         model.get_full_embeddings(x, torch.ones_like(x, dtype=torch.bool))

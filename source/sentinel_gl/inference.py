@@ -207,19 +207,19 @@ def poisson_rate_confidence_interval(
 ) -> Tuple[float, float]:
     """Compute exact Garwood / Chi-Square Poisson confidence interval for rate lambda = count / exposure.
 
-    For count == 0: CI = [0.0, -ln(alpha) / exposure].
+    For count == 0: CI = [0.0, -ln(alpha / 2) / exposure].
     Rejects non-positive exposure or negative count.
     """
-    if exposure <= 0.0 or not np.isfinite(exposure):
+    if isinstance(exposure, (bool, np.bool_)) or not isinstance(exposure, (int, float, np.integer, np.floating)) or exposure <= 0.0 or not np.isfinite(exposure):
         raise ValueError(f"exposure must be strictly positive and finite, got {exposure}")
-    if count < 0 or not isinstance(count, (int, np.integer)):
+    if isinstance(count, (bool, np.bool_)) or count < 0 or not isinstance(count, (int, np.integer)):
         raise ValueError(f"count must be a non-negative integer, got {count}")
-    if not (0.0 < alpha < 1.0):
+    if isinstance(alpha, (bool, np.bool_)) or not isinstance(alpha, (int, float, np.integer, np.floating)) or not (0.0 < alpha < 1.0):
         raise ValueError(f"alpha must be in (0, 1), got {alpha}")
 
     if count == 0:
         ci_lower = 0.0
-        ci_upper = float(-math.log(alpha) / exposure)
+        ci_upper = float(-math.log(alpha / 2) / exposure)
         return ci_lower, ci_upper
 
     # Garwood exact limits:
@@ -254,10 +254,13 @@ def cluster_conditional_metrics(
             "clusters": {},
         }
 
-    # Group lakes by cluster ID
+    # Unknown membership cannot establish independent clusters.
+    if set(lake_metrics) - set(cluster_map) or any(type(cluster_map[lid]) is not str or not cluster_map[lid].strip() for lid in lake_metrics):
+        return {"status": "NOT_ESTIMABLE", "reason": "UNKNOWN_CLUSTER_MEMBERSHIP", "n_clusters": None, "clusters": {}}
+    # Group lakes by explicitly supplied cluster ID
     clusters: Dict[str, List[str]] = {}
     for lake_id in sorted(lake_metrics.keys()):
-        c_id = cluster_map.get(lake_id, f"CLUSTER_UNKNOWN_{lake_id}")
+        c_id = cluster_map[lake_id]
         if c_id not in clusters:
             clusters[c_id] = []
         clusters[c_id].append(lake_id)
@@ -281,6 +284,8 @@ def cluster_conditional_metrics(
             valid_vals = []
             for l_id in lakes:
                 val = lake_metrics[l_id].get(m_key)
+                if isinstance(val, (bool, np.bool_)):
+                    raise ValueError("boolean metric is not a numeric measurement")
                 if val is not None and isinstance(val, (int, float, np.number)) and np.isfinite(val):
                     valid_vals.append(float(val))
 
@@ -297,7 +302,7 @@ def cluster_conditional_metrics(
             else:
                 arr = np.array(valid_vals, dtype=np.float64)
                 mean_val = float(np.mean(arr))
-                std_val = float(np.std(arr, ddof=1)) if len(arr) > 1 else 0.0
+                std_val = float(np.std(arr, ddof=1)) if len(arr) > 1 else None
                 min_val = float(np.min(arr))
                 max_val = float(np.max(arr))
                 c_summary["metrics"][m_key] = {
@@ -305,6 +310,8 @@ def cluster_conditional_metrics(
                     "reason": None,
                     "mean": mean_val,
                     "std": std_val,
+                    "std_status": "ESTIMATED" if std_val is not None else "NOT_ESTIMABLE",
+                    "std_reason": None if std_val is not None else "ONE_CLUSTER_MEMBER",
                     "min": min_val,
                     "max": max_val,
                     "n_valid": len(arr),

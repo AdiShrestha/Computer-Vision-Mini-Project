@@ -17,14 +17,14 @@ import numpy as np
 import pytest
 
 from sentinel_gl.features import (
+    DEFAULT_CHANNEL_SCHEMA,
+    OPTIONAL_CANDIDATE_SCHEMA,
     FEATURE_CHANNELS,
     NUM_CHANNELS,
-    WINDOW_DAYS,
     observed_array,
     compute_normalized_difference,
     compute_ndwi,
     compute_mndwi,
-    compute_ndsi,
     linear_power_from_db,
     db_from_linear_power,
     sar_linear_power_mean_db,
@@ -42,7 +42,7 @@ def test_optical_index_algebraic_correctness():
     assert compute_normalized_difference(1.0, 0.0) == 1.0
     assert compute_normalized_difference(0.0, 1.0) == -1.0
     assert compute_normalized_difference(0.5, 0.5) == 0.0
-    assert compute_normalized_difference(0.0, 0.0) == 0.0
+    assert math.isnan(compute_normalized_difference(0.0, 0.0))
 
     # 2. NDWI = (Green - NIR) / (Green + NIR)
     # Clear water typically has high green, low NIR -> positive NDWI
@@ -53,14 +53,18 @@ def test_optical_index_algebraic_correctness():
     # 3. MNDWI = (Green - SWIR) / (Green + SWIR)
     assert compute_mndwi(0.25, 0.05) == pytest.approx(0.20 / 0.30)
 
-    # 4. NDSI = (Green - SWIR) / (Green + SWIR)
-    assert compute_ndsi(0.40, 0.10) == pytest.approx(0.30 / 0.50)
+    # MNDWI and NDSI use the same B03/B11 expression and are one channel.
+    assert compute_mndwi(0.40, 0.10) == pytest.approx(0.30 / 0.50)
+    assert FEATURE_CHANNELS.count("mndwi_mean") == 1
+    assert all("ndsi" not in name for name in FEATURE_CHANNELS)
+    assert compute_normalized_difference(-0.1, 0.2) == pytest.approx(-3.0)
 
     # 5. Array vectorization
     g = np.array([0.2, 0.4, 0.0])
     n = np.array([0.1, 0.4, 0.0])
     res = compute_ndwi(g, n)
-    assert np.allclose(res, [(0.2 - 0.1) / 0.3, 0.0, 0.0])
+    assert np.allclose(res[:2], [(0.2 - 0.1) / 0.3, 0.0])
+    assert np.isnan(res[2])
 
 
 def test_sar_linear_power_averaging_and_conversions():
@@ -95,14 +99,11 @@ def test_sar_linear_power_averaging_and_conversions():
 
 
 def test_kelvin_to_celsius_conversion_exactness():
-    # Temperature in Kelvin (> 100.0) converts to Celsius
-    assert convert_kelvin_to_celsius(273.15) == pytest.approx(0.0)
-    assert convert_kelvin_to_celsius(300.0) == pytest.approx(26.85)
-    assert convert_kelvin_to_celsius(250.0) == pytest.approx(-23.15)
+    assert convert_kelvin_to_celsius(273.15,unit='K')==pytest.approx(0.)
+    assert convert_kelvin_to_celsius(12.5,unit='degC')==12.5
+    assert convert_kelvin_to_celsius(12.5,unit='K')==pytest.approx(-260.65)
+    with pytest.raises(ValueError):convert_kelvin_to_celsius(273.15,unit='unknown')
 
-    # Already in Celsius: untouched (never double-converted)
-    assert convert_kelvin_to_celsius(12.5) == 12.5
-    assert convert_kelvin_to_celsius(-8.0) == -8.0
 
 
 def test_static_topography_immutability():
@@ -124,415 +125,104 @@ def test_static_topography_immutability():
         StaticTopography(elevation_m=5000.0, moraine_slope_deg=20.0, catchment_area_km2=-2.0)
 
 
-def test_explicit_nan_missingness_mask_propagation():
-    pipeline = FeatureExtractionPipeline(cloud_cover_threshold_pct=30.0, window_days=180)
-    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=12.0)
+def test_explicit_nan_missingness_mask_propagation(tmp_path):
+    from admission_fixtures import measurement_fixture
+    ctx, record = measurement_fixture(tmp_path)
+    p = FeatureExtractionPipeline(2, admission=ctx).extract_panel('ANALYTICAL-SITE','fixture','2023-01-01',optical_observations=[record])
+    assert np.array_equal(np.isnan(p.values), ~p.mask)
+    assert p.values[1,1] == pytest.approx(.5)
+    assert p.values[1,0] == pytest.approx(.0001)
+    assert not p.mask[0].any()
 
-    # Window from 2023-01-01 to 2023-06-29 (180 days)
-    start_date = "2023-01-01"
-
-    optical_obs = [
-        # Clear optical pass on 2023-01-10 (Day 9)
-        {
-            "record_id": "S2-CLEAR",
-            "acquisition_timestamp": "2023-01-10T04:30:00Z",
-            "cloud_cover_percentage": 5.0,
-            "metadata": {
-                "bands": {"B03": 0.25, "B08": 0.05, "B11": 0.02},
-                "lake_area_km2": 1.35,
-            },
-            "sha256": "hash_clear",
-        },
-        # Cloudy optical pass on 2023-01-20 (Day 19) -> 65% cloud -> MUST BE CLOUD MASKED (NaN)
-        {
-            "record_id": "S2-CLOUDY",
-            "acquisition_timestamp": "2023-01-20T04:30:00Z",
-            "cloud_cover_percentage": 65.0,
-            "metadata": {
-                "bands": {"B03": 0.50, "B08": 0.50, "B11": 0.40},
-                "lake_area_km2": 1.35,
-            },
-            "sha256": "hash_cloudy",
-        },
-    ]
-
-    sar_obs = [
-        # SAR pass on 2023-01-15 (Day 14)
-        {
-            "record_id": "S1-PASS",
-            "acquisition_timestamp": "2023-01-15T12:00:00Z",
-            "metadata": {
-                "vv_db_pixels": [-16.0, -17.0, -15.5],
-                "vh_db_pixels": [-24.0, -25.0, -23.5],
-            },
-            "sha256": "hash_sar",
-        }
-    ]
-
-    era5_obs = [
-        # Daily ERA5 on 2023-01-01 to 2023-01-03
-        {
-            "record_id": "ERA5-01",
-            "acquisition_timestamp": "2023-01-01T12:00:00Z",
-            "metadata": {"t2m_mean_c": -5.2, "precipitation_total_mm": 1.4, "t2m_anomaly": -0.8},
-            "sha256": "hash_era5_01",
-        },
-        {
-            "record_id": "ERA5-02",
-            "acquisition_timestamp": "2023-01-02T12:00:00Z",
-            "metadata": {"t2m_mean_c": -4.8, "precipitation_total_mm": 0.0, "t2m_anomaly": -0.4},
-            "sha256": "hash_era5_02",
-        },
-    ]
-
-    panel = pipeline.extract_panel(
-        lake_id="SGL-001",
-        window_id="WIN-TEST-01",
-        start_date=start_date,
-        static_topography=topo,
-        optical_observations=optical_obs,
-        sar_observations=sar_obs,
-        era5_observations=era5_obs,
-    )
-
-    assert panel.values.shape == (180, 11)
-    assert panel.mask.shape == (180, 11)
-
-    # 1. Strict observed_array consistency: where mask=False, value must be NaN; where mask=True, value must be finite
-    assert np.all(np.isnan(panel.values) == ~panel.mask)
-    assert np.all(np.isfinite(panel.values) == panel.mask)
-
-    # 2. Clear optical pass (Day 9 = 2023-01-10) is valid and populated
-    day_clear = 9
-    assert np.all(panel.mask[day_clear, 0:4] == True)
-    assert panel.values[day_clear, 0] == 1.35  # area
-    assert panel.values[day_clear, 1] > 0.0   # ndwi
-    assert panel.values[day_clear, 2] > 0.0   # mndwi
-
-    # 3. Cloudy optical pass (Day 19 = 2023-01-20) is NaN with mask=False (ZERO IMPUTATION FORBIDDEN)
-    day_cloudy = 19
-    assert np.all(panel.mask[day_cloudy, 0:4] == False)
-    assert np.all(np.isnan(panel.values[day_cloudy, 0:4]))
-
-    # 4. SAR pass (Day 14 = 2023-01-15) is valid and populated
-    day_sar = 14
-    assert np.all(panel.mask[day_sar, 4:8] == True)
-    assert panel.values[day_sar, 4] < 0.0  # vv_db_mean
-    assert panel.values[day_sar, 5] < 0.0  # vh_db_mean
-    assert panel.values[day_sar, 7] >= 0.0 # vv_spatial_variance
-
-    # 5. Days without SAR (e.g. Day 0) must be NaN with mask=False
-    assert np.all(panel.mask[0, 4:8] == False)
-    assert np.all(np.isnan(panel.values[0, 4:8]))
-
-    # 6. Provenance hashes recorded
-    assert "optical_S2-CLEAR" in panel.provenance_hashes
-    assert "sar_S1-PASS" in panel.provenance_hashes
-    assert "era5_ERA5-01" in panel.provenance_hashes
-
-    # 7. Validates physical domain intervals
-    panel.validate_domains()
 
 
 def test_physical_domain_violations_detected():
-    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=12.0)
-    dates = tuple(f"2023-01-{i:02d}" for i in range(1, 181))
-    values = np.full((180, 11), np.nan, dtype=np.float64)
-    mask = np.zeros((180, 11), dtype=np.bool_)
-
-    # Insert an unphysical area: 15.0 km2 (> 5.0)
-    values[0, 0] = 15.0
-    mask[0, 0] = True
-
-    panel = MultiModalPanel(
-        lake_id="TEST-01",
-        window_id="W-01",
-        start_date="2023-01-01",
-        end_date="2023-06-29",
-        dates=dates,
-        values=values,
-        mask=mask,
-        static_metadata=topo,
-    )
-
-    with pytest.raises(ValueError, match="Physical domain violation on channel optical_lake_area_km2"):
-        panel.validate_domains()
+    dates=("2023-01-01", "2023-01-02")
+    values=np.full((len(dates),NUM_CHANNELS),np.nan); mask=np.zeros_like(values,dtype=bool)
+    values[0,0]=-1.;mask[0,0]=True
+    statuses=np.full(mask.shape,"UNAVAILABLE_TEST_FIXTURE",dtype=object);statuses[mask]="OBSERVED"
+    panel=MultiModalPanel('fixture','window',dates[0],dates[-1],dates,values,mask,None,
+        origin='fixture',statuses=statuses)
+    with pytest.raises(ValueError,match='domain violation'):panel.validate_domains()
+    panel.values[0,0]=15.
+    panel.validate_domains()  # No unsupported upper bound on real lake area.
 
 
-def test_panel_immutability_under_future_appends():
-    pipeline = FeatureExtractionPipeline()
-    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=12.0)
 
-    start_date = "2023-01-01"
+def test_panel_immutability_under_future_appends(tmp_path):
+    from admission_fixtures import measurement_fixture
+    from sentinel_gl.admission import AdmissionContext
+    ctx,r=measurement_fixture(tmp_path,suffix='past')
+    future,rf=measurement_fixture(tmp_path,suffix='future',day='2023-08-01')
+    before=FeatureExtractionPipeline(2,admission=ctx).extract_panel('ANALYTICAL-SITE','w','2023-01-01',optical_observations=[r])
+    ctx.manifest['artifacts'].update(future.manifest['artifacts']);ctx.manifest['measurements'].update(future.manifest['measurements'])
+    after=FeatureExtractionPipeline(2,admission=ctx).extract_panel('ANALYTICAL-SITE','w','2023-01-01',optical_observations=[r,rf])
+    assert np.array_equal(before.mask,after.mask)
+    assert np.allclose(before.values,after.values,equal_nan=True)
+    assert before.provenance_hashes==after.provenance_hashes
 
-    # Historical observations inside [2023-01-01, 2023-06-29]
-    hist_optical = [
-        {
-            "record_id": "S2-01",
-            "acquisition_timestamp": "2023-02-01T04:30:00Z",
-            "metadata": {"lake_area_km2": 1.30, "ndwi_mean": 0.45, "mndwi_mean": 0.50, "ndsi_mean": 0.35},
-        }
-    ]
-    hist_sar = [
-        {
-            "record_id": "S1-01",
-            "acquisition_timestamp": "2023-02-05T12:00:00Z",
-            "metadata": {"sar_vv_db_mean": -16.0, "sar_vh_db_mean": -24.0, "sar_vv_spatial_variance": 0.002},
-        }
-    ]
-
-    panel_initial = pipeline.extract_panel(
-        lake_id="SGL-001",
-        window_id="WIN-IMMUTABLE-01",
-        start_date=start_date,
-        static_topography=topo,
-        optical_observations=hist_optical,
-        sar_observations=hist_sar,
-    )
-
-    # Future observations arrived months later (e.g. July, August 2023)
-    future_optical = list(hist_optical) + [
-        {
-            "record_id": "S2-FUTURE",
-            "acquisition_timestamp": "2023-08-15T04:30:00Z",
-            "metadata": {"lake_area_km2": 1.45, "ndwi_mean": 0.55, "mndwi_mean": 0.60, "ndsi_mean": 0.40},
-        }
-    ]
-    future_sar = list(hist_sar) + [
-        {
-            "record_id": "S1-FUTURE",
-            "acquisition_timestamp": "2023-09-01T12:00:00Z",
-            "metadata": {"sar_vv_db_mean": -14.0, "sar_vh_db_mean": -21.0, "sar_vv_spatial_variance": 0.005},
-        }
-    ]
-
-    panel_re_extracted = pipeline.extract_panel(
-        lake_id="SGL-001",
-        window_id="WIN-IMMUTABLE-01",
-        start_date=start_date,
-        static_topography=topo,
-        optical_observations=future_optical,
-        sar_observations=future_sar,
-    )
-
-    # Verify past feature panel remains 100% byte-for-byte identical
-    assert np.array_equal(panel_initial.mask, panel_re_extracted.mask)
-    # Check NaN and numerical equality
-    assert np.array_equal(np.isnan(panel_initial.values), np.isnan(panel_re_extracted.values))
-    valid_idx = panel_initial.mask
-    assert np.allclose(panel_initial.values[valid_idx], panel_re_extracted.values[valid_idx])
 
 
 def test_optical_cloud_obscuration_masking():
-    """Verify observations with cloud cover >= threshold are masked out as NaN."""
-    pipeline = FeatureExtractionPipeline(cloud_cover_threshold_pct=30.0)
-    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=10.0)
-
-    # 1. Clear observation (cloud = 15%)
-    clear_obs = [
-        {
-            "record_id": "S2-CLEAR",
-            "acquisition_timestamp": "2023-03-01T04:30:00Z",
-            "metadata": {
-                "cloud_cover_percentage": 15.0,
-                "lake_area_km2": 1.35,
-                "ndwi_mean": 0.45,
-                "mndwi_mean": 0.50,
-                "ndsi_mean": 0.30,
-            },
-        }
-    ]
-    # 2. Cloudy observation (cloud = 65%)
-    cloudy_obs = [
-        {
-            "record_id": "S2-CLOUDY",
-            "acquisition_timestamp": "2023-03-05T04:30:00Z",
-            "metadata": {
-                "cloud_cover_percentage": 65.0,
-                "lake_area_km2": 1.40,
-                "ndwi_mean": 0.48,
-                "mndwi_mean": 0.52,
-                "ndsi_mean": 0.32,
-            },
-        }
-    ]
-
-    panel = pipeline.extract_panel(
-        lake_id="SGL-001",
-        window_id="WIN-CLOUD-TEST",
-        start_date="2023-01-01",
-        static_topography=topo,
-        optical_observations=clear_obs + cloudy_obs,
-    )
-
-    # Day of clear observation: 2023-03-01 is day index 59
-    day_clear = 59
-    assert panel.dates[day_clear] == "2023-03-01"
-    assert panel.mask[day_clear, 0] is True or panel.mask[day_clear, 0] == 1
-    assert not np.isnan(panel.values[day_clear, 0])
-    assert panel.values[day_clear, 0] == 1.35
-
-    # Day of cloudy observation: 2023-03-05 is day index 63
-    day_cloudy = 63
-    assert panel.dates[day_cloudy] == "2023-03-05"
-    # Must be masked out due to cloud >= 30%
-    for ch_idx in range(4):
-        assert bool(panel.mask[day_cloudy, ch_idx]) is False
-        assert np.isnan(panel.values[day_cloudy, ch_idx])
+    # Catalogue cloud percentages are not pixel QA or evidence of physical values.
+    for percentage in (0.,65.,None):
+        p=FeatureExtractionPipeline(1).extract_panel('fixture','w','2023-01-01',optical_observations=[{'metadata':{'cloud_cover_percentage':percentage,'lake_area_km2':1.35}}])
+        assert not p.mask.any() and np.isnan(p.values).all()
 
 
-def test_feature_input_sensitivity():
-    """Verify changing input observation values alters feature panel values deterministically."""
-    pipeline = FeatureExtractionPipeline()
-    topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=10.0)
 
-    obs_base = [
-        {
-            "record_id": "S2-01",
-            "acquisition_timestamp": "2023-02-01T04:30:00Z",
-            "metadata": {"lake_area_km2": 1.35, "ndwi_mean": 0.45, "mndwi_mean": 0.50, "ndsi_mean": 0.30},
-        }
-    ]
-    obs_mutated = [
-        {
-            "record_id": "S2-01",
-            "acquisition_timestamp": "2023-02-01T04:30:00Z",
-            "metadata": {"lake_area_km2": 1.48, "ndwi_mean": 0.52, "mndwi_mean": 0.58, "ndsi_mean": 0.36},
-        }
-    ]
+def test_feature_input_sensitivity(tmp_path):
+    from admission_fixtures import measurement_fixture
+    from sentinel_gl.integrity import file_hash
+    ctx,r=measurement_fixture(tmp_path)
+    before=FeatureExtractionPipeline(2,admission=ctx).extract_panel('ANALYTICAL-SITE','w','2023-01-01',optical_observations=[r])
+    path=ctx.artifact(r['product_id'])
+    with np.load(path,allow_pickle=False) as npz:fields={k:npz[k] for k in npz.files}
+    fields['B03'][0,0]=.5
+    np.savez(path,**fields)
+    with pytest.raises(ValueError,match='checksum'):ctx.measurement(r)
+    ctx.manifest['artifacts'][r['product_id']]['sha256']=file_hash(path)
+    after=FeatureExtractionPipeline(2,admission=ctx).extract_panel('ANALYTICAL-SITE','w','2023-01-01',optical_observations=[r])
+    assert after.values[1,1]==pytest.approx(2/3)
+    assert before.values[1,1]!=after.values[1,1]
+    assert before.provenance_hashes!=after.provenance_hashes
 
-    panel_a = pipeline.extract_panel(
-        lake_id="SGL-001",
-        window_id="WIN-SENS-01",
-        start_date="2023-01-01",
-        static_topography=topo,
-        optical_observations=obs_base,
-    )
-    panel_b = pipeline.extract_panel(
-        lake_id="SGL-001",
-        window_id="WIN-SENS-01",
-        start_date="2023-01-01",
-        static_topography=topo,
-        optical_observations=obs_mutated,
-    )
 
-    day_idx = 31  # Feb 1 is day index 31
-    assert panel_a.values[day_idx, 0] == 1.35
-    assert panel_b.values[day_idx, 0] == 1.48
-    assert not np.allclose(panel_a.values[day_idx, :4], panel_b.values[day_idx, :4])
+def test_versioned_panel_uses_declared_schedule_and_missing_b04_status(tmp_path):
+    from admission_fixtures import measurement_fixture
+    from sentinel_gl.features import MultiModalPanel
+    ctx, record = measurement_fixture(tmp_path)
+    panel = FeatureExtractionPipeline(2, admission=ctx,
+        channel_schema=OPTIONAL_CANDIDATE_SCHEMA).extract_panel(
+            "ANALYTICAL-SITE", "candidate", "2023-01-01", optical_observations=[record])
+    assert panel.values.shape == (2, len(OPTIONAL_CANDIDATE_SCHEMA.channels))
+    idx = panel.channel_names.index("four_band_water_candidate_area_km2")
+    assert not panel.mask[1, idx] and np.isnan(panel.values[1, idx])
+    assert panel.statuses[1, idx] == "UNAVAILABLE_MISSING_B04"
+    assert panel.channel_schema_id == OPTIONAL_CANDIDATE_SCHEMA.schema_id
+    assert panel.channel_schema_version == OPTIONAL_CANDIDATE_SCHEMA.version
+    assert panel.channel_schema_hash == OPTIONAL_CANDIDATE_SCHEMA.schema_hash
+
+    with pytest.raises(ValueError, match="explicit per-cell statuses"):
+        MultiModalPanel("fixture", "missing-status", panel.start_date, panel.end_date,
+            panel.dates, panel.values, panel.mask, None, channel_names=panel.channel_names,
+            channel_schema_id=panel.channel_schema_id,
+            channel_schema_version=panel.channel_schema_version,
+            channel_schema_hash=panel.channel_schema_hash)
+
 
 
 def test_feature_extraction_runner_and_panel_archive(tmp_path):
-    """Verify run_feature_extraction produces conforming NPZ archive and summary JSON."""
+    """Unsupported research inputs are rejected before any output is written."""
     from runners.run_extract_features import run_feature_extraction
+    with pytest.raises(ValueError, match="BLOCKED"):
+        run_feature_extraction(output_panels_path=tmp_path/"panels.npz")
+    assert not list(tmp_path.iterdir())
 
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    manifest_path = repo_root / "data" / "split_manifest.json"
-    dossier_path = repo_root / "data" / "pilot_dossier.json"
-    registry_path = repo_root / "data" / "lake_registry.csv"
-
-    out_npz = tmp_path / "test_panels.npz"
-    out_summary = tmp_path / "test_summary.json"
-
-    res = run_feature_extraction(
-        split_manifest_path=manifest_path,
-        dossier_path=dossier_path,
-        lake_registry_path=registry_path,
-        output_panels_path=out_npz,
-        output_summary_path=out_summary,
-        cloud_threshold=30.0,
-    )
-
-    assert res["status"] == "SUCCESS"
-    assert res["total_windows"] == 14
-    assert res["eligible_windows"] == 12
-    assert res["num_channels"] == 11
-
-    assert out_npz.exists()
-    assert out_summary.exists()
-
-    # Load and inspect NPZ
-    data = np.load(out_npz)
-    assert "values" in data
-    assert "masks" in data
-    assert "channels" in data
-
-    values_3d = data["values"]
-    masks_3d = data["masks"]
-    channels = [str(c) for c in data["channels"]]
-
-    assert values_3d.shape == (14, 180, 11)
-    assert masks_3d.shape == (14, 180, 11)
-    assert masks_3d.dtype == bool
-    assert channels == list(FEATURE_CHANNELS)
-
-    # Strict mask-nan pairing across all 14 x 180 x 11 elements
-    nan_mask = np.isnan(values_3d)
-    assert np.array_equal(nan_mask, ~masks_3d)
-
-    # Per-window individual arrays exist and match slices
-    with open(manifest_path, "r", encoding="utf-8") as f:
-        manifest = json.load(f)
-    windows = (
-        manifest.get("train_windows", [])
-        + manifest.get("val_windows", [])
-        + manifest.get("test_windows", [])
-    )
-    for i, w in enumerate(windows):
-        wid = w["window_id"]
-        assert f"{wid}_values" in data
-        assert f"{wid}_masks" in data
-        assert f"{wid}_dates" in data
-        np.testing.assert_array_equal(data[f"{wid}_values"], values_3d[i])
-        np.testing.assert_array_equal(data[f"{wid}_masks"], masks_3d[i])
-
-    # Summary JSON validation
-    with open(out_summary, "r", encoding="utf-8") as f:
-        summary = json.load(f)
-
-    assert summary["summary_version"] == 1
-    assert summary["total_windows"] == 14
-    assert summary["eligible_windows"] == 12
-    assert summary["num_channels"] == 11
-    assert summary["channel_names"] == list(FEATURE_CHANNELS)
-    assert summary["provenance"]["cloud_cover_threshold_pct"] == 30.0
-
-    # Ensure zero domain violations across all channels
-    for ch_name, stats in summary["channels"].items():
-        assert stats["domain_violations"] == 0
-        assert stats["total_slots"] == 14 * 180
 
 
 def test_cli_runner_feature_extraction(tmp_path):
-    """Verify source/runners/run_extract_features.py executes cleanly as CLI."""
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    runner_script = repo_root / "source" / "runners" / "run_extract_features.py"
-
-    out_npz = tmp_path / "cli_panels.npz"
-    out_summary = tmp_path / "cli_summary.json"
-
-    cmd = [
-        sys.executable,
-        "-B",
-        str(runner_script),
-        "--manifest",
-        str(repo_root / "data" / "split_manifest.json"),
-        "--dossier",
-        str(repo_root / "data" / "pilot_dossier.json"),
-        "--registry",
-        str(repo_root / "data" / "lake_registry.csv"),
-        "--output-panels",
-        str(out_npz),
-        "--output-summary",
-        str(out_summary),
-        "--cloud-threshold",
-        "30.0",
-    ]
-
-    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    stdout_json = json.loads(res.stdout.strip())
-    assert stdout_json["status"] == "SUCCESS"
-    assert stdout_json["total_windows"] == 14
-    assert out_npz.exists()
-    assert out_summary.exists()
-
+    root=Path(__file__).resolve().parents[2]
+    res=subprocess.run([sys.executable,'-B',str(root/'source/runners/run_extract_features.py'),'--output-panels',str(tmp_path/'panels.npz')],capture_output=True,text=True)
+    assert res.returncode==2 and 'BLOCKED' in res.stderr
+    assert not list(tmp_path.iterdir())

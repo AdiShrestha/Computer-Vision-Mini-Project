@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "registry_id": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "const": "DEVELOPMENT_DRAFT_IDENTITY_AND_PHYSICAL_JOINS_UNRESOLVED"},
+    "sites": {"type": "array", "minItems": 2, "items": {
+      "type": "object",
+      "properties": {
+        "site_id": {"type": "string", "minLength": 1},
+        "display_name": {"type": "string", "minLength": 1},
+        "identity_status": {"type": "string", "minLength": 1},
+        "candidate_lake_id": {"type": "null"},
+        "lake_identity_status": {"type": "string", "minLength": 1},
+        "query_point": {"type": "object", "properties": {
+          "latitude": {"type": "number"}, "longitude": {"type": "number"},
+          "crs": {"type": "string", "minLength": 1},
+          "origin": {"type": "string", "minLength": 1},
+          "status": {"type": "string", "const": "PI_QUERY_POINT_ONLY_NOT_LAKE_GEOMETRY_OR_GS_COORDINATE"}
+        }, "required": ["latitude", "longitude", "crs", "origin", "status"], "additionalProperties": false},
+        "geometry": {"type": "object", "properties": {
+          "status": {"type": "string", "const": "UNAVAILABLE"},
+          "artifact_path": {"type": "null"}, "sha256": {"type": "null"},
+          "mapping_date": {"type": "null"}, "crs": {"type": "null"},
+          "reason": {"type": "string", "minLength": 1}
+        }, "required": ["status", "artifact_path", "sha256", "mapping_date", "crs", "reason"], "additionalProperties": false},
+        "aliases": {"type": "object", "properties": {
+          "status": {"type": "string", "const": "UNRESOLVED"}, "values": {"type": "null"},
+          "reason": {"type": "string", "minLength": 1}
+        }, "required": ["status", "values", "reason"], "additionalProperties": false},
+        "event": {"type": "object", "properties": {
+          "classification": {"type": "null"},
+          "classification_status": {"type": "string", "const": "UNVERIFIED"},
+          "onset_earliest": {"type": "null"}, "onset_latest": {"type": "null"},
+          "reason": {"type": "string", "minLength": 1}
+        }, "required": ["classification", "classification_status", "onset_earliest", "onset_latest", "reason"], "additionalProperties": false},
+        "control_status": {"type": "string", "enum": ["NOT_A_CONTROL", "NOT_ASSESSED"]},
+        "development_exposure": {"type": "string", "const": "DEVELOPMENT_EXPOSED"},
+        "physical_support": {"type": "object", "properties": {
+          "status": {"type": "string", "const": "UNRESOLVED"},
+          "glacier_ids": {"type": "null"}, "basin_ids": {"type": "null"},
+          "era5_cell_ids": {"type": "null"}, "sentinel_frame_ids": {"type": "null"},
+          "event_time_support_ids": {"type": "null"}, "reason": {"type": "string", "minLength": 1}
+        }, "required": ["status", "glacier_ids", "basin_ids", "era5_cell_ids", "sentinel_frame_ids", "event_time_support_ids", "reason"], "additionalProperties": false},
+        "evidence": {"type": "array", "minItems": 2, "items": {"$ref": "wp04_input_binding.json"}}
+      },
+      "required": ["site_id", "display_name", "identity_status", "candidate_lake_id", "lake_identity_status", "query_point", "geometry", "aliases", "event", "control_status", "development_exposure", "physical_support", "evidence"],
+      "additionalProperties": false
+    }},
+    "research_admissible": {"type": "boolean", "const": false}
+  },
+  "required": ["schema_version", "registry_id", "status", "sites", "research_admissible"],
+  "additionalProperties": false
+}

@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "window_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "window_hash": {
+      "type": "string",
+      "pattern": "[a-f0-9]{64}"
+    },
+    "binding_hash": {
+      "type": "string",
+      "pattern": "[a-f0-9]{64}"
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ESTIMATED",
+        "NOT_ESTIMABLE",
+        "BLOCKED",
+        "FAILED"
+      ]
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "window_id",
+    "method_id",
+    "window_hash",
+    "binding_hash",
+    "value",
+    "status",
+    "reason"
+  ],
+  "additionalProperties": false
+}

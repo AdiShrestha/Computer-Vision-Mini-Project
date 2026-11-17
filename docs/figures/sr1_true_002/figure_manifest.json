@@ -1,0 +1,33 @@
+{
+  "status": "GENERATED_FROM_OBSERVED_SR1_TRUE_RUN",
+  "attempt": "attempt_006",
+  "analysis": "analysis_001",
+  "source_manifest_sha256": "00d72d0bf97cb89f4fc95e9f976805091d03739ba1fdfe9606490d67762280ae",
+  "figures": [
+    {
+      "stem": "fig1_observation_cadence",
+      "png": "docs/figures/sr1_true_002/fig1_observation_cadence.png",
+      "pdf": "docs/figures/sr1_true_002/fig1_observation_cadence.pdf"
+    },
+    {
+      "stem": "fig2_fit_only_candidate_zones",
+      "png": "docs/figures/sr1_true_002/fig2_fit_only_candidate_zones.png",
+      "pdf": "docs/figures/sr1_true_002/fig2_fit_only_candidate_zones.pdf"
+    },
+    {
+      "stem": "fig3_reflectance_distributions",
+      "png": "docs/figures/sr1_true_002/fig3_reflectance_distributions.png",
+      "pdf": "docs/figures/sr1_true_002/fig3_reflectance_distributions.pdf"
+    },
+    {
+      "stem": "fig4_validation_loss_by_seed",
+      "png": "docs/figures/sr1_true_002/fig4_validation_loss_by_seed.png",
+      "pdf": "docs/figures/sr1_true_002/fig4_validation_loss_by_seed.pdf"
+    },
+    {
+      "stem": "fig5_exploratory_scores_by_role",
+      "png": "docs/figures/sr1_true_002/fig5_exploratory_scores_by_role.png",
+      "pdf": "docs/figures/sr1_true_002/fig5_exploratory_scores_by_role.pdf"
+    }
+  ]
+}

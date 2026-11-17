@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "required": ["channel_id", "aliases", "status", "reason_code", "reason", "units", "calibration", "summary"],
+  "properties": {
+    "channel_id": {"type": "string", "minLength": 1},
+    "aliases": {"type": "array", "items": {"type": "string"}},
+    "status": {"type": "string", "minLength": 1},
+    "reason_code": {"type": ["string", "null"]},
+    "reason": {"type": ["string", "null"]},
+    "units": {"type": ["string", "null"]},
+    "calibration": {
+      "type": ["object", "null"],
+      "required": ["scale", "offset", "application", "raw_source_sha256"],
+      "properties": {
+        "scale": {"type": "number"},
+        "offset": {"type": "number"},
+        "application": {"type": "string", "const": "RAW_MEAN_DN_TIMES_SCALE_PLUS_OFFSET_ONCE"},
+        "raw_source_sha256": {"type": "string", "pattern": "[0-9a-f]{64}"}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": ["object", "null"],
+      "required": ["qa_supported", "candidate_conditioned"],
+      "properties": {
+        "qa_supported": {"$ref": "wp05_summary.json"},
+        "candidate_conditioned": {"$ref": "wp05_summary.json"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

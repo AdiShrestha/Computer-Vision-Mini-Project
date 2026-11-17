@@ -1,0 +1,52 @@
+\subsection{Source support and optimization}
+The retained optical clear fractions range from 1.27\% to 66.46\% at South Lhonak (median 41.17\%) and from 0 to 89.25\% at Khangchung Tsho (median 45.50\%). One comparator acquisition has no valid optical targets. Table~\ref{tab:corpus} distinguishes acquisition counts from usable score support; the two SAR rows share one product and one date.
+
+\begin{table}[t]\centering\small
+\caption{Recorded observation support. Optical pre/post counts denote acquisitions; the comparator has one wholly unsupported pre-period image.}\label{tab:corpus}
+\begin{tabular}{lrrr}\toprule
+Region & Optical pre & Optical post & SAR dates\\\midrule
+South Lhonak & 21 & 3 & 1\\
+Khangchung Tsho & 20 & 4 & 1\\\bottomrule
+\end{tabular}
+\end{table}
+
+The model has 1,062,919 trainable parameters. Fitting membership contains 43 site--sensor observations, of which 42 supply reconstruction targets. Every seed scores all 188 observed parity-1 quadrants; the other 12 of 200 possible quadrants lack genuine source support. This yields 49 acquisition-level reconstruction scores per seed, not 50 fabricated complete rows. Five-seed selected development losses range from 0.101839 to 0.215871 (Table~\ref{tab:seeds}, Fig.~\ref{fig:training}). All selected-checkpoint replay differences are exactly zero. Three runs reach the 80-epoch budget; two stop by the prescribed patience rule. Neither stopping condition proves global convergence.
+
+\begin{table}[t]\centering\small
+\caption{Actual selected-checkpoint evidence. Development MSE uses parity-1 pixels of pre-breach scenes.}\label{tab:seeds}
+\begin{tabular}{rrrr}\toprule
+Seed & Epochs run & Selected epoch & Monitor MSE\\\midrule
+0 & 80 & 80 & 0.140137\\
+1 & 73 & 61 & 0.215871\\
+2 & 80 & 77 & 0.149476\\
+3 & 77 & 65 & 0.138823\\
+4 & 80 & 72 & 0.101839\\
+\bottomrule\end{tabular}
+\end{table}
+
+\subsection{Retrospective score contrasts}
+Table~\ref{tab:contrasts} first takes the median across training seeds at each acquisition for learned scores, then the median across acquisitions within the pre/post period. Baseline medians use their single fixed fit. There are 21 usable pre-event and 3 post-event optical acquisitions at South Lhonak, versus 19 and 4 at Khangchung. These are descriptive temporal summaries; acquisitions and seeds are not pooled as independent event replicates.
+
+\begin{table}[t]\centering\scriptsize
+\caption{Optical acquisition-level medians, by method's own units. SL: South Lhonak; KT: Khangchung Tsho. No column is a detection-performance metric.}\label{tab:contrasts}
+\begin{tabular}{lrrrr}\toprule
+Method & SL pre & SL post & KT pre & KT post\\\midrule
+T-MAE A & 0.0477 & 0.0442 & 0.0359 & 0.0244\\
+T-MAE B & 1.0086 & 3.1894 & 1.3871 & 2.9591\\
+T-MAE C & -0.3062 & 0.2853 & -0.3217 & 0.0454\\
+Isolation Forest & 0.4277 & 0.4890 & 0.4189 & 0.4476\\
+One-Class SVM & -0.1898 & 0.0394 & -0.1897 & -0.0396\\
+RPCA residual & 0.0515 & 0.0368 & 0.0427 & 0.0324\\
+CUSUM & 0.0000 & 0.2171 & 0.0000 & 0.0000\\
+\bottomrule\end{tabular}
+\end{table}
+
+South Lhonak's reconstruction median decreases from 0.0477 to 0.0442; the comparator decreases from 0.0359 to 0.0244. Reconstruction therefore provides no distinctive post-breach increase under this representation. Latent-distance medians increase from 1.0086 to 3.1894 at South Lhonak and from 1.3871 to 2.9591 at the comparator. Elevated latent values are also present before October: September medians are 4.4797 and 2.9420, respectively. Thus, the latent shift is not uniquely localized to the known breach. Fused scores combine these differing signals rather than independently confirming an event mechanism. Seed ranges in Fig.~\ref{fig:scores} further show optimization-dependent variation.
+
+The first selected post-event optical images occur on 9 October at South Lhonak and 6 October at Khangchung. Surface changes visible in the South Lhonak pre/post image pair do not imply that an ROI-wide learned reconstruction score must increase: spatial pooling, varying clear support, seasonal terrain conditions and the fitting objective affect that score. These results do not establish a precursor signal; the entire pre-period informed the fitted states.
+
+\subsection{Baseline convergence and estimability}
+The optical robust-PCA fit uses 40 source-supported five-channel rows; the wholly unsupported row contributes no objective terms and remains a null query. Its fixed-penalty solver converges in 413 iterations at rank 3, with normalized primal residual $9.9450\times10^{-6}$ and dual residual $1.4947\times10^{-6}$. The largest reported nontrivial subgradient/dual-feasibility violation is below $7\times10^{-6}$. The two-row SAR fit converges in 1 iteration at rank 1; this is numerical convergence on one shared date, not temporal validation. Optical monitor residuals remain computed on parity-1 support throughout.
+
+The final record contains 950 method--seed--observation rows. Optical latent and fused scores are available where source support exists, while SAR latent/fused values are unavailable because one acquisition per site cannot supply five distinct reference acquisitions. Annual POT thresholds, calibrated false-alarm burden, precision--recall, AUROC and warning lead time remain unavailable. CUSUM traces have no validated alarm threshold. Representative attention in Fig.~\ref{fig:attention} demonstrates the fitted computation's internal distributions and cannot establish a causal precursor explanation.
+

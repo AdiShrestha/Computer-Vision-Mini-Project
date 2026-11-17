@@ -19,9 +19,9 @@ import numpy as np
 import pytest
 
 from sentinel_gl.features import (
+    CHANNEL_MODALITIES,
     FEATURE_CHANNELS,
     NUM_CHANNELS,
-    WINDOW_DAYS,
     StaticTopography,
     MultiModalPanel,
 )
@@ -63,24 +63,25 @@ def _make_test_panel(
     FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
     """
     dt_start = date.fromisoformat(start_date)
-    dates = tuple((dt_start + timedelta(days=i)).isoformat() for i in range(WINDOW_DAYS))
-    values = np.full((WINDOW_DAYS, NUM_CHANNELS), np.nan, dtype=np.float64)
-    mask = np.zeros((WINDOW_DAYS, NUM_CHANNELS), dtype=np.bool_)
+    schedule_days = 180
+    dates = tuple((dt_start + timedelta(days=i)).isoformat() for i in range(schedule_days))
+    values = np.full((schedule_days, NUM_CHANNELS), np.nan, dtype=np.float64)
+    mask = np.zeros((schedule_days, NUM_CHANNELS), dtype=np.bool_)
 
     # Populate 15 observations with base_val
     for d in range(0, 150, 10):
         values[d, 0] = base_val * 1.25   # lake area
         values[d, 1] = 0.45              # ndwi
         values[d, 2] = 0.50              # mndwi
-        values[d, 3] = 0.30              # ndsi
-        values[d, 4] = -12.0             # vv_db
-        values[d, 5] = -18.0             # vh_db
-        values[d, 6] = -6.0              # cross_ratio
-        values[d, 7] = 2.0               # vv_var
-        values[d, 8] = -5.0              # temp_2m
-        values[d, 9] = 10.0              # precip_mm
-        values[d, 10] = 0.5              # temp_anomaly
+        values[d, 3] = -12.0             # vv_db
+        values[d, 4] = -18.0             # vh_db
+        values[d, 5] = -6.0              # cross_ratio
+        values[d, 6] = 2.0               # vv_var
+        values[d, 7] = -5.0              # temp_2m
+        values[d, 8] = 10.0              # precip_mm
         mask[d, :] = True
+    statuses = np.full(mask.shape, "UNAVAILABLE_TEST_FIXTURE", dtype=object)
+    statuses[mask] = "OBSERVED"
 
     topo = StaticTopography(elevation_m=5000.0, moraine_slope_deg=20.0, catchment_area_km2=8.0)
     return MultiModalPanel(
@@ -92,7 +93,7 @@ def _make_test_panel(
         values=values,
         mask=mask,
         static_metadata=topo,
-    )
+        origin="fixture", statuses=statuses)
 
 
 # ---------------------------------------------------------------------------
@@ -145,8 +146,10 @@ def test_episode_engine_hysteresis_and_refractory():
     assert ep2.peak_score == pytest.approx(0.95)
 
     # Exposure calculation
-    exp_years = calculate_lake_exposure_years(dates, stride_days=30)
-    assert exp_years == pytest.approx((12 * 30) / 365.25)
+    with pytest.raises(ValueError,match="BLOCKED"):
+        calculate_lake_exposure_years(dates,stride_days=30)
+    # Hand-declared fixture exposure, not inferred from row count.
+    exp_years = 360 / 365.25
 
     # Alert burden estimand
     burden = compute_alert_burden_estimand(episodes, {"SGL-MOCK-001": exp_years})
@@ -155,7 +158,7 @@ def test_episode_engine_hysteresis_and_refractory():
     assert burden["lambda_alert"] == pytest.approx(2.0 / exp_years)
 
     # Zero exposure must return NOT_ESTIMABLE
-    zero_burden = compute_alert_burden_estimand(episodes, {"SGL-MOCK-001": 0.0})
+    zero_burden = compute_alert_burden_estimand([], {"SGL-MOCK-001": 0.0})
     assert zero_burden["status"] == "NOT_ESTIMABLE"
     assert zero_burden["lambda_alert"] is None
 
@@ -175,10 +178,10 @@ def test_baseline_training_isolation():
     train_ids = ["SGL-TRAIN-01", "SGL-TRAIN-02"]
 
     # Fit 4 baselines on training panels
-    b_clim = ClimatologyBaseline.fit(train_panels, train_ids)
-    b_trend = LakeAreaTrendBaseline.fit(train_panels, train_ids)
-    b_weath = WeatherOnlyBaseline.fit(train_panels, train_ids)
-    b_pca = RobustPCABaseline.fit(train_panels, train_ids, k_components=2)
+    b_clim = ClimatologyBaseline.fit_fixture(train_panels, train_ids)
+    b_trend = LakeAreaTrendBaseline.fit_fixture(train_panels, train_ids)
+    b_weath = WeatherOnlyBaseline.fit_fixture(train_panels, train_ids)
+    b_pca = RobustPCABaseline.fit_fixture(train_panels, train_ids, k_components=2)
 
     # Construct extreme evaluation panels from unseen lake
     p_eval1 = _make_test_panel("SGL-EVAL-01", "W03", "2023-01-01", base_val=99999.0)
@@ -186,10 +189,10 @@ def test_baseline_training_isolation():
     combined_panels = train_panels + [p_eval1, p_eval2]
 
     # Re-fit with combined panels but identical training lake IDs
-    b_clim_2 = ClimatologyBaseline.fit(combined_panels, train_ids)
-    b_trend_2 = LakeAreaTrendBaseline.fit(combined_panels, train_ids)
-    b_weath_2 = WeatherOnlyBaseline.fit(combined_panels, train_ids)
-    b_pca_2 = RobustPCABaseline.fit(combined_panels, train_ids, k_components=2)
+    b_clim_2 = ClimatologyBaseline.fit_fixture(combined_panels, train_ids)
+    b_trend_2 = LakeAreaTrendBaseline.fit_fixture(combined_panels, train_ids)
+    b_weath_2 = WeatherOnlyBaseline.fit_fixture(combined_panels, train_ids)
+    b_pca_2 = RobustPCABaseline.fit_fixture(combined_panels, train_ids, k_components=2)
 
     # Invariants: 100% parameter and hash identity
     assert b_clim.state_hash == b_clim_2.state_hash
@@ -234,7 +237,7 @@ def test_lead_time_estimand_integrity():
         decisions=decisions_detected,
         threshold=0.70,
         sustained_q=2,
-    )
+    max_gap_days=31, )
     assert res_det.status == "DETECTED"
     assert res_det.declaration_date == "2023-08-15"
     assert res_det.lead_time_days == (date.fromisoformat(onset) - date.fromisoformat("2023-08-15")).days
@@ -253,7 +256,7 @@ def test_lead_time_estimand_integrity():
         decisions=decisions_undetected,
         threshold=0.70,
         sustained_q=2,
-    )
+    max_gap_days=31, )
     assert res_undet.status == "NOT_DETECTED"
     assert res_undet.lead_time_days is None
     assert res_undet.lead_time_days != 0
@@ -270,7 +273,7 @@ def test_lead_time_estimand_integrity():
         decisions=decisions_post_only,
         threshold=0.70,
         sustained_q=2,
-    )
+    max_gap_days=31, )
     # Since no pre-event decisions were available, status is NOT_ESTIMABLE
     assert res_post.status == "NOT_ESTIMABLE"
     assert res_post.lead_time_days is None
@@ -337,23 +340,18 @@ def test_sensor_ablation_intervention_identity():
     # optical: 0, 1, 2, 3
     # sar: 4, 5, 6, 7
     # era5: 8, 9, 10
-    configs = {
-        "full": set(range(11)),
-        "opt_sar": set(range(8)),
-        "opt_era5": set(range(4)) | set(range(8, 11)),
-        "sar_era5": set(range(4, 11)),
-        "opt_only": set(range(4)),
-        "sar_only": set(range(4, 8)),
-        "era5_only": set(range(8, 11)),
-    }
+    configs = {name: {index for index, channel in enumerate(FEATURE_CHANNELS)
+                      if CHANNEL_MODALITIES[channel] in modalities}
+               for name, modalities in ABLATION_CONFIGS.items()}
 
     scores = {}
-    b_pca = RobustPCABaseline.fit([panel], ["SGL-MOCK-001"], k_components=2)
+    b_pca = RobustPCABaseline.fit_fixture([panel], ["SGL-MOCK-001"], k_components=2)
 
     for cfg_name, expected_active in configs.items():
-        abl_vals, abl_mask = apply_sensor_ablation(vals, mask, cfg_name)
+        abl_vals, abl_mask = apply_sensor_ablation(vals, mask, cfg_name,
+                                                   channel_names=FEATURE_CHANNELS)
 
-        for c in range(11):
+        for c in range(len(FEATURE_CHANNELS)):
             if c in expected_active:
                 # Active channels maintain original mask
                 assert np.array_equal(abl_mask[:, c], mask[:, c])
@@ -363,14 +361,20 @@ def test_sensor_ablation_intervention_identity():
                 assert np.all(np.isnan(abl_vals[:, c]))
 
         # Check eligibility
-        assert check_window_eligibility(abl_mask, cfg_name, min_obs_per_modality=2) is True
+        assert check_window_eligibility(abl_mask, cfg_name, min_obs_per_modality=2,
+                                        channel_names=FEATURE_CHANNELS) is (cfg_name != "all_off")
 
         # Score window
         score = b_pca.predict_window(abl_vals, abl_mask)
         scores[cfg_name] = score
 
     # Check distinct scores across sensor ablations
-    assert len(set(scores.values())) > 1
+    all_off_values,all_off_mask=apply_sensor_ablation(vals,mask,"all_off",
+                                                      channel_names=FEATURE_CHANNELS)
+    assert not all_off_mask.any() and np.isnan(all_off_values).all()
+    assert b_pca.predict_window(all_off_values,all_off_mask) is None
+    assert not check_window_eligibility(all_off_mask,"all_off",2,
+                                        channel_names=FEATURE_CHANNELS)
 
 
 # ---------------------------------------------------------------------------
@@ -378,39 +382,9 @@ def test_sensor_ablation_intervention_identity():
 # ---------------------------------------------------------------------------
 
 def test_paired_difference_support_alignment():
-    """Verify that paired Delta S computation requires identical window timestamps and lake IDs,
-    rejecting misaligned supports.
+    for scale in (1.,10.):
+        with pytest.raises(ValueError,match='performance estimand'):compute_paired_score_differences([scale],[1.])
 
-    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    """
-    dates = ["2023-01-01", "2023-02-01", "2023-03-01"]
-    m_scores = [0.85, 0.45, 0.65]
-    b_scores = [0.60, 0.40, 0.70]
-
-    model_preds = [
-        make_prediction_record("SGL-001", d, d, d, "tmae", "full", s, True)
-        for d, s in zip(dates, m_scores)
-    ]
-    base_preds = [
-        make_prediction_record("SGL-001", d, d, d, "climatology", "full", s, True)
-        for d, s in zip(dates, b_scores)
-    ]
-
-    paired = compute_paired_score_differences(model_preds, base_preds)
-    assert len(paired) == 3
-
-    for i, p in enumerate(paired):
-        assert p["delta_s"] == pytest.approx(m_scores[i] - b_scores[i])
-        assert p["lake_id"] == "SGL-001"
-        assert p["decision_date"] == dates[i]
-
-    # Support mismatch: perturb dates in baseline
-    mismatched_base_preds = [
-        make_prediction_record("SGL-001", "2023-04-01", "2023-04-01", "2023-04-01", "climatology", "full", 0.5, True)
-    ] + base_preds[1:]
-
-    with pytest.raises(ValueError, match="support mismatch"):
-        compute_paired_score_differences(model_preds, mismatched_base_preds)
 
 
 # ---------------------------------------------------------------------------
@@ -432,7 +406,7 @@ def test_prediction_record_sample_id_determinism():
         score=0.531365,
         eligible=True,
     )
-    expected_id = hashlib.sha256("SGL-001|2023-09-06|tmae|full".encode("utf-8")).hexdigest()
+    expected_id = hashlib.sha256("SGL-001|2023-09-06|tmae|full|2023-03-10|2023-09-05".encode("utf-8")).hexdigest()
     assert rec1.sample_id == expected_id
     assert len(rec1.sample_id) == 64
 
@@ -454,128 +428,20 @@ def test_prediction_record_sample_id_determinism():
 # Test 8: End-to-End Prediction Runner Execution
 # ---------------------------------------------------------------------------
 
-def test_run_predictions_end_to_end(tmp_path: Path):
-    """Verify run_predictions execution, ledger formatting, calibration, and episodes.
-
-    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    """
+def test_run_predictions_end_to_end(tmp_path):
+    """Unsupported research inputs are rejected before any output is written."""
     from runners.run_predictions import run_predictions
+    with pytest.raises(ValueError, match="BLOCKED"):
+        run_predictions(output_ledger_path=tmp_path/"ledger.csv")
+    assert not list(tmp_path.iterdir())
 
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    manifest_path = repo_root / "data" / "split_manifest.json"
-    panels_path = repo_root / "data" / "feature_panels.npz"
-    normalizer_path = repo_root / "data" / "fitted_normalizer.json"
-    checkpoint_path = repo_root / "data" / "checkpoints" / "tmae_best_checkpoint.pt"
-    lake_registry_path = repo_root / "data" / "lake_registry.csv"
-    event_registry_path = repo_root / "data" / "event_registry.csv"
-
-    out_ledger = tmp_path / "ledger.csv"
-    out_cal = tmp_path / "calibration.json"
-    out_ep = tmp_path / "episodes.json"
-    out_paired = tmp_path / "paired.json"
-
-    res = run_predictions(
-        manifest_path=manifest_path,
-        panels_path=panels_path,
-        normalizer_path=normalizer_path,
-        checkpoint_path=checkpoint_path,
-        lake_registry_path=lake_registry_path,
-        event_registry_path=event_registry_path,
-        output_ledger_path=out_ledger,
-        output_calibration_path=out_cal,
-        output_episodes_path=out_ep,
-        output_paired_path=out_paired,
-        calibration_target=0.05,
-        device="cpu",
-    )
-
-    assert res["status"] == "COMPLETED"
-    assert res["n_ledger_records"] == 490  # 14 windows * 7 ablations * 5 models
-    assert res["n_paired_comparisons"] > 0
-    assert res["primary_threshold"] > 0.0
-
-    # 1. Verify ledger CSV schema and contents
-    assert out_ledger.exists()
-    with open(out_ledger, "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
-        assert len(rows) == 490
-        for r in rows:
-            assert len(r["sample_id"]) == 64
-            assert r["status"] in ("ELIGIBLE", "NOT_ESTIMABLE")
-            assert r["eligible"] in ("true", "false")
-            assert np.isfinite(float(r["score"]))
-
-    # 2. Verify calibration JSON
-    assert out_cal.exists()
-    with open(out_cal, "r", encoding="utf-8") as f:
-        cal_data = json.load(f)
-        assert cal_data["target_false_alert_fraction"] == 0.05
-        assert "0.95" in cal_data["thresholds_by_percentile"]
-        assert len(cal_data["state_hash"]) == 64
-
-    # 3. Verify alert episodes JSON
-    assert out_ep.exists()
-    with open(out_ep, "r", encoding="utf-8") as f:
-        ep_data = json.load(f)
-        assert ep_data["alert_burden"]["status"] == "ESTIMATED"
-        assert ep_data["lead_time_results"][0]["status"] == "NOT_DETECTED"
-        assert ep_data["lead_time_results"][0]["lead_time_days"] is None
-
-    # 4. Verify paired score differences JSON
-    assert out_paired.exists()
-    with open(out_paired, "r", encoding="utf-8") as f:
-        paired_data = json.load(f)
-        assert paired_data["summary"]["model_id"] == "tmae"
-        assert len(paired_data["paired_differences"]) == 4
 
 
 # ---------------------------------------------------------------------------
 # Test 9: CLI Runner Subprocess Invocation
 # ---------------------------------------------------------------------------
 
-def test_run_predictions_cli_subprocess(tmp_path: Path):
-    """Verify source/runners/run_predictions.py executes cleanly via CLI subprocess.
-
-    FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    """
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    runner_script = repo_root / "source" / "runners" / "run_predictions.py"
-
-    out_ledger = tmp_path / "cli_ledger.csv"
-    out_cal = tmp_path / "cli_calibration.json"
-    out_ep = tmp_path / "cli_episodes.json"
-    out_paired = tmp_path / "cli_paired.json"
-
-    cmd = [
-        sys.executable,
-        "-B",
-        str(runner_script),
-        "--manifest", str(repo_root / "data" / "split_manifest.json"),
-        "--panels", str(repo_root / "data" / "feature_panels.npz"),
-        "--normalizer", str(repo_root / "data" / "fitted_normalizer.json"),
-        "--checkpoint", str(repo_root / "data" / "checkpoints" / "tmae_best_checkpoint.pt"),
-        "--lake-registry", str(repo_root / "data" / "lake_registry.csv"),
-        "--event-registry", str(repo_root / "data" / "event_registry.csv"),
-        "--output-ledger", str(out_ledger),
-        "--output-calibration", str(out_cal),
-        "--output-episodes", str(out_ep),
-        "--output-paired", str(out_paired),
-        "--device", "cpu",
-    ]
-
-    result = subprocess.run(
-        cmd,
-        capture_output=True,
-        text=True,
-        check=False,
-        env={**os.environ, "PYTHONPATH": str(repo_root / "source")},
-    )
-
-    assert result.returncode == 0, f"CLI runner failed with error:\nSTDOUT: {result.stdout}\nSTDERR: {result.stderr}"
-    assert "Sentinel-GL Predictions, Baselines, and Alert Episodes Completed" in result.stdout
-    assert out_ledger.exists()
-    assert out_cal.exists()
-    assert out_ep.exists()
-    assert out_paired.exists()
-
+def test_run_predictions_cli_subprocess(tmp_path):
+    from runners.run_predictions import main
+    assert main(['--output-ledger',str(tmp_path/'ledger.csv')])==2
+    assert not list(tmp_path.iterdir())

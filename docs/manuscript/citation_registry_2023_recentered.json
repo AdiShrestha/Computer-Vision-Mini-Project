@@ -1,0 +1,118 @@
+{
+  "candes2009": {
+    "citation": "Candès et al., 2009",
+    "reference": "Candès, E.J., Li, X., Ma, Y. & Wright, J. (2009). Robust principal component analysis? arXiv:0912.3599."
+  },
+  "davison1990": {
+    "citation": "Davison and Smith, 1990",
+    "reference": "Davison, A.C. & Smith, R.L. (1990). Models for exceedances over high thresholds. Journal of the Royal Statistical Society: Series B, 52(3), 393-425."
+  },
+  "drusch2012": {
+    "citation": "Drusch et al., 2012",
+    "reference": "Drusch, M., Del Bello, U., Carlier, S. et al. (2012). Sentinel-2: ESA's optical high-resolution mission for GMES operational services. Remote Sensing of Environment, 120, 25-36."
+  },
+  "he2022": {
+    "citation": "He et al., 2022",
+    "reference": "He, K., Chen, X., Xie, S., Li, Y., Dollár, P. & Girshick, R. (2022). Masked autoencoders are scalable vision learners. Proc. of the IEEE/CVF Conf. on Computer Vision and Pattern Recognition, 16000-16009."
+  },
+  "lin2010": {
+    "citation": "Lin et al., 2010",
+    "reference": "Lin, Z., Chen, M. & Ma, Y. (2010). The augmented Lagrange multiplier method for exact recovery of corrupted low-rank matrices. arXiv:1009.5055."
+  },
+  "liu2008": {
+    "citation": "Liu et al., 2008",
+    "reference": "Liu, F.T., Ting, K.M. & Zhou, Z.H. (2008). Isolation forest. Proc. of 8th IEEE International Conf. on Data Mining, 413-422."
+  },
+  "loshchilov2019": {
+    "citation": "Loshchilov and Hutter, 2019",
+    "reference": "Loshchilov, I. & Hutter, F. (2019). Decoupled weight decay regularization. Proc. of International Conf. on Learning Representations."
+  },
+  "mcfeeters1996": {
+    "citation": "McFeeters, 1996",
+    "reference": "McFeeters, S.K. (1996). The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. International Journal of Remote Sensing, 17(7), 1425-1432."
+  },
+  "page1954": {
+    "citation": "Page, 1954",
+    "reference": "Page, E.S. (1954). Continuous inspection schemes. Biometrika, 41(1-2), 100-115."
+  },
+  "pickands1975": {
+    "citation": "Pickands, 1975",
+    "reference": "Pickands, J. (1975). Statistical inference using extreme order statistics. The Annals of Statistics, 3(1), 119-131."
+  },
+  "sarfraz2024": {
+    "citation": "Sarfraz et al., 2024",
+    "reference": "Sarfraz, M.S., Chen, M.Y., Layer, L., Peng, K. & Koulakis, M. (2024). Position: Quo vadis, unsupervised time series anomaly detection? Proc. of 41st International Conf. on Machine Learning, 235, 43461-43476."
+  },
+  "sattar2025": {
+    "citation": "Sattar et al., 2025",
+    "reference": "Sattar, A., Cook, K.L., Rai, S.K. et al. (2025). The Sikkim flood of October 2023: Drivers, causes, and impacts of a multihazard cascade. Science, 387, eads2659."
+  },
+  "scholkopf2001": {
+    "citation": "Schölkopf et al., 2001",
+    "reference": "Schölkopf, B., Platt, J.C., Shawe-Taylor, J., Smola, A.J. & Williamson, R.C. (2001). Estimating the support of a high-dimensional distribution. Neural Computation, 13(7), 1443-1471."
+  },
+  "shugar2020": {
+    "citation": "Shugar et al., 2020",
+    "reference": "Shugar, D.H., Burr, A., Haritashya, U.K. et al. (2020). Rapid worldwide growth of glacial lakes since 1990. Nature Climate Change, 10, 939-945."
+  },
+  "taylor2023": {
+    "citation": "Taylor et al., 2023",
+    "reference": "Taylor, C., Robinson, T.R., Dunning, S., Carr, J.R. & Westoby, M. (2023). Glacial lake outburst floods threaten millions globally. Nature Communications, 14, 487."
+  },
+  "torres2012": {
+    "citation": "Torres et al., 2012",
+    "reference": "Torres, R., Snoeij, P., Geudtner, D. et al. (2012). GMES Sentinel-1 mission. Remote Sensing of Environment, 120, 9-24."
+  },
+  "vaswani2017": {
+    "citation": "Vaswani et al., 2017",
+    "reference": "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.N., Kaiser, L. & Polosukhin, I. (2017). Attention is all you need. Advances in Neural Information Processing Systems, 30."
+  },
+  "veh2018": {
+    "citation": "Veh et al., 2018",
+    "reference": "Veh, G., Korup, O., Roessner, S. & Walz, A. (2018). Detecting Himalayan glacial lake outburst floods from Landsat time series. Remote Sensing of Environment, 207, 84-97."
+  },
+  "welford1962": {
+    "citation": "Welford, 1962",
+    "reference": "Welford, B.P. (1962). Note on a method for calculating corrected sums of squares and products. Technometrics, 4(3), 419-420."
+  },
+  "xu2006": {
+    "citation": "Xu, 2006",
+    "reference": "Xu, H. (2006). Modification of normalised difference water index (NDWI) to enhance open water features in remotely sensed imagery. International Journal of Remote Sensing, 27(14), 3025-3033."
+  },
+  "zerveas2021": {
+    "citation": "Zerveas et al., 2021",
+    "reference": "Zerveas, G., Jayaraman, S., Patel, D., Bhamidipaty, A. & Eickhoff, C. (2021). A transformer-based framework for multivariate time series representation learning. Proc. of 27th ACM SIGKDD Conf. on Knowledge Discovery and Data Mining, 2114-2124."
+  },
+  "zheng2021": {
+    "citation": "Zheng et al., 2021",
+    "reference": "Zheng, G., Allen, S.K., Bao, A. et al. (2021). Increasing risk of glacial lake outburst floods from future Third Pole deglaciation. Nature Climate Change, 11, 411-417."
+  },
+  "li2023": {
+    "citation": "Li et al., 2023",
+    "reference": "Li, Z., Rao, Z., Pan, L., Wang, P. & Xu, Z. (2023). Ti-MAE: Self-Supervised Masked Time Series Autoencoders. arXiv:2301.08871. https://arxiv.org/abs/2301.08871"
+  },
+  "song2023": {
+    "citation": "Song et al., 2023",
+    "reference": "Song, J., Kim, K., Oh, J. & Cho, S. (2023). MEMTO: Memory-guided Transformer for Multivariate Time Series Anomaly Detection. Advances in Neural Information Processing Systems, 36. https://proceedings.neurips.cc/paper_files/paper/2023/hash/b4c898eb1fb556b8d871fbe9ead92256-Abstract.html"
+  },
+  "yu2024": {
+    "citation": "Yu et al., 2024",
+    "reference": "Yu, Y., Li, B., Li, Y. & Jiang, W. (2024). Retrospective Analysis of Glacial Lake Outburst Flood (GLOF) Using AI Earth InSAR and Optical Images: A Case Study of South Lhonak Lake, Sikkim. Remote Sensing, 16(13), 2307. https://doi.org/10.3390/rs16132307"
+  },
+  "nrsc2025": {
+    "citation": "NRSC/ISRO, 2025",
+    "reference": "NRSC/ISRO (2025). GLOF Risk Assessment of Khangchung Tso Glacial Lake in Brahmaputra River Basin. Report NRSC-RSA-WATER RE-WRD-FEB2025-TR-0002698-V1.0, February 2025, section 3.1. https://bhuvan.nrsc.gov.in/nhpfs/pdf/NRSC_KhangchungTsoGlacialLake_GLOF_Risk_Assessment_Report.pdf"
+  },
+  "s2technical": {
+    "citation": "ESA/Copernicus, n.d.-a",
+    "reference": "ESA/Copernicus (n.d.-a). Sentinel-2 Products: Level-2A radiometry, quantification offsets and scene classification. SentiWiki. Accessed 2026-10-18. https://sentiwiki.copernicus.eu/web/s2-products"
+  },
+  "s1technical": {
+    "citation": "ESA/Copernicus, n.d.-b",
+    "reference": "ESA/Copernicus (n.d.-b). Sentinel-1 Processing: Level-1 calibration vectors and noise LUTs. SentiWiki. Accessed 2026-10-18. https://sentiwiki.copernicus.eu/web/s1-processing"
+  },
+  "earthsearch": {
+    "citation": "Element 84, n.d.",
+    "reference": "Element 84 (n.d.). Earth Search Sentinel-2 Collection 1 Level-2A STAC collection. Native XML, COG assets and per-asset scale/offset metadata. Accessed 2026-10-18. https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a"
+  }
+}

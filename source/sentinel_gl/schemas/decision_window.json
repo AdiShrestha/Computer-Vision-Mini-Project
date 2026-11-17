@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "window_id": {"type": "string", "minLength": 1},
+    "lake_id": {"type": "string", "minLength": 1},
+    "decision_timestamp": {"type": "string", "minLength": 1},
+    "context_start": {"type": "string", "minLength": 1},
+    "context_end": {"type": "string", "minLength": 1},
+    "observation_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "is_eligible": {"type": "boolean"},
+    "status": {"type": "string", "enum": ["ELIGIBLE", "NOT_ESTIMABLE", "NOT_ASSESSED"]},
+    "modalities_present": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "missingness_reason": {"type": ["string", "null"]},
+    "scope": {"type": "string", "enum": ["fitting", "development_validation", "threshold_calibration", "evaluation"]},
+    "metadata": {"type": "object"}
+  },
+  "required": ["window_id", "lake_id", "decision_timestamp", "context_start", "context_end", "observation_ids", "is_eligible", "status", "modalities_present", "missingness_reason", "scope", "metadata"],
+  "additionalProperties": false
+}

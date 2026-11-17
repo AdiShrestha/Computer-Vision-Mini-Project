@@ -51,6 +51,10 @@ def main() -> int:
         default=16,
         help="Evaluation batch size (default: 16).",
     )
+    parser.add_argument("--sequence-length", type=int, required=True,
+                        help="Declared schedule length for constructed benchmark tensors.")
+    parser.add_argument("--channels", type=int, required=True,
+                        help="Declared channel count for constructed benchmark tensors.")
     parser.add_argument(
         "--output",
         type=str,
@@ -68,11 +72,11 @@ def main() -> int:
     out_path = Path(args.output).resolve()
 
     print("=" * 68)
-    print("Sentinel-GL Hardware Benchmarking & M3 Resource Trials")
+    print("Sentinel-GL Constructed Tensor Microbenchmark")
     print("=" * 68)
     print(f"Target Output Path:   {out_path}")
     print(f"Trial Configuration:  {args.trials} timed trials after {args.warmup} warmups")
-    print(f"Batch Size:           {args.batch_size} (180 days, 11 channels)")
+    print(f"Tensor Shape:         ({args.batch_size}, {args.sequence_length}, {args.channels})")
     print(f"Device Selection:     {args.device}")
     print(f"Numerical Tolerance:  {args.tolerance:.1e}")
     print("-" * 68)
@@ -83,6 +87,8 @@ def main() -> int:
         device=args.device,
         output_path=out_path,
         batch_size=args.batch_size,
+        seq_len=args.sequence_length,
+        n_channels=args.channels,
         tolerance=args.tolerance,
     )
 
@@ -109,15 +115,15 @@ def main() -> int:
 
     neq = report.get("numerical_equivalence", {})
     eq_status = neq.get("status", "UNKNOWN")
-    max_diff = neq.get("max_absolute_difference", 0.0)
+    max_diff = neq.get("max_absolute_difference")
     tol = neq.get("tolerance", args.tolerance)
     print("-" * 68)
-    print(f"Numerical Equivalence (CPU vs MPS): {eq_status} (max abs diff: {max_diff:.2e}, tol: {tol:.1e})")
-    print(f"Passively Cooled Thermal Disclosure: Recorded in report JSON.")
+    print(f"Numerical Equivalence (CPU vs MPS): {eq_status} (max abs diff: {max_diff}, tol: {tol:.1e})")
+    print(f"Unmeasured Thermal Conditions: Recorded in report JSON.")
     print("=" * 68)
     print(f"Report written to: {out_path}")
 
-    return 0 if eq_status in ("PASS", "CPU_ONLY") else 1
+    return 0 if eq_status in ("PASS", "NOT_MEASURED") else 1
 
 
 if __name__ == "__main__":

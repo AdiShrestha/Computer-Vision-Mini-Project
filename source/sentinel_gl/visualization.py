@@ -1,13 +1,4 @@
-"""Deterministic scientific figure rendering engine for Sentinel-GL research artifacts.
-
-Uses headless matplotlib backend ('Agg') with stripped metadata to guarantee
-bit-identical reproducible PNG output. Generates the 5 primary research figures:
-1. Fig 1: Observation Cadence & Monitoring Coverage (C_obs)
-2. Fig 2: Multi-Modal Feature Panel Traces & Pre-Event Trajectory
-3. Fig 3: Anomaly Score Trajectories & Bounded Lead Time (Delta t_lead)
-4. Fig 4: Negative-Control Alert Episodes & Follow-Up Exposure (lambda_alert)
-5. Fig 5: Sensor Ablation Lattice (2^N configurations)
-"""
+"""Deterministic analytical fixture rendering; research figures remain blocked."""
 from __future__ import annotations
 from datetime import date, datetime
 from pathlib import Path
@@ -20,7 +11,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 from .episodes import AlertEpisode, LeadTimeResult
-from .features import FEATURE_CHANNELS, NUM_CHANNELS, WINDOW_DAYS, MultiModalPanel
+from .features import CHANNEL_MODALITIES, MultiModalPanel
 from .predictions import ABLATION_CONFIGS
 
 
@@ -28,6 +19,9 @@ def _save_deterministic_fig(fig: plt.Figure, output_path: Union[str, Path], dpi:
     """Save matplotlib figure with deterministic metadata to guarantee bit-identical PNG digests."""
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
+    if out.exists():
+        raise FileExistsError("preserve prior figure attempts")
+    fig.text(0.5, 0.01, "ANALYTICAL FIXTURE — NOT RESEARCH", ha="center", fontsize=9)
     fig.savefig(
         out,
         format="png",
@@ -43,6 +37,20 @@ def _save_deterministic_fig(fig: plt.Figure, output_path: Union[str, Path], dpi:
 # Figure 1: Observation Cadence & Monitoring Coverage (C_obs)
 # ---------------------------------------------------------------------------
 
+
+def _fixture_plot(function):
+    from functools import wraps
+    @wraps(function)
+    def render(*args, origin=None, **kwargs):
+        if origin != 'fixture':
+            from .admission import blocked
+            blocked("research figure rendering")
+        if args and hasattr(args[0], 'origin') and args[0].origin != 'fixture':
+            raise ValueError("fixture plot requires fixture panels")
+        return function(*args, **kwargs)
+    return render
+
+@_fixture_plot
 def plot_observation_cadence_and_coverage(
     dossier: Mapping[str, Any],
     output_path: Union[str, Path],
@@ -120,34 +128,27 @@ def plot_observation_cadence_and_coverage(
 # Figure 2: Multi-Modal Feature Panel Traces
 # ---------------------------------------------------------------------------
 
+@_fixture_plot
 def plot_multimodal_feature_panels(
     panel: MultiModalPanel,
     output_path: Union[str, Path],
 ) -> str:
-    """Plot 180-day time series across all 11 standardized channels distinguishing observed vs missing entries."""
-    fig, axes = plt.subplots(4, 3, figsize=(14, 9), sharex=True, dpi=150)
+    """Plot every declared channel over its explicit schedule and show cell missingness."""
+    n_channels = len(panel.channel_names)
+    ncols = 3
+    nrows = int(np.ceil((n_channels + 1) / ncols))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(14, max(4.5, 2.6 * nrows)),
+                             sharex=True, dpi=150, squeeze=False)
     ax_flat = axes.flatten()
 
     dates = [date.fromisoformat(d.split("T")[0]) for d in panel.dates]
 
-    channel_groups = {
-        0: ("Lake Area (km²)", "#1f77b4"),
-        1: ("NDWI Mean", "#17becf"),
-        2: ("MNDWI Mean", "#1f77b4"),
-        3: ("NDSI Mean", "#7f7f7f"),
-        4: ("SAR VV (dB)", "#ff7f0e"),
-        5: ("SAR VH (dB)", "#d62728"),
-        6: ("SAR Cross-Ratio (dB)", "#e377c2"),
-        7: ("SAR VV Variance", "#8c564b"),
-        8: ("ERA5 2m Temp (°C)", "#2ca02c"),
-        9: ("ERA5 Precip (mm)", "#bcbd22"),
-        10: ("ERA5 Temp Anomaly (°C)", "#9467bd"),
-    }
-
-    for c_idx in range(NUM_CHANNELS):
+    modality_colors = {"optical": "#1f77b4", "sar": "#e377c2",
+                       "weather": "#2ca02c", "static": "#7f7f7f"}
+    for c_idx, ch_name in enumerate(panel.channel_names):
         ax = ax_flat[c_idx]
-        ch_name = FEATURE_CHANNELS[c_idx]
-        title, col = channel_groups[c_idx]
+        title = ch_name.replace("_", " ")
+        col = modality_colors[CHANNEL_MODALITIES[ch_name]]
 
         vals = panel.values[:, c_idx]
         mask = panel.mask[:, c_idx]
@@ -169,8 +170,8 @@ def plot_multimodal_feature_panels(
         ax.tick_params(labelsize=8)
         ax.grid(True, linestyle=":", alpha=0.4)
 
-    # Empty 12th subplot for legend and metadata
-    ax_unused = ax_flat[11]
+    # The final subplot is metadata; remaining cells are hidden for any schema size.
+    ax_unused = ax_flat[n_channels]
     ax_unused.axis("off")
     ax_unused.text(
         0.1,
@@ -180,8 +181,10 @@ def plot_multimodal_feature_panels(
         bbox=dict(boxstyle="round,pad=0.5", facecolor="#f9f9f9", edgecolor="#cccccc"),
     )
 
-    for i in range(8, 11):
-        ax_flat[i].xaxis.set_major_formatter(mdates.DateFormatter("%b %d"))
+    for ax in ax_flat[:n_channels]:
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %d"))
+    for ax in ax_flat[n_channels + 1:]:
+        ax.axis("off")
 
     fig.suptitle(f"Figure 2: Multi-Modal Feature Panel Traces ({panel.lake_id})", fontsize=12, fontweight="bold", y=0.99)
     fig.subplots_adjust(top=0.94, bottom=0.06, left=0.06, right=0.96, hspace=0.35, wspace=0.25)
@@ -192,6 +195,7 @@ def plot_multimodal_feature_panels(
 # Figure 3: Anomaly Score Trajectories & Bounded Lead Time
 # ---------------------------------------------------------------------------
 
+@_fixture_plot
 def plot_anomaly_trajectories_and_lead_time(
     lead_time_result: LeadTimeResult,
     trajectory_data: Mapping[str, Sequence[Tuple[str, float]]],
@@ -259,6 +263,7 @@ def plot_anomaly_trajectories_and_lead_time(
 # Figure 4: Negative-Control Alert Episodes & Exposure
 # ---------------------------------------------------------------------------
 
+@_fixture_plot
 def plot_control_episodes_and_exposure(
     episodes: Sequence[AlertEpisode],
     decisions: Sequence[Tuple[str, float, bool]],
@@ -318,6 +323,7 @@ def plot_control_episodes_and_exposure(
 # Figure 5: Sensor Ablation Lattice
 # ---------------------------------------------------------------------------
 
+@_fixture_plot
 def plot_sensor_ablation_comparison(
     ablation_scores: Mapping[str, float],
     output_path: Union[str, Path],

@@ -40,19 +40,39 @@ def test_recorded_evidence_detects_changed_code_logs_and_counts(tmp_path):
     ready['verification']['current_evidence'] = 'evidence.json'
     (tmp_path/'project/READINESS.json').write_text(json.dumps(ready))
     (tmp_path/'project/readiness.schema.json').write_bytes((ROOT/'project/readiness.schema.json').read_bytes())
-    for path, text in {'core.txt':'CONSTRUCTED FIXTURE\n2 passed\n',
-                       'factory.txt':'CONSTRUCTED FIXTURE\nRan 3 tests\nOK\n',
-                       'source/code.py':'# constructed fixture\n', 'lock.txt':'fixture\n'}.items():
+    for path, text in {'core.txt':'CONSTRUCTED FIXTURE\n2 passed, 1 skipped\n',
+                       'core.stdout.log':'CONSTRUCTED FIXTURE\n2 passed, 1 skipped\n',
+                       'core.stderr.log':'',
+                       'factory.txt':'CONSTRUCTED FIXTURE\nRan 3 tests\nOK (skipped=1)\n',
+                       'factory.stdout.log':'',
+                       'factory.stderr.log':'CONSTRUCTED FIXTURE\nRan 3 tests\nOK (skipped=1)\n',
+                       'source/code.py':'# constructed fixture\n',
+                       'source/requirements.lock':'# fixture\n'}.items():
         (tmp_path/path).write_text(text)
     evidence = {'kind':'executed_engineering_verification_not_research_results',
         'covered_code_hashes':{p.relative_to(tmp_path).as_posix():verifier.sha(p) for p in verifier.covered_paths(tmp_path)},
+        'covered_schema_hashes':{p.relative_to(tmp_path).as_posix():verifier.sha(p) for p in verifier.covered_schema_paths(tmp_path)},
         'source_stability':'STABLE_DURING_CHECKS',
-        'commands':{name:{'exit_code':0,'tests_passed':count,'log':name+'.txt',
-                    'sha256':verifier.sha(tmp_path/(name+'.txt'))} for name,count in [('core',2),('factory',3)]},
-        'dependency_snapshot':'lock.txt','dependency_snapshot_sha256':verifier.sha(tmp_path/'lock.txt'),
+        'commands':{name:{'exit_code':0,'tests_passed':2,'tests_skipped':1,
+                    'tests_failed':0,'tests_total':3,'log':name+'.txt',
+                    'sha256':verifier.sha(tmp_path/(name+'.txt')),
+                    'stdout_log':name+'.stdout.log',
+                    'stdout_sha256':verifier.sha(tmp_path/(name+'.stdout.log')),
+                    'stderr_log':name+'.stderr.log',
+                    'stderr_sha256':verifier.sha(tmp_path/(name+'.stderr.log'))}
+                   for name in ('core','factory')},
+        'dependency_snapshot':'source/requirements.lock',
+        'dependency_snapshot_sha256':verifier.sha(tmp_path/'source/requirements.lock'),
+        'dependency_inventory':verifier.dependency_inventory(tmp_path),
         'supplied_reviews':[]}
     (tmp_path/'evidence.json').write_text(json.dumps(evidence))
     assert verifier.check_recorded(tmp_path)['status'] == 'PASS'
+    evidence['dependency_inventory']['status'] = 'MISMATCH'
+    (tmp_path/'evidence.json').write_text(json.dumps(evidence))
+    with pytest.raises(ValueError, match='inventory'):
+        verifier.check_recorded(tmp_path)
+    evidence['dependency_inventory'] = verifier.dependency_inventory(tmp_path)
+    (tmp_path/'evidence.json').write_text(json.dumps(evidence))
     original = (tmp_path/'source/code.py').read_bytes()
     (tmp_path/'source/code.py').write_text('# changed fixture\n')
     with pytest.raises(ValueError, match='checksum'):
@@ -62,6 +82,19 @@ def test_recorded_evidence_detects_changed_code_logs_and_counts(tmp_path):
     with pytest.raises(ValueError, match='membership'):
         verifier.check_recorded(tmp_path)
     (tmp_path/'source/added.py').unlink()
+    schema_path=tmp_path/'project/readiness.schema.json'
+    schema_original=schema_path.read_bytes()
+    schema_path.write_bytes(schema_original+b' ')
+    with pytest.raises(ValueError, match='checksum'):
+        verifier.check_recorded(tmp_path)
+    schema_path.write_bytes(schema_original)
+    (tmp_path/'source/sentinel_gl/schemas').mkdir(parents=True)
+    extra_schema=tmp_path/'source/sentinel_gl/schemas/extra.json'
+    extra_schema.write_text('{"type":"object"}')
+    with pytest.raises(ValueError, match='schema membership'):
+        verifier.check_recorded(tmp_path)
+    extra_schema.unlink()
+    (tmp_path/'source/sentinel_gl/schemas').rmdir()
     evidence['commands']['core']['tests_passed'] = 4
     (tmp_path/'evidence.json').write_text(json.dumps(evidence))
     with pytest.raises(ValueError, match='mismatch'):

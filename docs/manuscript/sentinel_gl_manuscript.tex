@@ -1,0 +1,144 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[letterpaper,margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx,amsmath,amssymb,booktabs}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks,breaklinks]{hyperref}
+\setlength{\columnsep}{0.25in}
+\setlength{\emergencystretch}{2em}
+\Urlmuskip=0mu plus 2mu
+\graphicspath{{../figures/}}
+\hypersetup{pdftitle={Sentinel-GL: Source-Bound Multisensor Anomaly Modeling Diagnostics},pdfauthor={Aditya Shrestha},pdfsubject={Development diagnostics; no operational warning or research-admission claim},pdfkeywords={glacial lakes, Sentinel-1, Sentinel-2, masked autoencoder, reproducibility}}
+\title{Sentinel-GL: Source-Bound Multisensor Anomaly Modeling Diagnostics for Two Himalayan Lake Regions}
+\author{Aditya Shrestha\thanks{Institutional student email: \href{mailto:as03233622@student.ku.edu.np}{\nolinkurl{as03233622@student.ku.edu.np}}.}\\[-1pt]
+\small Department of Computer Science and Engineering (DoCSE)\\
+\small School of Engineering, Kathmandu University\\
+\small Dhulikhel, Nepal\\[2pt]
+\small Correspondence: \href{mailto:adityashrestha39@gmail.com}{\nolinkurl{adityashrestha39@gmail.com}}}
+\date{15 October 2026}
+\begin{document}
+\maketitle
+\begin{center}\small
+ICT-CEEL 2027 preparation draft; IEEE TGRS is a methodological reference target, not an alternate submission or endorsement. This locally compiled academic layout is not a verified venue template. Author identity and affiliation are supplied by the author for this local draft.\\[3pt]
+\textbf{Research not ready; diagnostic evidence only; release blocked.}
+\end{center}
+\begin{abstract}
+Retrospective multisensor anomaly modeling requires a defensible separation between authentic observations, engineering diagnostics and independently validated warning performance. We assemble a source-bound diagnostic workflow for South Lhonak and Khangchung Tsho using one shared September 2023 Sentinel-1 product and two distinct Sentinel-2 products. Four site--sensor groups retain asynchronous acquisition support, explicit missingness and source hashes. Native SAR calibration is verified numerically; target-grid SAR remains an ellipsoid/tiepoint diagnostic without terrain correction or validated lake registration. A masked autoencoder with 1,062,407 parameters is optimized in five local diagnostic runs using frozen training-only normalization and dependency-safe optical masking. Matched score records, genuine checkpoint attention distributions and preserved null results are reported. The monitor masked reconstruction errors range from 0.00510621716135 to 0.0105662554769 on shared, development-exposed support; these values do not estimate population performance. RPCA remains nonconverged. Independent labels, threshold-calibration support, eligible exposure and an adequate temporal corpus are absent, so precision--recall, annual false-alarm trade-offs and warning lead time remain unavailable. The contribution of this draft is an auditable diagnostic record and a precise account of the remaining scientific dependencies, not a validated GLOF forecast or operational alert system.
+\end{abstract}
+\noindent\textbf{Index terms---}Glacial lakes; multisensor observations; masked reconstruction; missingness; diagnostic reproducibility.
+
+\section{Introduction}
+Glacial-lake monitoring joins a physical observation problem with a statistical decision problem. Authentic image values alone do not establish lake-specific change, independent anomaly labels or a prospective warning threshold. The retained source register includes regional glacier and lake-risk studies~\cite{LIT001,LIT004,LIT005,LIT006}, retrospective GLOF detection and inventory studies~\cite{LIT002,LIT003}, and event-specific case material~\cite{LIT010,LIT011,LIT012}. These references motivate source and task differentiation; their numerical findings are not transferred into this diagnostic dataset.
+
+Sentinel-GL asks whether a temporal masked autoencoder can eventually provide useful information beyond classical, seasonal, physical and observation-quality alternatives. That question is not answered by the present pilot. The complete intended program still requires independent measurement and event ascertainment, fitted embedding-reference scoring, a frozen score combination, fair baselines, controlled perturbations, factorial and sensitivity analyses, out-of-distribution tests, independent evaluation and reproducibility. Negative and inconclusive outcomes remain admissible.
+
+The present paper-style draft reports the completed engineering and bounded optimization diagnostics. It neither substitutes those diagnostics for missing research evidence nor reduces the intended study because of venue or timing.
+
+\section{Related Work and Source-Access Boundaries}
+The literature register contains 20 literature records and one excluded project hypothesis. Four literature records are explicitly abstract/metadata-only; 16 retain a status indicating that their methods were not reassessed in the local correction. A registered citation is therefore not a claim of full-method verification. The 29-paper claim in the supplied synthesis is not adopted.
+
+The register covers Sentinel-1 susceptibility and retrospective SAR/optical case analysis~\cite{LIT008,LIT009}, masked temporal representation candidates~\cite{LIT013,LIT014}, and anomaly-model or scoring precedents~\cite{LIT015,LIT016,LIT017,LIT018}. It also includes multimodal GLOF preprint claims~\cite{LIT019,LIT020,LIT021}; their peer-review status, data rights and evaluation validity are not established by this draft. No generic novelty claim for masked autoencoding, reconstruction scores, embedding-density scores or score fusion is made. The bibliography preserves inspected-material and access limitations.
+
+\section{Data and Observation Support}
+\subsection{Products, sites and geometry}
+The pilot query centroids are South Lhonak (27.915$^\circ$N, 88.204$^\circ$E) and Khangchung Tsho (27.985$^\circ$N, 88.752$^\circ$E). These are query locations, not independently validated lake boundaries. Each target grid is $499\times499$ cells in EPSG:32645 with 20-m spacing; this spacing is not a claim of 20-m sensor resolution or terrain-corrected geometric accuracy.
+
+Four site--sensor records originate from three unique provider products. Both SAR records use the same S1A IW GRD VV/VH acquisition dated 1 September 2023. Optical observations are dated 4 September for South Lhonak and 21 September for Khangchung Tsho. The retained SAR start/stop strings do not explicitly specify a timezone. Historical 2023 provider availability is unknown, and later processing cannot establish operational availability in 2023. Figure~\ref{fig:obs} shows the actual sparse support rather than an interpolated annual sequence.
+
+\subsection{Optical validity and missingness}
+B03, B08 and B11 retain source-derived reflectance, including valid negative values where present. The indices are
+\begin{align}
+\mathrm{NDWI}&=\frac{B03-B08}{B03+B08},\\
+\mathrm{MNDWI}&=\frac{B03-B11}{B03+B11},
+\end{align}
+with invalid or unsupported denominators represented explicitly. MNDWI is not duplicated as a separate NDSI measurement. The source grids contain 249,001 cells each; SCL classes 4/5/6 cover 104,366 South Lhonak cells and 9,286 Khangchung cells. Finite observed values and clear-class eligibility are distinct masks, not interchangeable claims of usable lake coverage. Weather, DEM, coherence and unstaged optical bands remain unavailable.
+
+\subsection{SAR radiometry and spatial limits}
+For raw digital number $D$, calibration factor $A_\sigma$ and supported range/azimuth noise terms, the implemented numerical transform is
+\begin{align}
+\sigma^0_{\rm raw}&=D^2/A_\sigma^2,\\
+\sigma^0_{\rm signed}&=(D^2-N_{\rm range}N_{\rm azimuth})/A_\sigma^2.
+\end{align}
+The product-specific LUTs, flags, image coordinates and block support govern application. Signed noise-subtracted values remain signed in linear diagnostics; $10\log_{10}(\sigma^0)$ is defined only on positive finite support. No arbitrary dB floor restores nonpositive power. Sixteen actual source-sample arithmetic checks were retained.
+
+The plotted and panel SAR channels are \emph{raw calibrated} $\sigma^0$ target-grid diagnostics, not the native signed-denoised variant. Native calibration does not establish terrain correction. Annotation tiepoint inversion and linear-power resampling produce an ellipsoid-only diagnostic; DEM-based terrain correction, layover/shadow QA, independently validated lake geometry and cross-sensor registration uncertainty remain unavailable. The distributions in Figure~\ref{fig:sar} are spatial diagnostics, not temporal anomaly traces or water-only measurements.
+
+\section{Diagnostic Modeling and Inference}
+\subsection{Asynchronous panel and target masking}
+The source-bound panel stores optical and SAR acquisition groups separately, retaining channel units, masks, hashes and support. There is no temporal interpolation or forward fill. Computational padding is not an observation and cannot become a loss target.
+
+Optical indices are deterministic functions of source bands. Hiding B03 while leaving B08 and NDWI visible would leak the target through $B03=B08(1+\mathrm{NDWI})/(1-\mathrm{NDWI})$ on its defined domain. The accepted dependency-closure policy therefore hides all observed optical channels at a targeted coordinate from encoder context while preserving exactly the requested genuine-valid loss targets. Dependency-hidden context, natural missingness, artificial targets and padding remain distinct.
+
+\subsection{Architecture, fitting and monitoring}
+The actual model has latent width 128, four attention heads, four encoder layers, two decoder layers and feed-forward widths 512/256. Its measured parameter count is 1,062,407, superseding an earlier approximate 401K estimate. Pre-layer normalization and final normalization are recorded. Explicit UTC optical time features are encoded; unresolved SAR times remain unencoded. Bounded source-derived quadrant summaries avoid unbounded pixel-wise attention and do not create new independent samples.
+
+Training and monitoring use complementary 16-pixel checkerboard-tile parity on the same exposed scenes. A transform is fitted only on declared parity-0 valid context and frozen for parity-1 application, checkpoint replay and extensions. This is not independent lake/event validation. Five seeds (0--4) run under a prospectively recorded configuration after a four-epoch learning pilot. Main runs lasted 12, 12, 12, 12 and 11 epochs; checkpoint eligibility began at epoch 6, and selected epochs were 10, 10, 12, 11 and 8. Three-epoch extensions and their adverse/mixed monitor outcomes remain retained. Neither short execution nor checkpoint replay proves convergence. The training runner's OS exit code was not captured; its completed artifacts, state updates and replay checks are available, while this telemetry limitation remains explicit.
+
+\subsection{Score definitions and baselines}
+Score A is observed hidden-target squared error divided by its actual target count:
+\begin{equation}
+A=\frac{\sum_{j\in\mathcal T}(\hat x_j-x_j)^2}{|\mathcal T|}.
+\end{equation}
+Empty target support yields an unavailable value, not zero. Score B remains unavailable pending the pooled embedding, PCA rank, reference-bank size and overlap-exclusion design. Score C remains unavailable pending paired fitting-only transforms and a prospectively justified combination weight. No arbitrary defaults are reported as accepted results.
+
+The diagnostic baselines include proportional-missing-branch Isolation Forest, a fixed missingness-aware feature map with a PSD RBF one-class SVM, and an observed-entry Inexact ALM RPCA variant with frozen projection. RPCA remains \texttt{NONCONVERGED\_MAX\_ITERATIONS} after 150 iterations. CUSUM chronology is unavailable because actual source-arrival times are not bound. Shared row identifiers do not make raw method scores commensurate or restore independent support.
+
+POT/GPD and $k\ge2$ persistence primitives have numerical tests, but the pilot supplies no independent threshold-calibration set or verified lake-year exposure. The objective of one false alarm per lake-year is not achieved or estimated. The sequence primitive distinguishes sustained episode continuation from a new opening and declares at the sustaining arrival; it is not applied to create real alarms under an unavailable threshold.
+
+\section{Results}
+\subsection{Reconstruction diagnostics}
+\begingroup
+\renewenvironment{table}[1][]{\begin{table*}[t]}{\end{table*}}
+\input{diagnostic_results.tex}
+\endgroup
+
+All five corrected selected checkpoints were replayed. The reporting packet contains 160 Score A rows: 40 measured rows and 120 explicit nulls for rows without selected hidden-target support. Each seed has 14 target elements over four supported rows per role. Table~\ref{tab:wp09-score-a-diagnostic} reproduces the retained values without favorable-seed selection. Fit errors are in-sample and monitor errors use the same physical source groups. Their range is optimizer variation, not a confidence interval or evidence of event-warning skill.
+
+Figure~\ref{fig:optical} shows source-derived optical distributions; Figure~\ref{fig:loss} shows real monitor curves; Figure~\ref{fig:scores} retains each method's own score units. RPCA nonconvergence and different information sets prohibit a comparative performance ranking. PR/AP, PR-AUC, lead time and calibrated annual false-alarm trade-offs are unavailable. No labels are invented from proximity to the 2023 event or site identity.
+
+\subsection{Captured attention}
+The retained read-only capture covers all five selected checkpoints, both sites and fit/monitor roles: 20 replays. Encoder tensor axes are $[5,4,4,1,4,8,8]$ and decoder axes $[5,4,2,1,4,8,8]$ for seed, sample, layer, batch, head, query and key. The audit binds 30,720 weights, checks 3,840 row sums and compares 40 float64 layer/head means at an unchanged $10^{-8}$ tolerance. Instrumented and ordinary float32 predictions agree at absolute tolerance $10^{-6}$ and relative tolerance $10^{-5}$; maximum absolute difference is $4.76837158\times10^{-7}$.
+
+Figures~\ref{fig:encoder}--\ref{fig:decoder} display the actual sparse-token weights, separately by seed/sample. Encoder target/no-context keys are masked. Decoder self-attention follows the actual checkpoint computation. These internal distributions are neither causal explanations nor feature-importance estimates, and they do not depict a complete pre-breach 2023 sequence.
+
+\section{Validity, Reproducibility and Reporting Boundaries}
+The diagnostic package is limited by sparse acquisitions, two development-exposed sites, unresolved physical sampling memberships, approximate SAR geometry and unknown historical availability. Seeds, spatial cells, tokens and repeated groups do not increase independent lake/event counts. Fitting provenance $G_P$ is separate from physical sampling graph $G_S$; shared model weights alone do not collapse distinct geographic sampling units.
+
+The reporting milestone has 11 focused test passes, 423 core passes and 477 supporting software-verification passes, with one skip in each full suite. These 911 test passes are engineering checks, not 911 independent experiments or a scientific guarantee. Source/input/output hashes, actual replay arithmetic and retained adverse results support the stated diagnostic claims. They do not replace independent review or statistical identification.
+
+No PR-AUC curve, operational warning threshold, control-lake non-event label or validated precursor result is asserted. Administrative inventory geometry is not a prerequisite for orbital extraction, but lake-specific quantitative claims still require an appropriately validated physical mask and registration support. A calendar cutoff alone does not supply historical product availability. Current outputs remain outside scientific admission and the project is not ready for submission.
+
+\section{Disclosures}
+\noindent\textbf{Independence and funding.} Aditya Shrestha conducted this research independently, without institutional or external grant funding. The stated academic affiliation does not imply institutional sponsorship.
+
+\noindent\textbf{AI assistance and author responsibility.} OpenAI Codex assisted coding, verification and drafting under Aditya Shrestha's sole architectural direction. The author directed and audited these contributions and assumes sole intellectual responsibility for the study design, analysis, interpretations and manuscript. AI systems are not authors. Local technical review and PI acceptance of bounded diagnostics are not independently blinded scientific validation or venue acceptance.
+
+\noindent\textbf{Permissions and research boundaries.} Source and redistribution permissions remain subject to review; the existing license remains authoritative. No new license is granted by this manuscript. The diagnostic and non-operational limits stated throughout remain in force.
+
+\section{Conclusion}
+The retained evidence supports source-bound engineering diagnostics, reproducible masked reconstruction on exposed support and genuine checkpoint-attention visualization. It does not yet answer whether Sentinel-GL improves GLOF monitoring or warning. The next scientific dependencies are an adequate temporal corpus, verified spatial and temporal support, independent event/non-event ascertainment, disjoint calibration/evaluation and the full planned comparative and sensitivity program. Unavailable and nonconverged results remain explicit rather than being replaced with favorable values.
+
+\clearpage
+\onecolumn
+\section*{Diagnostic Figures}
+\newcommand{\diagnosticfigure}[4]{\begin{figure}[!ht]\centering\includegraphics[width=\textwidth,height=0.79\textheight,keepaspectratio]{#1}\caption{#2}\label{#3}\end{figure}}
+\diagnosticfigure{fig1_actual_observation_support.pdf}{Retained observation support. Four site--sensor records map to three unique provider products because both SAR site records share one product. Source calendar dates are shown without temporal interpolation. SAR timezone and historical provider availability remain unknown; these are not independent event or calibration units.}{fig:obs}{}
+\diagnosticfigure{fig2_raw_sigma0_ellipsoid_diagnostic.pdf}{Raw calibrated VV/VH sigma0 pixel distributions on ellipsoid/tiepoint grids. The full spatial distributions are retained without clipping valid extremes. They are not terrain-corrected, lake-only or temporally calibrated anomaly measurements; pixel density is not an independent-sample distribution.}{fig:sar}{}
+\diagnosticfigure{fig3_optical_channel_distributions.pdf}{Source-derived B03/B08/B11 reflectance and NDWI/MNDWI distributions. Finite observed support, SCL clear-class eligibility and validated lake coverage are distinct. Spatial spread is not radiometric or geometric uncertainty and does not establish a time trend.}{fig:optical}{}
+\diagnosticfigure{fig4_wp06_five_seed_monitor_loss.pdf}{Actual five-seed monitor-loss histories on the shared diagnostic support. Monitoring applies frozen training-only scaling. The curves measure optimization behavior; shared scenes, selected checkpoints and short bounded extensions do not establish independent validation or convergence.}{fig:loss}{}
+\diagnosticfigure{fig5_matched_diagnostic_scores.pdf}{Matched monitor row identifiers with method-specific units. The five T-MAE points per row are seed-checkpoint variation, not independent rows. RPCA is NONCONVERGED\_MAX\_ITERATIONS. The differing information sets and score definitions prohibit raw-axis performance ranking.}{fig:scores}{}
+\clearpage
+\diagnosticfigure{fig6_checkpoint_attention_encoder.pdf}{Actual encoder self-attention, averaged in float64 over four layers and four heads separately within each seed/sample. Columns represent site/role combinations and rows seeds 0--4. Marked target/no-context keys are masked by the encoder policy. Sparse pooled source-token weights are internal distributions, not causal explanations, feature importance or a full annual sequence. The original vector asset preserves detailed token labels for magnified inspection.}{fig:encoder}{}
+\clearpage
+\diagnosticfigure{fig7_checkpoint_attention_decoder.pdf}{Actual decoder self-attention, averaged in float64 over two layers and four heads separately within each seed/sample. The decoder has the checkpoint's own masking semantics; no encoder key-padding claim is transferred to it. Source, quadrant, target and mask bindings remain in the audited tables. These retrospective internal weights do not establish physical mechanism or warning performance.}{fig:decoder}{}
+
+\clearpage
+\section*{Bibliographic Access Note}
+The following 20 entries reproduce the registered source inventory. Four entries are abstract/metadata-only; the remaining entries are not promoted to full-method verification by citation or compilation. The project hypothesis is excluded. Bibliographic title/author details are retained as registered rather than filled from unverified memory. A typesetting-only derivative escapes TeX-special characters and preserves registered title capitalization; it introduces no new sources or scientific metadata.
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references_legacy_diagnostic_typeset}
+\end{document}

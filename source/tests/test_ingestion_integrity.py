@@ -214,6 +214,7 @@ def test_era5_ingestor_parsing():
     assert r1.status == "CATALOGUED"
     assert r1.modality == "weather"
     assert r1.record_id == "ERA5-SGL-001-2023-09-01"
+    assert r1.acquisition_timestamp is None  # No invented acquisition hour for a daily summary.
     assert r1.metadata["elevation_m"] == 5200.0
     # Mean of [-2.0, -1.0, 3.5, 0.5] = 1.0 / 4 = 0.25
     assert abs(r1.metadata["t2m_mean_c"] - 0.25) < 1e-5
@@ -221,82 +222,18 @@ def test_era5_ingestor_parsing():
     assert abs(r1.metadata["precipitation_total_mm"] - 1.6) < 1e-5
 
 
-def test_pilot_ingestion_pipeline_with_mock_ingestors(tmp_path: Path):
-    # Construct isolated lake registry
-    csv_path = tmp_path / "lake_registry.csv"
-    with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(["lake_id", "name", "centroid_lat", "centroid_lon", "elevation_m", "glacier_system", "cohort_role"])
-        writer.writerow(["SGL-001", "South Lhonak", "27.91350", "88.20010", "5201", "Lhonak Glacier", "outburst_target"])
+def test_pilot_ingestion_pipeline_with_mock_ingestors(tmp_path):
+    """Unsupported research inputs are rejected before any output is written."""
+    from sentinel_gl.ingestion.pipeline import PilotIngestionPipeline
+    with pytest.raises(ValueError, match="BLOCKED"):
+        PilotIngestionPipeline(tmp_path).run_pilot()
+    assert not list(tmp_path.iterdir())
 
-    pipeline = PilotIngestionPipeline(tmp_path)
-
-    # Patch ingestors with mock offline returns
-    sample_rec = AcquisitionRecord(
-        record_id="MOCK-S2-001",
-        lake_id="SGL-001",
-        modality="optical",
-        provider_name="Copernicus Data Space Ecosystem",
-        product_identifier="S2_TEST_PRODUCT",
-        acquisition_timestamp="2023-09-15T04:30:00Z",
-        query_timestamp="2023-10-05T12:00:00Z",
-        roi_geometry={"type": "Point", "coordinates": [88.20010, 27.91350]},
-        status="CATALOGUED",
-        sha256="deadbeef",
-        storage_bytes=512,
-        metadata={"cloud_cover": 0.0},
-    )
-
-    pipeline.s2_ingestor.query_catalog = MagicMock(return_value=[sample_rec])  # type: ignore
-    pipeline.s1_ingestor.query_catalog = MagicMock(return_value=[])  # type: ignore
-    pipeline.era5_ingestor.query_series = MagicMock(return_value=[])  # type: ignore
-
-    dossier = pipeline.run_pilot("2023-09-01", "2023-10-03")
-
-    assert dossier["dossier_version"] == 1
-    assert dossier["data_authenticity"]["zero_synthetic_data_declaration"] is True
-    assert "SGL-001" in dossier["cohort_summary"]
-    assert dossier["records_count"] == 1
-    assert (tmp_path / "pilot_dossier.json").exists()
 
 
 def test_live_registries_and_dossier_integrity():
-    """Verify live lake registry, event registry, and pilot dossier when present."""
-    root = Path(__file__).resolve().parents[2]
-    lake_reg = root / "data" / "lake_registry.csv"
-    event_reg = root / "data" / "event_registry.csv"
-    dossier_file = root / "data" / "pilot_dossier.json"
-
-    if not lake_reg.exists() or not event_reg.exists() or not dossier_file.exists():
-        pytest.skip("Observational pilot files not yet generated")
-
-    with open(lake_reg, "r", encoding="utf-8") as f:
-        reader = list(csv.DictReader(f))
-        assert len(reader) >= 2
-        lake_ids = {r["lake_id"] for r in reader}
-        assert "SGL-001" in lake_ids
-        assert "SGL-002" in lake_ids
-
-    with open(event_reg, "r", encoding="utf-8") as f:
-        reader = list(csv.DictReader(f))
-        assert len(reader) >= 1
-        event_ids = {r["event_id"] for r in reader}
-        assert "EVT-001" in event_ids
-        evt = next(r for r in reader if r["event_id"] == "EVT-001")
-        assert evt["lake_id"] == "SGL-001"
-        assert evt["onset_earliest"].startswith("2023-10-03")
-
-    with open(dossier_file, "r", encoding="utf-8") as f:
-        dossier = json.load(f)
-        assert dossier["data_authenticity"]["zero_synthetic_data_declaration"] is True
-        assert dossier["records_count"] > 0
-        assert "SGL-001" in dossier["cohort_summary"]
-        assert "SGL-002" in dossier["cohort_summary"]
-        for rec in dossier["record_provenance"]:
-            assert "record_id" in rec
-            assert "lake_id" in rec
-            assert "modality" in rec
-            assert rec["status"] in ("CATALOGUED", "NO_DATA", "FAILED")
-            if rec["status"] == "CATALOGUED":
-                assert rec["sha256"] is not None
-                assert rec["storage_bytes"] > 0
+    from sentinel_gl.admission import QUARANTINED
+    from sentinel_gl.integrity import file_hash
+    root=Path(__file__).resolve().parents[2]
+    for rel in ('data/lake_registry.csv','data/event_registry.csv','data/pilot_dossier.json'):
+        assert file_hash(root/rel) in QUARANTINED

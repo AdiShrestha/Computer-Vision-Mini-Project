@@ -2,6 +2,7 @@
 from __future__ import annotations
 import datetime
 import json
+from ..integrity import loads_strict
 import urllib.parse
 import urllib.request
 from typing import Any, Dict, List, Optional
@@ -25,7 +26,7 @@ class ERA5Ingestor:
         start_date: str,
         end_date: str,
     ) -> List[AcquisitionRecord]:
-        """Fetch verified ECMWF ERA5 hourly records and produce daily provenance records."""
+        """Retrieve unadmitted provider metadata; this is not measurement admission."""
         params = {
             "latitude": f"{centroid_lat:.5f}",
             "longitude": f"{centroid_lon:.5f}",
@@ -40,7 +41,7 @@ class ERA5Ingestor:
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as resp:
                 raw_bytes = resp.read()
-                data = json.loads(raw_bytes.decode("utf-8"))
+                data = loads_strict(raw_bytes.decode("utf-8"))
         except Exception as ex:
             return [
                 AcquisitionRecord(
@@ -49,7 +50,7 @@ class ERA5Ingestor:
                     modality="weather",
                     provider_name="ECMWF ERA5 Reanalysis",
                     product_identifier=url,
-                    acquisition_timestamp=f"{start_date}T00:00:00Z",
+                    acquisition_timestamp=None,
                     query_timestamp=query_time,
                     roi_geometry={"type": "Point", "coordinates": [centroid_lon, centroid_lat]},
                     status="FAILED",
@@ -71,7 +72,7 @@ class ERA5Ingestor:
                     modality="weather",
                     provider_name="ECMWF ERA5 Reanalysis",
                     product_identifier="NO_DATA",
-                    acquisition_timestamp=f"{start_date}T00:00:00Z",
+                    acquisition_timestamp=None,
                     query_timestamp=query_time,
                     roi_geometry={"type": "Point", "coordinates": [centroid_lon, centroid_lat]},
                     status="NO_DATA",
@@ -94,10 +95,10 @@ class ERA5Ingestor:
         for day_str, vals in sorted(daily_groups.items()):
             t_list = vals["temps"]
             p_list = vals["precips"]
-            t_mean = sum(t_list) / len(t_list) if t_list else float("nan")
-            t_min = min(t_list) if t_list else float("nan")
-            t_max = max(t_list) if t_list else float("nan")
-            p_tot = sum(p_list) if p_list else float("nan")
+            t_mean = sum(t_list) / len(t_list) if t_list else None
+            t_min = min(t_list) if t_list else None
+            t_max = max(t_list) if t_list else None
+            p_tot = sum(p_list) if p_list else None
 
             day_payload = {
                 "date": day_str,
@@ -107,7 +108,7 @@ class ERA5Ingestor:
                 "precipitation_total_mm": p_tot,
                 "elevation_m": data.get("elevation"),
             }
-            day_bytes = json.dumps(day_payload, sort_keys=True).encode("utf-8")
+            day_bytes = json.dumps(day_payload, sort_keys=True, allow_nan=False).encode("utf-8")
             day_sha = compute_bytes_sha256(day_bytes)
 
             records.append(
@@ -117,7 +118,7 @@ class ERA5Ingestor:
                     modality="weather",
                     provider_name="ECMWF ERA5 Reanalysis",
                     product_identifier=f"ERA5_HOURLY_{day_str}",
-                    acquisition_timestamp=f"{day_str}T12:00:00Z",
+                    acquisition_timestamp=None,  # Daily aggregation is not a noon acquisition.
                     query_timestamp=query_time,
                     roi_geometry={"type": "Point", "coordinates": [centroid_lon, centroid_lat]},
                     status="CATALOGUED",

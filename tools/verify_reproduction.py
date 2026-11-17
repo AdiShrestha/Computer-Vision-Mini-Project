@@ -86,6 +86,7 @@ def verify_dependency_lock(lock_path: Path) -> Dict[str, Any]:
 
     status = "PASS" if not mismatches else "FAIL"
     return {
+        "scope": "installed-version comparison; not a clean installation",
         "status": status,
         "total_packages_checked": len(checked),
         "mismatches_count": len(mismatches),
@@ -128,7 +129,7 @@ def verify_clean_subprocess_replay(tolerance: float = 1e-5) -> Dict[str, Any]:
 
         expected = compute_deterministic_reconstruction(model, x, validity, device="cpu")
 
-        bundle = CheckpointBundle.capture(
+        bundle = CheckpointBundle.capture_fixture(
             model=model,
             optimizer=None,
             transform_state={"mean": [0.0] * 11, "scale": [1.0] * 11, "fit_lake_ids": ["LAKE-REPLAY"]},
@@ -156,150 +157,21 @@ def verify_clean_subprocess_replay(tolerance: float = 1e-5) -> Dict[str, Any]:
         }
 
 
-def verify_figure_manifest_hashes(manifest_path: Path, figures_dir: Path) -> Dict[str, Any]:
-    """Verify that all figures on disk match cryptographic SHA-256 digests in manifest."""
-    if not manifest_path.is_file():
-        return {
-            "status": "FAIL",
-            "error": f"Figure manifest not found at {manifest_path}",
-            "figures_checked": 0,
-            "mismatches": [],
-        }
-
-    with open(manifest_path, "r", encoding="utf-8") as f:
-        manifest = json.load(f)
-
-    figures = manifest.get("figures", [])
-    mismatches: List[Dict[str, Any]] = []
-    checked: List[Dict[str, Any]] = []
-
-    for fig in figures:
-        fname = fig["filename"]
-        expected_hash = fig["sha256"]
-        expected_size = fig["size_bytes"]
-        fig_path = figures_dir / fname
-
-        if not fig_path.is_file():
-            mismatch = {
-                "filename": fname,
-                "error": "FILE_NOT_FOUND",
-                "expected_sha256": expected_hash,
-            }
-            mismatches.append(mismatch)
-            continue
-
-        raw_bytes = fig_path.read_bytes()
-        actual_size = len(raw_bytes)
-        actual_hash = hashlib.sha256(raw_bytes).hexdigest()
-
-        is_match = (actual_hash == expected_hash) and (actual_size == expected_size)
-        record = {
-            "filename": fname,
-            "expected_sha256": expected_hash,
-            "actual_sha256": actual_hash,
-            "expected_bytes": expected_size,
-            "actual_bytes": actual_size,
-            "match": is_match,
-        }
-        checked.append(record)
-        if not is_match:
-            mismatches.append(record)
-
-    status = "PASS" if (not mismatches and len(checked) == len(figures)) else "FAIL"
-    return {
-        "status": status,
-        "figures_checked": len(checked),
-        "total_in_manifest": len(figures),
-        "mismatches_count": len(mismatches),
-        "mismatches": mismatches,
-    }
+def verify_figure_manifest_hashes(*args, **kwargs):
+    return {"status": "BLOCKED", "reason": "RESEARCH_ARTIFACT_ADMISSION_REQUIRED"}
 
 
-def verify_table_metrics_integrity(tables_dir: Path) -> Dict[str, Any]:
-    """Verify that table 1 markdown and CSV contain expected headline numbers without fabrication."""
-    csv_path = tables_dir / "table1_comparative_evaluation.csv"
-    md_path = tables_dir / "table1_comparative_evaluation.md"
-
-    if not csv_path.is_file() or not md_path.is_file():
-        return {
-            "status": "FAIL",
-            "error": f"Table files missing in {tables_dir}",
-        }
-
-    rows: List[List[str]] = []
-    with open(csv_path, "r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        rows = list(reader)
-
-    # Check headers and row counts
-    if len(rows) < 6:
-        return {
-            "status": "FAIL",
-            "error": f"Table 1 CSV has only {len(rows)} rows, expected at least 6",
-        }
-
-    # Verify Case Detection row
-    case_row = next((r for r in rows if len(r) > 1 and "SGL-001" in r[1]), None)
-    alert_row = next((r for r in rows if len(r) > 1 and "lambda_alert" in r[1]), None)
-    paired_rows = [r for r in rows if len(r) > 0 and r[0] == "Paired Contrast"]
-
-    checks: Dict[str, bool] = {
-        "case_detection_present": case_row is not None and case_row[7] in ("DETECTED", "NOT_DETECTED"),
-        "alert_burden_present": alert_row is not None and alert_row[7] in ("ESTIMATED", "NOT_ESTIMABLE") and float(alert_row[2]) >= 0.0,
-        "paired_contrasts_present": len(paired_rows) == 4,
-    }
-
-    all_pass = all(checks.values())
-    return {
-        "status": "PASS" if all_pass else "FAIL",
-        "checks": checks,
-        "rows_verified": len(rows),
-    }
+def verify_table_metrics_integrity(*args, **kwargs):
+    return {"status": "BLOCKED", "reason": "RESEARCH_ARTIFACT_ADMISSION_REQUIRED"}
 
 
-def generate_reproduction_report(
-    output_path: Path = REPO_ROOT / "docs/audit/wp10_reproduction/reproduction_report.json",
-) -> Dict[str, Any]:
-    """Run all reproduction checks and emit structured JSON report."""
-    lock_path = REPO_ROOT / "source/requirements.lock"
-    manifest_path = REPO_ROOT / "docs/figures/manifest.json"
-    figures_dir = REPO_ROOT / "docs/figures"
-    tables_dir = REPO_ROOT / "docs/tables"
-
-    dep_check = verify_dependency_lock(lock_path)
-    replay_check = verify_clean_subprocess_replay(tolerance=1e-5)
-    figure_check = verify_figure_manifest_hashes(manifest_path, figures_dir)
-    table_check = verify_table_metrics_integrity(tables_dir)
-
-    all_passed = (
-        dep_check["status"] == "PASS"
-        and replay_check["status"] == "PASS"
-        and figure_check["status"] == "PASS"
-        and table_check["status"] == "PASS"
-    )
-
-    report = {
-        "report_version": 1,
-        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-        "overall_status": "PASS" if all_passed else "FAIL",
-        "platform": {
-            "system": platform.system().lower(),
-            "machine": platform.machine().lower(),
-            "python_version": sys.version,
-            "torch_version": torch.__version__,
-        },
-        "checks": {
-            "dependency_lock": dep_check,
-            "clean_process_replay": replay_check,
-            "figure_manifest_hashes": figure_check,
-            "table_metrics_integrity": table_check,
-        },
-    }
-
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
-
+def generate_reproduction_report(output_path=None):
+    report = {"overall_status": "BLOCKED", "scope": "research reproduction", "checks": {"measurement_admission": {"status": "BLOCKED", "reason": "NO_ADMITTED_RESEARCH_RUN"}, "clean_install": {"status": "NOT_VERIFIED"}}}
+    if output_path is not None:
+        p = Path(output_path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with p.open('x') as f:
+            json.dump(report, f, indent=2, allow_nan=False)
     return report
 
 
@@ -321,10 +193,8 @@ def main() -> int:
     report = generate_reproduction_report(Path(args.output))
 
     checks = report["checks"]
-    print(f"1. Dependency Lock Check:       {checks['dependency_lock']['status']}")
-    print(f"2. Subprocess Replay Check:      {checks['clean_process_replay']['status']} (diff: {checks['clean_process_replay'].get('max_absolute_difference', 0.0):.2e})")
-    print(f"3. Figure Manifest Hash Check:   {checks['figure_manifest_hashes']['status']} ({checks['figure_manifest_hashes'].get('figures_checked', 0)} figures verified)")
-    print(f"4. Table Metric Integrity Check: {checks['table_metrics_integrity']['status']}")
+    for name, check in checks.items():
+        print(f"{name}: {check['status']} ({check.get('reason', 'no executed evidence')})")
     print("-" * 65)
     print(f"OVERALL REPRODUCTION VERDICT:     {report['overall_status']}")
     print(f"Report written to:               {args.output}")

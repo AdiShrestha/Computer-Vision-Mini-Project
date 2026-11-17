@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["class_id", "count", "fraction", "status"],
+  "properties": {
+    "class_id": {"type": "integer", "minimum": 1},
+    "count": {"type": "integer", "minimum": 0},
+    "fraction": {"type": ["number", "null"]},
+    "status": {"type": "string", "enum": ["AVAILABLE", "EMPTY_POPULATION"]}
+  },
+  "additionalProperties": false
+}

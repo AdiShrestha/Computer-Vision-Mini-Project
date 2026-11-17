@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "status": "GENERATED_FROM_SOURCE_BOUND_CORRECTED_EVAL_EXPLORATORY",
+  "corrected_eval_report_sha256": "a267f3334450c303ee32c46d7f8dce90dfbcfdc301ccb0dcb39f2af5d893e5e7",
+  "corrected_eval_audit_sha256": "cb771c9777d0a3eed2f8846d7cdd63cccdfb3f0c0d3b0cb1ede8a6fa0b111836",
+  "source_manifest_sha256": "00d72d0bf97cb89f4fc95e9f976805091d03739ba1fdfe9606490d67762280ae",
+  "figures": [
+    {
+      "stem": "fig1_corpus_and_zone_support",
+      "png": {
+        "path": "docs/figures/sr1_final_003/fig1_corpus_and_zone_support.png",
+        "sha256": "7d71c0fce7fcd1f05d3431c3629406f82fb0114ec21fa6ef2ac127838a04dd18"
+      },
+      "pdf": {
+        "path": "docs/figures/sr1_final_003/fig1_corpus_and_zone_support.pdf",
+        "sha256": "a81afe86fe6671c783909b972b4558ab1547f0b3e6c9c3465687856c9e496fe1"
+      },
+      "svg": {
+        "path": "docs/figures/sr1_final_003/fig1_corpus_and_zone_support.svg",
+        "sha256": "318ffe7db5eb797bf0c30382455c01a42dfc8b7f30237e0b11325af803c21a41"
+      }
+    },
+    {
+      "stem": "fig2_radiometry_and_tail_guard",
+      "png": {
+        "path": "docs/figures/sr1_final_003/fig2_radiometry_and_tail_guard.png",
+        "sha256": "4f2128929382ad95edcb2af29ee24620454f2b983c07ab7fa99d8b4f36400da4"
+      },
+      "pdf": {
+        "path": "docs/figures/sr1_final_003/fig2_radiometry_and_tail_guard.pdf",
+        "sha256": "de0c7af64161489d78f764aec48ba5bd4142f7bc065eb93b2676f18185ec94c5"
+      },
+      "svg": {
+        "path": "docs/figures/sr1_final_003/fig2_radiometry_and_tail_guard.svg",
+        "sha256": "6434ca546162e4cbbf920956db9a0b4bbbd190d1ffd9b41a10293fdb3d3c8117"
+      }
+    },
+    {
+      "stem": "fig3_corrective_50fit_diagnostics",
+      "png": {
+        "path": "docs/figures/sr1_final_003/fig3_corrective_50fit_diagnostics.png",
+        "sha256": "92d5a52fe94f85626f6550c0257876bb4c479de14b714f82151d1e954fe94f17"
+      },
+      "pdf": {
+        "path": "docs/figures/sr1_final_003/fig3_corrective_50fit_diagnostics.pdf",
+        "sha256": "e3e8af2a7304c4836b69e509c7748fbb9d3cef58c05da687346853b5428b094f"
+      },
+      "svg": {
+        "path": "docs/figures/sr1_final_003/fig3_corrective_50fit_diagnostics.svg",
+        "sha256": "5e02cd28d49348cf4e8c9958493848120e2ff61b5303cf0d42b207e1bcd8e006"
+      }
+    },
+    {
+      "stem": "fig4_multiyear_anomaly_trajectories",
+      "png": {
+        "path": "docs/figures/sr1_final_003/fig4_multiyear_anomaly_trajectories.png",
+        "sha256": "5512cd3d0c55679f718d0aa70664305388cabbbf26437a52fcefea9d1f5b102a"
+      },
+      "pdf": {
+        "path": "docs/figures/sr1_final_003/fig4_multiyear_anomaly_trajectories.pdf",
+        "sha256": "e9d0cf2b8168d4edbd33ccda877edf5b76a91b0cbcc70cdbbc80ea9a7f3f8a74"
+      },
+      "svg": {
+        "path": "docs/figures/sr1_final_003/fig4_multiyear_anomaly_trajectories.svg",
+        "sha256": "c99359c9e22bc42d8a476b7369d517349dd442ffdbe32b1f88f18694ed890daa"
+      }
+    },
+    {
+      "stem": "fig5_zone_and_autumn_contrasts",
+      "png": {
+        "path": "docs/figures/sr1_final_003/fig5_zone_and_autumn_contrasts.png",
+        "sha256": "85e2a43fdce16aef51484f3b3ca6c5328c3664579d568e41dad2f35665f762ee"
+      },
+      "pdf": {
+        "path": "docs/figures/sr1_final_003/fig5_zone_and_autumn_contrasts.pdf",
+        "sha256": "1d4a3e22043a2ab2b140d6f7465d0bb6b8059846784a56b765e2e9bdc86d7d98"
+      },
+      "svg": {
+        "path": "docs/figures/sr1_final_003/fig5_zone_and_autumn_contrasts.svg",
+        "sha256": "eee3b8fe3eb2158ed783ccfa65e662ae38fbbbbf31be9dc346e8cfa5964e7f81"
+      }
+    }
+  ],
+  "limits": [
+    "No harmonic or ridge outcomes are plotted because they are not in the frozen parent analysis.",
+    "No bootstrap intervals are shown for patch/scene clusters.",
+    "Autumn contrasts are descriptive; rolling-origin E3 remains unestimated."
+  ]
+}

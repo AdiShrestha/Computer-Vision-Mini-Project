@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "scope_manifest_id": {"type": "string", "minLength": 1},
+    "roles": {"type": "object", "properties": {
+      "fitting": {"$ref": "wp04_role_membership.json"},
+      "development_validation": {"$ref": "wp04_role_membership.json"},
+      "threshold_calibration": {"$ref": "wp04_role_membership.json"},
+      "evaluation": {"$ref": "wp04_role_membership.json"}
+    }, "required": ["fitting", "development_validation", "threshold_calibration", "evaluation"], "additionalProperties": false},
+    "graphs": {"type": "object", "properties": {
+      "G_S": {"type": "object"}, "G_P": {"type": "object"}
+    }, "required": ["G_S", "G_P"], "additionalProperties": false},
+    "role_separation": {"type": "string", "const": "EXPLICIT_FOUR_ROLE_KEYS_EMPTY_ROLES_ALLOWED_IN_NON_EXECUTABLE_DRAFT"},
+    "future_append_invariant": {"type": "string", "minLength": 1},
+    "research_admissible": {"type": "boolean", "const": false}
+  },
+  "required": ["schema_version", "scope_manifest_id", "roles", "graphs", "role_separation", "future_append_invariant", "research_admissible"],
+  "additionalProperties": false
+}

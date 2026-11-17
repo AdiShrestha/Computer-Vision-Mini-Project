@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "attempt_id": {"type": "string", "const": "attempt_2026-10-14_stage_001"},
+    "report_path": {"type": "string", "const": "data/raw/wp03/attempt_2026-10-14_stage_001/stage_report.json"},
+    "report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "site_id": {"type": "string", "enum": ["PILOT-SOUTH-LHONAK", "PILOT-KHANGCHUNG-TSHO"]},
+    "product_id": {"type": "string", "minLength": 1},
+    "inspection": {"type": "object", "properties": {
+      "status": {"type": "string", "const": "INSPECTION_FAILED"},
+      "error_type": {"type": "string", "const": "AdmissionError"},
+      "literal_error": {"type": "string", "const": "query centroid is outside the selected C1 green tile"},
+      "research_admitted": {"type": "boolean", "const": false}
+    }, "required": ["status", "error_type", "literal_error", "research_admitted"], "additionalProperties": false}
+  },
+  "required": ["attempt_id", "report_path", "report_sha256", "site_id", "product_id", "inspection"],
+  "additionalProperties": false
+}

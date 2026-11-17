@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "required": ["schema_version", "task_id", "task_type", "origin", "scope_role", "source_ids", "method_ids", "schedule", "decisions"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "task_type": {"type": "string", "const": "OBSERVABILITY"},
+    "origin": {"type": "string", "enum": ["observational", "fixture"]},
+    "scope_role": {"type": "string", "enum": ["fitting", "development_validation", "threshold_calibration", "evaluation"]},
+    "source_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "method_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "schedule": {"type": "array", "items": {"type": "object", "required": ["window_id", "source_ids", "support_start", "support_end", "decision_at", "eligibility_status", "reason"]}, "minItems": 1},
+    "decisions": {"type": "array", "items": {"type": "object", "required": ["window_id", "method_id", "source_ids", "status", "value", "reason"]}, "minItems": 1}
+  },
+  "additionalProperties": false
+}

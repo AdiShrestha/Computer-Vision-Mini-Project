@@ -1,9 +1,4 @@
-"""Prediction ledger records, 2^N sensor ablation lattice, and paired differences.
-
-Implements structured prediction generation, sensor ablation masks, window eligibility
-checking, and paired difference estimand Delta S = S_model - S_baseline over identical
-eligible supports.
-"""
+"""Closed-window decision records and explicit sensor occlusion; raw-score contrasts are prohibited."""
 from __future__ import annotations
 import dataclasses
 import hashlib
@@ -11,46 +6,41 @@ import json
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Set, Tuple
 import numpy as np
 
-from .features import FEATURE_CHANNELS, NUM_CHANNELS, MultiModalPanel
+from .features import CHANNEL_MODALITIES, MultiModalPanel
 
 
 # ---------------------------------------------------------------------------
 # Sensor Groups and Ablation Lattice
 # ---------------------------------------------------------------------------
 
-OPTICAL_CHANNELS: Tuple[int, ...] = (0, 1, 2, 3)
-SAR_CHANNELS: Tuple[int, ...] = (4, 5, 6, 7)
-ERA5_CHANNELS: Tuple[int, ...] = (8, 9, 10)
-
-SENSOR_MODALITIES: Dict[str, Tuple[int, ...]] = {
-    "optical": OPTICAL_CHANNELS,
-    "sar": SAR_CHANNELS,
-    "era5": ERA5_CHANNELS,
-}
-
 # 2^N named configurations (for N=3 sensors: Optical, SAR, ERA5)
-# Excludes the trivial empty configuration where 0 sensors are active.
+# The all-off cell is an explicit abstention.
 ABLATION_CONFIGS: Dict[str, Tuple[str, ...]] = {
-    "full": ("optical", "sar", "era5"),
+    "all_off": (),
+    "full": ("optical", "sar", "weather"),
     "opt_sar": ("optical", "sar"),
-    "opt_era5": ("optical", "era5"),
-    "sar_era5": ("sar", "era5"),
+    "opt_era5": ("optical", "weather"),
+    "sar_era5": ("sar", "weather"),
     "opt_only": ("optical",),
     "sar_only": ("sar",),
-    "era5_only": ("era5",),
+    "era5_only": ("weather",),
 }
 
 
-def get_active_channels(ablation_id: str) -> Set[int]:
-    """Return the set of active channel indices for a given ablation configuration."""
+def get_active_channels(ablation_id: str, channel_names: Sequence[str]) -> Set[int]:
+    """Resolve sensor ablation by declared channel name, never by fixed offsets."""
     if ablation_id not in ABLATION_CONFIGS:
         raise ValueError(
             f"Unknown ablation_id '{ablation_id}'. Must be one of {list(ABLATION_CONFIGS.keys())}"
         )
     modalities = ABLATION_CONFIGS[ablation_id]
     active: Set[int] = set()
-    for mod in modalities:
-        active.update(SENSOR_MODALITIES[mod])
+    unknown = [name for name in channel_names if name not in CHANNEL_MODALITIES]
+    if unknown:
+        raise ValueError("unknown channel in ablation schema: " + ", ".join(unknown))
+    for index, name in enumerate(channel_names):
+        if CHANNEL_MODALITIES[name] in modalities:
+            active.add(index)
     return active
 
 
@@ -58,6 +48,7 @@ def apply_sensor_ablation(
     values: np.ndarray,
     mask: np.ndarray,
     ablation_id: str,
+    *, channel_names: Sequence[str],
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Apply sensor ablation intervention by masking out inactive channels.
 
@@ -66,11 +57,11 @@ def apply_sensor_ablation(
     """
     if values.shape != mask.shape:
         raise ValueError(f"values shape {values.shape} must match mask shape {mask.shape}")
-    if values.shape[1] != NUM_CHANNELS:
-        raise ValueError(f"expected {NUM_CHANNELS} channels, got {values.shape[1]}")
+    if values.ndim != 2 or values.shape[1] != len(channel_names):
+        raise ValueError(f"expected {len(channel_names)} declared channels, got shape {values.shape}")
 
-    active_channels = get_active_channels(ablation_id)
-    all_channels = set(range(NUM_CHANNELS))
+    active_channels = get_active_channels(ablation_id, channel_names)
+    all_channels = set(range(len(channel_names)))
     inactive_channels = all_channels - active_channels
 
     ablated_values = values.copy()
@@ -86,15 +77,25 @@ def apply_sensor_ablation(
 def check_window_eligibility(
     mask: np.ndarray,
     ablation_id: str,
-    min_obs_per_modality: int = 2,
+    min_obs_per_modality: int,
+    *, channel_names: Sequence[str],
 ) -> bool:
-    """Check window eligibility: >= min_obs_per_modality valid observations for each active modality."""
+    """Apply a caller-declared support rule to the active channel modalities."""
     if ablation_id not in ABLATION_CONFIGS:
         raise ValueError(f"Unknown ablation_id '{ablation_id}'")
 
+    if type(min_obs_per_modality) is not int or min_obs_per_modality < 1:
+        raise ValueError("an explicit positive support threshold is required")
+    if np.asarray(mask).ndim != 2 or np.asarray(mask).shape[1] != len(channel_names):
+        raise ValueError("mask channel dimension differs from its declared schema")
     active_modalities = ABLATION_CONFIGS[ablation_id]
+    if not active_modalities:
+        return False
     for mod in active_modalities:
-        ch_indices = list(SENSOR_MODALITIES[mod])
+        ch_indices = [index for index, name in enumerate(channel_names)
+                      if CHANNEL_MODALITIES.get(name) == mod]
+        if not ch_indices:
+            return False
         mod_mask = mask[:, ch_indices]
         # A day has a valid observation if any channel in that modality is valid
         valid_days = np.any(mod_mask, axis=1)
@@ -118,8 +119,21 @@ class PredictionRecord:
     window_end: str
     model_id: str
     ablation_id: str
-    score: float
+    score: Optional[float]
     eligible: bool
+
+    def __post_init__(self):
+        from datetime import date
+        if type(self.eligible) is not bool:
+            raise ValueError("eligibility must be boolean")
+        if self.eligible:
+            if type(self.score) not in (int, float) or not np.isfinite(self.score):
+                raise ValueError("eligible score must be finite numeric data")
+        elif self.score is not None:
+            raise ValueError("ineligible score must remain null")
+        start, end, decision = [date.fromisoformat(x) for x in (self.window_start, self.window_end, self.decision_date)]
+        if start > end or end > decision:
+            raise ValueError("window must be closed before decision")
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -132,6 +146,8 @@ class PredictionRecord:
             "ablation_id": self.ablation_id,
             "score": self.score,
             "eligible": self.eligible,
+            "status": "ESTIMATED" if self.eligible else "NOT_ESTIMABLE",
+            "reason": None if self.eligible else "INELIGIBLE_WINDOW",
         }
 
 
@@ -147,6 +163,7 @@ def make_prediction_record(
 ) -> PredictionRecord:
     """Construct PredictionRecord with deterministic cryptographic sample_id."""
     id_material = f"{lake_id}|{decision_date}|{model_id}|{ablation_id}"
+    id_material += f"|{window_start}|{window_end}"
     sample_id = hashlib.sha256(id_material.encode("utf-8")).hexdigest()
 
     return PredictionRecord(
@@ -157,8 +174,8 @@ def make_prediction_record(
         window_end=window_end,
         model_id=model_id,
         ablation_id=ablation_id,
-        score=float(score),
-        eligible=bool(eligible),
+        score=score,
+        eligible=eligible,
     )
 
 
@@ -174,46 +191,4 @@ def compute_paired_score_differences(
 
     Raises ValueError if prediction supports (lake_id, decision_date, ablation_id) do not align.
     """
-    model_dict: Dict[Tuple[str, str, str], PredictionRecord] = {}
-    for r in model_records:
-        key = (r.lake_id, r.decision_date, r.ablation_id)
-        if key in model_dict:
-            raise ValueError(f"Duplicate model record detected for key {key}")
-        model_dict[key] = r
-
-    baseline_dict: Dict[Tuple[str, str, str], PredictionRecord] = {}
-    for r in baseline_records:
-        key = (r.lake_id, r.decision_date, r.ablation_id)
-        if key in baseline_dict:
-            raise ValueError(f"Duplicate baseline record detected for key {key}")
-        baseline_dict[key] = r
-
-    if set(model_dict.keys()) != set(baseline_dict.keys()):
-        diff_keys = set(model_dict.keys()) ^ set(baseline_dict.keys())
-        raise ValueError(
-            f"support mismatch: model and baseline prediction supports do not align ({len(diff_keys)} mismatched keys)"
-        )
-
-    paired_results: List[Dict[str, Any]] = []
-    # Sort keys for deterministic output ordering
-    sorted_keys = sorted(model_dict.keys())
-
-    for key in sorted_keys:
-        m = model_dict[key]
-        b = baseline_dict[key]
-
-        # Only evaluate paired difference over windows where BOTH are eligible
-        if m.eligible and b.eligible:
-            delta_s = float(m.score - b.score)
-            paired_results.append({
-                "lake_id": m.lake_id,
-                "decision_date": m.decision_date,
-                "ablation_id": m.ablation_id,
-                "model_id": m.model_id,
-                "baseline_id": b.model_id,
-                "model_score": m.score,
-                "baseline_score": b.score,
-                "delta_s": delta_s,
-            })
-
-    return paired_results
+    raise ValueError("raw cross-method score differences are not a performance estimand")

@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {"type": "string", "enum": ["VERIFIED", "UNKNOWN", "NOT_APPLICABLE"]},
+    "at": {"type": ["string", "null"]},
+    "reason": {"type": ["string", "null"]}
+  },
+  "required": ["status", "at", "reason"],
+  "additionalProperties": false
+}

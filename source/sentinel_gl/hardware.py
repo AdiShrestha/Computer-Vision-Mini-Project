@@ -42,16 +42,16 @@ def get_device_profile() -> Dict[str, Any]:
             total_ram_bytes = None
 
     # Detect chip family / CPU brand
-    chip_family = "Apple Silicon"
+    chip_family = None
     if os_platform == "darwin":
         try:
             brand = subprocess.check_output(["sysctl", "-n", "machdep.cpu.brand_string"], text=True).strip()
             if brand:
                 chip_family = brand
         except Exception:
-            chip_family = platform.processor() or "Apple Silicon"
+            chip_family = platform.processor() or None
     else:
-        chip_family = platform.processor() or "Generic CPU"
+        chip_family = platform.processor() or None
 
     mps_built = bool(torch.backends.mps.is_built())
     mps_available = bool(torch.backends.mps.is_available())
@@ -62,6 +62,8 @@ def get_device_profile() -> Dict[str, Any]:
         "cpu_count": cpu_count,
         "total_ram_bytes": total_ram_bytes,
         "chip_family": chip_family,
+        "chip_status": "MEASURED" if chip_family else "NOT_MEASURED",
+        "ram_status": "MEASURED" if total_ram_bytes is not None else "NOT_MEASURED",
         "pytorch_version": torch.__version__,
         "mps_built": mps_built,
         "mps_available": mps_available,
@@ -71,7 +73,7 @@ def get_device_profile() -> Dict[str, Any]:
 def compute_metric_stats(values: List[float]) -> Dict[str, float]:
     """Compute summary statistics (mean, median, std, min, max) for numeric series."""
     if not values:
-        return {"mean": 0.0, "median": 0.0, "std": 0.0, "min": 0.0, "max": 0.0}
+        return {"mean": None, "median": None, "std": None, "min": None, "max": None, "status": "NOT_MEASURED"}
     arr = np.array(values, dtype=np.float64)
     return {
         "mean": float(np.mean(arr)),
@@ -121,15 +123,16 @@ def run_hardware_trials(
     device: str = "mps",
     output_path: Optional[Union[str, Path]] = "docs/benchmarks/m3_trials.json",
     batch_size: int = 16,
-    seq_len: int = 180,
-    n_channels: int = 11,
     d_model: int = 64,
     tolerance: float = 1e-4,
+    *,
+    seq_len: int,
+    n_channels: int,
 ) -> Dict[str, Any]:
     """Execute synchronized hardware trials on CPU and MPS with numerical verification.
 
     Workloads:
-      1. forward_eval: Multi-modal (T=180, C=11) batch evaluation.
+      1. forward_eval: constructed batch at the caller-declared schedule and channel dimensions.
       2. mae_reconstruction: Masked autoencoder reconstruction over observation entries.
 
     Returns:
@@ -139,9 +142,16 @@ def run_hardware_trials(
         raise ValueError("n_trials must be at least 1")
     if warmup_trials < 0:
         raise ValueError("warmup_trials must be non-negative")
+    if type(seq_len) is not int or seq_len < 2 or type(n_channels) is not int or n_channels < 1:
+        raise ValueError("explicit sequence and channel dimensions are required")
 
     device_profile = get_device_profile()
     mps_ready = device_profile["mps_available"] and device in ("mps", "all", "auto")
+
+    if device == "mps" and not mps_ready:
+        raise ValueError("requested MPS device unavailable")
+    if device not in ("cpu", "mps", "auto", "all"):
+        raise ValueError("unsupported device")
 
     # Devices to benchmark
     target_devices = ["cpu"]
@@ -298,8 +308,8 @@ def run_hardware_trials(
         }
     else:
         numerical_eq = {
-            "status": "CPU_ONLY",
-            "max_absolute_difference": 0.0,
+            "status": "NOT_MEASURED",
+            "max_absolute_difference": None,
             "tolerance": tolerance,
             "note": "MPS backend unavailable; evaluated on CPU reference only",
         }
@@ -308,16 +318,14 @@ def run_hardware_trials(
     summary = compute_trial_summary(traces)
 
     # Fanless M3 Thermal Disclosure
-    thermal_disclosure = (
-        "Apple Silicon M3 MacBook Air is a fanless, passively cooled architecture. Sustained CPU "
-        "and GPU execution leads to passive thermal throttling and clock downscaling over extended "
-        "run durations. Benchmark figures reflect burst execution under stable thermal conditions. "
-        "Production deployments and long-running training loops must account for thermal headroom, "
-        "bounded batch memory allocations (B <= 16), and explicit memory reclamation."
-    )
+    thermal_disclosure = "Thermal conditions were not measured. These constructed tensor trials are engineering microbenchmarks."
+
 
     report = {
         "report_version": 1,
+        "origin": "fixture",
+        "scope": "constructed untrained tensor microbenchmark",
+        "research_admissible": False,
         "device_profile": device_profile,
         "config": {
             "n_trials": n_trials,
@@ -336,7 +344,7 @@ def run_hardware_trials(
     if output_path is not None:
         p = Path(output_path)
         p.parent.mkdir(parents=True, exist_ok=True)
-        with open(p, "w", encoding="utf-8") as f:
+        with open(p, "x", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
 
     return report
@@ -348,6 +356,8 @@ def main() -> int:
     parser.add_argument("--trials", type=int, default=5, help="Number of timed trials per workload")
     parser.add_argument("--warmup", type=int, default=2, help="Number of warmup iterations")
     parser.add_argument("--device", type=str, default="mps", choices=["mps", "cpu", "auto"], help="Target device")
+    parser.add_argument("--sequence-length", type=int, required=True, help="Declared constructed schedule length")
+    parser.add_argument("--channels", type=int, required=True, help="Declared constructed channel count")
     parser.add_argument("--output", type=str, default="docs/benchmarks/m3_trials.json", help="Output path for JSON report")
     args = parser.parse_args()
 
@@ -360,6 +370,8 @@ def main() -> int:
         warmup_trials=args.warmup,
         device=args.device,
         output_path=args.output,
+        seq_len=args.sequence_length,
+        n_channels=args.channels,
     )
 
     prof = report["device_profile"]
@@ -377,7 +389,9 @@ def main() -> int:
 
     neq = report["numerical_equivalence"]
     print("-" * 60)
-    print(f"Numerical Equivalence (CPU vs MPS): {neq['status']} (max diff: {neq['max_absolute_difference']:.2e}, tol: {neq['tolerance']:.1e})")
+    difference = neq['max_absolute_difference']
+    difference_text = "unmeasured" if difference is None else f"{difference:.2e}"
+    print(f"Numerical Equivalence (CPU vs MPS): {neq['status']} (max diff: {difference_text}, tol: {neq['tolerance']:.1e})")
     print(f"Benchmark artifact written to: {args.output}")
     print("=" * 60)
     return 0

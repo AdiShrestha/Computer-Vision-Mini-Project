@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["status", "value", "required_rule", "reason"],
+  "properties": {
+    "status": {"type": "string", "const": "UNAVAILABLE_MISSING_B04"},
+    "value": {"type": "null"},
+    "required_rule": {"type": "string", "minLength": 1},
+    "reason": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

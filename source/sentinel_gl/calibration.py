@@ -90,12 +90,14 @@ def calibrate_percentile_threshold(
     if set(cal_lakes) & set(eval_lakes):
         raise ValueError("calibration overlaps evaluation")
 
-    s = np.asarray(scores, dtype=np.float64)
+    s = finite_vector(scores)
     if s.ndim != 1 or s.size == 0:
         raise ValueError("scores must be a non-empty 1D sequence of numbers")
     if np.any(~np.isfinite(s)):
         raise ValueError("all calibration scores must be finite")
 
+    if type(percentile) not in (int, float) or not np.isfinite(percentile):
+        raise ValueError("percentile must be finite numeric data")
     p = float(percentile)
     if p > 1.0:
         p = p / 100.0

@@ -96,7 +96,12 @@ def test_generated_training_masks_always_have_real_target_and_context():
         MaskedReconstructionScorer(model).score(valid.float(), valid)
 
 
-@pytest.mark.parametrize('config', [{'max_time_steps': 1}, {'n_channels': True}, {'dropout': float('nan')}, {'masking_ratio': 1.}])
+@pytest.mark.parametrize('config', [
+    {'n_channels': 2, 'max_time_steps': 1},
+    {'n_channels': True, 'max_time_steps': 2},
+    {'n_channels': 2, 'max_time_steps': 2, 'dropout': float('nan')},
+    {'n_channels': 2, 'max_time_steps': 2, 'masking_ratio': 1.},
+])
 def test_invalid_architecture_settings_are_rejected(config):
     with pytest.raises(ValueError):
         TimeSeriesMAE(**config)

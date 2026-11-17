@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "asset_id": {"type": "string", "minLength": 1},
+    "band_role": {"type": "string", "enum": ["green", "nir", "swir16", "scl"]},
+    "path": {"type": "string", "minLength": 1},
+    "bytes": {"type": "integer", "minimum": 1},
+    "sha256": {"type": "string", "pattern": "[0-9a-f]{64}"},
+    "receipt_path": {"type": "string", "minLength": 1},
+    "receipt_bytes": {"type": "integer", "minimum": 1},
+    "receipt_sha256": {"type": "string", "pattern": "[0-9a-f]{64}"},
+    "retrieval_started_at": {"type": "string", "minLength": 1},
+    "retrieval_finished_at": {"type": "string", "minLength": 1},
+    "origin": {"type": "string", "const": "PROVIDER_BYTES_RETAINED"}
+  },
+  "required": ["asset_id", "band_role", "path", "bytes", "sha256", "receipt_path", "receipt_bytes", "receipt_sha256", "retrieval_started_at", "retrieval_finished_at", "origin"],
+  "additionalProperties": false
+}

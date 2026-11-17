@@ -1,0 +1,99 @@
+{
+  "source_manifest_sha256": "791f83182fb0c1916ec6bc16e7e5a578fa91a9fe507fc7bea8961b2155a6c65b",
+  "source_figure_selection": {
+    "pre_image": "PILOT-SOUTH-LHONAK__S2B_T45RXL_20230926T045046_L2A",
+    "post_image": "PILOT-SOUTH-LHONAK__S2B_T45RXL_20231009T045202_L2A",
+    "sar_image": "PILOT-SOUTH-LHONAK__S1A_IW_GRDH_1SDV_20230901T121408_20230901T121433_050134_060898_363F"
+  },
+  "figures": [
+    {
+      "path": "docs/figures/2023/fig1_observation_timeline.pdf",
+      "bytes": 44588,
+      "sha256": "711a45529d7773c60e57557b9c95c59ee5eee073ab4cf17847d22fdffb8c87a0"
+    },
+    {
+      "path": "docs/figures/2023/fig1_observation_timeline.png",
+      "bytes": 113991,
+      "sha256": "61c985efb63fe520ee271f8e81232514c547fbe45215413f64b409db2a5b438e"
+    },
+    {
+      "path": "docs/figures/2023/fig1_observation_timeline.svg",
+      "bytes": 23744,
+      "sha256": "ae50ed111953f30f4c2ec7504ec7ed11629872868d15053b9da7b25c57837e93"
+    },
+    {
+      "path": "docs/figures/2023/fig2_source_distributions.pdf",
+      "bytes": 136891,
+      "sha256": "957fb134dafb41796d356804247952220d96b8dec3725782df6185ee01dbf885"
+    },
+    {
+      "path": "docs/figures/2023/fig2_source_distributions.png",
+      "bytes": 829175,
+      "sha256": "0cb944adca1dd1e4714a8e0bdd198dd67d8be196ad5f2ce455391bfdfe558189"
+    },
+    {
+      "path": "docs/figures/2023/fig2_source_distributions.svg",
+      "bytes": 154760,
+      "sha256": "3861363d0f5c16df8e862860a1e30d5abb331146c9fa2c44d960f4774278494d"
+    },
+    {
+      "path": "docs/figures/2023/fig3_optimization.pdf",
+      "bytes": 53524,
+      "sha256": "874dc49f6697b0ad7c3536f3569e5ad491bb6b78a9191f32caea2f01716b3f5d"
+    },
+    {
+      "path": "docs/figures/2023/fig3_optimization.png",
+      "bytes": 224891,
+      "sha256": "9ae1aef26598a846600d617d08bc1bb0a6317d76e69320e39fd7d9b6d479f5b8"
+    },
+    {
+      "path": "docs/figures/2023/fig3_optimization.svg",
+      "bytes": 46256,
+      "sha256": "64250ac402af7f0c8196ead0a0fef806d517f130cacf868913cbaf3d3422ac12"
+    },
+    {
+      "path": "docs/figures/2023/fig4_anomaly_trajectories.pdf",
+      "bytes": 82872,
+      "sha256": "7648784b1e9e727ab9d1ac56471b30023e3e9fae985bbf4a44c0e4bce643272c"
+    },
+    {
+      "path": "docs/figures/2023/fig4_anomaly_trajectories.png",
+      "bytes": 412946,
+      "sha256": "6a0904765d7839de997e474eb685dbda0810b8de5490562c1755437050da228c"
+    },
+    {
+      "path": "docs/figures/2023/fig4_anomaly_trajectories.svg",
+      "bytes": 130745,
+      "sha256": "5bcf93611e48dd5e13d5ec76a93bbaee8e675d73374069a940386f63b63af573"
+    },
+    {
+      "path": "docs/figures/2023/fig5_attention.pdf",
+      "bytes": 79621,
+      "sha256": "2bfaae35d357956645546aaceb4247416aceb6dcaef50f55f9beea9adc9c3869"
+    },
+    {
+      "path": "docs/figures/2023/fig5_attention.png",
+      "bytes": 136036,
+      "sha256": "100d25635277fadf4526dc7852bf4208200711215ca9fe303fd0b0149aea1003"
+    },
+    {
+      "path": "docs/figures/2023/fig5_attention.svg",
+      "bytes": 84755,
+      "sha256": "77917b02467da5270f36f6e0e8818aa80207db15cc207016a85c67dc59396477"
+    }
+  ],
+  "analysis_path": "data/derived/expansion_2023/v2_diagnostic_run_20261015_01",
+  "training_report_sha256": "73a317aaa708576211053e506a75a2c4dc3908594eb120a6adf25702c2af9309",
+  "inference_summary_sha256": "a86d4ab1392e21e9276f62d0635f14ebe213b6bd64529b1a4b605458b8a75fbf",
+  "scores_sha256": "4910950edaecba24868e44f4a469a808f9a6959749dfce16e39c5116cf449f11",
+  "attention_query": "PILOT-SOUTH-LHONAK__S2B_T45RXL_20231009T045202_L2A",
+  "inference_path": "data/derived/expansion_2023/v2_diagnostic_run_20261015_01/inference",
+  "scientific_limits": [
+    "Two developmental ROIs, same-scene spatial monitoring",
+    "All preperiod parameter fitting is development-exposed",
+    "Single September SAR acquisition, no SAR change sequence",
+    "Candidate query mask, no independently validated lake boundary",
+    "No event/control labels, calibrated annual exposure, lead-time or detection-performance claim",
+    "Attention is internal distribution, not causal explanation"
+  ]
+}

@@ -39,8 +39,8 @@ from sentinel_gl.insar import (
 def test_expanded_lake_registry_schema_and_invariants():
     """Verify that all expanded lakes satisfy schema, physical bounds, and minimum area."""
     # FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    lakes = get_expanded_lake_registry()
-    events = get_expanded_event_registry()
+    lakes = get_expanded_lake_registry(include_unverified=True)
+    events = get_expanded_event_registry(include_unverified=True)
 
     assert len(lakes) == 8, "Expected exactly 8 curated candidate lakes"
     assert len(events) == 4, "Expected exactly 4 curated historical events"
@@ -75,8 +75,8 @@ def test_expanded_lake_registry_schema_and_invariants():
 def test_spatial_clustering_enforces_isolation():
     """Verify that lakes within 50 km share a cluster and split boundaries never leak clusters."""
     # FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    lakes = get_expanded_lake_registry()
-    events = get_expanded_event_registry()
+    lakes = get_expanded_lake_registry(include_unverified=True)
+    events = get_expanded_event_registry(include_unverified=True)
 
     # Dynamic spatial clustering with 50 km buffer
     computed_clusters = cluster_lakes_spatially(lakes, buffer_km=50.0)
@@ -183,65 +183,19 @@ def test_insar_storage_budget_bounds():
 # ---------------------------------------------------------------------------
 
 def test_statistical_power_calculation_amendment():
-    """Verify analytical statistical power calculations confirming N <= 5 is underpowered (< 0.20)
+    # Exact two-sided sign-flip resolution, not power or a universal event floor.
+    from sentinel_gl.inference import exact_sign_flip_test
+    for n in (4,5):
+        result=exact_sign_flip_test([1.]*n)
+        assert result.p_value==pytest.approx(2/(2**n))
 
-    and identifying the N >= 30 sample size floor for 80% power at alpha=0.05.
-    """
-    # FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    delta_auc = 0.10
-    alpha = 0.05
-    z_alpha = 1.96  # Two-sided 5% critical threshold
-
-    # 1. Under N = 4 event lakes and N = 4 controls:
-    # SE(Delta) approx 0.185 (Hanley & McNeil standard error)
-    se_n4 = 0.185
-    z_beta_n4 = (delta_auc / se_n4) - z_alpha
-    # Standard normal cumulative distribution approximation
-    power_n4 = 0.5 * (1.0 + math.erf(z_beta_n4 / math.sqrt(2.0)))
-
-    # Statistical power must be strictly less than 0.20 (severely underpowered)
-    assert power_n4 < 0.20, f"Expected power < 0.20 for N=4, got {power_n4:.4f}"
-
-    # 2. Sample size floor for 80% power:
-    # Requires z_beta = 0.842 => delta / SE >= 1.96 + 0.842 = 2.802
-    target_z_total = 1.96 + 0.8416
-    target_se = delta_auc / target_z_total  # ~ 0.0357
-
-    # Since SE ~ 1 / sqrt(N), N_required = N_current * (SE_current / target_SE)^2
-    n_required = 4.0 * (se_n4 / target_se) ** 2
-
-    # Confirms minimum floor of N >= 30 independent events
-    assert n_required >= 30.0, f"Sample size floor {n_required:.1f} should be >= 30"
 
 
 # ---------------------------------------------------------------------------
 # Test 7: Cohort and InSAR CLI Runner Subprocess Execution
 # ---------------------------------------------------------------------------
 
-def test_cohort_and_insar_cli_subprocess():
-    """Verify that source/runners/run_cohort_and_insar.py executes as CLI subprocess."""
-    # FABRICATION-DISCLOSURE: TEST-FIXTURE-ONLY
-    repo_root = Path(__file__).resolve().parents[2]
-    runner_path = repo_root / "source/runners/run_cohort_and_insar.py"
-    assert runner_path.is_file(), f"Runner script not found: {runner_path}"
-
-    with tempfile.TemporaryDirectory() as tmpdir:
-        tmp_data = Path(tmpdir) / "data"
-        tmp_insar = Path(tmpdir) / "docs/insar"
-
-        cmd = [
-            sys.executable,
-            "-B",
-            str(runner_path),
-            "--all",
-            "--data-dir", str(tmp_data),
-            "--output-insar", str(tmp_insar),
-        ]
-        res = subprocess.run(cmd, capture_output=True, text=True, cwd=str(repo_root))
-        assert res.returncode == 0, f"CLI runner failed with code {res.returncode}:\n{res.stderr}\n{res.stdout}"
-
-        # Verify exported files
-        assert (tmp_data / "lake_registry_expanded.csv").is_file()
-        assert (tmp_data / "event_registry_expanded.csv").is_file()
-        assert (tmp_insar / "insar_feasibility_dossier.json").is_file()
-        assert (tmp_insar / "insar_feasibility_report.md").is_file()
+def test_cohort_and_insar_cli_subprocess(tmp_path):
+    from runners.run_cohort_and_insar import main
+    assert main(['--all','--data-dir',str(tmp_path)])==2
+    assert not list(tmp_path.iterdir())

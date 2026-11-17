@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["qa_supported", "candidate_conditioned"],
+  "properties": {
+    "qa_supported": {"$ref": "wp05_summary.json"},
+    "candidate_conditioned": {"$ref": "wp05_summary.json"}
+  },
+  "additionalProperties": false
+}

@@ -1,10 +1,4 @@
-"""Explicit missingness, fit scope, trailing-window identity, and multi-modal feature panels.
-
-Transforms ingested remote-sensing products (Sentinel-2, Sentinel-1, ERA5)
-into standardized (T=180, C=11) time-series panels paired with explicit
-boolean observation masks, enforcing physical domain bounds and strict
-lineage provenance.
-"""
+"""Numerical missingness/fit/window primitives and admitted analytical fixture grids."""
 from __future__ import annotations
 import dataclasses
 from dataclasses import dataclass
@@ -162,52 +156,110 @@ def trailing_windows(dates, available_dates, length: int, stride: int):
 
 
 # ---------------------------------------------------------------------------
-# WP05: Geospatial Processing, Multi-Modal Channels & Feature Panel Engine
+# Analytical feature transforms and explicitly missing panels
 # ---------------------------------------------------------------------------
 
-FEATURE_CHANNELS: Tuple[str, ...] = (
-    "optical_lake_area_km2",    # c0
-    "ndwi_mean",                # c1
-    "mndwi_mean",               # c2
-    "ndsi_mean",                # c3
-    "sar_vv_db_mean",           # c4
-    "sar_vh_db_mean",           # c5
-    "sar_cross_ratio_db",       # c6
-    "sar_vv_spatial_variance",  # c7
-    "era5_temp_2m_c_mean",      # c8
-    "era5_precip_mm_sum",       # c9
-    "era5_temp_2m_anomaly",     # c10
-)
-NUM_CHANNELS: int = len(FEATURE_CHANNELS)
-WINDOW_DAYS: int = 180
+@dataclass(frozen=True)
+class ChannelDefinition:
+    name: str
+    modality: str
+    units: str
+    required_inputs: Tuple[str, ...]
+    derivation: str
+    lower_bound: Optional[float] = None
+    upper_bound: Optional[float] = None
 
-# Physical validity intervals from WP05 contract
+    def to_dict(self):
+        return {"name": self.name, "modality": self.modality, "units": self.units,
+                "required_inputs": list(self.required_inputs), "derivation": self.derivation,
+                "lower_bound": self.lower_bound, "upper_bound": self.upper_bound}
+
+
+@dataclass(frozen=True)
+class ChannelSchema:
+    schema_id: str
+    version: int
+    channels: Tuple[ChannelDefinition, ...]
+
+    def __post_init__(self):
+        if not self.schema_id or type(self.version) is not int or self.version < 1 or not self.channels:
+            raise ValueError("channel schema requires an ID, positive version and channels")
+        names = [channel.name for channel in self.channels]
+        if len(names) != len(set(names)):
+            raise ValueError("channel names must be unique; duplicate derived indices are forbidden")
+        if any(channel.modality not in {"optical", "sar", "weather", "static"} for channel in self.channels):
+            raise ValueError("unknown channel modality")
+
+    @property
+    def channel_names(self):
+        return tuple(channel.name for channel in self.channels)
+
+    @property
+    def schema_hash(self):
+        return digest(self.to_dict())
+
+    def to_dict(self):
+        return {"schema_id": self.schema_id, "version": self.version,
+                "channels": [channel.to_dict() for channel in self.channels]}
+
+
+_CHANNELS = {
+    "optical_candidate_roi_area_km2": ChannelDefinition("optical_candidate_roi_area_km2", "optical", "km2", ("water", "pixel_area_m2"), "sum(candidate_mask * pixel_area_m2) / 1e6", 0.0),
+    "ndwi_mean": ChannelDefinition("ndwi_mean", "optical", "1", ("B03", "B08"), "mean finite (B03-B08)/(B03+B08)"),
+    "mndwi_mean": ChannelDefinition("mndwi_mean", "optical", "1", ("B03", "B11"), "mean finite (B03-B11)/(B03+B11); algebraically identical to NDSI"),
+    "sar_vv_db_mean": ChannelDefinition("sar_vv_db_mean", "sar", "dB", ("VV",), "10*log10(mean positive linear sigma0)"),
+    "sar_vh_db_mean": ChannelDefinition("sar_vh_db_mean", "sar", "dB", ("VH",), "10*log10(mean positive linear sigma0)"),
+    "sar_cross_ratio_db": ChannelDefinition("sar_cross_ratio_db", "sar", "dB", ("VV", "VH"), "mean VH dB - mean VV dB on paired positive support"),
+    "sar_vv_linear_variance": ChannelDefinition("sar_vv_linear_variance", "sar", "sigma0^2", ("VV",), "variance of signed linear sigma0"),
+    "era5_temp_2m_c_mean": ChannelDefinition("era5_temp_2m_c_mean", "weather", "degC", ("temperature",), "mean over declared spatial support"),
+    "era5_precip_mm_sum": ChannelDefinition("era5_precip_mm_sum", "weather", "mm/support", ("precipitation",), "mean provider accumulation over declared support", 0.0),
+    "four_band_water_candidate_area_km2": ChannelDefinition("four_band_water_candidate_area_km2", "optical", "km2", ("B03", "B04", "B08", "B11", "water", "pixel_area_m2"), "unvalidated four-band development candidate", 0.0),
+    "awei_sh_mean": ChannelDefinition("awei_sh_mean", "optical", "1", ("B02", "B03", "B08", "B11", "B12"), "unvalidated AWEI_sh development feature"),
+}
+CHANNEL_MODALITIES = {name: definition.modality for name, definition in _CHANNELS.items()}
+
+
+def channel_definition(name: str) -> ChannelDefinition:
+    try:
+        return _CHANNELS[name]
+    except KeyError as exc:
+        raise ValueError("unknown versioned channel: " + str(name)) from exc
+
+DEFAULT_CHANNEL_SCHEMA = ChannelSchema("sentinel_gl_panel_v2", 2, tuple(
+    _CHANNELS[name] for name in (
+        "optical_candidate_roi_area_km2", "ndwi_mean", "mndwi_mean",
+        "sar_vv_db_mean", "sar_vh_db_mean", "sar_cross_ratio_db",
+        "sar_vv_linear_variance", "era5_temp_2m_c_mean", "era5_precip_mm_sum")))
+OPTIONAL_CANDIDATE_SCHEMA = ChannelSchema("sentinel_gl_optional_candidates_v3", 3,
+    DEFAULT_CHANNEL_SCHEMA.channels + (_CHANNELS["four_band_water_candidate_area_km2"],
+                                        _CHANNELS["awei_sh_mean"]))
+FEATURE_CHANNELS: Tuple[str, ...] = DEFAULT_CHANNEL_SCHEMA.channel_names
+NUM_CHANNELS: int = len(FEATURE_CHANNELS)  # size of the named default schema, not a panel requirement
 FEATURE_DOMAIN_BOUNDS: Dict[str, Tuple[Optional[float], Optional[float]]] = {
-    "optical_lake_area_km2": (0.05, 5.0),
-    "ndwi_mean": (-1.0, 1.0),
-    "mndwi_mean": (-1.0, 1.0),
-    "ndsi_mean": (-1.0, 1.0),
-    "sar_vv_db_mean": (-35.0, 5.0),
-    "sar_vh_db_mean": (-45.0, 0.0),
-    "sar_cross_ratio_db": (-25.0, 5.0),
-    "sar_vv_spatial_variance": (0.0, None),
-    "era5_temp_2m_c_mean": (-40.0, 35.0),
-    "era5_precip_mm_sum": (0.0, None),
-    "era5_temp_2m_anomaly": (None, None),
+    channel.name: (channel.lower_bound, channel.upper_bound)
+    for channel in DEFAULT_CHANNEL_SCHEMA.channels
+    if channel.lower_bound is not None or channel.upper_bound is not None
 }
 
 
 def compute_normalized_difference(
     band_a: Union[float, np.ndarray],
     band_b: Union[float, np.ndarray],
-    eps: float = 1e-7,
+    eps: float = 0.0,
 ) -> Union[float, np.ndarray]:
-    """Compute normalized difference index (A - B) / (A + B)."""
+    """Compute normalized difference, leaving a zero/unsupported denominator NaN.
+
+    A positive epsilon is an explicit sensitivity choice; no universal reflectance
+    bound or threshold is implied by this numerical helper.
+    """
+    if type(eps) not in (int, float) or not math.isfinite(eps) or eps < 0:
+        raise ValueError("ratio support tolerance must be finite and nonnegative")
     a = np.asarray(band_a, dtype=np.float64)
     b = np.asarray(band_b, dtype=np.float64)
     denom = a + b
     diff = a - b
-    res = np.where(np.abs(denom) < eps, 0.0, diff / np.where(np.abs(denom) < eps, 1.0, denom))
+    res = np.full(np.broadcast_shapes(a.shape, b.shape), np.nan, dtype=np.float64)
+    np.divide(diff, denom, out=res, where=np.isfinite(a) & np.isfinite(b) & (np.abs(denom) > eps))
     if np.ndim(band_a) == 0 and np.ndim(band_b) == 0:
         return float(res)
     return res
@@ -223,20 +275,18 @@ def compute_mndwi(green: Union[float, np.ndarray], swir: Union[float, np.ndarray
     return compute_normalized_difference(green, swir)
 
 
-def compute_ndsi(green: Union[float, np.ndarray], swir: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
-    """Hall NDSI: (Green - SWIR1) / (Green + SWIR1)."""
-    return compute_normalized_difference(green, swir)
-
-
 def linear_power_from_db(db: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
     """Convert radar backscatter from decibels (dB) to linear power: 10^(dB / 10)."""
     return np.power(10.0, np.asarray(db, dtype=np.float64) / 10.0)
 
 
-def db_from_linear_power(power: Union[float, np.ndarray], eps: float = 1e-12) -> Union[float, np.ndarray]:
-    """Convert linear power back to decibels: 10 * log10(power)."""
-    p = np.maximum(np.asarray(power, dtype=np.float64), eps)
-    return 10.0 * np.log10(p)
+def db_from_linear_power(power: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
+    """Convert positive finite linear power to dB; other cells remain unavailable NaN."""
+    p = np.asarray(power, dtype=np.float64)
+    out = np.full(p.shape, np.nan, dtype=np.float64)
+    valid = np.isfinite(p) & (p > 0)
+    out[valid] = 10.0 * np.log10(p[valid])
+    return float(out) if out.ndim == 0 else out
 
 
 def sar_linear_power_mean_db(db_pixels: Union[Sequence[float], np.ndarray]) -> float:
@@ -246,7 +296,7 @@ def sar_linear_power_mean_db(db_pixels: Union[Sequence[float], np.ndarray]) -> f
     sigma_mean_db = 10 * log10(mean(10^(sigma_i / 10))).
     """
     arr = np.asarray(db_pixels, dtype=np.float64)
-    if arr.size == 0:
+    if arr.size == 0 or not np.isfinite(arr).all():
         raise ValueError("empty radar pixel array")
     linear_powers = linear_power_from_db(arr)
     mean_linear = float(np.mean(linear_powers))
@@ -267,15 +317,15 @@ def sar_cross_polarization_ratio_db(vh_db: float, vv_db: float) -> float:
     return float(vh_db - vv_db)
 
 
-def convert_kelvin_to_celsius(temp: float) -> float:
-    """Convert temperature to Celsius exactly once.
-
-    If temperature is in Kelvin (temp > 100.0), subtract 273.15.
-    If already in Celsius, leaves value untouched.
-    """
-    if temp > 100.0:
+def convert_kelvin_to_celsius(temp: float, *, unit: str) -> float:
+    """Convert using declared units; magnitude never establishes units."""
+    if type(temp) not in (int, float) or not math.isfinite(temp):
+        raise ValueError("temperature must be finite numeric data")
+    if unit == "K":
         return float(temp - 273.15)
-    return float(temp)
+    if unit == "degC":
+        return float(temp)
+    raise ValueError("unknown temperature unit")
 
 
 @dataclass(frozen=True)
@@ -286,6 +336,8 @@ class StaticTopography:
     catchment_area_km2: float
 
     def __post_init__(self):
+        if any(type(x) not in (int, float) or not math.isfinite(x) for x in (self.elevation_m,self.moraine_slope_deg,self.catchment_area_km2)):
+            raise ValueError("topography must be finite numeric data")
         if self.elevation_m < 0 or self.elevation_m > 9000:
             raise ValueError(f"invalid lake elevation: {self.elevation_m}")
         if self.moraine_slope_deg < 0 or self.moraine_slope_deg > 90:
@@ -303,36 +355,80 @@ class StaticTopography:
 
 @dataclass(frozen=True)
 class MultiModalPanel:
-    """Multi-modal time panel of shape (T=180, C=11) with matching observation mask."""
+    """Versioned, schedule-sized panel with cell status, units and source lineage."""
     lake_id: str
     window_id: str
     start_date: str
     end_date: str
     dates: Tuple[str, ...]
-    values: np.ndarray  # shape (180, 11) float64
-    mask: np.ndarray    # shape (180, 11) bool
-    static_metadata: StaticTopography
+    values: np.ndarray
+    mask: np.ndarray
+    static_metadata: Optional[StaticTopography]
     provenance_hashes: Dict[str, str] = dataclasses.field(default_factory=dict)
+    origin: str = "unverified"
+    absence_reasons: Dict[str, str] = dataclasses.field(default_factory=dict)
+    channel_names: Tuple[str, ...] = FEATURE_CHANNELS
+    channel_schema_id: str = DEFAULT_CHANNEL_SCHEMA.schema_id
+    channel_schema_version: int = DEFAULT_CHANNEL_SCHEMA.version
+    channel_schema_hash: str = DEFAULT_CHANNEL_SCHEMA.schema_hash
+    units: Mapping[str, str] = dataclasses.field(default_factory=dict)
+    statuses: Optional[np.ndarray] = None
+    lineage: Mapping[str, Any] = dataclasses.field(default_factory=dict)
+    schedule_mode: str = "DECLARED_SCHEDULE_NO_EXECUTION_EVIDENCE"
 
     def __post_init__(self):
-        if len(self.dates) != WINDOW_DAYS:
-            raise ValueError(f"panel dates length must be {WINDOW_DAYS}, got {len(self.dates)}")
-        if self.values.shape != (WINDOW_DAYS, NUM_CHANNELS):
-            raise ValueError(f"values shape must be ({WINDOW_DAYS}, {NUM_CHANNELS}), got {self.values.shape}")
-        if self.mask.shape != (WINDOW_DAYS, NUM_CHANNELS):
-            raise ValueError(f"mask shape must be ({WINDOW_DAYS}, {NUM_CHANNELS}), got {self.mask.shape}")
-        # Enforce strict observed_array invariants: mask=True -> finite, mask=False -> NaN
-        observed_array(self.values, self.mask)
+        from datetime import date
+        if not self.dates or any(not isinstance(value, str) for value in self.dates):
+            raise ValueError("panel requires an explicit nonempty schedule")
+        parsed_dates = tuple(date.fromisoformat(value) for value in self.dates)
+        if tuple(sorted(set(parsed_dates))) != parsed_dates:
+            raise ValueError("schedule dates must be unique and increasing")
+        if self.start_date != self.dates[0] or self.end_date != self.dates[-1]:
+            raise ValueError("panel date bounds must match the declared schedule")
+        names = tuple(self.channel_names)
+        if not names or len(names) != len(set(names)) or any(name not in _CHANNELS for name in names):
+            raise ValueError("panel channel names must be unique members of the versioned channel catalog")
+        if type(self.channel_schema_version) is not int or self.channel_schema_version < 1:
+            raise ValueError("panel channel schema version must be a positive integer")
+        expected_schema_hash = digest({"schema_id": self.channel_schema_id,
+            "version": self.channel_schema_version,
+            "channels": [_CHANNELS[name].to_dict() for name in names]})
+        if expected_schema_hash != self.channel_schema_hash:
+            raise ValueError("panel channel schema ID/version/hash do not bind its declared channels")
+        values, mask = observed_array(self.values, self.mask)
+        expected_shape = (len(self.dates), len(names))
+        if values.shape != expected_shape:
+            raise ValueError(f"panel values shape must match schedule/channels {expected_shape}, got {values.shape}")
+        object.__setattr__(self, "values", values)
+        object.__setattr__(self, "mask", mask)
+        object.__setattr__(self, "channel_names", names)
+        expected_units = {name: _CHANNELS[name].units for name in names}
+        if self.units and dict(self.units) != expected_units:
+            raise ValueError("panel units must exactly match its versioned channel definitions")
+        object.__setattr__(self, "units", expected_units)
+        if self.statuses is None:
+            raise ValueError("panel requires explicit per-cell statuses; missingness cannot imply a reason")
+        statuses = np.asarray(self.statuses, dtype=object)
+        if statuses.shape != expected_shape or any(not isinstance(value, str) or not value for value in statuses.flat):
+            raise ValueError("panel requires one explicit nonempty status per schedule/channel cell")
+        if np.any(mask & (statuses != "OBSERVED")) or np.any(~mask & (statuses == "OBSERVED")):
+            raise ValueError("panel cell status conflicts with its explicit observation mask")
+        object.__setattr__(self, "statuses", statuses)
+        if not isinstance(self.lineage, Mapping):
+            raise ValueError("panel lineage must be a mapping")
+        if not self.schedule_mode:
+            raise ValueError("schedule mode must be explicit")
 
     def validate_domains(self) -> None:
-        """Validate that all observed measurements fall within physical bounds."""
-        for c_idx, ch_name in enumerate(FEATURE_CHANNELS):
+        """Check only explicit physical domains; spectral ratios are unbounded here."""
+        for c_idx, ch_name in enumerate(self.channel_names):
             col_vals = self.values[:, c_idx]
             col_mask = self.mask[:, c_idx]
             observed_vals = col_vals[col_mask]
             if len(observed_vals) == 0:
                 continue
-            min_bound, max_bound = FEATURE_DOMAIN_BOUNDS[ch_name]
+            definition = _CHANNELS[ch_name]
+            min_bound, max_bound = definition.lower_bound, definition.upper_bound
             if min_bound is not None and np.any(observed_vals < min_bound - 1e-5):
                 raise ValueError(
                     f"Physical domain violation on channel {ch_name}: "
@@ -351,8 +447,17 @@ class MultiModalPanel:
             "start_date": self.start_date,
             "end_date": self.end_date,
             "dates": list(self.dates),
-            "channels": list(FEATURE_CHANNELS),
-            "static_metadata": self.static_metadata.to_dict(),
+            "schedule_mode": self.schedule_mode,
+            "channels": list(self.channel_names),
+            "channel_schema_id": self.channel_schema_id,
+            "channel_schema_version": self.channel_schema_version,
+            "channel_schema_hash": self.channel_schema_hash,
+            "units": dict(self.units),
+            "statuses": self.statuses.tolist(),
+            "lineage": dict(self.lineage),
+            "static_metadata": self.static_metadata.to_dict() if self.static_metadata else None,
+            "origin": self.origin,
+            "absence_reasons": dict(self.absence_reasons),
             "provenance_hashes": self.provenance_hashes,
             "observed_count": int(np.sum(self.mask)),
             "missing_count": int(np.sum(~self.mask)),
@@ -360,171 +465,227 @@ class MultiModalPanel:
 
 
 class FeatureExtractionPipeline:
-    """Coordinate multi-sensor observation processing into (180, 11) panels."""
-
-    def __init__(
-        self,
-        cloud_cover_threshold_pct: float = 30.0,
-        window_days: int = WINDOW_DAYS,
-    ):
-        self.cloud_cover_threshold_pct = cloud_cover_threshold_pct
+    """Build fixture panels from an explicit schedule and admitted measurement bytes."""
+    def __init__(self, window_days=None, *, admission=None, channel_schema=DEFAULT_CHANNEL_SCHEMA):
+        if window_days is not None and (type(window_days) is not int or window_days < 1):
+            raise ValueError("explicit schedule length must be a positive integer")
+        if not isinstance(channel_schema, ChannelSchema):
+            raise ValueError("a versioned channel schema is required")
         self.window_days = window_days
+        self.admission = admission
+        self.channel_schema = channel_schema
 
-    def extract_panel(
-        self,
-        lake_id: str,
-        window_id: str,
-        start_date: str,
-        static_topography: StaticTopography,
-        optical_observations: Sequence[Mapping[str, Any]] = (),
-        sar_observations: Sequence[Mapping[str, Any]] = (),
-        era5_observations: Sequence[Mapping[str, Any]] = (),
-        climatology_doy_mean: Optional[Mapping[int, float]] = None,
-        base_lake_area_km2: Optional[float] = None,
-    ) -> MultiModalPanel:
-        """Extract multi-modal panel for a 180-day window starting at start_date."""
-        dt_start = date.fromisoformat(start_date)
-        dt_end = dt_start + datetime.timedelta(days=self.window_days - 1)
-        end_date = dt_end.isoformat()
+    def extract_panel(self, lake_id, window_id, start_date=None, static_topography=None,
+                      optical_observations=(), sar_observations=(), era5_observations=(),
+                      climatology_doy_mean=None, base_lake_area_km2=None, *, schedule_dates=None):
+        from .admission import Absence, AdmissionError, timestamp
+        if climatology_doy_mean is not None or base_lake_area_km2 is not None:
+            raise AdmissionError("unadmitted area/climatology context")
+        if schedule_dates is not None:
+            dates = tuple(schedule_dates)
+            if not dates or any(not isinstance(value, str) for value in dates):
+                raise ValueError("an explicit nonempty schedule_dates sequence is required")
+            parsed = tuple(date.fromisoformat(value) for value in dates)
+            if tuple(sorted(set(parsed))) != parsed:
+                raise ValueError("schedule dates must be unique and increasing")
+            if start_date is not None and date.fromisoformat(start_date) != parsed[0]:
+                raise ValueError("start_date conflicts with explicit schedule")
+        else:
+            if self.window_days is None or start_date is None:
+                raise ValueError("provide explicit schedule_dates or both start_date and schedule length")
+            start = date.fromisoformat(start_date)
+            dates = tuple((start + datetime.timedelta(days=i)).isoformat() for i in range(self.window_days))
+        channel_names = self.channel_schema.channel_names
+        channel_index = {name: index for index, name in enumerate(channel_names)}
+        values = np.full((len(dates), len(channel_names)), np.nan, dtype=np.float64)
+        mask = np.zeros(values.shape, dtype=bool)
+        statuses = np.full(values.shape, "UNAVAILABLE_NO_ADMITTED_SUPPORT", dtype=object)
+        reasons, hashes, lineage = {}, {}, {}
+        first_schedule_day = date.fromisoformat(dates[0])
+        consumed = set()
+        for modality, records in (("optical", optical_observations), ("sar", sar_observations), ("weather", era5_observations)):
+            for n, record in enumerate(records):
+                key = modality + ":" + str(record.get("measurement_id", n))
+                if self.admission is None:
+                    reasons[key] = "NO_ADMITTED_MEASUREMENT_BYTES"
+                    continue
+                admitted = self.admission.measurement(record)
+                if isinstance(admitted, Absence):
+                    reasons[key] = admitted.reason
+                    continue
+                if record['lake_id'] != lake_id:
+                    raise AdmissionError("measurement lake mismatch")
+                if record['measurement_id'] in consumed:
+                    raise AdmissionError("duplicate measurement")
+                consumed.add(record['measurement_id'])
+                day = timestamp(record['support_end']).date().isoformat()
+                if day not in dates:
+                    reasons[key] = "OUTSIDE_CLOSED_WINDOW"
+                    continue
+                close = timestamp(day + "T23:59:59.999999+00:00")
+                if (timestamp(record['available_at']) > close or
+                        timestamp(record['support_start']).date() < first_schedule_day):
+                    reasons[key] = "UNAVAILABLE_AT_WINDOW_CLOSE_OR_SUPPORT_OUTSIDE_WINDOW"
+                    continue
+                with np.load(self.admission.artifact(record['product_id']), allow_pickle=False) as product:
+                    fields = {k: product[k] for k in product.files}
+                qa, roi = fields.pop('valid'), fields.pop('roi')
+                if qa.dtype != np.bool_ or roi.dtype != np.bool_ or qa.ndim != 2 or qa.shape != roi.shape or not qa.size:
+                    raise AdmissionError("explicit matching QA/ROI masks required")
+                usable = qa & roi
+                if not usable.any():
+                    reasons[key] = "NO_VALID_ROI_PIXELS"
+                    continue
+                units = record['units']
+                row = np.full(len(channel_names), np.nan, dtype=np.float64)
+                row_status = np.full(len(channel_names), "UNAVAILABLE_NOT_PRODUCED_BY_MODALITY", dtype=object)
 
-        dates = tuple((dt_start + datetime.timedelta(days=i)).isoformat() for i in range(self.window_days))
-        date_to_idx = {d_str: idx for idx, d_str in enumerate(dates)}
+                def pixels(name, expected_unit=None, *, positive=False):
+                    if name not in fields:
+                        return None
+                    if name not in units:
+                        raise AdmissionError("measured input lacks explicit units: " + name)
+                    if expected_unit is not None and units[name] != expected_unit:
+                        raise AdmissionError("unexpected units for measured input: " + name)
+                    array = np.asarray(fields.pop(name))
+                    if array.shape != qa.shape or array.dtype.kind not in "iuf" or not np.isfinite(array[usable]).all():
+                        raise AdmissionError("invalid measured pixels: " + name)
+                    selected = array[usable].astype(np.float64)
+                    if positive and np.any(selected <= 0):
+                        raise AdmissionError("pixel area must be positive on usable support")
+                    return selected
 
-        values = np.full((self.window_days, NUM_CHANNELS), np.nan, dtype=np.float64)
-        mask = np.zeros((self.window_days, NUM_CHANNELS), dtype=np.bool_)
+                def put(name, value, status="OBSERVED"):
+                    if name in channel_index:
+                        idx = channel_index[name]
+                        if value is not None and np.isfinite(value):
+                            row[idx], row_status[idx] = float(value), status
+                        else:
+                            row_status[idx] = (status if status != "OBSERVED"
+                                               else "UNAVAILABLE_NONFINITE_DERIVATION")
 
-        input_hashes: Dict[str, str] = {}
-
-        # 1. Optical Processing (c0: area, c1: ndwi, c2: mndwi, c3: ndsi)
-        default_area = (
-            float(base_lake_area_km2)
-            if base_lake_area_km2 is not None
-            else (1.42 if lake_id == "SGL-002" else 1.35)
-        )
-        for obs in optical_observations:
-            ts = obs.get("acquisition_timestamp", "")
-            d_str = ts.split("T")[0]
-            if d_str not in date_to_idx:
-                continue
-            idx = date_to_idx[d_str]
-
-            meta = obs.get("metadata", {})
-            cloud_pct = meta.get("cloud_cover_percentage")
-            if cloud_pct is None:
-                cloud_pct = obs.get("cloud_cover_percentage", 0.0)
-
-            # Cloud masking rule: if >= threshold, mark explicit NaN (mask=False)
-            if float(cloud_pct) >= self.cloud_cover_threshold_pct:
-                continue
-
-            # Extract spectral bands or precomputed indices
-            bands = meta.get("bands", {})
-            if "B03" in bands and "B08" in bands and "B11" in bands:
-                b03 = float(bands["B03"])
-                b08 = float(bands["B08"])
-                b11 = float(bands["B11"])
-                ndwi = compute_ndwi(b03, b08)
-                mndwi = compute_mndwi(b03, b11)
-                ndsi = compute_ndsi(b03, b11)
-            else:
-                ndwi = float(meta.get("ndwi_mean", 0.45))
-                mndwi = float(meta.get("mndwi_mean", 0.50))
-                ndsi = float(meta.get("ndsi_mean", 0.30))
-
-            area_km2 = float(meta.get("lake_area_km2", default_area))
-
-            values[idx, 0] = area_km2
-            values[idx, 1] = ndwi
-            values[idx, 2] = mndwi
-            values[idx, 3] = ndsi
-            mask[idx, 0:4] = True
-
-            if "sha256" in obs:
-                input_hashes[f"optical_{obs.get('record_id', d_str)}"] = obs["sha256"]
-
-        # 2. SAR Processing (c4: vv_db, c5: vh_db, c6: cross_ratio, c7: vv_var)
-        for obs in sar_observations:
-            ts = obs.get("acquisition_timestamp", "")
-            d_str = ts.split("T")[0]
-            if d_str not in date_to_idx:
-                continue
-            idx = date_to_idx[d_str]
-
-            meta = obs.get("metadata", {})
-            if "vv_db_pixels" in meta and "vh_db_pixels" in meta:
-                vv_db_mean = sar_linear_power_mean_db(meta["vv_db_pixels"])
-                vh_db_mean = sar_linear_power_mean_db(meta["vh_db_pixels"])
-                vv_var = sar_linear_power_variance(meta["vv_db_pixels"])
-            else:
-                vv_db_mean = float(meta.get("sar_vv_db_mean", -16.5))
-                vh_db_mean = float(meta.get("sar_vh_db_mean", -24.0))
-                vv_var = float(meta.get("sar_vv_spatial_variance", 0.005))
-
-            cross_ratio = sar_cross_polarization_ratio_db(vh_db_mean, vv_db_mean)
-
-            values[idx, 4] = vv_db_mean
-            values[idx, 5] = vh_db_mean
-            values[idx, 6] = cross_ratio
-            values[idx, 7] = vv_var
-            mask[idx, 4:8] = True
-
-            if "sha256" in obs:
-                input_hashes[f"sar_{obs.get('record_id', d_str)}"] = obs["sha256"]
-
-        # 3. Atmospheric ERA5 Processing (c8: temp_c, c9: precip_mm, c10: temp_anomaly)
-        for obs in era5_observations:
-            ts = obs.get("acquisition_timestamp", "")
-            d_str = ts.split("T")[0]
-            if d_str not in date_to_idx:
-                continue
-            idx = date_to_idx[d_str]
-
-            meta = obs.get("metadata", {})
-            t_raw = meta.get("t2m_mean_c", meta.get("temperature_2m", 0.0))
-            t_c = convert_kelvin_to_celsius(float(t_raw))
-            precip = max(0.0, float(meta.get("precipitation_total_mm", meta.get("precipitation", 0.0))))
-
-            dt = date.fromisoformat(d_str)
-            doy = dt.timetuple().tm_yday
-            if climatology_doy_mean and doy in climatology_doy_mean:
-                t_anomaly = t_c - climatology_doy_mean[doy]
-            else:
-                t_anomaly = float(meta.get("t2m_anomaly", 0.0))
-
-            values[idx, 8] = t_c
-            values[idx, 9] = precip
-            values[idx, 10] = t_anomaly
-            mask[idx, 8:11] = True
-
-            if "sha256" in obs:
-                input_hashes[f"era5_{obs.get('record_id', d_str)}"] = obs["sha256"]
-
-        panel = MultiModalPanel(
-            lake_id=lake_id,
-            window_id=window_id,
-            start_date=start_date,
-            end_date=end_date,
-            dates=dates,
-            values=values,
-            mask=mask,
-            static_metadata=static_topography,
-            provenance_hashes=input_hashes,
-        )
-        return panel
-
-
-# Backward compatibility aliases and mask wrapper
-MultimodalPanel = MultiModalPanel
+                if modality == 'optical':
+                    band_values = {name: pixels(name, "1") for name in ("B02", "B03", "B04", "B08", "B11", "B12")}
+                    area_values = pixels("pixel_area_m2", "m2", positive=True)
+                    water = fields.pop("water", None)
+                    if water is not None and (water.dtype != np.bool_ or water.shape != qa.shape):
+                        raise AdmissionError("water mask must be a matching boolean raster")
+                    if water is not None and area_values is not None:
+                        put("optical_candidate_roi_area_km2", float(area_values[water[usable]].sum() / 1e6))
+                    else:
+                        put("optical_candidate_roi_area_km2", None, "UNAVAILABLE_MASK_OR_AREA")
+                    for out_name, (left, right) in {
+                        "ndwi_mean": ("B03", "B08"), "mndwi_mean": ("B03", "B11")
+                    }.items():
+                        a, b = band_values[left], band_values[right]
+                        if a is None or b is None:
+                            missing = [name for name, array in ((left, a), (right, b)) if array is None]
+                            put(out_name, None, "UNAVAILABLE_MISSING_" + "_".join(missing))
+                            continue
+                        index = compute_normalized_difference(a, b)
+                        finite = np.isfinite(index)
+                        put(out_name, float(np.mean(index[finite])) if finite.any() else None,
+                            "OBSERVED" if finite.any() else "UNDEFINED_RATIO_SUPPORT")
+                    for optional_name, required in (
+                        ("four_band_water_candidate_area_km2", ("B03", "B04", "B08", "B11")),
+                        ("awei_sh_mean", ("B02", "B03", "B08", "B11", "B12")),
+                    ):
+                        if optional_name not in channel_index:
+                            continue
+                        missing = [name for name in required if band_values.get(name) is None]
+                        if missing:
+                            put(optional_name, None, "UNAVAILABLE_MISSING_" + "_".join(missing))
+                        else:
+                            put(optional_name, None, "UNAVAILABLE_UNVALIDATED_DEVELOPMENT_RULE")
+                    for name in tuple(fields):
+                        if name not in {"valid", "roi"}:
+                            raise AdmissionError("unknown optical product field: " + name)
+                elif modality == 'sar':
+                    unit_vv, unit_vh = units.get("VV"), units.get("VH")
+                    if unit_vv not in {"dB", "sigma0"} or unit_vh != unit_vv:
+                        raise AdmissionError("VV/VH must have matching declared dB or signed sigma0 units")
+                    vv, vh = pixels("VV", unit_vv), pixels("VH", unit_vh)
+                    if vv is None or vh is None:
+                        for out_name in ("sar_vv_db_mean", "sar_vh_db_mean", "sar_cross_ratio_db", "sar_vv_linear_variance"):
+                            put(out_name, None, "UNAVAILABLE_MISSING_POLARIZATION")
+                    else:
+                        vv_linear = linear_power_from_db(vv) if unit_vv == "dB" else vv
+                        vh_linear = linear_power_from_db(vh) if unit_vh == "dB" else vh
+                        vv_mean = float(np.mean(vv_linear))
+                        vh_mean = float(np.mean(vh_linear))
+                        vv_status = ("OBSERVED" if np.isfinite(vv_mean) and vv_mean > 0 else
+                                     "UNAVAILABLE_NONPOSITIVE_POWER" if np.isfinite(vv_mean) else
+                                     "UNAVAILABLE_NONFINITE_POWER")
+                        vh_status = ("OBSERVED" if np.isfinite(vh_mean) and vh_mean > 0 else
+                                     "UNAVAILABLE_NONPOSITIVE_POWER" if np.isfinite(vh_mean) else
+                                     "UNAVAILABLE_NONFINITE_POWER")
+                        put("sar_vv_db_mean", db_from_linear_power(vv_mean), vv_status)
+                        put("sar_vh_db_mean", db_from_linear_power(vh_mean), vh_status)
+                        put("sar_cross_ratio_db", db_from_linear_power(vh_mean) - db_from_linear_power(vv_mean)
+                            if vh_mean > 0 and vv_mean > 0 else None,
+                            "OBSERVED" if vh_mean > 0 and vv_mean > 0 else "UNAVAILABLE_NONPOSITIVE_POWER")
+                        vv_variance = float(np.var(vv_linear))
+                        put("sar_vv_linear_variance", vv_variance,
+                            "OBSERVED" if np.isfinite(vv_variance) else "UNAVAILABLE_NONFINITE_POWER")
+                else:
+                    unit = units.get('temperature')
+                    t = pixels('temperature', unit)
+                    if t is None:
+                        put("era5_temp_2m_c_mean", None, "UNAVAILABLE_MISSING_TEMPERATURE")
+                    elif unit not in ('K','degC'):
+                        raise AdmissionError("unknown temperature unit")
+                    else:
+                        put("era5_temp_2m_c_mean", convert_kelvin_to_celsius(float(t.mean()), unit=unit))
+                    pu = units.get('precipitation')
+                    precip = pixels("precipitation", pu) if pu else None
+                    if precip is None:
+                        put("era5_precip_mm_sum", None, "UNAVAILABLE_MISSING_PRECIPITATION")
+                    elif pu not in ('m','mm'):
+                        raise AdmissionError("unknown precipitation unit")
+                    elif (precip < 0).any():
+                        raise AdmissionError("negative precipitation")
+                    else:
+                        put("era5_precip_mm_sum", float(precip.mean() * (1000 if pu == 'm' else 1)))
+                    for name in tuple(fields):
+                        if name not in {"valid", "roi"}:
+                            raise AdmissionError("unknown weather product field: " + name)
+                if fields:
+                    raise AdmissionError("unknown product bands")
+                i = dates.index(day)
+                produced = np.isfinite(row)
+                if (mask[i] & produced).any():
+                    raise AdmissionError("multiple contributions require a declared aggregation policy")
+                values[i, produced], mask[i, produced] = row[produced], True
+                for name, idx in channel_index.items():
+                    if row_status[idx] == "UNAVAILABLE_NOT_PRODUCED_BY_MODALITY":
+                        continue
+                    if np.isfinite(row[idx]):
+                        statuses[i, idx] = "OBSERVED"
+                        lineage[f"{day}|{name}"] = {
+                            "measurement_id": record["measurement_id"], "product_id": record["product_id"],
+                            "support_start": record["support_start"], "support_end": record["support_end"],
+                            "available_at": record["available_at"], "status": "OBSERVED"}
+                    else:
+                        statuses[i, idx] = row_status[idx]
+                        reasons[f"{day}|{name}"] = row_status[idx]
+                hashes[record['measurement_id']] = digest(record)
+                hashes[record['product_id']] = self.admission.manifest['artifacts'][record['product_id']]['sha256']
+        return MultiModalPanel(lake_id, window_id, dates[0], dates[-1], dates, values, mask,
+            static_topography, hashes, self.admission.mode if self.admission else 'unverified', reasons,
+            channel_names=channel_names, channel_schema_id=self.channel_schema.schema_id,
+            channel_schema_version=self.channel_schema.version,
+            channel_schema_hash=self.channel_schema.schema_hash,
+            units={name: _CHANNELS[name].units for name in channel_names}, statuses=statuses,
+            lineage=lineage, schedule_mode="RETROSPECTIVE_AS_OF_SIMULATION")
 
 
 class ObservedMask:
-    """Boolean observation mask wrapper of shape (T=180, C=11)."""
+    """Boolean observation mask wrapper for an explicitly declared shape."""
 
-    def __init__(self, mask: np.ndarray | None = None):
-        if mask is not None:
-            self.mask = np.asarray(mask, dtype=bool)
-        else:
-            self.mask = np.zeros((WINDOW_DAYS, NUM_CHANNELS), dtype=bool)
+    def __init__(self, mask: np.ndarray):
+        self.mask = np.asarray(mask)
+        if self.mask.dtype != np.bool_ or self.mask.ndim != 2:
+            raise ValueError("observation mask must be an explicit boolean T,C matrix")
 
     def __array__(self, dtype=None):
         return self.mask.astype(dtype) if dtype else self.mask

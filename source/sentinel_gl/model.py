@@ -11,7 +11,6 @@ Legacy checkpoints are incompatible with the explicit observation-mask input.
 import torch
 import torch.nn as nn
 import math
-import warnings
 from typing import Tuple, Optional
 
 
@@ -118,8 +117,7 @@ class TimeSeriesMAE(nn.Module):
 
     def __init__(
         self,
-        n_channels: int = 15,
-        n_windows: Optional[int] = None,
+        n_channels: int,
         d_model: int = 128,
         n_encoder_layers: int = 4,
         n_decoder_layers: int = 2,
@@ -130,14 +128,10 @@ class TimeSeriesMAE(nn.Module):
         masking_ratio: float = 0.5,
         dropout: float = 0.1,
         *,
-        max_time_steps: Optional[int] = None,
+        max_time_steps: int,
     ):
         super().__init__()
-        if n_windows is not None and max_time_steps is not None:
-            raise ValueError("specify max_time_steps only; n_windows is a deprecated alias")
-        if n_windows is not None:
-            warnings.warn("n_windows means time steps; use max_time_steps", DeprecationWarning, stacklevel=2)
-        capacity = max_time_steps if max_time_steps is not None else n_windows if n_windows is not None else 108
+        capacity = max_time_steps
         dimensions = (n_channels, capacity, d_model, n_encoder_layers,
                       n_decoder_layers, n_encoder_heads, n_decoder_heads,
                       d_ff_encoder, d_ff_decoder)
@@ -190,11 +184,6 @@ class TimeSeriesMAE(nn.Module):
 
         # Initialize weights
         self._init_weights()
-
-    @property
-    def n_windows(self):
-        """Deprecated read-only alias for maximum time steps, not context count."""
-        return self.max_time_steps
 
     @property
     def configuration(self):

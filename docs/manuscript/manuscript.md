@@ -1,207 +1,84 @@
-# Sentinel-GL: Evaluating Multi-Modal Satellite Anomaly Detection for Glacial Lake Outburst Precursors Under Cloud Obscuration and Coherence Limits
+# Sentinel-GL: Missingness-Aware Sentinel-2 Masked Autoencoding and Multi-Year Surface-Anomaly Diagnostics for South Lhonak and Khangchung Tsho
 
-**Authors:** Sentinel-GL Research Collaboration  
-**Affiliation:** Open Cryospheric Science Initiative  
-**Date:** October 2026  
-**Status:** Working Paper / Pre-Print Under Peer Review  
-**Reproducibility Repository:** `https://github.com/AdiShrestha/Computer-Vision-Mini-Project`  
+**Aditya Shrestha**
 
-> [!IMPORTANT]
-> **Scientific Integrity & Simulation Provenance Notice:**  
-> This manuscript specifies the complete mathematical and software architecture of the Sentinel-GL pipeline. All architectural contracts, statistical formulations, and release verification gates are fully implemented and verified via automated engineering test suites (143 core tests, 474 factory tests). However, per the project research charter and `project/READINESS.json`, observational acquisition from live provider APIs remains pending (`observational_experiments: NOT_EXECUTED`).  
-> 
-> The comparative evaluation results in Section 5 (e.g., prospective case detection status on South Lhonak, alert burden estimates on Khangchung Tsho, and baseline paired contrasts) and the sensor ablation scores in Section 6 are evaluated on **deterministic computational verification fixtures** designed to demonstrate pipeline execution end-to-end. They illustrate the behavior of the retrospective decision scheduler, alert episode engine, and Holm-Bonferroni hypothesis tests under controlled contracts, and **must not be interpreted as empirical observational measurements from live satellite rasters**.  
-> 
-> The InSAR coherence decay values ($\gamma_{\text{total}} = 0.0176$) in Section 2.3 are derived from **analytical physical forward-modeling** of Himalayan terrain geometry and monsoon moisture decorrelation, not processed Single Look Complex (SLC) interferograms. The sample size threshold ($N \ge 30$) and statistical power bounds ($1 - \beta < 0.20$) in Section 4.2 are **closed-form mathematical derivations** establishing the fundamental limitations of empirical satellite early warning claims across High Mountain Asia.
-
----
+Department of Computer Science and Engineering (DoCSE), School of Engineering, Kathmandu University, Dhulikhel, Nepal
+Corresponding author: Aditya Shrestha; adityashrestha39@gmail.com
 
 ## Abstract
 
-Glacial Lake Outburst Floods (GLOFs) present severe, escalating hazards across High Mountain Asia (HMA) as climate change accelerates glacial retreat and lake expansion. Machine learning approaches leveraging Earth observation (EO) satellites have been widely proposed for early warning; however, severe cloud obscuration during the summer monsoon, steep terrain radar distortions, interferometric coherence collapse, and small historical event cohorts severely challenge operational viability. In this paper, we evaluate a multi-modal temporal anomaly detection framework—**Sentinel-GL**—combining optical surface reflectance (Sentinel-2 MSI), synthetic aperture radar backscatter (Sentinel-1 SAR GRD), and reanalysis meteorology (ERA5) within 180-day retrospective closed windows. *(Note: Empirical observational acquisition across live provider APIs remains pending; evaluation results reported below demonstrate pipeline contracts on deterministic simulation fixtures).*
+Cloud, snow and irregular revisits limit optical monitoring of Himalayan glacial lakes. Sentinel-GL is a 207,685-parameter missingness-aware factorized temporal masked autoencoder. We analyzed 141 Sentinel-2 observations (117 FIT, 17 VAL, seven EVAL) from South Lhonak and Khangchung Tsho, 2018–2023. The prespecified five-channel model’s five best-validation-epoch checkpoints achieved mean validation masked MSE 0.8498 (SD 0.2371) across 15 target-bearing blocks per seed; the 50-fit sensitivity matrix included 350 target-bearing and 80 no-target configuration-block instances. At South Lhonak, Score A medians were 1.399 (9 October), 0.539 (26 October) and 0.528 (13 November); the seasonal-residual baseline was unavailable on EVAL because complete same-patch FIT support was insufficient. Zone 0+1 minus Zone 2 reconstruction-contrast medians were 0.121/0.072 (FIT n=7/5) and 0.189/0.231 (EVAL n=3/4), at South Lhonak/Khangchung. Six of eight matched autumn Score A, B, C and candidate-area medians were lower in EVAL: South Lhonak 0.410→0.539, 1.515→1.219, 0.366→0.363 and 1.144→1.074 km²; Khangchung 0.669→0.567, 1.118→0.937, 0.273→0.197 and 1.736→1.932 km². This comparison uses seven prior FIT scenes per site versus three/four EVAL scenes; FIT scenes are in-sample. Zones lack independent geometry validation, and event timing, false-alert burden and warning value remain unestimated.
 
-We define strict **population bounds** centered on High Mountain Asia moraine-dammed and ice-dammed proglacial lakes, evaluating an expanded regional cohort of $N=8$ candidate lakes (4 verified historical outburst events and 4 matched negative controls) spanning four major river basins: Teesta (South Lhonak SGL-001 / Khangchung Tsho SGL-002), Hunza (Shishper SGL-003 / Passu SGL-006), Gyirong/Poiqu (Gongbatongsha SGL-004 / Galong Tsho SGL-007), and Jinsha/Pumqu (Baige SGL-005 / Longbasaba SGL-008). We enforce rigorous anti-leakage contracts: strict retrospective availability ($t_{\text{acq}} < t_{\text{decision}}$), spatial basin clustering with $\ge 50$ km buffers, training-only normalizer fitting, and split-isolated threshold calibration.
+**Keywords:** glacial lakes; Sentinel-2; masked autoencoders; anomaly detection; missing data
 
-Through physical modeling of Sentinel-1 Single Look Complex (SLC) interferometry, we demonstrate why phase unwrapping fails during the peak hazard season: intense monsoon precipitation and moraine saturation induce severe temporal decorrelation ($\tau_{\text{decorr}} \approx 3.0\text{ days} \implies \gamma_{\text{total}} = 0.0176 < 0.25$), falling far below the phase unwrapping threshold ($0.30$) alongside extreme radar layover on steep moraine headwalls and prohibitive archive storage ($>900\text{ GB}$). Consequently, Sentinel-GL relies on calibrated dual-polarization GRD backscatter amplitude and spatial texture.
+## 1. Introduction
 
-Evaluating against four fair baselines (Seasonal Climatology, Lake-Area Trend, Weather-Only Anomaly, and Robust PCA) with exact paired sign-flip permutation tests and Holm-Bonferroni multiplicity correction, we evaluate prospective case detection across the pilot cohort. On South Lhonak, pre-event retrospective anomaly scores remained strictly below the empirical 95th-percentile calibration threshold ($\theta_{0.95} = 2.643366$), yielding an unalerted outcome (`NOT_DETECTED`) and undeclared lead time (`null`), primarily driven by intense monsoon cloud obscuration. On the negative-control lake (Khangchung Tsho), zero false alert episodes were triggered ($\lambda_{\text{alert}} = 0.0$ [95% Poisson CI: 0.0, 43.77] episodes/lake-year). In paired baseline contrasts, Sentinel-GL fails to demonstrate statistically significant superiority over Seasonal Climatology ($p_{\text{adj}} = 0.500$) and Weather-Only ($p_{\text{adj}} = 0.597$) baselines (`FAIL_TO_REJECT`), while rejecting null equivalence against area trend and PCA baselines ($p_{\text{adj}} = 0.0039$). Crucially, we report negative and inconclusive findings truthfully: remote sensing anomaly detection cannot guarantee early warning without persistent cloud-free observability. Furthermore, an analytical power analysis reveals that with $N \le 5$ historical satellite-era events across HMA, statistical power to confirm regional superiority is bounded at $1 - \beta < 0.20$, establishing that an empirical sample size floor of $N \ge 30$ independent events across multiple mountain ranges is mathematically mandatory for confirmatory early warning claims. We conclude by presenting a formal five-part operational failure taxonomy and explicitly declaring our **non-operational research scope**: this pipeline is a retrospective scientific benchmarking framework and cannot serve as an autonomous civil defense warning system.
+Glacial lakes are growing across mountain regions, increasing exposure to outburst floods. The October 2023 Sikkim cascade illustrates the consequences of interacting hazards, while optical and radar reconstructions document the South Lhonak event. Satellite time series can describe surface change retrospectively, but a spectral anomaly score is not itself a measurement of drainage or an operational warning.
 
----
+Sentinel-2 and Sentinel-1 offer complementary optical and radar observations. NDWI-family indices provide useful but imperfect candidate water masks. Prior GLOF studies combine satellite records with physical or operational evidence, including studies of South Lhonak and Khangchung. Under cloud and snow gaps, a masked sequence model is an exploratory complement: spatial attention can combine context across a scene while temporal attention uses each location’s observed history. The present study compares those diagnostics with classical change-detection and anomaly methods. Its purpose is to characterize behavior on this fixed two-site corpus, not to claim warning performance.
 
-## 1. Introduction & Literature Grounding
+## 2. Data and Methods
 
-Glacial lakes across High Mountain Asia have expanded dramatically over the past three decades in response to rapid cryospheric warming and negative glacier mass balances ([Brun et al., 2017](https://doi.org/10.1038/ngeo2999); [Nie et al., 2018](https://doi.org/10.1016/j.geomorph.2017.03.013)). Moraine-dammed and ice-dammed proglacial lakes impound massive volumes of meltwater behind unconsolidated, ice-cored moraines or advancing glacier tongues susceptible to catastrophic breaching by ice avalanches, rockfalls, subglacial tunnel collapse, or excessive hydrostatic pressure ([Veh et al., 2018](https://doi.org/10.1016/j.earscirev.2018.09.015); [Veh et al., 2019](https://doi.org/10.1073/pnas.1914898116); [Taylor et al., 2023](https://doi.org/10.1038/s41467-023-36033-x)).
+The corpus contains 141 observations from two 160 × 160 pixel windows at 20 m resolution in EPSG:32645, centered on study reference coordinates 27.915° N, 88.204° E (South Lhonak) and 27.988333° N, 88.815° E (Khangchung Tsho), snapped to the nearest 20 m pixel center. These points are not validated lake outlines. `FIT` comprises 2018–2021 and January–June 2023; `VAL` comprises 2022 and July–September 2023; the uncertain 2–4 October interval is excluded; `EVAL` begins at the 4 October cutoff. The retrospective partition includes pre-monsoon 2023 in `FIT` and holds 2022 and July–September 2023 for validation. Since 2022 `VAL` falls between `FIT` periods, validation measures reconstruction within this corpus rather than forward-time prediction. The 2018–2021 autumn scenes remain in-sample, and 2023 outcomes were viewed during earlier development. Native Sentinel-2 Collection-1 BOA quantification values and SAFE additive-offset metadata were applied during ingestion without additional cross-baseline harmonization.
 
-On the night of October 3–4, 2023, the South Lhonak glacial lake in Sikkim, India, suffered a catastrophic breach triggered by an ice and rock avalanche from the adjacent lateral peak, releasing over 45 million cubic meters of water. The resulting flood decimated the Chungthang dam, destroyed critical downstream infrastructure, and claimed dozens of lives. Similar high-magnitude outburst events have impacted other major river systems: the June 2019 Shishper ice-dammed outburst in the Hunza Valley of Pakistan ([Bhardwaj et al., 2021](https://doi.org/10.1016/j.geomorph.2021.107794)), the June 2020 Gongbatongsha moraine breach in the Gyirong/Poiqu Basin of Tibet ([Zheng et al., 2021](https://doi.org/10.1029/2021GL094394)), and the October 2018 Baige landslide-dammed lake breach on the Jinsha River ([Fan et al., 2019](https://doi.org/10.1007/s10346-019-01150-1)).
+Each window is partitioned into 100 non-overlapping 16 × 16 patches. B03, B08 and B11 retain native signed reflectance. Clear support uses SCL classes 4, 5 and 6 and at least 25% valid pixels per patch. NDWI and MNDWI are calculated after patch-level averaging; denominators with absolute value below 0.002 are undefined. FIT-derived Zone 0 is a core-water candidate, Zone 1 a buffer candidate, and Zone 2 the remaining candidate background. These zones are not surveyed lake boundaries. Candidate spectral area counts clear pixels with NDWI > 0 and MNDWI > 0 in Zones 0/1 and multiplies by 0.0004 km² per pixel; it is not validated water area or a measure of drainage volume. During ingestion, reflectance was derived from each product’s native BOA quantification value and radiometric additive offset recorded in SAFE metadata, without additional cross-baseline harmonization.
 
-Prior machine learning studies in Earth observation have frequently claimed high predictive accuracy for hazard forecasting, but often suffer from severe methodological vulnerabilities:
-1. **Temporal Leakage:** Models trained or evaluated with post-event observations, or where future measurements inform past baseline normalizations.
-2. **Spatial Contamination:** Fitting models on lakes within the same hydrologic basin as test lakes, inflating evaluation scores due to shared local atmospheric and glacial conditions.
-3. **Optimistic Metric Sinks:** Classifying entire years as single true/false predictions, masking operational alert burdens ($\lambda_{\text{alert}}$) and ignoring false alarm fatigue.
-4. **Underpowered Extrapolation:** Asserting broad "regional warning capability" across the Himalayas based on evaluation of one or two hand-picked case studies, disregarding asymptotic power constraints.
+The primary model has a 64-dimensional representation, four attention heads, two spatial encoder layers, one causal temporal encoder layer, one spatial decoder layer and 207,685 trainable parameters. Spatial attention operates across observed patch positions within a scene. Its output is rearranged into one sequence per fixed location, where causal temporal attention uses only observed acquisition times. Patch position, zone, modality and time embeddings are added to the projected channel features. Time is represented by cyclic day-of-year terms and a capped normalized revisit gap, Δt/30 capped at 5, where Δt is the gap since the preceding acquisition. Unsupported patches are masked from attention; a masked target is represented by a learned mask token.
 
-In this work, we implement an honest, measurement-first research pipeline that establishes verifiable baseline boundaries, guarantees retrospective closed-window availability, analyzes the physical limits of optical and radar interferometry, and discloses negative and inconclusive results.
+Training examples are chronological, site-specific blocks of at most eight scenes. Half of the observed patches are sampled at random for masking during training; validation masks every other observed patch deterministically. Loss averages only masked channels that are actually observed. A validation block without any such target remains unavailable. We fixed the primary configuration (d = 64, five channels, FIT-derived zones, context length 8) before running the 10-configuration, five-seed sensitivity matrix. Three-channel variants reconstruct B03/B08/B11; five-channel variants also reconstruct NDWI/MNDWI, so their losses average different target spaces and scales and are not directly comparable. Context-1 and context-8 validation windows also have different support: 65 versus 15 target-bearing blocks per fit, with 20 versus zero no-target blocks. Across the 50 fits, deterministic validation partitioning contains 350 target-bearing and 80 no-target configuration-block instances; no-target blocks are excluded from loss aggregation.
 
----
+For Score A, each masked supported patch receives the mean squared error across its observed target channels; the score averages those patch errors within the specified zone. Score A in Table 4 is for candidate Zones 0+1, and Zone 2 provides the background comparator. Score B projects latent patch representations through a rank-8 PCA fitted only to FIT latent vectors, then averages each eligible candidate patch’s five smallest same-patch distances to distinct FIT acquisitions within a circular ±45-day seasonal window; a FIT query is excluded from its own references. Score C equally combines FIT-robust-standardized log Score A and Score B, using the FIT median and 1.4826 × MAD. The seasonal-residual baseline is the mean across supported patches of each patch’s median Euclidean distance to its five closest complete FIT feature vectors within ±45 day-of-year. Spatial persistence compares each patch with its immediately preceding complete feature vector. Additional comparators are Isolation Forest, one-class SVM, robust PCA and fixed-rule Page CUSUM. Insufficient reference support remains unavailable, and thresholds are not operational alarm points.
 
-## 2. Multi-Modal Observational Pipeline & Physical Limits
+| Symbol | Definition |
+| --- | --- |
+| ρ̄₀₃, ρ̄₀₈, ρ̄₁₁ | Clear-pixel patch means of native BOA reflectance for B03, B08 and B11 |
+| xₜ,ₚ,𝚌; x̃ₜ,ₚ,𝚌 | Observed model feature and its FIT-standardized value |
+| medianFIT,𝚌; MADFIT,𝚌 | FIT-only channel median and median absolute deviation |
+| x̂ₜ,ₚ,𝚌 | Reconstruction of the masked standardized target |
+| zₜ,ₚ; PCAFIT | Patch-level latent representation and rank-8 PCA fitted to FIT latent vectors |
+| DOYₜ; Δt | Acquisition day of year and revisit gap in days |
+| Ωₜ⁽ᵍ⁾; Cₜ,ₚ | Masked supported patches in zone g and observed target channels for patch p |
+| Pₜ; N₅(t,p) | Eligible Zone 0+1 patches and their five nearest distinct FIT references |
+| α; δ | Fixed Score C weight α = 0.5 and water-index denominator threshold δ = 0.002 |
 
-### 2.1 Observational Ingestion Pilot
-We ingest authentic observational records directly from provider archives without synthetic substitution:
-- **Sentinel-2 MSI (Optical):** Multi-spectral Level-2A surface reflectance products from the Copernicus Data Space Ecosystem (CDSE). Cloud and shadow masking is strictly enforced using the Scene Classification Layer (SCL) and QA60 masks. Any observation with $\ge 30\%$ cloud cover is masked as explicit `NaN` (mask bit `False`). Mean imputation or zero-substitution is strictly forbidden.
-- **Sentinel-1 (SAR):** Ground Range Detected (GRD) Interferometric Wide (IW) dual-polarization (VV + VH) products. Radar backscatter is converted to linear power prior to spatial aggregation and converted back to decibels ($10 \log_{10} \mu_{\text{power}}$), preventing geometric bias.
-- **ERA5 Reanalysis (Atmospheric):** Hourly single-level surface variables (2m temperature, total precipitation) from ECMWF ([Hersbach et al., 2020](https://doi.org/10.1002/qj.3803)) aggregated to daily steps. Kelvin to Celsius conversion is performed exactly once with immutable verification hashes.
+The water-index denominators are guarded by δ = 0.002:
 
-### 2.2 Monsoon Cloud Obscuration Limits
-Optical observation frequencies are severely bounded by the South Asian summer monsoon. As shown in **Figure 1**, between June and September 2023, over $80\%$ of optical acquisitions over the Sikkim Himalaya were obscured by persistent cloud cover. Optical lake area and spectral indices (NDWI, MNDWI, NDSI) exhibited multi-week data voids. Multi-modal integration with all-weather Sentinel-1 SAR backscatter and ERA5 atmospheric reanalysis is therefore essential to maintain continuous surveillance.
+$$\mathrm{NDWI}=\frac{\bar{\rho}_{03}-\bar{\rho}_{08}}{\bar{\rho}_{03}+\bar{\rho}_{08}},\quad |\bar{\rho}_{03}+\bar{\rho}_{08}|\ge\delta;\qquad \mathrm{MNDWI}=\frac{\bar{\rho}_{03}-\bar{\rho}_{11}}{\bar{\rho}_{03}+\bar{\rho}_{11}},\quad |\bar{\rho}_{03}+\bar{\rho}_{11}|\ge\delta. \tag{1}$$
 
-### 2.3 InSAR SLC Feasibility & Monsoon Coherence Collapse Analysis
-A persistent hypothesis in remote sensing is that repeat-pass Synthetic Aperture Radar Interferometry (InSAR) Single Look Complex (SLC) phase tracking can measure sub-centimeter moraine crest creep prior to GLOF failure. We conducted a rigorous analytical physical forward-modeling audit of Sentinel-1 SLC interferometry (evaluating theoretical coherence formulas and synthetic orbital geometry rather than empirical SLC interferograms) across three dimensions:
+FIT-only robust channel standardization is:
 
-1. **Workstation Storage Budget:** Full-scene Sentinel-1 SLC archives produce $\sim 4.2\text{ GB}$ per compressed frame ($\sim 8.0\text{ GB}$ uncompressed). Constructing a multi-temporal interferometric stack for our 8 study lakes over 30 acquisition epochs requires $938.8\text{ GB}$ of storage, dramatically exceeding the local workstation budget ($114\text{ GB}$ free). Processing requires burst-cropped ROI sub-setting ($\le 1.0\text{ GB}$ per lake ROI, totaling $223.5\text{ GB}$).
-2. **Geometric Radar Distortions in Steep Mountain Terrain:** High-relief glaciated cirques introduce severe geometric distortions governed by the local incidence angle:
-   $$\cos(\theta_{\text{local}}) = \cos(\theta_{\text{inc}}) \cos(\alpha) + \sin(\theta_{\text{inc}}) \sin(\alpha) \cos(\phi_{\text{look}} - \beta)$$
-   On steep cirque headwalls facing the radar line-of-sight ($\alpha = 45^\circ$, $\theta_{\text{inc}} = 38^\circ$), the terrain enters severe **`LAYOVER`** ($\theta_{\text{local}} = 7.1^\circ$), entangling crest top and valley bottom echoes. Opposing valley slopes ($\alpha = 55^\circ$, $\beta = 258^\circ$) fall into complete **`SHADOW`** ($\theta_{\text{local}} = 93.0^\circ$), resulting in absolute signal voids.
-3. **Summer Monsoon Temporal Decorrelation:** Multi-temporal interferometric coherence $\gamma_{\text{total}} = \gamma_{\text{geom}} \gamma_{\text{temp}} \gamma_{\text{thermal}}$ decays exponentially with temporal baseline $B_t$:
-   $$\gamma_{\text{temp}} = \exp\left(-\frac{B_t}{\tau_{\text{decorr}}}\right)$$
-   During the dry Himalayan winter, frozen moraine till maintains long coherence decay constants ($\tau_{\text{decorr}} \approx 45.0\text{ days}$), yielding viable repeat-pass coherence ($\gamma_{\text{total}} = 0.7350$). However, during the summer monsoon (July–October)—precisely the peak hazard window for moraine failure—heavy rainfall ($>50\text{ mm/week}$) and glacial till water saturation collapse the decay constant to $\tau_{\text{decorr}} \approx 3.0\text{ days}$. Under a standard 12-day Sentinel-1 repeat interval ($B_t = 12\text{ days}$):
-   $$\gamma_{\text{temp}} = \exp(-12 / 3) = \exp(-4) \approx 0.0183 \implies \gamma_{\text{total}} = 0.0176$$
-   Because $\gamma_{\text{total}} = 0.0176 \ll 0.25$, coherence falls far below the minimal phase unwrapping threshold ($0.30$). Consequently, interferometric phase tracking collapses entirely during the pre-event monsoon period.
+$$\tilde{x}_{t,p,c}=\frac{x_{t,p,c}-\mathrm{median}_{FIT,c}}{1.4826\,\mathrm{MAD}_{FIT,c}}. \tag{2}$$
 
-**Architectural Decision:** Sentinel-GL rejects reliance on fragile InSAR interferometric phase unwrapping. The framework adopts calibrated dual-polarization Sentinel-1 GRD backscatter amplitude (VV, VH), cross-ratio (VH/VV), and spatial texture variance, guaranteeing continuous, all-weather observability.
+For a masked supported patch, first average squared error over its observed target channels; then average these patch errors within a zone:
 
----
+$$A_t^{(g)}=\frac{1}{|\Omega_t^{(g)}|}\sum_{p\in\Omega_t^{(g)}}\left[\frac{1}{|C_{t,p}|}\sum_{c\in C_{t,p}}(\tilde{x}_{t,p,c}-\hat{x}_{t,p,c})^2\right]. \tag{3}$$
 
-## 3. Spatiotemporal Architecture & Regional Cohort Isolation
+Score B averages the five nearest distinct FIT acquisition distances for each eligible candidate patch after the FIT-only rank-8 PCA projection:
 
-### 3.1 Expanded Regional Cohort
-To assess geographic transferability and evaluate baseline behaviors across diverse geomorphic settings, we expanded our pilot to an eligible cohort of $N=8$ lakes across High Mountain Asia (**Table 4**):
-- **Teesta Basin (Sikkim, India):** South Lhonak (`SGL-001`, Moraine-dammed, 2023-10-03 Event) and Khangchung Tsho (`SGL-002`, Moraine-dammed Control).
-- **Hunza Basin (Karakoram, Pakistan):** Shishper (`SGL-003`, Ice-dammed Surge Lake, 2019-06-23 Event) and Passu Lake (`SGL-006`, Moraine-dammed Control).
-- **Gyirong/Poiqu Basin (Tibet, China):** Gongbatongsha (`SGL-004`, Moraine-dammed, 2020-06-26 Event) and Galong Tsho (`SGL-007`, Moraine-dammed Control).
-- **Jinsha & Pumqu Basins (Tibet, China):** Baige Landslide Dammed Lake (`SGL-005`, Landslide Dam, 2018-10-11 Event) and Longbasaba Lake (`SGL-008`, Moraine-dammed Control).
+$$B_t=\frac{1}{|P_t|}\sum_{p\in P_t}\left[\frac{1}{5}\sum_{i\in N_5(t,p)}\|\mathrm{PCA}_{FIT}(z_{t,p})-\mathrm{PCA}_{FIT}(z_{i,p})\|_2\right]. \tag{4}$$
 
-### 3.2 Anti-Leakage Contracts
-To prevent methodological data contamination, Sentinel-GL strictly enforces four architectural contracts:
-1. **Retrospective Closed Windows ($t_{\text{acq}} < t_{\text{decision}}$):** Every evaluation window spans 180 trailing calendar days $(T=180, C=11)$. Decisions are evaluated at $t_{\text{decision}}$, consuming strictly acquisitions timestamped prior to $t_{\text{decision}}$.
-2. **Spatial Basin Cluster Isolation ($\ge 50$ km):** Lakes are grouped by Haversine centroid distances with a 50 km buffer. Lakes within the same basin (e.g. Shishper and Passu in Hunza, separated by $<20\text{ km}$) are assigned to the identical cluster (`CLS-HUNZA-01`) and never split across fitting and holdout partitions.
-3. **Training-Only Fitted State Normalization:** Normalization parameters (mean $\mu$, scale $\sigma$) are computed strictly over observed entries on training split lakes. Constant channels are assigned unit scale. Appending holdout evaluation lakes does not alter the normalizer state hash by a single bit.
-4. **Split-Isolated Threshold Calibration:** Anomaly thresholds $\theta$ corresponding to target false alarm percentiles (e.g. 95th percentile) are calibrated exclusively on disjoint calibration lakes, strictly isolated from final holdout evaluation lakes.
+Score C uses FIT-only robust standardization of log Score A and Score B:
 
----
+$$C_t=0.5\,z_{FIT}(\ln A_t^{(0+1)})+0.5\,z_{FIT}(B_t),\qquad z_{FIT}(u)=\frac{u-\mathrm{median}_{FIT}(u)}{1.4826\,\mathrm{MAD}_{FIT}(u)}. \tag{5}$$
 
-## 4. Fair Baselines, Statistical Power & Independent Inference
+## 3. Results and Interpretation
 
-### 4.1 Fair Baselines
-We evaluate the Masked Autoencoder architecture (T-MAE) against four fair baselines consuming identical $(T=180, C=11)$ windows and observation masks:
-1. **Seasonal Climatology Baseline:** Day-of-year (DOY) mean and standard deviation per channel fitted strictly on training panels.
-2. **Lake-Area Trend Heuristic:** Relative water area expansion rate $\Delta A / A = (A_{\text{latest}} - A_{\text{earliest}}) / A_{\text{earliest}}$ on channel 0 over a minimum separation of 30 days.
-3. **Weather-Only Anomaly Baseline:** Standardized Mahalanobis distance across ERA5 atmospheric channels (temperature mean, precipitation sum, temperature anomaly).
-4. **Robust PCA Residual Baseline:** Linear subspace projection with $k=8$ principal components fitted on centered training windows with training channel mean imputation.
+The five best-validation-epoch checkpoints for the prespecified primary configuration had mean validation masked MSE 0.8498 (SD 0.2371) across 15 target-bearing blocks per seed. The 50-fit sensitivity matrix contained 350 target-bearing and 80 no-target configuration-block instances per seed sweep; no-target blocks were excluded from loss aggregation. Three-channel variants reconstruct B03/B08/B11, while five-channel variants also reconstruct NDWI/MNDWI, so their losses cover different target spaces and scales. Context-1 and context-8 validation partitions also differ in support (65 versus 15 target-bearing blocks and 20 versus zero no-target blocks per fit), making direct rankings across contexts inappropriate. These are optimization summaries on one corpus; seed variation does not measure lake-level uncertainty.
 
-### 4.2 Statistical Power Analysis & Confirmatory Sample Size Floor
-A critical contribution of this work is establishing the mathematical bounds on what satellite Earth observation can and cannot prove regarding GLOF early warning across High Mountain Asia.
+The best-validation-epoch checkpoints were evaluated using FIT-derived scalers and reference tokens. Classical comparators were fit once on FIT observations and scored across acquisitions. Unconstrained five-channel robust PCA has a near-machine-precision residual because its fitted subspace spans the input vectors; a separate rank-2 SVD residual is reported as a constrained low-rank sensitivity diagnostic.
 
-Under the standard variance formulation for the Area Under the ROC Curve (Hanley & McNeil, 1982):
-$$\text{SE}(\text{AUC}) \approx \sqrt{\frac{\text{AUC}(1 - \text{AUC}) + (N_1 - 1)(Q_1 - \text{AUC}^2) + (N_0 - 1)(Q_2 - \text{AUC}^2)}{N_1 N_0}}$$
-where $N_1$ is event count, $N_0$ is control count, $Q_1 = \frac{\text{AUC}}{2 - \text{AUC}}$, and $Q_2 = \frac{2 \text{AUC}^2}{1 + \text{AUC}}$.
+For the October–November comparison, seed scores were first collapsed to a median per acquisition; medians, IQRs and counts in Table 4 use distinct scenes as the unit. Six of eight site-by-metric medians were lower in 2023 EVAL than in prior-autumn FIT; two were higher. The earlier autumn FIT observations were used for model fitting, so this is not an independent seasonal-transfer comparison. Only three South Lhonak and four Khangchung EVAL scenes are available.
 
-For our expanded cohort of $N_1 = 4$ event lakes and $N_0 = 4$ control lakes, evaluating an anticipated discrimination increment of $\Delta \text{AUC} = 0.10$:
-- Standard error of paired difference: $\text{SE}(\Delta) \approx 0.185$.
-- Test statistic under critical two-sided threshold ($\alpha = 0.05$, $Z_{\alpha/2} = 1.96$):
-  $$Z_\beta = \frac{\Delta}{\text{SE}(\Delta)} - Z_{\alpha/2} = \frac{0.10}{0.185} - 1.96 = 0.54 - 1.96 = -1.42$$
-- Statistical Power:
-  $$1 - \beta = \Phi(Z_\beta) = \Phi(-1.42) \approx 0.078 \quad (1 - \beta < 0.20)$$
+South Lhonak’s three EVAL scene-level Score A medians across seeds are 1.399 on 9 October, 0.539 on 26 October and 0.528 on 13 November. Score B is 1.411, 1.167 and 1.219; Score C is 1.100, 0.350 and 0.363. Thus, one early reconstruction-score elevation is not sustained across the next two scenes. Score A, Score B and Score C measure different properties. The seasonal-residual baseline is unavailable for these EVAL scenes because five complete same-patch FIT references are not supported.
 
-**Key Finding:** Across the entire 8-year operational baseline of the European Space Agency Copernicus constellation (2016–2024), documented catastrophic GLOF events with verified pre-event satellite archives number fewer than five ($N \le 5$). At this sample size, statistical power is bounded below $20\%$. Any claim asserting "proven regional warning capability across the Himalayas" represents an unsupported extrapolation.
+The Zone 0+1 minus Zone 2 reconstruction-error contrast has scene-level autumn medians of 0.121 at South Lhonak (seven prior FIT scenes) and 0.072 at Khangchung (five), compared with 0.189 and 0.231 in three and four 2023 EVAL scenes. This is descriptive, conditional on spectral zones, and does not establish a lake-specific signal. South Lhonak candidate spectral area has similar prior-autumn and EVAL medians (1.144 and 1.074 km²). This does not show that the mask detected or failed to detect drainage: it is not validated shoreline or volume, and seasonal snow, ice, shadow and classification effects have not been separated. Khangchung is a development comparator, not an independently ascertained event-free control.
 
-To achieve standard confirmatory power ($1 - \beta = 0.80$, $Z_\beta = 0.84$) at two-sided $\alpha = 0.05$ ($Z_{\alpha/2} = 1.96$) for detecting $\Delta \text{AUC} = 0.10$, the standard error must satisfy $\text{SE} \le 0.0357$. Because $\text{SE} \propto 1/\sqrt{N}$, the minimum sample size required is:
-$$N_{\text{required}} \ge 4 \times \left(\frac{0.185}{0.0357}\right)^2 \approx 107 \text{ lake pairs}$$
-Even under optimistic paired variance assumptions, a rigorous statistical sample size floor requires at least **$N \ge 30$ independent events** across multiple mountain ranges.
+Five scientific quantities were considered: event-onset detection timing; false-alert burden per verified event-free lake-year; seasonal transfer to a year excluded from fitting and selection; within-scene candidate-zone reconstruction contrast; and incremental warning value at a common independently calibrated operating point. Only the zone contrast is conditionally descriptive. The other quantities are not estimable because independent event and control histories, operational availability, rolling-origin models or fair calibrated thresholds are absent. The five seeds are not independent lakes, and scenes and patches are dependent.
 
-### 4.3 Statistical Inference Protocol
-- **Paired Contrasts ($\Delta S$):** Evaluated strictly on identical eligible windows where both model and baseline satisfy $C_{\text{obs}}$ eligibility ($\ge 2$ observations per modality).
-- **Exact Sign-Flip Permutation:** For $N \le 20$, exact $2^N$ combinatorial evaluation; for $N > 20$, deterministic Monte Carlo ($B=10000$ draws).
-- **Holm-Bonferroni Multiplicity Adjustment:** Family-wise error rate (FWER) strongly controlled across the family of 4 baseline contrasts using step-down rejection thresholds $\alpha / (M - k + 1)$.
-- **Conservative Reporting Rule:** If the adjusted p-value exceeds $\alpha = 0.05$, the comparison is marked **`FAIL_TO_REJECT`** (inconclusive).
+## 4. Conclusion
 
----
+Sentinel-GL generated surface diagnostics from this incomplete Sentinel-2 corpus. At South Lhonak, Score A was elevated in the first EVAL scene but fell in the next two; matched autumn summaries did not show uniform increases over in-sample FIT scenes. These results do not establish detection or warning value. Further assessment requires independently validated geometry, event/control records, multiple independent lakes and rolling-origin evaluation at a calibrated operating point.
 
-## 5. Comparative Results
+## Acknowledgement
 
-> [!NOTE]
-> **Evaluation Provenance Disclosure:**  
-> The comparative evaluation results reported below are evaluated on deterministic verification fixtures to demonstrate the scoring, episode declaration, and hypothesis testing pipeline end-to-end. While event dates and spatial coordinates reflect verified historical records, these numerical results represent an illustrative forward demonstration of the software contracts, not empirical discoveries from live satellite rasters.
-
-The comparative evaluation results are summarized in **Table 1**:
-
-### Case Detection & Bounded Lead Time ($\Delta t_{\text{lead}}$)
-On South Lhonak (SGL-001), retrospective anomaly scores evaluated across the 5-day stride decision schedule leading up to the October 3, 2023 disaster remained strictly below the empirical 95th-percentile calibration threshold ($\theta_{0.95} = 2.643366$). Because the detector never sustained consecutive threshold crossings ($q=2$), no prospective alert was declared prior to the event:
-$$\text{Status} = \mathbf{NOT\_DETECTED}, \quad \Delta t_{\text{lead}} = \mathbf{null}$$
-Physical diagnostic tracing confirms that during the critical pre-event monsoon months (July–September 2023), persistent cloud cover obscured all optical acquisitions, while Sentinel-1 SAR backscatter and ERA5 reanalysis anomalies remained within standard seasonal bounds, failing to exceed the conservative false alarm threshold.
-
-### Alert Burden & Negative-Control Exposure ($\lambda_{\text{alert}}$)
-On the negative-control lake Khangchung Tsho (SGL-002), monitored over 0.0684 lake-years of closed retrospective follow-up exposure, zero alert episodes were declared under the calibrated threshold $\theta_{0.95} = 2.643366$ (**Figure 4**). The alert burden is conservatively bounded at:
-$$\lambda_{\text{alert}} = 0.0000 \text{ episodes / lake-year} \quad (95\% \text{ Poisson CI: } [0.0000, 43.7676])$$
-The wide Poisson confidence interval directly reflects the limited observational exposure duration, highlighting that long-term multi-year baselines are required to tightly bound operational false alarm rates.
-
-### Hypothesis Testing vs Baselines
-In paired comparisons across $N=11$ mutually eligible evaluation windows (**Table 1**):
-- $\Delta S$ vs Area Trend Heuristic: Mean difference $+1.3465$, unadjusted $p=0.0010$, Holm-adjusted $p=0.0039 \implies$ **`REJECT_NULL_SUPERIOR`**.
-- $\Delta S$ vs Seasonal Climatology: Mean difference $-93274.5974$, unadjusted $p=0.2500$, Holm-adjusted $p=0.5000 \implies$ **`FAIL_TO_REJECT`**.
-- $\Delta S$ vs Robust PCA Baseline: Mean difference $+1.0702$, unadjusted $p=0.0010$, Holm-adjusted $p=0.0039 \implies$ **`REJECT_NULL_SUPERIOR`**.
-- $\Delta S$ vs Weather-Only Anomaly: Mean difference $+0.0880$, unadjusted $p=0.5967$, Holm-adjusted $p=0.5967 \implies$ **`FAIL_TO_REJECT`**.
-
-Crucially, two of the four baseline contrasts fail to achieve statistical significance under family-wise multiplicity correction (`FAIL_TO_REJECT`). While Sentinel-GL demonstrates significant reconstruction divergence against static morphology and unregularized PCA, it cannot statistically reject equivalence against seasonal climatology and atmospheric anomaly baselines.
-
----
-
-## 6. Ablation & Sensitivity Analysis
-
-> [!NOTE]
-> **Evaluation Provenance Disclosure:**  
-> Sensor ablation sensitivity scores represent illustrative computational fixtures exercising the $2^N$ ablation lattice pipeline.
-
-We systematically evaluate the $2^N$ sensor ablation lattice across all 7 combinations of Optical, SAR, and ERA5 channels (**Table 2** and **Figure 5**):
-- **Full Modality (Opt+SAR+ERA5):** Reconstruction MSE $= 1.3465$ across 11 valid windows.
-- **SAR + Optical (Opt+SAR):** Lowest multi-modal reconstruction error (MSE $= 0.8834$ across 11 valid windows), demonstrating strong joint multi-spectral and backscatter representation.
-- **SAR + ERA5 (SAR+ERA5):** Competitive reconstruction MSE ($1.3138$ across 12 valid windows), offering reliable all-weather capability when optical channels are cloud-obscured.
-- **Optical + ERA5 (Opt+ERA5):** MSE $= 1.6750$ across 11 valid windows.
-- **Optical Only (Opt-only):** MSE $= 1.8522$ across 11 valid windows, degraded by high missingness during cloudy periods.
-- **SAR Only (SAR-only):** Lowest single-modality error (MSE $= 0.1671$ across 12 valid windows), reflecting smooth, consistent radar backscatter time series.
-- **ERA5 Only (ERA5-only):** MSE $= 1.7521$ across 12 valid windows, illustrating that atmospheric variables alone lack spatial discrimination for lake surface dynamics.
-
----
-
-## 7. Operational Failure Taxonomy & Physical Limitations
-
-To guide operational cryospheric monitoring, we categorize failure modes into an explicit five-part taxonomy (**Table 3**):
-1. **`ERR_CLOUD_OBSCURATION`:** Severe optical gaps ($\ge 80\%$ missing data in preceding 60 days) preventing spectral water delineation. In our evaluation, this accounted for **70.0%** (7 of 10) of all diagnostic failure flags.
-2. **`ERR_INSUFFICIENT_OBSERVATIONS`:** Windows failing $C_{\text{obs}}$ eligibility ($< 2$ observations per active modality), accounting for **30.0%** (3 of 10) of evaluation failures, which must remain explicit nulls (`NOT_ESTIMABLE`) rather than imputed zeros.
-3. **`ERR_SAR_GEOMETRIC_DISTORTION`:** Radar layover, shadow, and extreme spatial variance ($> 5.0$) on steep lateral moraines causing spurious backscatter anomalies (0 occurrences in the pilot evaluation).
-4. **`ERR_SPURIOUS_SEASONAL_ANOMALY`:** False alarms on negative controls triggered by rapid freeze-up (November/December) or spring breakup (April/May) when lake surface temperatures hover around $0^\circ\text{C}$ (0 occurrences in the pilot evaluation).
-5. **`ERR_MISSED_RAPID_TRIGGER`:** Sudden catastrophic moraine collapses or subaqueous piping occurring within $< 6$ days without detectable precursory deformation.
-
----
-
-## 8. Reproducibility & Open Science
-
-### Open Science Disclosures
-- **Code & Environment Availability:** Complete implementation source code, test suites, and report generators are available in the public repository under the Apache 2.0 open license. Exact dependency specifications are pinned in `source/requirements.lock`.
-- **Data Lineage:** Pilot dossiers, lake registries, and event catalogs contain verified CDSE and ECMWF product identifiers and SHA-256 byte digests.
-- **Observational Research Readiness:** As declared in `project/READINESS.json` (`status: RESEARCH_NOT_READY`), observational experiments across live provider APIs remain unexecuted (`observational_experiments: NOT_EXECUTED`). All software scaffolding and statistical machinery are fully frozen and reproducible.
-- **Non-Operational Research Scope:** Sentinel-GL is a retrospective scientific benchmarking system. It has **NOT** been certified for operational civil protection or real-time life-safety warning. Operational deployment requires real-time telemetry, automated satellite downlinks, and downstream hydrodynamic flood routing models beyond the scope of this work.
-
----
-
-## References
-
-1. **Bhardwaj, A., Sam, L., Akanksha, Martín-Torres, F. J., & Lu, Z. (2021).** Monitoring the dynamics of the Shishper Glacier surge and dammed ice lake evolution in the Hunza Valley, Karakoram. *Geomorphology*, 375, 107794. [https://doi.org/10.1016/j.geomorph.2021.107794](https://doi.org/10.1016/j.geomorph.2021.107794)
-2. **Brun, F., Berthier, E., Wagnon, P., Kääb, A., & Treichler, D. (2017).** A spatially resolved estimate of High Mountain Asia glacier mass balances from 2000 to 2016. *Nature Geoscience*, 10(9), 668–673. [https://doi.org/10.1038/ngeo2999](https://doi.org/10.1038/ngeo2999)
-3. **Fan, X., Yang, F., Subramanian, S., Xu, Q., Mavrouli, O., Peng, M., Ouyang, C., Jansen, J. D., & Huang, R. (2019).** The formation and breaching of the Baige landslide dam on the Jinsha River, China. *Landslides*, 16(6), 1149–1160. [https://doi.org/10.1007/s10346-019-01150-1](https://doi.org/10.1007/s10346-019-01150-1)
-4. **Hersbach, H., Bell, B., Berrisford, P., et al. (2020).** The ERA5 global reanalysis. *Quarterly Journal of the Royal Meteorological Society*, 146(730), 1999–2049. [https://doi.org/10.1002/qj.3803](https://doi.org/10.1002/qj.3803)
-5. **Nie, Y., Liu, Q., Wang, J., Zhang, Y., Sheng, Y., & Liu, S. (2018).** An inventory of historical glacial lake outburst floods in the Himalayas based on remote sensing observations and literature. *Geomorphology*, 308, 91–106. [https://doi.org/10.1016/j.geomorph.2017.03.013](https://doi.org/10.1016/j.geomorph.2017.03.013)
-6. **Taylor, C., Robinson, T. R., Dunning, S., Rachel Carr, J., & Westoby, M. (2023).** Glacial lake outburst floods threaten millions globally. *Nature Communications*, 14(1), 487. [https://doi.org/10.1038/s41467-023-36033-x](https://doi.org/10.1038/s41467-023-36033-x)
-7. **Veh, G., Korup, O., Roessner, S., & Walz, A. (2018).** Detecting, mapping and analysing glacial lake outburst floods in High Mountain Asia: an overview and regional assessment. *Earth-Science Reviews*, 185, 301–315. [https://doi.org/10.1016/j.earscirev.2018.09.015](https://doi.org/10.1016/j.earscirev.2018.09.015)
-8. **Veh, G., Korup, O., & Walz, A. (2019).** Hazard from Himalayan glacier lake outburst floods. *Proceedings of the National Academy of Sciences*, 116(48), 24107–24112. [https://doi.org/10.1073/pnas.1914898116](https://doi.org/10.1073/pnas.1914898116)
-9. **Zheng, G., Allen, S. K., Bao, A., et al. (2021).** Complex evolving cascades of glacial lake outburst floods in the Himalayas: A case study of the 2020 Gongbatongsha outburst. *Geophysical Research Letters*, 48(20), e2021GL094394. [https://doi.org/10.1029/2021GL094394](https://doi.org/10.1029/2021GL094394)
+Contains modified Copernicus Sentinel data [2018–2023], processed by the author. The manuscript distributes derived summaries and figures, not source product files.

@@ -2,6 +2,7 @@
 from __future__ import annotations
 import datetime
 import json
+from ..integrity import loads_strict
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -51,7 +52,7 @@ class Sentinel1Ingestor:
         req = urllib.request.Request(url, headers={"User-Agent": self.user_agent})
         try:
             with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
+                data = loads_strict(resp.read().decode("utf-8"))
         except Exception as ex:
             return [
                 AcquisitionRecord(
@@ -60,7 +61,7 @@ class Sentinel1Ingestor:
                     modality="sar",
                     provider_name="Copernicus Data Space Ecosystem",
                     product_identifier=url,
-                    acquisition_timestamp=f"{start_date}T00:00:00Z",
+                    acquisition_timestamp=None,
                     query_timestamp=query_time,
                     roi_geometry={"type": "Point", "coordinates": [centroid_lon, centroid_lat]},
                     status="FAILED",
@@ -78,7 +79,7 @@ class Sentinel1Ingestor:
                     modality="sar",
                     provider_name="Copernicus Data Space Ecosystem",
                     product_identifier="NO_PRODUCTS_FOUND",
-                    acquisition_timestamp=f"{start_date}T00:00:00Z",
+                    acquisition_timestamp=None,
                     query_timestamp=query_time,
                     roi_geometry={"type": "Point", "coordinates": [centroid_lon, centroid_lat]},
                     status="NO_DATA",
@@ -116,9 +117,9 @@ class Sentinel1Ingestor:
                 metadata={
                     "cdse_product_id": prod_id,
                     "product_name": prod_name,
-                    "polarization": polarization or "VV+VH",
-                    "orbit_direction": orbit_direction or "UNKNOWN",
-                    "terrain_correction": "Copernicus 30m DEM",
+                    "polarization": polarization,
+                    "orbit_direction": orbit_direction,
+                    "terrain_correction": None,
                 },
             )
             records.append(rec)

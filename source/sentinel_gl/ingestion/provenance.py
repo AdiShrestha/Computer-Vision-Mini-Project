@@ -15,7 +15,7 @@ class AcquisitionRecord:
     modality: str  # optical, sar, weather, elevation
     provider_name: str
     product_identifier: str
-    acquisition_timestamp: str  # ISO-8601 UTC
+    acquisition_timestamp: Optional[str]  # ISO-8601 UTC
     query_timestamp: str        # ISO-8601 UTC
     roi_geometry: Dict[str, Any]
     status: str  # CATALOGUED, EXPORTED, HASH_VERIFIED, QA_ACCEPTED, NO_DATA, FAILED
@@ -25,8 +25,14 @@ class AcquisitionRecord:
     missingness_reason: Optional[str] = None
     metadata: Dict[str, Any] = dataclasses.field(default_factory=dict)
 
+    def __post_init__(self):
+        if self.status in ('FAILED', 'NO_DATA'):
+            self.acquisition_timestamp = None
+        if self.status not in ('CATALOGUED', 'FAILED', 'NO_DATA'):
+            raise ValueError("catalogue records are not admitted measurements")
+
     def to_dict(self) -> Dict[str, Any]:
-        return dataclasses.asdict(self)
+        return {**dataclasses.asdict(self), "record_kind": "request" if self.status in ("FAILED", "NO_DATA") else "catalogue_metadata", "measurement_status": "NOT_MEASURED", "origin": "unknown", "research_admissible": False}
 
 
 def compute_file_sha256(path: Path) -> str:

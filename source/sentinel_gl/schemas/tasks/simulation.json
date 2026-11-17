@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["schema_version", "task_id", "task_type", "origin", "scope_role", "source_ids", "method_ids", "perturbations"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "task_type": {"type": "string", "const": "SIMULATION"},
+    "origin": {"type": "string", "const": "simulation"},
+    "scope_role": {"type": "string", "const": "development_validation"},
+    "source_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "method_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "perturbations": {"type": "array", "items": {"type": "object", "required": ["perturbation_id", "parent_source_ids", "source_ids", "transform", "seed", "parameters", "input_sha256", "output_sha256"]}, "minItems": 1}
+  },
+  "additionalProperties": false
+}

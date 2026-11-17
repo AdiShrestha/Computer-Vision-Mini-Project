@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "band_role": {"type": "string", "enum": ["green", "nir", "swir16", "scl"]},
+    "band_identity": {"type": "string", "enum": ["B03", "B08", "B11", "SCL"]},
+    "path": {"type": "string", "minLength": 1},
+    "bytes": {"type": "integer", "minimum": 0},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"type": "string", "const": "MATCHED_VERIFIED_STAGE_RAW_ASSET"}
+  },
+  "required": ["band_role", "band_identity", "path", "bytes", "sha256", "status"],
+  "additionalProperties": false
+}

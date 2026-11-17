@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string",
+      "enum": [
+        "fitting",
+        "development_validation",
+        "threshold_calibration",
+        "evaluation"
+      ]
+    },
+    "site_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "available_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cutoff": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "scope",
+    "site_id",
+    "available_at",
+    "cutoff"
+  ],
+  "additionalProperties": false
+}

@@ -7,6 +7,7 @@ reconstructions within float32 tolerance (<= 1e-5).
 from __future__ import annotations
 import argparse
 import dataclasses
+import math
 from pathlib import Path
 import random
 import subprocess
@@ -32,8 +33,11 @@ class CheckpointBundle:
 
     def save(self, path: Union[Path, str]) -> None:
         p = Path(path)
+        if any(parent.is_symlink() for parent in (p, *p.parents)):
+            raise ValueError("checkpoint output cannot traverse symlinks")
         p.parent.mkdir(parents=True, exist_ok=True)
         payload = {
+            "origin": "fixture",
             "format_version": self.format_version,
             "model_config": self.model_config,
             "model_state_dict": self.model_state_dict,
@@ -43,14 +47,22 @@ class CheckpointBundle:
             "telemetry": self.telemetry,
             "history": self.history,
         }
-        torch.save(payload, p)
+        with p.open('xb') as stream:
+            torch.save(payload, stream)
 
     @classmethod
-    def load(cls, path: Union[Path, str], device: str = "cpu") -> CheckpointBundle:
+    def load_fixture(cls, path: Union[Path, str], device: str = "cpu") -> CheckpointBundle:
         p = Path(path)
         if not p.is_file():
             raise FileNotFoundError(f"Checkpoint not found at {p}")
-        payload = torch.load(p, map_location=device, weights_only=False)
+        from .admission import QUARANTINED, AdmissionError
+        from .integrity import file_hash, verified_file
+        if p.is_symlink() or file_hash(p) in QUARANTINED:
+            raise AdmissionError("quarantined or symlink checkpoint")
+        verified_file(p.parent, p.name, file_hash(p))
+        payload = torch.load(p, map_location=device, weights_only=True)
+        if payload.get('origin') != 'fixture':
+            raise AdmissionError("checkpoint is not an explicit fixture")
         return cls(
             format_version=payload.get("format_version", 4),
             model_config=payload["model_config"],
@@ -63,7 +75,7 @@ class CheckpointBundle:
         )
 
     @classmethod
-    def capture(
+    def capture_fixture(
         cls,
         model: TimeSeriesMAE,
         optimizer: Optional[torch.optim.Optimizer],
@@ -75,7 +87,7 @@ class CheckpointBundle:
         """Capture live model, optimizer, normalizer, and RNG states."""
         rng_states = {
             "python": random.getstate(),
-            "numpy": np.random.get_state(),
+            "numpy": {"algorithm": np.random.get_state()[0], "keys": torch.tensor(np.random.get_state()[1].astype(np.int64)), "position": int(np.random.get_state()[2]), "has_gauss": int(np.random.get_state()[3]), "cached_gaussian": float(np.random.get_state()[4])},
             "torch": torch.get_rng_state(),
         }
         if torch.cuda.is_available():
@@ -91,6 +103,16 @@ class CheckpointBundle:
             telemetry=dict(telemetry),
             history=list(history),
         )
+
+    @classmethod
+    def load(cls, *args, **kwargs):
+        from .admission import blocked
+        blocked("research checkpoint loading")
+
+    @classmethod
+    def capture(cls, *args, **kwargs):
+        from .admission import blocked
+        blocked("research checkpoint capture")
 
 
 def compute_deterministic_reconstruction(
@@ -145,14 +167,17 @@ def verify_clean_process_replay(
 
     result = subprocess.run(cmd, capture_output=True, text=True, env=env)
     if result.returncode != 0:
-        return False, float("inf")
+        print(result.stderr, file=sys.stderr)
+        return False, None
 
     # Parse stdout for recorded diff
-    max_diff = 0.0
+    max_diff = None
     for line in result.stdout.splitlines():
         if "max_diff=" in line:
             max_diff = float(line.split("max_diff=")[-1].strip())
 
+    if max_diff is None or not math.isfinite(max_diff) or max_diff < 0:
+        return False, None
     return True, max_diff
 
 
@@ -165,17 +190,17 @@ def main() -> int:
     parser.add_argument("--tolerance", type=float, default=1e-5, help="Maximum float32 error tolerance")
     args = parser.parse_args()
 
-    bundle = CheckpointBundle.load(args.checkpoint, device="cpu")
+    bundle = CheckpointBundle.load_fixture(args.checkpoint, device="cpu")
     model = TimeSeriesMAE(**bundle.model_config)
     model.load_state_dict(bundle.model_state_dict)
 
-    input_data = torch.load(args.input, map_location="cpu", weights_only=False)
+    input_data = torch.load(args.input, map_location="cpu", weights_only=True)
     if isinstance(input_data, (tuple, list)):
         x, validity = input_data[0], input_data[1]
     else:
         x, validity = input_data["x"], input_data["validity"]
 
-    expected = torch.load(args.expected, map_location="cpu", weights_only=False)
+    expected = torch.load(args.expected, map_location="cpu", weights_only=True)
 
     reconstruction = compute_deterministic_reconstruction(model, x, validity, device="cpu")
     diff = float((reconstruction - expected).abs().max().item())

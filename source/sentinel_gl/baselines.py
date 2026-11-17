@@ -1,14 +1,4 @@
-"""Four fair baseline estimators for Sentinel-GL multi-modal evaluation.
-
-All baselines consume identical (T=180, C=11) multi-modal windows and boolean
-observation masks as the T-MAE model:
-1. ClimatologyBaseline: Day-of-year mean and standard deviation strictly on training panels.
-2. LakeAreaTrendBaseline: Relative water area expansion Delta A / A on channel 0.
-3. WeatherOnlyBaseline: Standardized ERA5 atmospheric anomaly distance (channels 8-10).
-4. RobustPCABaseline: Linear subspace reconstruction error (k=8) fitted on training panels.
-
-All baselines enforce strict training isolation and serialize with cryptographic state hashes.
-"""
+"""Analytical fixture baseline operators; research fitting and panel scoring remain blocked."""
 from __future__ import annotations
 import dataclasses
 from datetime import date
@@ -17,7 +7,7 @@ import json
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
-from .features import FEATURE_CHANNELS, NUM_CHANNELS, WINDOW_DAYS, MultiModalPanel
+from .features import CHANNEL_MODALITIES, MultiModalPanel
 
 
 # ---------------------------------------------------------------------------
@@ -31,12 +21,14 @@ class ClimatologyBaseline:
     temporal_cutoff: Optional[str]
     global_means: Tuple[float, ...]
     global_scales: Tuple[float, ...]
-    doy_means: np.ndarray   # shape (367, 11)
-    doy_scales: np.ndarray  # shape (367, 11)
+    channel_names: Tuple[str, ...]
+    channel_schema_hash: str
+    doy_means: np.ndarray
+    doy_scales: np.ndarray
     state_hash: str
 
     @classmethod
-    def fit(
+    def fit_fixture(
         cls,
         panels: Sequence[MultiModalPanel],
         training_lake_ids: Sequence[str],
@@ -44,6 +36,8 @@ class ClimatologyBaseline:
         eps: float = 1e-7,
     ) -> ClimatologyBaseline:
         """Fit climatology parameters strictly on training split panels."""
+        if any(p.origin != "fixture" for p in panels):
+            raise ValueError("baseline fixtures require explicit fixture origin")
         train_set = set(training_lake_ids)
         if not train_set:
             raise ValueError("training_lake_ids must be non-empty")
@@ -54,11 +48,16 @@ class ClimatologyBaseline:
         ]
         if not valid_panels:
             raise ValueError("No valid training panels available to fit ClimatologyBaseline")
+        channel_names = valid_panels[0].channel_names
+        schema_hash = valid_panels[0].channel_schema_hash
+        if any(p.channel_names != channel_names or p.channel_schema_hash != schema_hash for p in valid_panels):
+            raise ValueError("climatology fit panels have different channel schemas")
+        n_channels = len(channel_names)
 
         # 1. Compute global training channel statistics
         global_means = []
         global_scales = []
-        for c in range(NUM_CHANNELS):
+        for c in range(n_channels):
             obs_vals = []
             for p in valid_panels:
                 vals = p.values[:, c][p.mask[:, c]]
@@ -68,17 +67,18 @@ class ClimatologyBaseline:
                 stacked = np.concatenate(obs_vals)
                 mu = float(np.mean(stacked))
                 sigma = float(np.std(stacked))
-                if sigma <= 0.0 or not np.isfinite(sigma):
+                if not np.isfinite(sigma):
+                    raise ValueError("nonfinite fitted scale")
+                if sigma == 0.0:
                     sigma = 1.0
             else:
-                mu = 0.0
-                sigma = 1.0
+                raise ValueError("missing training channel")
             global_means.append(mu)
             global_scales.append(sigma)
 
         # 2. Compute DOY bins (1 to 366)
-        doy_means = np.zeros((367, NUM_CHANNELS), dtype=np.float64)
-        doy_scales = np.zeros((367, NUM_CHANNELS), dtype=np.float64)
+        doy_means = np.zeros((367, n_channels), dtype=np.float64)
+        doy_scales = np.zeros((367, n_channels), dtype=np.float64)
 
         # Pre-initialize with global fallback
         for d in range(367):
@@ -92,7 +92,7 @@ class ClimatologyBaseline:
             for t_idx, d_str in enumerate(p.dates):
                 d_obj = date.fromisoformat(d_str.split("T")[0])
                 doy = d_obj.timetuple().tm_yday
-                for c in range(NUM_CHANNELS):
+                for c in range(n_channels):
                     if p.mask[t_idx, c]:
                         key = (doy, c)
                         if key not in doy_obs:
@@ -114,6 +114,8 @@ class ClimatologyBaseline:
         hash_payload = {
             "training_lake_ids": sorted(list(train_set)),
             "temporal_cutoff": temporal_cutoff,
+            "channel_names": list(channel_names),
+            "channel_schema_hash": schema_hash,
             "global_means": list(global_means),
             "global_scales": list(global_scales),
             "doy_means_digest": hashlib.sha256(doy_means.tobytes()).hexdigest(),
@@ -126,6 +128,8 @@ class ClimatologyBaseline:
             temporal_cutoff=temporal_cutoff,
             global_means=tuple(global_means),
             global_scales=tuple(global_scales),
+            channel_names=channel_names,
+            channel_schema_hash=schema_hash,
             doy_means=doy_means,
             doy_scales=doy_scales,
             state_hash=state_hash,
@@ -141,6 +145,8 @@ class ClimatologyBaseline:
         """Compute window anomaly score via observed seasonal climatology deviation."""
         if values.shape[0] != len(dates):
             raise ValueError(f"values rows {values.shape[0]} does not match dates count {len(dates)}")
+        if values.ndim != 2 or values.shape[1] != len(self.channel_names) or mask.shape != values.shape:
+            raise ValueError("climatology input shape differs from its fitted channel schema")
 
         doys = np.array([date.fromisoformat(d.split("T")[0]).timetuple().tm_yday for d in dates], dtype=np.int32)
         mu_window = self.doy_means[doys, :]   # (T, C)
@@ -149,7 +155,7 @@ class ClimatologyBaseline:
         valid_entries = mask & np.isfinite(values)
         total_obs = int(np.sum(valid_entries))
         if total_obs == 0:
-            return 0.0
+            return None
 
         v = values[valid_entries]
         mu = mu_window[valid_entries]
@@ -159,7 +165,23 @@ class ClimatologyBaseline:
         return score
 
     def predict_panel(self, panel: MultiModalPanel) -> float:
+        if panel.origin != "fixture":
+            from .admission import blocked
+            blocked("research baseline scoring")
+        if panel.channel_names != self.channel_names or panel.channel_schema_hash != self.channel_schema_hash:
+            raise ValueError("panel channel schema differs from fitted climatology")
         return self.predict_window(panel.values, panel.mask, panel.dates)
+
+    def predict_status(self, panel):
+        value = self.predict_panel(panel)
+        return {'value': value, 'status': 'ESTIMATED' if value is not None else 'NOT_ESTIMABLE',
+                'reason': None if value is not None else 'INSUFFICIENT_MEASUREMENT_OR_FITTED_SUPPORT',
+                'origin': 'fixture', 'research_admissible': False}
+
+    @classmethod
+    def fit(cls, *args, **kwargs):
+        from .admission import blocked
+        blocked("research baseline fitting")
 
 
 # ---------------------------------------------------------------------------
@@ -175,7 +197,7 @@ class LakeAreaTrendBaseline:
     state_hash: str
 
     @classmethod
-    def fit(
+    def fit_fixture(
         cls,
         panels: Sequence[MultiModalPanel],
         training_lake_ids: Sequence[str],
@@ -183,6 +205,8 @@ class LakeAreaTrendBaseline:
         min_separation_days: int = 30,
     ) -> LakeAreaTrendBaseline:
         """Initialize and seal area trend baseline with training isolation provenance."""
+        if any(p.origin != "fixture" for p in panels):
+            raise ValueError("baseline fixtures require explicit fixture origin")
         train_set = set(training_lake_ids)
         if not train_set:
             raise ValueError("training_lake_ids must be non-empty")
@@ -191,7 +215,7 @@ class LakeAreaTrendBaseline:
             "training_lake_ids": sorted(list(train_set)),
             "temporal_cutoff": temporal_cutoff,
             "min_separation_days": min_separation_days,
-            "channel": "optical_lake_area_km2",
+            "channel": "optical_candidate_roi_area_km2",
         }
         state_hash = hashlib.sha256(json.dumps(hash_payload, sort_keys=True).encode("utf-8")).hexdigest()
 
@@ -207,12 +231,19 @@ class LakeAreaTrendBaseline:
         values: np.ndarray,
         mask: np.ndarray,
         dates: Optional[Sequence[str]] = None,
+        channel_names: Optional[Sequence[str]] = None,
     ) -> float:
         """Compute relative lake area expansion Delta A / A from earliest to latest valid optical observation."""
-        area_mask = mask[:, 0] & np.isfinite(values[:, 0])
+        try:
+            if channel_names is None:
+                return None
+            area_index = tuple(channel_names).index("optical_candidate_roi_area_km2")
+        except ValueError:
+            return None
+        area_mask = mask[:, area_index] & np.isfinite(values[:, area_index])
         valid_indices = np.flatnonzero(area_mask)
         if len(valid_indices) < 2:
-            return 0.0
+            return None
 
         idx_earliest = int(valid_indices[0])
         idx_latest = int(valid_indices[-1])
@@ -225,26 +256,38 @@ class LakeAreaTrendBaseline:
             separation = idx_latest - idx_earliest
 
         if separation < self.min_separation_days:
-            return 0.0
+            return None
 
-        a_earliest = float(values[idx_earliest, 0])
-        a_latest = float(values[idx_latest, 0])
+        a_earliest = float(values[idx_earliest, area_index])
+        a_latest = float(values[idx_latest, area_index])
 
         if a_earliest <= 0.0:
-            return 0.0
+            return None
 
         delta_rel = (a_latest - a_earliest) / a_earliest
         return float(max(0.0, delta_rel))
 
     def predict_panel(self, panel: MultiModalPanel) -> float:
-        return self.predict_window(panel.values, panel.mask, panel.dates)
+        if panel.origin != "fixture":
+            from .admission import blocked
+            blocked("research baseline scoring")
+        return self.predict_window(panel.values, panel.mask, panel.dates, panel.channel_names)
+
+    def predict_status(self, panel):
+        value = self.predict_panel(panel)
+        return {'value': value, 'status': 'ESTIMATED' if value is not None else 'NOT_ESTIMABLE',
+                'reason': None if value is not None else 'INSUFFICIENT_MEASUREMENT_OR_FITTED_SUPPORT',
+                'origin': 'fixture', 'research_admissible': False}
+
+    @classmethod
+    def fit(cls, *args, **kwargs):
+        from .admission import blocked
+        blocked("research baseline fitting")
 
 
 # ---------------------------------------------------------------------------
 # 3. Weather-Only Anomaly Baseline
 # ---------------------------------------------------------------------------
-
-WEATHER_CHANNEL_INDICES = (8, 9, 10)  # temp_2m, precip_mm, temp_anomaly
 
 @dataclasses.dataclass(frozen=True)
 class WeatherOnlyBaseline:
@@ -253,16 +296,20 @@ class WeatherOnlyBaseline:
     temporal_cutoff: Optional[str]
     weather_means: Tuple[float, ...]
     weather_scales: Tuple[float, ...]
+    weather_channel_names: Tuple[str, ...]
+    channel_schema_hash: str
     state_hash: str
 
     @classmethod
-    def fit(
+    def fit_fixture(
         cls,
         panels: Sequence[MultiModalPanel],
         training_lake_ids: Sequence[str],
         temporal_cutoff: Optional[str] = None,
     ) -> WeatherOnlyBaseline:
         """Fit weather means and scales strictly on training panels."""
+        if any(p.origin != "fixture" for p in panels):
+            raise ValueError("baseline fixtures require explicit fixture origin")
         train_set = set(training_lake_ids)
         if not train_set:
             raise ValueError("training_lake_ids must be non-empty")
@@ -273,10 +320,18 @@ class WeatherOnlyBaseline:
         ]
         if not valid_panels:
             raise ValueError("No valid training panels available to fit WeatherOnlyBaseline")
+        channel_names = valid_panels[0].channel_names
+        schema_hash = valid_panels[0].channel_schema_hash
+        if any(p.channel_names != channel_names or p.channel_schema_hash != schema_hash for p in valid_panels):
+            raise ValueError("weather fit panels have different channel schemas")
+        weather_names = tuple(name for name in channel_names if CHANNEL_MODALITIES[name] == "weather")
+        if not weather_names:
+            raise ValueError("declared panel schema has no weather channels")
 
         means = []
         scales = []
-        for c in WEATHER_CHANNEL_INDICES:
+        indices = [channel_names.index(name) for name in weather_names]
+        for c in indices:
             obs = []
             for p in valid_panels:
                 v = p.values[:, c][p.mask[:, c]]
@@ -286,17 +341,20 @@ class WeatherOnlyBaseline:
                 stacked = np.concatenate(obs)
                 mu = float(np.mean(stacked))
                 sigma = float(np.std(stacked))
-                if sigma <= 0.0 or not np.isfinite(sigma):
+                if not np.isfinite(sigma):
+                    raise ValueError("nonfinite fitted scale")
+                if sigma == 0.0:
                     sigma = 1.0
             else:
-                mu = 0.0
-                sigma = 1.0
+                raise ValueError("missing training channel")
             means.append(mu)
             scales.append(sigma)
 
         hash_payload = {
             "training_lake_ids": sorted(list(train_set)),
             "temporal_cutoff": temporal_cutoff,
+            "weather_channel_names": list(weather_names),
+            "channel_schema_hash": schema_hash,
             "weather_means": list(means),
             "weather_scales": list(scales),
         }
@@ -307,6 +365,8 @@ class WeatherOnlyBaseline:
             temporal_cutoff=temporal_cutoff,
             weather_means=tuple(means),
             weather_scales=tuple(scales),
+            weather_channel_names=weather_names,
+            channel_schema_hash=schema_hash,
             state_hash=state_hash,
         )
 
@@ -316,14 +376,20 @@ class WeatherOnlyBaseline:
         mask: np.ndarray,
         dates: Optional[Sequence[str]] = None,
         eps: float = 1e-7,
+        channel_names: Optional[Sequence[str]] = None,
     ) -> float:
         """Compute standardized anomaly distance over observed weather channels."""
-        w_values = values[:, WEATHER_CHANNEL_INDICES]
-        w_mask = mask[:, WEATHER_CHANNEL_INDICES] & np.isfinite(w_values)
+        if channel_names is None:
+            raise ValueError("weather prediction requires its explicit channel schema")
+        if tuple(name for name in channel_names if CHANNEL_MODALITIES.get(name) == "weather") != self.weather_channel_names:
+            raise ValueError("weather channels differ from fitted baseline schema")
+        indices = [tuple(channel_names).index(name) for name in self.weather_channel_names]
+        w_values = values[:, indices]
+        w_mask = mask[:, indices] & np.isfinite(w_values)
 
         total_obs = int(np.sum(w_mask))
         if total_obs == 0:
-            return 0.0
+            return None
 
         means_arr = np.array(self.weather_means, dtype=np.float64)
         scales_arr = np.array(self.weather_scales, dtype=np.float64)
@@ -341,7 +407,23 @@ class WeatherOnlyBaseline:
         return score
 
     def predict_panel(self, panel: MultiModalPanel) -> float:
-        return self.predict_window(panel.values, panel.mask, panel.dates)
+        if panel.origin != "fixture":
+            from .admission import blocked
+            blocked("research baseline scoring")
+        if panel.channel_schema_hash != self.channel_schema_hash:
+            raise ValueError("panel channel schema differs from fitted weather baseline")
+        return self.predict_window(panel.values, panel.mask, panel.dates, panel.channel_names)
+
+    def predict_status(self, panel):
+        value = self.predict_panel(panel)
+        return {'value': value, 'status': 'ESTIMATED' if value is not None else 'NOT_ESTIMABLE',
+                'reason': None if value is not None else 'INSUFFICIENT_MEASUREMENT_OR_FITTED_SUPPORT',
+                'origin': 'fixture', 'research_admissible': False}
+
+    @classmethod
+    def fit(cls, *args, **kwargs):
+        from .admission import blocked
+        blocked("research baseline fitting")
 
 
 # ---------------------------------------------------------------------------
@@ -354,13 +436,16 @@ class RobustPCABaseline:
     training_lake_ids: Tuple[str, ...]
     temporal_cutoff: Optional[str]
     k_components: int
+    channel_names: Tuple[str, ...]
+    channel_schema_hash: str
+    window_length: int
     channel_means: Tuple[float, ...]
     mean_window: np.ndarray   # shape (1980,)
     components: np.ndarray    # shape (k_eff, 1980)
     state_hash: str
 
     @classmethod
-    def fit(
+    def fit_fixture(
         cls,
         panels: Sequence[MultiModalPanel],
         training_lake_ids: Sequence[str],
@@ -368,6 +453,8 @@ class RobustPCABaseline:
         k_components: int = 8,
     ) -> RobustPCABaseline:
         """Fit PCA subspace strictly on training panels."""
+        if any(p.origin != "fixture" for p in panels):
+            raise ValueError("baseline fixtures require explicit fixture origin")
         train_set = set(training_lake_ids)
         if not train_set:
             raise ValueError("training_lake_ids must be non-empty")
@@ -378,10 +465,18 @@ class RobustPCABaseline:
         ]
         if not valid_panels:
             raise ValueError("No valid training panels available to fit RobustPCABaseline")
+        channel_names = valid_panels[0].channel_names
+        schema_hash = valid_panels[0].channel_schema_hash
+        window_length = len(valid_panels[0].dates)
+        expected_shape = valid_panels[0].values.shape
+        if any(p.channel_names != channel_names or p.channel_schema_hash != schema_hash or
+               p.values.shape != expected_shape for p in valid_panels):
+            raise ValueError("PCA fit panels have different channel schemas or schedule shapes")
+        n_channels = len(channel_names)
 
         # 1. Compute training channel means for missing value imputation
         channel_means_list = []
-        for c in range(NUM_CHANNELS):
+        for c in range(n_channels):
             obs = []
             for p in valid_panels:
                 v = p.values[:, c][p.mask[:, c]]
@@ -390,9 +485,9 @@ class RobustPCABaseline:
             if obs:
                 channel_means_list.append(float(np.mean(np.concatenate(obs))))
             else:
-                channel_means_list.append(0.0)
+                raise ValueError("missing training channel")
 
-        ch_means_arr = np.array(channel_means_list, dtype=np.float64)  # (11,)
+        ch_means_arr = np.array(channel_means_list, dtype=np.float64)
 
         # 2. Impute and flatten training panels to shape (N, 1980)
         imputed_windows = []
@@ -418,6 +513,9 @@ class RobustPCABaseline:
         hash_payload = {
             "training_lake_ids": sorted(list(train_set)),
             "temporal_cutoff": temporal_cutoff,
+            "channel_names": list(channel_names),
+            "channel_schema_hash": schema_hash,
+            "window_length": window_length,
             "k_components": k_components,
             "channel_means": list(channel_means_list),
             "mean_window_digest": hashlib.sha256(mean_window.tobytes()).hexdigest(),
@@ -429,6 +527,9 @@ class RobustPCABaseline:
             training_lake_ids=tuple(sorted(train_set)),
             temporal_cutoff=temporal_cutoff,
             k_components=k_components,
+            channel_names=channel_names,
+            channel_schema_hash=schema_hash,
+            window_length=window_length,
             channel_means=tuple(channel_means_list),
             mean_window=mean_window,
             components=components,
@@ -443,6 +544,10 @@ class RobustPCABaseline:
         eps: float = 1e-7,
     ) -> float:
         """Reconstruct window and return normalized mean squared reconstruction error over observed entries."""
+        values = np.asarray(values)
+        mask = np.asarray(mask)
+        if values.shape != (self.window_length, len(self.channel_names)) or mask.shape != values.shape:
+            raise ValueError("PCA input schedule/channel shape differs from fitted transform")
         ch_means_arr = np.array(self.channel_means, dtype=np.float64)
         valid_m = mask & np.isfinite(values)
         x_imputed = np.where(valid_m, values, ch_means_arr).reshape(-1)
@@ -456,11 +561,11 @@ class RobustPCABaseline:
         else:
             recon = self.mean_window
 
-        recon_2d = recon.reshape(WINDOW_DAYS, NUM_CHANNELS)
+        recon_2d = recon.reshape(self.window_length, len(self.channel_names))
         valid_entries = mask & np.isfinite(values)
         total_obs = int(np.sum(valid_entries))
         if total_obs == 0:
-            return 0.0
+            return None
 
         v = values[valid_entries]
         recon_valid = recon_2d[valid_entries]
@@ -469,4 +574,20 @@ class RobustPCABaseline:
         return score
 
     def predict_panel(self, panel: MultiModalPanel) -> float:
+        if panel.origin != "fixture":
+            from .admission import blocked
+            blocked("research baseline scoring")
+        if panel.channel_names != self.channel_names or panel.channel_schema_hash != self.channel_schema_hash:
+            raise ValueError("panel channel schema differs from fitted PCA baseline")
         return self.predict_window(panel.values, panel.mask, panel.dates)
+
+    def predict_status(self, panel):
+        value = self.predict_panel(panel)
+        return {'value': value, 'status': 'ESTIMATED' if value is not None else 'NOT_ESTIMABLE',
+                'reason': None if value is not None else 'INSUFFICIENT_MEASUREMENT_OR_FITTED_SUPPORT',
+                'origin': 'fixture', 'research_admissible': False}
+
+    @classmethod
+    def fit(cls, *args, **kwargs):
+        from .admission import blocked
+        blocked("research baseline fitting")

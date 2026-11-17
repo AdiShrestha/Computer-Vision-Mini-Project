@@ -7,6 +7,8 @@ in offline unit tests only. They do not represent real observations and must nev
 support scientific claims.
 """
 from __future__ import annotations
+import dataclasses
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -14,15 +16,15 @@ import sys
 import numpy as np
 import pytest
 import torch
+from datetime import date, timedelta
 
 from sentinel_gl.features import (
     FEATURE_CHANNELS,
     NUM_CHANNELS,
-    WINDOW_DAYS,
     StaticTopography,
     MultiModalPanel,
 )
-from sentinel_gl.splits import SplitManifest, DecisionWindow
+from sentinel_gl.splits import SplitEngine, SCOPE_ROLES
 from sentinel_gl.loaders import (
     PanelDataset,
     deterministic_collate,
@@ -38,107 +40,241 @@ from sentinel_gl.replay import (
 )
 
 
-def _create_mock_panel(
-    lake_id: str,
-    window_id: str,
-    start_date: str = "2023-01-01",
-    end_date: str = "2023-06-29",
-    empty: bool = False,
-) -> MultiModalPanel:
-    """Helper to create small valid MultiModalPanel for loader testing."""
+def _create_mock_panel(lake_id, window_id, start_date="2023-01-01", end_date=None, empty=False):
+    """Explicit analytical panel fixture with a declared variable schedule."""
+    start = date.fromisoformat(start_date)
+    stop = date.fromisoformat(end_date) if end_date is not None else start + timedelta(days=23)
+    dates = tuple((start + timedelta(days=i)).isoformat() for i in range((stop - start).days + 1))
     topo = StaticTopography(elevation_m=5200.0, moraine_slope_deg=25.0, catchment_area_km2=10.0)
-    dates = tuple(f"2023-01-{i:02d}" for i in range(1, 181))
-
-    if empty:
-        values = np.full((WINDOW_DAYS, NUM_CHANNELS), np.nan, dtype=np.float64)
-        mask = np.zeros((WINDOW_DAYS, NUM_CHANNELS), dtype=np.bool_)
-    else:
-        values = np.full((WINDOW_DAYS, NUM_CHANNELS), np.nan, dtype=np.float64)
-        mask = np.zeros((WINDOW_DAYS, NUM_CHANNELS), dtype=np.bool_)
-        # Populate 10 observed days
-        for day in range(10):
-            values[day, 0] = 1.35  # area
-            values[day, 1] = 0.45  # ndwi
-            values[day, 2] = 0.50  # mndwi
-            values[day, 3] = 0.35  # ndsi
-            values[day, 4] = -16.0 # vv_db
-            values[day, 5] = -24.0 # vh_db
-            values[day, 6] = -8.0  # cross_ratio
-            values[day, 7] = 0.005 # vv_var
-            values[day, 8] = -4.5  # temp_c
-            values[day, 9] = 1.2   # precip_mm
-            values[day, 10] = -0.5 # anomaly
+    values = np.full((len(dates), NUM_CHANNELS), np.nan, dtype=np.float64)
+    mask = np.zeros(values.shape, dtype=np.bool_)
+    if not empty:
+        for day in range(min(10, len(dates))):
+            values[day, 0] = 1.35
+            values[day, 1] = 0.45
+            values[day, 2] = 0.50
+            values[day, 3] = -16.0
+            values[day, 4] = -24.0
+            values[day, 5] = -8.0
+            values[day, 6] = 0.005
+            values[day, 7] = -4.5
+            values[day, 8] = 1.2
             mask[day, :] = True
-
-    return MultiModalPanel(
-        lake_id=lake_id,
-        window_id=window_id,
-        start_date=start_date,
-        end_date=end_date,
-        dates=dates,
-        values=values,
-        mask=mask,
-        static_metadata=topo,
-    )
+    statuses = np.full(values.shape, "UNAVAILABLE_TEST_FIXTURE", dtype=object)
+    statuses[mask] = "OBSERVED"
+    return MultiModalPanel(lake_id=lake_id, window_id=window_id, start_date=dates[0],
+        end_date=dates[-1], dates=dates, values=values, mask=mask,
+        static_metadata=topo, origin="fixture", statuses=statuses)
 
 
-def test_loader_respects_split_boundaries():
-    train_panel = _create_mock_panel("LAKE-TRAIN", "WIN-TRAIN-01", "2023-01-01", "2023-06-29")
-    test_panel = _create_mock_panel("LAKE-TEST", "WIN-TEST-01", "2023-01-01", "2023-06-29")
+def _four_lake_fixture(*, shared_support=False):
+    lakes = []
+    for index, role in enumerate(SCOPE_ROLES):
+        lake_id = "LAKE-" + role
+        support = {field: [f"{lake_id}:{field}"] for field in
+            ("glacier_ids", "basin_ids", "era5_cell_ids", "sentinel_frame_ids", "event_time_support_ids")}
+        lakes.append({"lake_id": lake_id, "centroid_lat": 0., "centroid_lon": index * 2.,
+                      "physical_support_status": "VERIFIED", "physical_support": support})
+    if shared_support:
+        lakes[-1]["physical_support"]["basin_ids"] = list(lakes[0]["physical_support"]["basin_ids"])
+    return lakes
 
-    purged_win = DecisionWindow(
-        window_id="WIN-PURGED-01",
-        lake_id="LAKE-TRAIN",
-        decision_timestamp="2023-02-01T00:00:00Z",
-        context_start="2022-08-05T00:00:00Z",
-        context_end="2023-01-31T00:00:00Z",
-        observation_ids=(),
-        is_eligible=False,
-        modalities_present=(),
-    )
 
-    manifest = SplitManifest(
-        split_id="SPLIT-TEST",
-        protocol="spatiotemporal_purged_cluster",
-        created_at="2026-10-05T00:00:00Z",
-        clusters={"C1": ["LAKE-TRAIN"], "C2": ["LAKE-TEST"]},
-        train_lakes=("LAKE-TRAIN",),
-        val_lakes=(),
-        test_lakes=("LAKE-TEST",),
-        train_windows=(),
-        val_windows=(),
-        test_windows=(),
-        purged_windows=(purged_win,),
-        metadata={"split_date": "2023-07-01T00:00:00Z"},
-    )
+def _fixture_source(lake_id, *, available="2023-06-06T00:00:00Z"):
+    return {"record_id": "SRC-" + lake_id, "modality": "optical",
+        "support_start": "2023-06-05T00:00:00Z", "support_end": "2023-06-05T12:00:00Z",
+        "sha256": "a" * 64,
+        "availability": {"status": "PROVIDER_EVIDENCE", "at": available,
+            "evidence_id": "FIXTURE-RECEIPT-" + lake_id, "evidence_sha256": "b" * 64,
+            "reason": None},
+        "time_axes": {
+            "acquisition": {"status": "VERIFIED", "at": "2023-06-05T12:00:00Z", "reason": None},
+            "product_generation": {"status": "VERIFIED", "at": "2023-06-05T12:00:00Z", "reason": None},
+            "publication": {"status": "UNKNOWN", "at": None, "reason": "test fixture has no publication axis"},
+            "retrieval": {"status": "VERIFIED", "at": available, "reason": None},
+            "historical_availability": {"status": "VERIFIED", "at": available, "reason": None},
+            "execution": {"status": "VERIFIED", "at": available, "reason": None}}}
 
-    # 1. Valid training panel succeeds
-    ds_train = PanelDataset([train_panel], split_manifest=manifest, split="train")
-    assert len(ds_train) == 1
-    x, mask, meta = ds_train[0]
-    assert x.shape == (180, 11)
-    assert mask.shape == (180, 11)
 
-    # 2. Feeding test lake panel to train dataset raises ValueError
-    with pytest.raises(ValueError, match="not in allowed train lakes"):
-        PanelDataset([test_panel], split_manifest=manifest, split="train")
+def _digest_json(value, *, sort_keys=True):
+    return hashlib.sha256(json.dumps(value, sort_keys=sort_keys,
+        separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
-    # 3. Feeding purged window raises ValueError
-    purged_panel = _create_mock_panel("LAKE-TRAIN", "WIN-PURGED-01")
-    with pytest.raises(ValueError, match="in purged boundary set"):
-        PanelDataset([purged_panel], split_manifest=manifest, split="train")
 
-    # 4. Training panel extending past split date cutoff raises ValueError
-    late_panel = _create_mock_panel("LAKE-TRAIN", "WIN-LATE-01", "2023-05-01", "2023-10-27")
-    with pytest.raises(ValueError, match="violates retrospective split cutoff"):
-        PanelDataset([late_panel], split_manifest=manifest, split="train")
+def _fixture_bindings(lakes, directory, *, missing_lake=None, corrupt_lake=None):
+    support_bindings, coordinate_bindings = {}, {}
+    directory.mkdir(parents=True, exist_ok=True)
+    for lake in lakes:
+        lake_id = lake["lake_id"]
+        support_path = directory / (lake_id + "-support.json")
+        coordinate_path = directory / (lake_id + "-coordinates.json")
+        support_path.write_text(json.dumps({"origin": "fixture", "lake_id": lake_id,
+            "physical_support": lake["physical_support"]}, sort_keys=True, separators=(",", ":")))
+        coordinate_values = [lake["centroid_lat"], lake["centroid_lon"]]
+        coordinate_path.write_text(json.dumps({"origin": "fixture", "lake_id": lake_id,
+            "coordinates": coordinate_values}, sort_keys=True, separators=(",", ":")))
+        support_file_sha = hashlib.sha256(support_path.read_bytes()).hexdigest()
+        coordinate_file_sha = hashlib.sha256(coordinate_path.read_bytes()).hexdigest()
+        assert support_file_sha == hashlib.sha256(support_path.read_bytes()).hexdigest()
+        assert coordinate_file_sha == hashlib.sha256(coordinate_path.read_bytes()).hexdigest()
+        support_digest = _digest_json(lake["physical_support"])
+        coordinate_digest = _digest_json(coordinate_values, sort_keys=False)
+        support_bindings[lake_id] = {"artifact_path": str(support_path),
+            "artifact_sha256": support_file_sha, "support_sha256": support_digest, "origin": "fixture"}
+        coordinate_bindings[lake_id] = {"artifact_path": str(coordinate_path),
+            "artifact_sha256": coordinate_file_sha, "coordinate_sha256": coordinate_digest, "origin": "fixture"}
+        if lake_id == corrupt_lake:
+            support_bindings[lake_id]["support_sha256"] = "f" * 64
+        if lake_id == missing_lake:
+            support_bindings.pop(lake_id)
+            coordinate_bindings.pop(lake_id)
+    return support_bindings, coordinate_bindings
+
+
+def _four_role_fixture_manifest(tmp_path, *, shared_support=False, binding_mode="valid"):
+    lakes = _four_lake_fixture(shared_support=shared_support)
+    if binding_mode == "missing_all":
+        support_bindings, coordinate_bindings = {}, {}
+    else:
+        support_bindings, coordinate_bindings = _fixture_bindings(lakes, tmp_path / binding_mode,
+            missing_lake="LAKE-evaluation" if binding_mode == "missing_one" else None,
+            corrupt_lake="LAKE-evaluation" if binding_mode == "corrupt_one" else None)
+    role_map = {row["lake_id"]: role for row, role in zip(lakes, SCOPE_ROLES)}
+    observations = {row["lake_id"]: [_fixture_source(row["lake_id"])] for row in lakes}
+    manifest = SplitEngine(window_days=30, stride_days=1,
+        minimum_observations_by_modality={"optical": 1}).build_spatiotemporal_split(
+        split_id="fixture-split", lakes=lakes, observations_by_lake=observations,
+        start_date="2023-07-01T00:00:00Z", end_date="2023-07-02T00:00:00Z",
+        scope_by_lake=role_map, required_modalities=("optical",),
+        verified_support_bindings=support_bindings,
+        verified_coordinate_bindings=coordinate_bindings)
+    return manifest, lakes
+
+
+def _panel_for(lake_id, *, end_date="2023-06-30", available="2023-06-06T00:00:00Z"):
+    panel = _create_mock_panel(lake_id, f"WIN-{lake_id}-20230701", "2023-06-01", end_date)
+    source_id = "SRC-" + lake_id
+    object.__setattr__(panel, "lineage", {f"{day}|{channel}": {"measurement_id": source_id,
+        "product_id": "PRODUCT-" + lake_id,
+        "support_start": "2023-06-05T00:00:00Z", "support_end": "2023-06-05T12:00:00Z",
+        "available_at": available, "status": "OBSERVED"}
+        for day in panel.dates[:10] for channel in panel.channel_names})
+    return panel
+
+
+def test_loader_respects_four_role_schedule_membership(tmp_path):
+    manifest, lakes = _four_role_fixture_manifest(tmp_path)
+    assert manifest.physical_graph["role_isolation_status"] == "FIXTURE_ONLY_NOT_RESEARCH_VERIFIED"
+    assert not manifest.physical_graph["unresolved_units"]
+    assert not manifest.physical_graph["cross_role_edges"]
+    lake_by_id = {lake["lake_id"]: lake for lake in lakes}
+    for node in manifest.physical_graph["nodes"]:
+        for evidence_key, content_key in (("physical_support_evidence", "physical_support"),
+                                          ("coordinate_evidence", "coordinates")):
+            evidence = node[evidence_key]
+            artifact = Path(evidence["artifact_path"])
+            artifact_bytes = artifact.read_bytes()
+            artifact_doc = json.loads(artifact_bytes)
+            assert hashlib.sha256(artifact_bytes).hexdigest() == evidence["artifact_sha256"]
+            if content_key == "physical_support":
+                assert artifact_doc[content_key] == lake_by_id[node["lake_id"]][content_key]
+            else:
+                assert artifact_doc[content_key] == [lake_by_id[node["lake_id"]]["centroid_lat"],
+                    lake_by_id[node["lake_id"]]["centroid_lon"]]
+    train_id = "LAKE-fitting"
+    eval_id = "LAKE-evaluation"
+    train_panel = _panel_for(train_id)
+    eval_panel = _panel_for(eval_id)
+
+    ds_fit = PanelDataset([train_panel], split_manifest=manifest, role="fitting", mode="fixture")
+    assert len(ds_fit) == 1
+    x, mask, _ = ds_fit[0]
+    assert x.shape == (len(train_panel.dates), len(FEATURE_CHANNELS))
+    assert mask.shape == x.shape
+
+    with pytest.raises(ValueError, match="not in allowed fitting lakes"):
+        PanelDataset([eval_panel], split_manifest=manifest, role="fitting", mode="fixture")
+    orphan = _create_mock_panel(train_id, "WIN-ORPHAN")
+    with pytest.raises(ValueError, match="absent from explicit role schedule"):
+        PanelDataset([orphan], split_manifest=manifest, role="fitting", mode="fixture")
+    late = _create_mock_panel(train_id, f"WIN-{train_id}-20230701", "2023-06-01", "2023-07-03")
+    object.__setattr__(late, "lineage", dict(train_panel.lineage))
+    with pytest.raises(ValueError, match="ends after its decision time"):
+        PanelDataset([late], split_manifest=manifest, role="fitting", mode="fixture")
+    with pytest.raises(ValueError, match="four explicit fitting roles"):
+        PanelDataset([train_panel], split_manifest=manifest, role="train", mode="fixture")
+    with pytest.raises(ValueError, match="BLOCKED"):
+        PanelDataset([train_panel], split_manifest=manifest, role="fitting", mode="observational")
+
+
+@pytest.mark.parametrize("binding_mode", ["missing_all", "missing_one", "corrupt_one"])
+def test_loader_rejects_unknown_missing_or_corrupt_fixture_graph_bindings(tmp_path, binding_mode):
+    manifest, _ = _four_role_fixture_manifest(tmp_path / binding_mode, binding_mode=binding_mode)
+    assert manifest.physical_graph["role_isolation_status"] == "UNRESOLVED_UNKNOWN_PHYSICAL_MEMBERSHIP"
+    panel = _panel_for("LAKE-fitting")
+    with pytest.raises(ValueError, match="unresolved physical or coordinate membership"):
+        PanelDataset([panel], split_manifest=manifest, role="fitting", mode="fixture")
+
+
+def test_loader_rejects_bound_cross_role_physical_edges(tmp_path):
+    manifest, _ = _four_role_fixture_manifest(tmp_path, shared_support=True)
+    assert manifest.physical_graph["role_isolation_status"] == "CROSS_ROLE_PHYSICAL_ADJACENCY"
+    assert manifest.physical_graph["cross_role_edges"]
+    panel = _panel_for("LAKE-fitting")
+    with pytest.raises(ValueError, match="cross-role physical edges"):
+        PanelDataset([panel], split_manifest=manifest, role="fitting", mode="fixture")
+
+
+def test_loader_rejects_late_nested_availability_even_when_lineage_matches(tmp_path):
+    manifest, _ = _four_role_fixture_manifest(tmp_path)
+    row = next(row for row in manifest.schedule_rows if row.lake_id == "LAKE-fitting")
+    metadata = dict(row.metadata)
+    supports = [dict(source) for source in metadata["source_supports"]]
+    source = supports[0]
+    late = "2023-07-01T00:00:01Z"
+    source["availability"] = {**source["availability"], "at": late}
+    source["time_axes"] = {**source["time_axes"],
+        "retrieval": {"status": "VERIFIED", "at": late, "reason": None},
+        "historical_availability": {"status": "VERIFIED", "at": late, "reason": None}}
+    metadata["source_supports"] = supports
+    changed = dataclasses.replace(row, metadata=metadata)
+    rows = tuple(changed if current.window_id == row.window_id else current
+                 for current in manifest.schedule_rows)
+    corrupted_manifest = dataclasses.replace(manifest, schedule_rows=rows)
+    panel = _panel_for("LAKE-fitting", available=late)
+    with pytest.raises(ValueError, match="future or late-available support"):
+        PanelDataset([panel], split_manifest=corrupted_manifest, role="fitting", mode="fixture")
+
+
+def test_loader_requires_complete_nested_time_axes(tmp_path):
+    manifest, _ = _four_role_fixture_manifest(tmp_path)
+    row = next(row for row in manifest.schedule_rows if row.lake_id == "LAKE-fitting")
+    metadata = dict(row.metadata)
+    supports = [dict(source) for source in metadata["source_supports"]]
+    supports[0]["time_axes"] = {key: value for key, value in supports[0]["time_axes"].items()
+        if key != "retrieval"}
+    metadata["source_supports"] = supports
+    changed = dataclasses.replace(row, metadata=metadata)
+    rows = tuple(changed if current.window_id == row.window_id else current
+                 for current in manifest.schedule_rows)
+    malformed_manifest = dataclasses.replace(manifest, schedule_rows=rows)
+    with pytest.raises(ValueError, match="separate acquisition/generation/publication/retrieval/history/execution axes"):
+        PanelDataset([_panel_for("LAKE-fitting")], split_manifest=malformed_manifest,
+                     role="fitting", mode="fixture")
+
+
+def test_loader_compares_nested_schedule_availability_with_panel_lineage(tmp_path):
+    manifest, _ = _four_role_fixture_manifest(tmp_path)
+    mismatched_panel = _panel_for("LAKE-fitting", available="2023-06-07T00:00:00Z")
+    with pytest.raises(ValueError, match="panel source support differs from its scheduled evidence"):
+        PanelDataset([mismatched_panel], split_manifest=manifest, role="fitting", mode="fixture")
 
 
 def test_loader_rejects_unobserved_batches():
     empty_panel = _create_mock_panel("LAKE-TRAIN", "WIN-EMPTY-01", empty=True)
     item = (
-        torch.from_numpy(np.zeros((180, 11), dtype=np.float32)),
-        torch.from_numpy(np.zeros((180, 11), dtype=bool)),
+        torch.from_numpy(np.zeros(empty_panel.values.shape, dtype=np.float32)),
+        torch.from_numpy(np.zeros(empty_panel.values.shape, dtype=bool)),
         empty_panel.to_dict(),
     )
 
@@ -149,7 +285,7 @@ def test_loader_rejects_unobserved_batches():
 def test_fitted_normalizer_isolation():
     # Training panels on LAKE-TRAIN
     train_panel = _create_mock_panel("LAKE-TRAIN", "W-TR-01", "2023-01-01", "2023-06-29")
-    norm_tr = FittedNormalizer.fit([train_panel], training_lake_ids=["LAKE-TRAIN"])
+    norm_tr = FittedNormalizer.fit_fixture([train_panel], training_lake_ids=["LAKE-TRAIN"])
 
     # Evaluation panel on LAKE-EVAL with extreme physical values (e.g. area = 4.8, temp = 30)
     eval_panel = _create_mock_panel("LAKE-EVAL", "W-EV-01", "2023-01-01", "2023-06-29")
@@ -157,7 +293,7 @@ def test_fitted_normalizer_isolation():
     eval_panel.values[0, 8] = 30.0
 
     # Normalizer fit with both train and eval panels passed, but training_lake_ids strictly LAKE-TRAIN
-    norm_isolated = FittedNormalizer.fit([train_panel, eval_panel], training_lake_ids=["LAKE-TRAIN"])
+    norm_isolated = FittedNormalizer.fit_fixture([train_panel, eval_panel], training_lake_ids=["LAKE-TRAIN"])
 
     # Assert exact state identity: eval panel has zero influence
     assert norm_tr.mean == norm_isolated.mean
@@ -166,15 +302,15 @@ def test_fitted_normalizer_isolation():
 
     # Serialization roundtrip
     serialized = norm_isolated.to_json()
-    restored = FittedNormalizer.from_json(serialized)
+    restored = FittedNormalizer.from_fixture_json(serialized)
     assert restored.state_hash == norm_isolated.state_hash
 
 
 def test_checkpoint_roundtrip_and_replay(tmp_path: Path):
     torch.manual_seed(42)
     config = {
-        "n_channels": 11,
-        "max_time_steps": 180,
+        "n_channels": NUM_CHANNELS,
+        "max_time_steps": 24,
         "d_model": 32,
         "n_encoder_layers": 1,
         "n_decoder_layers": 1,
@@ -188,19 +324,19 @@ def test_checkpoint_roundtrip_and_replay(tmp_path: Path):
     model = TimeSeriesMAE(**config)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
 
-    # Synthetic batch of shape (2, 180, 11)
-    x = torch.randn(2, 180, 11)
-    validity = torch.ones(2, 180, 11, dtype=torch.bool)
+    # Explicit constructed batch at the declared 24-step capacity.
+    x = torch.randn(2, 24, NUM_CHANNELS)
+    validity = torch.ones(2, 24, NUM_CHANNELS, dtype=torch.bool)
     # Put some realistic missingness
-    validity[:, 10:170, :] = False
+    validity[:, 4:20, :] = False
     x[~validity] = 0.0
 
     expected_reconstruction = compute_deterministic_reconstruction(model, x, validity, device="cpu")
 
-    bundle = CheckpointBundle.capture(
+    bundle = CheckpointBundle.capture_fixture(
         model=model,
         optimizer=optimizer,
-        transform_state={"mean": [0.0]*11, "scale": [1.0]*11, "fit_lake_ids": ["LAKE-01"], "constant_channels": []},
+        transform_state={"mean": [0.0]*NUM_CHANNELS, "scale": [1.0]*NUM_CHANNELS, "fit_lake_ids": ["LAKE-01"], "constant_channels": []},
         telemetry={"epoch": 1, "validation_loss": 0.123},
         history=[{"epoch": 1, "loss": 0.123}],
     )
@@ -214,7 +350,7 @@ def test_checkpoint_roundtrip_and_replay(tmp_path: Path):
     torch.save(expected_reconstruction, expected_path)
 
     # 1. In-process replay check
-    reloaded_bundle = CheckpointBundle.load(ckpt_path, device="cpu")
+    reloaded_bundle = CheckpointBundle.load_fixture(ckpt_path, device="cpu")
     model_reloaded = TimeSeriesMAE(**reloaded_bundle.model_config)
     model_reloaded.load_state_dict(reloaded_bundle.model_state_dict)
 
@@ -235,8 +371,8 @@ def test_checkpoint_roundtrip_and_replay(tmp_path: Path):
 
 def test_deterministic_training_under_seed(tmp_path: Path):
     model_config = {
-        "n_channels": 11,
-        "max_time_steps": 180,
+        "n_channels": NUM_CHANNELS,
+        "max_time_steps": 24,
         "d_model": 32,
         "n_encoder_layers": 1,
         "n_decoder_layers": 1,
@@ -249,8 +385,8 @@ def test_deterministic_training_under_seed(tmp_path: Path):
     }
     stop_rule = StopRule(min_epochs=2, max_epochs=2, patience=2, min_delta=1e-4)
     transform_state = {
-        "mean": [0.0]*11,
-        "scale": [1.0]*11,
+        "mean": [0.0]*NUM_CHANNELS,
+        "scale": [1.0]*NUM_CHANNELS,
         "fit_lake_ids": ["LAKE-TRAIN"],
         "constant_channels": [],
     }
@@ -258,9 +394,9 @@ def test_deterministic_training_under_seed(tmp_path: Path):
     # Deterministic batch generator
     def _create_batches():
         torch.manual_seed(999)
-        x = torch.randn(8, 180, 11)
-        valid = torch.zeros(8, 180, 11, dtype=torch.bool)
-        valid[:, :20, :] = True
+        x = torch.randn(8, 24, NUM_CHANNELS)
+        valid = torch.zeros(8, 24, NUM_CHANNELS, dtype=torch.bool)
+        valid[:, :8, :] = True
         x[~valid] = 0.0
         return [(x, valid)]
 
@@ -305,190 +441,35 @@ def test_deterministic_training_under_seed(tmp_path: Path):
     assert np.allclose(val_loss1, val_loss2, atol=1e-7)
 
 
-def test_run_train_model_end_to_end(tmp_path: Path):
-    """Verify run_training produces conforming checkpoint, normalizer, and history artifacts."""
+def test_run_train_model_end_to_end(tmp_path):
+    """Unsupported research inputs are rejected before any output is written."""
     from runners.run_train_model import run_training
-
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    manifest_path = repo_root / "data" / "split_manifest.json"
-    panels_path = repo_root / "data" / "feature_panels.npz"
-    registry_path = repo_root / "data" / "lake_registry.csv"
-
-    out_ckpt = tmp_path / "checkpoints" / "test_model.pt"
-    out_norm = tmp_path / "test_normalizer.json"
-    out_hist = tmp_path / "test_history.json"
-
-    res = run_training(
-        manifest_path=manifest_path,
-        panels_path=panels_path,
-        lake_registry_path=registry_path,
-        output_checkpoint_path=out_ckpt,
-        output_normalizer_path=out_norm,
-        output_history_path=out_hist,
-        epochs=2,
-        min_epochs=2,
-        patience=2,
-        batch_size=8,
-        seed=123,
-        device="cpu",
-        dev_split=True,
-    )
-
-    assert res["status"] == "SUCCESS"
-    assert res["epochs_trained"] == 2
-    assert res["replay_verified"] is True
-    assert res["replay_max_diff"] <= 1e-5
-    assert out_ckpt.exists()
-    assert out_norm.exists()
-    assert out_hist.exists()
-
-    with open(out_hist, "r", encoding="utf-8") as f:
-        hist = json.load(f)
-    assert hist["status"] == "SUCCESS"
-    assert len(hist["history"]) == 2
-    assert hist["replay_verified"] is True
-    assert hist["normalizer_state_hash"] == res["normalizer_state_hash"]
+    with pytest.raises(ValueError, match="BLOCKED"):
+        run_training(output_checkpoint_path=tmp_path/"model.pt")
+    assert not list(tmp_path.iterdir())
 
 
-def test_checkpoint_bundle_clean_replay_verification(tmp_path: Path):
-    """Verify clean-process replay matches reconstructions within 1e-5 on genuine checkpoint."""
-    from runners.run_train_model import run_training
 
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    manifest_path = repo_root / "data" / "split_manifest.json"
-    panels_path = repo_root / "data" / "feature_panels.npz"
-    registry_path = repo_root / "data" / "lake_registry.csv"
-
-    out_ckpt = tmp_path / "replay_check.pt"
-    out_norm = tmp_path / "norm.json"
-    out_hist = tmp_path / "hist.json"
-
-    run_training(
-        manifest_path=manifest_path,
-        panels_path=panels_path,
-        lake_registry_path=registry_path,
-        output_checkpoint_path=out_ckpt,
-        output_normalizer_path=out_norm,
-        output_history_path=out_hist,
-        epochs=2,
-        min_epochs=2,
-        seed=42,
-        device="cpu",
-        dev_split=True,
-    )
-
-    bundle = CheckpointBundle.load(out_ckpt, device="cpu")
-    assert bundle.format_version == 4
-    assert "n_channels" in bundle.model_config
-    assert bundle.model_config["n_channels"] == NUM_CHANNELS
-
-    # Construct normalized test input from an eligible window with observations
-    npz_data = np.load(panels_path)
-    with open(manifest_path, "r", encoding="utf-8") as f:
-        manifest_data = json.load(f)
-    eligible_id = [w["window_id"] for w in manifest_data["test_windows"] if w.get("is_eligible", False)][0]
-    raw_vals = npz_data[f"{eligible_id}_values"][np.newaxis, ...]
-    raw_mask = npz_data[f"{eligible_id}_mask"][np.newaxis, ...]
-    normalizer = FittedNormalizer.from_dict(bundle.transform_state)
-    norm_vals, norm_masks = normalizer.transform(raw_vals, raw_mask)
-    vals = torch.from_numpy(norm_vals)
-    masks = torch.from_numpy(norm_masks)
-
-    in_file = tmp_path / "in.pt"
-    exp_file = tmp_path / "exp.pt"
-    torch.save((vals, masks), in_file)
-
-    model = TimeSeriesMAE(**bundle.model_config)
-    model.load_state_dict(bundle.model_state_dict)
-    expected_recon = compute_deterministic_reconstruction(model, vals, masks, device="cpu")
-    torch.save(expected_recon, exp_file)
-
-    ok, max_diff = verify_clean_process_replay(
-        checkpoint_path=out_ckpt,
-        input_tensor_path=in_file,
-        expected_output_path=exp_file,
-        tolerance=1e-5,
-    )
-    assert ok is True
-    assert max_diff <= 1e-5
+def test_checkpoint_bundle_clean_replay_verification(tmp_path):
+    """Unsupported research inputs are rejected before any output is written."""
+    from sentinel_gl.replay import CheckpointBundle
+    with pytest.raises(ValueError, match="BLOCKED"):
+        CheckpointBundle.load(tmp_path/"model.pt")
+    assert not list(tmp_path.iterdir())
 
 
-def test_cli_runner_training_subprocess(tmp_path: Path):
-    """Verify source/runners/run_train_model.py executes cleanly as CLI subprocess."""
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    runner_script = repo_root / "source" / "runners" / "run_train_model.py"
 
-    out_ckpt = tmp_path / "cli_ckpt.pt"
-    out_norm = tmp_path / "cli_norm.json"
-    out_hist = tmp_path / "cli_hist.json"
+def test_cli_runner_training_subprocess(tmp_path):
+    from runners.run_train_model import main
+    assert main(['--dev-split','--output-checkpoint',str(tmp_path/'model.pt')])==2
+    assert not list(tmp_path.iterdir())
 
-    cmd = [
-        sys.executable,
-        "-B",
-        str(runner_script),
-        "--manifest",
-        str(repo_root / "data" / "split_manifest.json"),
-        "--panels",
-        str(repo_root / "data" / "feature_panels.npz"),
-        "--registry",
-        str(repo_root / "data" / "lake_registry.csv"),
-        "--output-checkpoint",
-        str(out_ckpt),
-        "--output-normalizer",
-        str(out_norm),
-        "--output-history",
-        str(out_hist),
-        "--epochs",
-        "2",
-        "--min-epochs",
-        "2",
-        "--batch-size",
-        "8",
-        "--seed",
-        "99",
-        "--dev-split",
-    ]
-
-    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    stdout_json = json.loads(res.stdout.strip())
-    assert stdout_json["status"] == "SUCCESS"
-    assert stdout_json["epochs_trained"] == 2
-    assert stdout_json["replay_verified"] is True
-    assert out_ckpt.exists()
-    assert out_norm.exists()
-    assert out_hist.exists()
 
 
 def test_normalizer_immutability_and_state_hash():
-    """Verify normalizer state serialization and roundtrip immutability."""
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    norm_path = repo_root / "data" / "fitted_normalizer.json"
-    assert norm_path.exists(), "data/fitted_normalizer.json must be materialized"
-
-    with open(norm_path, "r", encoding="utf-8") as f:
-        norm_json = f.read()
-
-    normalizer = FittedNormalizer.from_json(norm_json)
-    assert len(normalizer.mean) == NUM_CHANNELS
-    assert len(normalizer.scale) == NUM_CHANNELS
-    assert normalizer.channel_names == FEATURE_CHANNELS
-    assert all(s > 0 for s in normalizer.scale)
-
-    # Re-serialization matches state_hash exactly
-    reserialized = normalizer.to_json()
-    normalizer_reloaded = FittedNormalizer.from_json(reserialized)
-    assert normalizer_reloaded.state_hash == normalizer.state_hash
-
-    # Test transform & inverse transform consistency
-    dummy_vals = np.ones((10, NUM_CHANNELS), dtype=np.float64)
-    dummy_mask = np.ones((10, NUM_CHANNELS), dtype=np.bool_)
-    dummy_mask[5:, :] = False
-
-    z_norm, mask_out = normalizer.transform(dummy_vals, dummy_mask)
-    assert np.all(z_norm[5:] == 0.0)
-    assert np.all(np.isfinite(z_norm[:5]))
-
-    inverted = normalizer.inverse_transform(z_norm, mask_out)
-    assert np.all(np.isnan(inverted[5:]))
-    assert np.allclose(inverted[:5], dummy_vals[:5])
-
+    p=_create_mock_panel('LAKE-TRAIN','fixture','2023-01-01')
+    n=FittedNormalizer.fit_fixture([p],['LAKE-TRAIN'])
+    restored=FittedNormalizer.from_fixture_json(n.to_json())
+    assert restored.state_hash==n.state_hash
+    changed=n.to_dict();changed['mean'][0]+=1.
+    with pytest.raises(ValueError,match='hash'):FittedNormalizer.from_fixture_dict(changed)
