@@ -76,7 +76,7 @@ def main() -> int:
 
 Inputs and outputs of the PLOS ONE analysis (protocol amendment SR1_AMENDMENT_PLOS_001).
 Unzip at the root of the Sentinel-GL code release (same version); paths are repository-relative.
-`MANIFEST.sha256` lists every file with its SHA-256 (`shasum -a 256 -c MANIFEST.sha256`).
+`MANIFEST.sha256` lists every data file with its SHA-256 (`shasum -a 256 -c MANIFEST.sha256`).
 
 Contents: 141 Sentinel-2 Collection-1 L2A 160 x 160 ROI arrays for South Lhonak and Khangchung Tsho
 (2018-2023) with STAC items, HTTP byte-range receipts, native SAFE metadata and transfer ledgers; the
@@ -96,7 +96,7 @@ Licence: CC BY 4.0. {NOTICE}
         for p in files:
             z.write(p, p.relative_to(ROOT).as_posix())
         z.writestr("MANIFEST.sha256", "\n".join(lines) + "\n")
-        z.writestr("README.md", readme)
+        z.writestr("DATA_README.md", readme)
         z.writestr("LICENSE-DATA.txt", licence)
     code_zip = REL / "sentinel_gl_code_v1.zip"
     subprocess.run(["git", "archive", "--format=zip", "--prefix=sentinel-gl/", "-o", str(code_zip), "HEAD"],
