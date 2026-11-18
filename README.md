@@ -33,7 +33,7 @@ Earlier versions of this repository held a fixture-based prototype, a 2023-only 
 
 ## Archives
 
-Data deposit: doi:DATA_DOI_PENDING. Code archive: doi:CODE_DOI_PENDING.
+Data deposit: doi:10.5281/zenodo.24338676. Code archive: doi:10.5281/zenodo.24339345.
 
 ## Licence
 
